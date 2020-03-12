@@ -1,5 +1,5 @@
 # Welcome to BracelHertZ!
-![alt text](https://i.imgur.com/sEjTyZL.png)
+![alt text](https://i.imgur.com/wv9eBoj.png)
 
 O nosso readme serve como ajudante de navegação no nosso repositório!
 
@@ -7,7 +7,7 @@ O nosso readme serve como ajudante de navegação no nosso repositório!
 # Diretoria app
 
 Aqui encontram se todos os ficheiros relativos à aplicação.
-Um vez que estamos a desenvolver uma aplicação REST, a pasta app encontra-se dividida em duas pastas:
+Um vez que estamos a desenvolver uma aplicação REST, a pasta app encontra-se dividida em duas pastas main e uma para anexos:
 
  - **backend**
  - **frontend**
