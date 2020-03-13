@@ -1,4 +1,4 @@
-# Welcome to BracelHertZ!
+# Welcome to BracelHertZ Repository!
 ![alt text](https://i.imgur.com/wv9eBoj.png)
 
 O nosso readme serve como ajudante de navegação no nosso repositório!
