@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -16,8 +19,12 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
-@Entity
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@Entity(name="utilizador")
 @Table(name="utilizador")
 public class Utilizador {
 
@@ -29,6 +36,7 @@ public class Utilizador {
 	private Long id_tipo;
 	
 	@NotBlank
+	@NotNull
 	private String username;
 	
     @NotBlank
@@ -36,6 +44,7 @@ public class Utilizador {
 	private String password;
 	
     @Temporal(TemporalType.DATE)
+    @NotNull
 	private Date data_nascimento;
     
     @NotBlank
@@ -61,22 +70,29 @@ public class Utilizador {
     @Email
     private String email;
 
-	private Long id_instituicao;
+	@OneToOne
+    @JoinColumn(name = "id_instituicao")
+	private Instituicao id_instituicao;
 	
-	private Long created_by;
+	@ManyToOne
+    @JoinColumn(name = "created_by", referencedColumnName = "id_user", nullable = true)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+	private Utilizador created_by;
 	
 	@CreationTimestamp
 	private LocalDateTime created_timestamp;
     
-    
+	
     public Utilizador() {
     }
 
-	public Utilizador(Long id_user, @NotNull Long id_tipo, @NotBlank String username,
-			@NotBlank @Size(max = 100) String password, Date data_nascimento, @NotBlank String nacionalidade,
+
+	public Utilizador(Long id_user, @NotNull Long id_tipo, @NotBlank @NotNull String username,
+			@NotBlank @Size(max = 100) String password, @NotNull Date data_nascimento, @NotBlank String nacionalidade,
 			@NotBlank String morada, @NotBlank String localidade, @NotBlank String primeiro_nome,
-			@NotBlank String ultimo_nome, @NotBlank String foto, int contacto, String email, Long id_instituicao,
-			Long created_by, LocalDateTime created_timestamp) {
+			@NotBlank String ultimo_nome, @NotBlank String foto, int contacto, @Email String email,
+			Instituicao id_instituicao, Utilizador created_by, LocalDateTime created_timestamp) {
 		super();
 		this.id_user = id_user;
 		this.id_tipo = id_tipo;
@@ -227,22 +243,22 @@ public class Utilizador {
 	}
 
 
-	public Long getId_instituicao() {
+	public Instituicao getId_instituicao() {
 		return id_instituicao;
 	}
 
 
-	public void setId_instituicao(Long id_instituicao) {
+	public void setId_instituicao(Instituicao id_instituicao) {
 		this.id_instituicao = id_instituicao;
 	}
 
 
-	public Long getCreated_by() {
+	public Utilizador getCreated_by() {
 		return created_by;
 	}
 
 
-	public void setCreated_by(Long created_by) {
+	public void setCreated_by(Utilizador created_by) {
 		this.created_by = created_by;
 	}
 
@@ -255,5 +271,7 @@ public class Utilizador {
 	public void setCreated_timestamp(LocalDateTime created_timestamp) {
 		this.created_timestamp = created_timestamp;
 	}
-	
+
+
+
 }

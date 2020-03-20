@@ -11113,7 +11113,7 @@ body.sidebar-toggled footer.sticky-footer {
 .teste{
   overflow-y: scroll;
   width: 100%;
-  height: 700px;
+  height: 850px;
   overflow-x: hidden;
 }
 
@@ -11126,12 +11126,12 @@ body.sidebar-toggled footer.sticky-footer {
 .tab_nome{
   display: table-cell !important;
     width: 100% !important;
-    vertical-align: top !important;
+    vertical-align: middle !important;
 }
 
 .tab_time{
   display: table-cell !important;
-    vertical-align: top !important;
+    vertical-align: middle !important;
 
 }
 
@@ -11326,9 +11326,9 @@ body.sidebar-toggled footer.sticky-footer {
 }
 
 .imagemlogo{
-  border-radius: 15%;
+  border-radius: 20px;
   background-position: -15px -15px;
-  height: 195px;
+  height: 363px;
   width: auto;
 }
 .imagem{
@@ -11476,3 +11476,19 @@ body.sidebar-toggled footer.sticky-footer {
   transform:rotate(45deg) scaleX(1);
 }
 /*----------------------------------------------------------Novo Codigo---------------------------------------------------------*/
+.form-control420 {
+  margin-top: -25px;
+  background-color: white;
+  width: 60px;
+  padding-left: 8px;
+  font-variant: small-caps;
+}
+
+.font-weight-600 {
+  font-weight: 600;
+}
+
+
+.perfil_header {
+  height: 55px;
+}

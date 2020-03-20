@@ -113,7 +113,7 @@
     <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column">
+    <div id="content-wrapper" class="d-flex flex-column" style="zoom: 75%;">
 
       <!-- Main Content -->
       <div id="content">
@@ -271,8 +271,8 @@
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
-                <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                <span id="nomeUser" class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
+                <img id="avatarUser" class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -340,7 +340,7 @@
 
                     </tr>
                   </tfoot>
-                  <tbody>
+                  <tbody id="tabelaRecluso">
                     <tr>
                       <td><div type="button" onclick="location.href='recluso.html'">R123456789</div></td>
                       <td><div type="button" onclick="location.href='recluso.html'">Tiger Nixon</div></td>
@@ -384,6 +384,7 @@
           <div class="col pl-0">
           <input type="text" id="myFilter" placeholder="Pesquisar recluso" class="form-control py-2 mr-3 myFilter">
         </div>
+        <div id="tPulsacoes">
           <ul class="teste w-100 px-0" style="list-style-type: none;">
           
           <!--Recluso-->
@@ -506,6 +507,7 @@
             </div>
           </ul>
         </div>
+        </div>
       </div>
         <!-- /.container-fluid -->
 
@@ -587,6 +589,7 @@
 
   <!-- Page level custom scripts -->
   <script src="js/demo/datatables-demo.js"></script>
+  <script src="./controller/controlo.js"></script>
 
 </body>
 

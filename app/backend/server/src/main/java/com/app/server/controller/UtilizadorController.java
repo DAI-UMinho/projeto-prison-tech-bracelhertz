@@ -1,6 +1,7 @@
 package com.app.server.controller;
 
 import java.util.List;
+//import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -31,6 +32,13 @@ public class UtilizadorController {
 	public Utilizador listUsers(@PathVariable(value="id_user") long id_user){
 		return utilizadorRepository.findById(id_user);
 	}
+	
+	/*
+	@GetMapping("/user/{id_user}")
+	public Optional<Utilizador> listUsers(@PathVariable(value="id_user") long id_user){
+		return utilizadorRepository.teste(id_user);
+	}
+	*/
 	
 	@PostMapping("/user")
 	public Utilizador saveUser(@RequestBody Utilizador utilizador) {
