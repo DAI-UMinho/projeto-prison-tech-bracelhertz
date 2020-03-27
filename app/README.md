@@ -32,7 +32,7 @@
 # Patch Notes 1.2
 ## Backend
 
- 1. **Package Model:**
+ 1. **Package model:**
 	 - Todas as classes foram reinscritas em camelCase e traduzidas para Inglês;
 	 - Update da classe User.
 
