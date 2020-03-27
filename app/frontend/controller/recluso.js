@@ -1,117 +1,145 @@
-window.onload = function () {
+$(window).on("load", function () {
 
-  display_logs();
+    display_recluso();
 
-  function display_logs() {
-      async function fetchAsync() {
-          //id_user=localStorage.getItem("id_user");
-          //const response = await fetch('https://dd10afea8a444651a7975b97cdbc8a11.vfs.cloud9.us-east-2.amazonaws.com/users/' + id_user + '/friends-list');
-          //const friends = await response.json();
-          //console.log(friends);
+    function display_recluso() {
+        async function fetchAsync() {
+            //let id_user_clicked = localStorage.getItem("id_user_clicked");
+            //  const response = await fetch('http://127.0.0.1:8080/api/recluso/' + id_user_clicked);
+            // const recluso = await response.json();
+            //  console.log(perfil);
 
-
-          var tabelBody = document.getElementById("tabelBody");
-
-          let see_logs = "";
-
-          var listaLog = [
-              {
-                  hora: "Mon Mar 16 2020 19:12:38 GMT+0000",
-                  quem: "Jose Pires",
-                  texto: "Adicionou uma anotação ao recluso Luis Duarte"
-              },
-              {
-                  hora: "Mon Mar 16 2020 19:10:38 GMT+0000",
-                  quem: "Jose Pires",
-                  texto: "Adicionou uma anotação ao recluso Luis Duarte"
-              },
-              {
-                  hora: "Mon Mar 16 2020 19:14:38 GMT+0000",
-                  quem: "Jose Pires",
-                  texto: "Adicionou uma anotação ao recluso Luis Duarte"
-              },
-              {
-                  hora: "Mon Mar 16 2020 19:15:38 GMT+0000",
-                  quem: "Jose Pires",
-                  texto: "Adicionou uma anotação ao recluso Luis Duarte"
-              }
-          ];
+            var recluso = {
+                idRecluso: "3",
+                idIdentificador: "cR123",
+                dataNascimento: "2000-01-07",
+                nacionalidade: "Portuguesa",
+                nome: "carlos Teixeira",
+                foto: "img/rec2.jpg",
+                contacto: 123456789,
+                contactoAlternativo: 987654321,
+                idPulseira: 321323,
+                idInstituicao: {
+                    idInstituicao: 1,
+                    nome: "Uminho"
+                },
+                nivelAmeaca: 10,
+                cela: "c14",
+                pulsacaoMax: 120,
+                pulsacaoMin: 60,
+                desligarAlerta: false
+            }
+            //criação da demonstração de resultados recebidos
 
 
-          //criação da demonstração de resultados recebidos
-          for (const log of listaLog) {
-              let time = new Date(log.hora);
-              var ht = time.getHours();
-              var mt = time.getMinutes();
+            //envia a para a pagina
+            document.getElementById("fotoR").src = recluso.foto;
+            document.getElementById("id_recluso").innerHTML = recluso.idIdentificador;
+            document.getElementById("nome_recluso").innerHTML = recluso.nome;
+            document.getElementById("dn_recluso").innerHTML = recluso.dataNascimento;
+            document.getElementById("nac_recluso").innerHTML = recluso.nacionalidade;
+            document.getElementById("contacto_recluso2").innerHTML = recluso.contacto;
+            document.getElementById("contacto_recluso_alternativo2").innerHTML = recluso.contactoAlternativo;
+            document.getElementById("n_cela2").innerHTML = recluso.cela;
+            document.getElementById("n_ameaca2").innerHTML = recluso.nivelAmeaca;
+            document.getElementById("id_instituicao").innerHTML = recluso.idInstituicao.nome;
+            document.getElementById("id_pulseira2").innerHTML = recluso.idPulseira;
+            document.getElementById("max_pul2").innerHTML = recluso.pulsacaoMax;
+            document.getElementById("min_pul2").innerHTML = recluso.pulsacaoMin;
+
+            if (recluso.desligarAlerta) {
+                document.getElementById("notiR").checked = false;
+            } else {
+                document.getElementById("notiR").checked = true;
+            }
+
+        }
+        //chama a função fetchAsync()
+        fetchAsync().then(data => console.log("done")).catch(reason => console.log(reason.message));
 
 
-              see_logs += "<td>" + time.getDate() + "-" + (time.getMonth() + 1) + "-" + time.getFullYear() + " " + ht + ":" + mt + "</td>";
-              see_logs += "<td>" + log.quem + "</td>";
-              see_logs += "<td>" + log.texto + "</td></tr>";
-          }
-
-          //envia a para a pagina
-          tabelBody.innerHTML = see_logs;
+    }
+})
 
 
-      }
-      //chama a função fetchAsync()
-      fetchAsync().then(data => console.log("done")).catch(reason => console.log(reason.message));
-      //var t = setTimeout(display_logs, 60000);
-  }
+//--------------------------------------EDITAR PERFIL-----------------------------------------------------
+
+document.getElementById("perfil_save_2").addEventListener("click", editar);
+
+async function editar() {
+    event.preventDefault();
+
+    //let id_user_clicked = localStorage.getItem("id_user_clicked");
+    //  const response = await fetch('http://127.0.0.1:8080/api/recluso/' + id_user_clicked);
+    // const recluso = await response.json();
+
+    var recluso = {
+        idRecluso: "3",
+        idIdentificador: "cR123",
+        dataNascimento: "2000-01-07",
+        nacionalidade: "Portuguesa",
+        nome: "carlos Teixeira",
+        foto: "img/rec2.jpg",
+        contacto: 123456789,
+        contactoAlternativo: 987654321,
+        idPulseira: 321323,
+        idInstituicao: {
+            idInstituicao: 1,
+            nome: "Uminho"
+        },
+        nivelAmeaca: 10,
+        cela: "c14",
+        pulsacaoMax: 120,
+        pulsacaoMin: 60,
+        desligarAlerta: false
+    }
+    data = {};
+
+    data.foto = document.getElementById("fotoR").src;
+    data.idIdentificador = document.getElementById("id_recluso").innerHTML;
+    data.nome = recluso.nome;
+    data.dataNasciomento = recluso.dataNascimento;
+    data.nacionalidade = document.getElementById("nac_recluso").innerHTML;
+    data.contacto = parseInt(document.getElementById("contacto_recluso2").innerHTML);
+    data.contactoAlternativo =  parseInt(document.getElementById("contacto_recluso_alternativo2").innerHTML);
+    data.cela = document.getElementById("n_cela2").innerHTML;
+    data.nivelAmeca = parseInt(document.getElementById("n_ameaca2").innerHTML);
+    data.idInstituicao = recluso.idInstituicao;
+    data.idPulseira = document.getElementById("id_pulseira2").innerHTML;
+    data.pulsacaoMax = parseInt(document.getElementById("max_pul2").innerHTML);
+    data.pulsacaoMin = parseInt(document.getElementById("min_pul2").innerHTML);
+    data.desligarAlerta = document.getElementById("notiR").checked;
+
+    if (document.getElementById("notiR").checked) {
+        data.desligarAlerta = false;
+    } else {
+        data.desligarAlerta = true;
+    }
+
+console.log(data);
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
+
 //----------------------------------------------------------------------------------------------------------------
 
-function myfunction420() {
-    document.getElementById("edit_registocriminal").readOnly = false;
-    document.getElementById("edit_registocriminal").style.border = "groove";
-  }
-
-  function myfunction421() {
-    document.getElementById("edit_registocriminal").readOnly = true;
-    document.getElementById("edit_registocriminal").style.border = "hidden";
-  }
-
-  function myfunction422() {
-    document.getElementById("edit_receita").readOnly = false;
-    document.getElementById("edit_receita").style.border = "groove";
-  }
-
-  function myfunction423() {
-    document.getElementById("edit_receita").readOnly = true;
-    document.getElementById("edit_receita").style.border = "hidden";
-  }
-
-  function Myfunction424() {
-    document.getElementById("contacto_recluso2").contentEditable = true;
-    document.getElementById("icon_contacto_recluso").style.display = "block";
-    document.getElementById("contacto_recluso_alternativo2").contentEditable = true;
-    document.getElementById("icon_contacto_recluso_alternativo").style.display = "block";
-    document.getElementById("n_cela2").contentEditable = true;
-    document.getElementById("icon_n_cela").style.display = "block";
-    document.getElementById("n_ameaca2").contentEditable = true;
-    document.getElementById("icon_n_ameaca").style.display = "block";
-    document.getElementById("max_pul2").contentEditable = true;
-    document.getElementById("icon_max_pul").style.display = "block";
-    document.getElementById("min_pul2").contentEditable = true;
-    document.getElementById("icon_min_pul").style.display = "block";
-    document.getElementById("perfil_alterar_2").style.display = "none";
-    document.getElementById("perfil_save_2").style.display = "block";
-  }
-
-  function Myfunction425() {
-    document.getElementById("contacto_recluso2").contentEditable = false;
-    document.getElementById("icon_contacto_recluso").style.display = "none";
-    document.getElementById("contacto_recluso_alternativo2").contentEditable = false;
-    document.getElementById("icon_contacto_recluso_alternativo").style.display = "none";
-    document.getElementById("n_cela2").contentEditable = false;
-    document.getElementById("icon_n_cela").style.display = "none";
-    document.getElementById("n_ameaca2").contentEditable = false;
-    document.getElementById("icon_n_ameaca").style.display = "none";
-    document.getElementById("max_pul2").contentEditable = false;
-    document.getElementById("icon_max_pul").style.display = "none";
-    document.getElementById("min_pul2").contentEditable = false;
-    document.getElementById("icon_min_pul").style.display = "none";
-    document.getElementById("perfil_save_2").style.display = "none";
-    document.getElementById("perfil_alterar_2").style.display = "block";
-  }
+function checkInp() {
+    var x = document.getElementById("newNif").value;
+    if ((x % 1) != 0) {
+        //alert("So aceita numeros");
+        return false;
+    } else {
+        return true;
+    }
+}

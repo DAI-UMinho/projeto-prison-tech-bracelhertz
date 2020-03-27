@@ -1,4 +1,4 @@
-window.onload = function () {
+$(window).on("load", function () {
 
     display_perfil();
 
@@ -15,37 +15,24 @@ window.onload = function () {
 
 
             //envia a para a pagina
-            if (perfil.id_tipo == 0) {
+            if (perfil.idTipo == 0) {
                 funcao = "Guarda Prisional";
-            } else if (perfil.id_tipo == 1) {
+            } else if (perfil.idTipo == 1) {
                 funcao = "Gestor da Instituição";
-            } else if (perfil.id_tipo == 2) {
+            } else if (perfil.idTipo == 2) {
                 funcao = "Gestor da Rede Prisional";
             } else {
                 funcao = "undifined";
             }
 
-            /*    switch (perfil.id_tipo) {
-                    case 0:
-                        funcao = "Guarda Prisional";
-                        break;
-                    case 1:
-                        funcao = "Gestor da Instituição";
-                        break;
-                    case 2:
-                        funcao = "Gestor da Rede Prisional";
-                    default:
-                        funcao = "undifined";
-                }*/
-
             document.getElementById("funcaoF").innerHTML = funcao;
             document.getElementById("nFuncionario").innerHTML = perfil.username;
-            document.getElementById("InstituicaoF").innerHTML = perfil.id_instituicao.nome;
-            document.getElementById("dataNascimentoF").innerHTML = perfil.data_nascimento;
+            document.getElementById("InstituicaoF").innerHTML = perfil.idInstituicao.nome;
+            document.getElementById("dataNascimentoF").innerHTML = perfil.dataNascimento;
             document.getElementById("nacionalidadeF").innerHTML = perfil.nacionalidade;
             document.getElementById("moradaF").innerHTML = perfil.morada;
             document.getElementById("localidadeF").innerHTML = perfil.localidade;
-            document.getElementById("nomeF").innerHTML = perfil.primeiro_nome + " " + perfil.ultimo_nome;
+            document.getElementById("nomeF").innerHTML = perfil.nome;
             document.getElementById("imagemPerfil").src = perfil.foto;
             document.getElementById("contactoF").innerHTML = perfil.contacto;
             document.getElementById("emailF").innerHTML = perfil.email;
@@ -57,6 +44,6 @@ window.onload = function () {
         fetchAsync().then(data => console.log("done")).catch(reason => console.log(reason.message));
         //var t = setTimeout(display_logs, 60000);
     }
-}
+})
 //----------------------------------------------------------------------------------------------------------------
 

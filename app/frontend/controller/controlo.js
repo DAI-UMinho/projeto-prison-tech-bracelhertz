@@ -93,26 +93,24 @@ function display_infoPerfil() {
 
 
         var perfilLogado = {
-            id_user: 2,
-            id_tipo: 2,
+            idUtilizador: 2,
+            idTipo: 2,
             username: "#78ABC",
             password: "123456Aa",
-            data_nascimento: "2019-02-03",
+            dataNascimento: "2019-02-03",
             nacionalidade: "Portuguesa",
             morada: "Rua X",
             localidade: "Braga",
-            primeiro_nome: "Rui",
-            ultimo_nome: "Gomes",
+            nome: "Rui Gomes",
             foto: "https://crestedcranesolutions.com/wp-content/uploads/2013/07/facebook-profile-picture-no-pic-avatar.jpg",
             contacto: 14,
             email: "ruigo@gmail.com",
-            created_timestamp: "2020-03-18T22:42:31.172055"
         }
 
 
         //criação da demonstração de resultados recebidos
         //envia a para a pagina
-        nomeUser.innerHTML = perfilLogado.primeiro_nome + " " + perfilLogado.ultimo_nome;
+        nomeUser.innerHTML = perfilLogado.nome;
         avatarUser.src = perfilLogado.foto;
 
 

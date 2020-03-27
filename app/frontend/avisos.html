@@ -58,14 +58,14 @@
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link" href="dashboard.html">
+        <a class="nav-link" href="listaocorrencias.html">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Ocorrências</span></a>
       </li>
 
       <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link" href="aviso.html">
+        <a class="nav-link" href="avisos.html">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Avisos</span></a>
       </li>
@@ -95,9 +95,9 @@
           <span>Funcionários</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="listagestores.html">
+        <a class="nav-link" href="listainstituicoes.html">
           <i class="fas fa-fw fa-table"></i>
-          <span>Gestores</span></a>
+          <span>Instituições</span></a>
       </li>
 
       <!-- Divider -->
@@ -270,8 +270,8 @@
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
-                <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                <span id="nomeUser" class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
+                <img id="avatarUser" class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -299,28 +299,33 @@
         <!-- Begin Page Content -->
         <div class="row">
         <div class="col-10 pr-0">
-        <div class="container-fluid pr-2">
+        <div class="container-fluid pr-2 ">
 
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4 border-bottom-secondary">
             <h1 class="h3 mb-0 text-secondary">Avisos</h1>
-            <div class="dropdown mr-3">
+            <div class="justify-content-end">
+            <select id="filtro" class="dropdown" onchange="getSelectValue();">
               <span>Filtrar por...</span>
               <div class="dropdown-content">
-                <button class="mb-n05" style="border: none; background: none;">Reclusos</button>
-                <button class="mb-n1" style="border: none; background: none;">Instituições</button>
+                <option class="mb-n05" style="border: none; background: none;" value="reclusos">Reclusos</option>
+                <option class="mb-n1" style="border: none; background: none;" value="instituicoes">Instituições</option>
               </div>
-            </div>
+            </select>
+          <span>
+            <a href="#" data-toggle="modal" data-target="#NotaModal" class="d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Nova Anotação</a>
+          </span>
+        </div>
             <!---<a href="#" data-toggle="modal" data-target="#NotaModal" class="d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Nova nota</a>--->
           </div>
-  
+          <div id="real_content">
           <!-- Dropdown Card Example -->
           <div class="card shadow mb-4">
             <!-- Card Header - Dropdown -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-secondary">
               <h6 class="m-0 font-weight-bold text-white">Espancamento
               
-              <span data-tooltip="Sexta-feira 11 Março 2020 14:24h" data-tooltip-position="bottom" class="text-white font-small font-weight-normal">(Editado)</span></h6>
+              <span data-tooltip="Sexta-feira 11 Março 2020 14:24h" data-tooltip-position="bottom" class="text-white font-small font-weight-normal solve" id="cona">(Editado)</span></h6>
               
               <div class="dropdown no-arrow">
                 <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -328,8 +333,8 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
                   <div class="dropdown-header text-secondary">Opções:</div>
-                  <a class="dropdown-item" data-toggle="modal" data-target="#EditarNotaModal" href="#">Editar</a>
-                  <a class="dropdown-item" href="#">Apagar</a>
+                  <a class="dropdown-item" data-toggle="modal" data-target="#EditarNotaModal" id="willEdit" href="#">Editar</a>
+                  <a class="dropdown-item" href="#" id="apagar_aviso">Apagar</a>
                   
                   <a class="dropdown-item" href="#"></a>
                 </div>
@@ -340,6 +345,8 @@
               <div style="margin-top:-12px;" class="text-primary">
                 <img class="img-profile rounded-circle picNotes" src="img/perfil2.jpg"> João Teixeira
                 <span class="text-xs"> 12:35</span></div>
+                <br>
+                <div>Recluso: Carlos Teixeira</div>
               <div class="mt-3">
                 Dropdown menus can be placed in the card header in order to extend the functionality of a basic card. In this dropdown card example, the Font Awesome vertical ellipsis icon in the card header can be clicked on in order to toggle a dropdown menu.
               </div>
@@ -387,7 +394,7 @@
               <div class="input-group">
                 <input type="text" class="form-control bg-light border-0 small mt-2" placeholder="Comente aqui..." aria-label="Add" aria-describedby="basic-addon2">
                 <div class="input-group-append">
-                  <button class="btn btn-secondary mt-2" type="button">
+                  <button class="btn btn-secondary mt-2" id="botaoEnviarComentario" type="button">
                     <i class="fas fa-envelope fa-sm"></i>
                   </button>
                 </div>
@@ -633,7 +640,7 @@
               
             </div>
           </div>
-
+          </div>
         </div>
         </div>
 
@@ -641,6 +648,7 @@
           <div class="col pl-0">
           <input type="text" id="myFilter" placeholder="Pesquisar recluso" class="form-control py-2 mr-3 myFilter">
         </div>
+        <div id="tPulsacoes">
           <ul class="teste w-100 px-0" style="list-style-type: none;">
           
           <!--Recluso-->
@@ -763,6 +771,7 @@
             </div>
           </ul>
         </div>
+        </div>
 
         </div>
         <!-- /.container-fluid -->
@@ -816,17 +825,19 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header bg-gradient-primary text-white" style="margin-right:-0.5px;">
-          <h5 class="modal-title" id="exampleModalLabel">Nova Nota</h5>
+          <h5 class="modal-title text-white" id="exampleModalLabel">Nova Anotação</h5>
           <button class="close text-white" type="button" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
         </div>
         <div class="modal-body">
-          <textarea class="form-control" rows="6" cols="60" placeholder="Escreva aqui a nota"></textarea>
+          <textarea class="form-control mb-1 textarea2" rows="1" cols="1" placeholder="Recluso"></textarea>
+          <textarea class="form-control mb-1 textarea2" rows="1" cols="1" placeholder="Assunto"></textarea>
+          <textarea class="form-control textarea1" rows="6" cols="60" placeholder="Escreva aqui a nota"></textarea>
         </div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-          <a class="btn btn-primary" id="EnviarNota" href="#">Enviar</a>
+          <a class="btn btn-primary" id="enviar_novo" href="#">Criar</a>
         </div>
       </div>
     </div>
@@ -842,13 +853,16 @@
             <span aria-hidden="true">×</span>
           </button>
         </div>
-        <div class="modal-body">
-          <textarea class="form-control" rows="6" cols="60" placeholder="Escreva aqui a nota"></textarea>
-        </div>
+        <form class="modal-body" id="show_information">
+          <textarea class="form-control mb-1 textarea2" rows="1" cols="1" placeholder="Recluso"></textarea>
+          <textarea class="form-control mb-1 textarea2" rows="1" cols="1" placeholder="Assunto"></textarea>
+          <textarea class="form-control textarea1" rows="6" cols="60" placeholder="Escreva aqui a nota..."></textarea>
+        
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-          <a class="btn btn-primary" id="EditarNota" href="#">Enviar</a>
+          <a class="btn btn-primary" id="enviar_edicao" href="#">Enviar</a>
         </div>
+      </form>
       </div>
     </div>
   </div>
@@ -862,6 +876,9 @@
 
   <!-- Custom scripts for all pages-->
   <script src="js/sb-admin-2.js"></script>
+  <script src="controller/avisos.js"></script>
+  <script src="./controller/controlo.js"></script>
+  <!---<script src="controller/controlo.js"></script>--->
 
 </body>
 

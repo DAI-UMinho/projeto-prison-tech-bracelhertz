@@ -94,9 +94,9 @@
     <span>Funcionários</span></a>
 </li>
 <li class="nav-item">
-  <a class="nav-link" href="listagestores.html">
+  <a class="nav-link" href="listainstituicoes.html">
     <i class="fas fa-fw fa-table"></i>
-    <span>Gestores</span></a>
+    <span>Instituições</span></a>
 </li>
 
       <!-- Divider -->
@@ -269,8 +269,8 @@
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
-                <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                <span id="nomeUser" class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
+                <img id="avatarUser" class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -417,6 +417,7 @@
         <div class="col pl-0">
         <input type="text" id="myFilter" placeholder="Pesquisar recluso" class="form-control py-2 mr-3 myFilter">
       </div>
+      <div id="tPulsacoes">
         <ul class="teste w-100 px-0" style="list-style-type: none;">
         
         <!--Recluso-->
@@ -539,6 +540,7 @@
           </div>
         </ul>
       </div>
+      </div>
       
     </div>
         <!-- /.container-fluid -->
@@ -605,6 +607,8 @@
   <script src="js/demo/chart-area-demo.js"></script>
   <script src="js/demo/chart-pie-demo.js"></script>
   <script src="js/demo/datatables-demo.js"></script>
+  <script src="controller/perfil.js"></script>
+  <script src="controller/controlo.js"></script>
 
 </body>
 

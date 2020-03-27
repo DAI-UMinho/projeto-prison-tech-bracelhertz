@@ -94,9 +94,9 @@
           <span>Funcionários</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="listagestores.html">
+        <a class="nav-link" href="listainstituicoes.html">
           <i class="fas fa-fw fa-table"></i>
-          <span>Gestores</span></a>
+          <span>Instituições</span></a>
       </li>
 
       <!-- Divider -->
@@ -282,8 +282,9 @@
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
-                <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                <span id="nomeUser" class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
+                <img id="avatarUser" class="img-profile rounded-circle"
+                  src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -310,320 +311,430 @@
 
         <!-- Begin Page Content -->
         <div class="row">
-        <div class="col-10 pr-0">
-        <div id="body" class="container-fluid pr-2">
+          <div class="col-10 pr-0">
+            <div id="body" class="container-fluid pr-2">
 
 
 
-          <!-- Content Row -->
-          <div class="row">
+              <!-- Content Row -->
+              <div class="row">
 
 
 
 
 
 
-            <div class="col-lg-4">
-              <div class="card shadow mb-4">
-                <!-- Card Header - Dropdown -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-secondary perfil_header">
-                  <h6 class="m-0 font-weight-bold text-white">Dados Pessoais:</h6>
-                  <button class="bg-transparent" id="perfil_save_2" onclick="Myfunction425()" style="border: none; display:none"><i class="fas fa-file-export font-weight-bold text-white"></i></button>
-                  <button onclick="Myfunction424()" id="perfil_alterar_2" style="background-color:transparent; border: none;"><i class="fas fa-user-edit font-weight-bold text-white"></i></button>
-                  
-
-                </div>
-                <!-- Card Body -->
-                <div class="card-body">
-                  <div>
-                    <div class="imagem">
-                      <img  class="imagemlogo" src="img/rec2.jpg">
+                <div class="col-7">
+                  <div class="card shadow mb-4">
+                    <!-- Card Header - Dropdown -->
+                    <div class="card-header py-3 bg-secondary">
+                      <div class="m-0 font-weight-bold text-white full_tab">
+                        <div class="tab_nome">Perfil</div>
+                        <div class="d-flex" type="button tab_time">
+                          <button class="bg-transparent" id="perfil_save_2" onclick="Myfunction425()"
+                            style="border: none; display:none"><i
+                              class="fas fa-file-export font-weight-bold text-white"></i></button>
+                          <button onclick="Myfunction424()" id="perfil_alterar_2"
+                            style="background-color:transparent; border: none;"><i
+                              class="fas fa-user-edit font-weight-bold text-white"></i></button>
+                        </div>
+                      </div>
                     </div>
+                    <!-- Card Body -->
+                    <div class="card-body">
+                      <div>
+                        <div class="imagem">
+                          <img id="fotoR" class="imagemlogo" src="img/rec2.jpg">
+                        </div>
 
-                    <br>
-                    
-                    <div class="form-control mt-4" style="height: 50px">
-                      <h5 class="card-title form-control420" style="width: 110px;"><strong>ID Recluso</strong></h5>
-                      <div id="id_recluso" class="h6 ml-2 text-primary font-weight-600"><em>a89268</em></div>
-                    </div>
+                        <br>
+
+                        <div class="form-control mt-4" style="height: 50px">
+                          <h5 class="card-title form-control420" style="width: 110px;"><strong>ID Recluso</strong></h5>
+                          <div id="id_recluso" class="h6 ml-2 text-primary font-weight-600"><em>a89268</em></div>
+                        </div>
 
 
-                    <br>
-                    
-                    <div class="form-control" style="height: 50px">
-                      <h5 class="card-title form-control420"><strong>Nome</strong></h5>
-                      <div id="nome_recluso" class="h6 ml-2 text-primary font-weight-600"><em>Carla Andrade</em></div>
-                    </div>
-                    
-                    <br>
+                        <br>
 
-                    <div class="form-control" style="height: 50px">
-                      <h5 class="card-title form-control420" style="width: 180px"><strong>Data de Nascimento</strong></h5>
-                      <div id="dn_recluso" class="h6 ml-2 text-primary font-weight-600"><em>02-09-1996</em></div>
-                    </div>
+                        <div class="form-control" style="height: 50px">
+                          <h5 class="card-title form-control420"><strong>Nome</strong></h5>
+                          <div id="nome_recluso" class="h6 ml-2 text-primary font-weight-600"><em>Carla Andrade</em>
+                          </div>
+                        </div>
 
-                    <br>
+                        <br>
 
-                    <div class="form-control" style="height: 50px">
-                      <h5 class="card-title form-control420" style="width: 220px"><strong>Contacto de Emergência</strong></h5>
-                      <div id="contacto_recluso" class="h6 ml-2 text-primary font-weight-600" style="display: inline-flex;"><p id="contacto_recluso2"><em>912877654</em></p><i id="icon_contacto_recluso" class="fas fa-pen text-primary bg-transparent" style="margin-left: 275px; display: none"></i></div>
-                    </div>
+                        <div class="form-control" style="height: 50px">
+                          <h5 class="card-title form-control420" style="width: 180px"><strong>Data de
+                              Nascimento</strong></h5>
+                          <div id="dn_recluso" class="h6 ml-2 text-primary font-weight-600"><em>02-09-1996</em></div>
+                        </div>
 
-                    <br>
-                   
-                    <div class="form-control" style="height: 50px">
-                      <h4 class="card-title form-control420" style="width: 395px"><strong>Contacto de Emergência Alternativo</strong></h4>
-                      <div id="contacto_recluso_alternativo" class="h6 ml-2 text-primary font-weight-600" style="display: inline-flex;"><p id="contacto_recluso_alternativo2"><em>912877654</em></p><i id="icon_contacto_recluso_alternativo" class="fas fa-pen text-primary bg-transparent" style="margin-left: 275px; display: none"></i></div>
-                    </div>
 
-                    <br>
-                   
-                    <div class="form-control" style="height: 50px">
-                      <h4 class="card-title form-control420" style="width: 65px"><strong>Cela</strong></h4>
-                      <div id="n_cela" class="h6 ml-2 text-primary font-weight-600" style="display: inline-flex;"><p id="n_cela2"><em>A87</em></p><i id="icon_n_cela" class="fas fa-pen text-primary bg-transparent" style="margin-left: 330px; display: none"></i></div>
-                    </div>
 
-                    <br>
-                   
-                    <div class="form-control" style="height: 50px">
-                      <h4 class="card-title form-control420" style="width: 185px"><strong>Nível de Ameaça</strong></h4>
-                      <div id="n_ameaca" class="h6 ml-2 text-primary font-weight-600" style="display: inline-flex;"><p id="n_ameaca2"><em>3</em></p><i id="icon_n_ameaca" class="fas fa-pen text-primary bg-transparent" style="margin-left: 350px; display: none"></i></div>
-                    </div>
+                        <br>
 
-                    <br>
-                   
-                    <div class="form-control" style="height: 50px">
-                      <h4 class="card-title form-control420" style="width: 160px"><strong>ID Instituição</strong></h4>
-                      <div id="id_instituicao" class="h6 ml-2 text-primary font-weight-600"><em>a89287</em></div>
-                    </div>
+                        <div class="form-control" style="height: 50px">
+                          <h5 class="card-title form-control420" style="width: 135px"><strong>Nacionalidade</strong>
+                          </h5>
+                          <div id="nacionalidade_recluso" class="h6 ml-2 text-primary font-weight-600 full_tab"
+                            style="display: inline-flex;">
+                            <p class="tab_nome" id="nac_recluso"><em>Frances</em></p>
+                            <i id="icon_nacionalidade_recluso" class="fas fa-pen text-primary bg-transparent pr-3"
+                              style="margin-left: 275px; display: none"></i>
+                          </div>
+                        </div>
 
-                    <br>
-                   
-                    <div class="form-control" style="height: 50px">
-                      <h4 class="card-title form-control420" style="width: 135px"><strong>ID Pulseira</strong></h4>
-                      <div id="id_pulseira" class="h6 ml-2 text-primary font-weight-600" style="display: inline-flex;"><p id="id_pulseira2"><em>35578</em></p><i id="icon_id_pulseira" class="fas fa-pen text-primary bg-transparent" style="margin-left: 550px; display: none"></i></div>
-                    </div>
+                        <br>
 
-                    <br>
-                   
-                    <div class="form-control" style="height: 50px">
-                      <h4 class="card-title form-control420" style="width: 195px"><strong>Pulsação Máxima</strong></h4>
-                      <div id="max_pul" class="h6 ml-2 text-primary font-weight-600" style="display: inline-flex;"><p id="max_pul2"><em>120</em></p><i id="icon_max_pul" class="fas fa-pen text-primary bg-transparent" style="margin-left: 330px; display: none"></i></div>
-                    </div>
+                        <div class="form-control" style="height: 50px">
+                          <h5 class="card-title form-control420" style="width: 220px"><strong>Contacto de
+                              Emergência</strong></h5>
+                          <div id="contacto_recluso" class="h6 ml-2 text-primary font-weight-600 full_tab"
+                            style="display: inline-flex;">
+                            <p class="tab_nome" id="contacto_recluso2"><em>912877654</em></p>
+                            <i id="icon_contacto_recluso" class="fas fa-pen text-primary bg-transparent pr-3"
+                              style="margin-left: 275px; display: none"></i>
+                          </div>
+                        </div>
 
-                    <br>
-                   
-                    <div class="form-control" style="height: 50px">
-                      <h4 class="card-title form-control420" style="width: 190px"><strong>Pulsação Minima</strong></h4>
-                      <div id="min_pul" class="h6 ml-2 text-primary font-weight-600" style="display: inline-flex;"><p id="min_pul2"><em>60</em></p><i id="icon_min_pul" class="fas fa-pen text-primary bg-transparent" style="margin-left: 340px; display: none"></i></div>
+                        <br>
+
+                        <div class="form-control" style="height: 50px">
+                          <h4 class="card-title form-control420" style="width: 395px"><strong>Contacto de Emergência
+                              Alternativo</strong></h4>
+                          <div id="contacto_recluso_alternativo" class="h6 ml-2 text-primary font-weight-600 full_tab"
+                            style="display: inline-flex;">
+                            <p class="tab_nome" id="contacto_recluso_alternativo2"><em>912877654</em></p>
+                            <i id="icon_contacto_recluso_alternativo"
+                              class="fas fa-pen text-primary bg-transparent pr-3"
+                              style="margin-left: 275px; display: none"></i>
+                          </div>
+                        </div>
+
+                        <br>
+
+                        <div class="form-control" style="height: 50px">
+                          <h4 class="card-title form-control420" style="width: 65px"><strong>Cela</strong></h4>
+                          <div id="n_cela" class="h6 ml-2 text-primary font-weight-600 full_tab"
+                            style="display: inline-flex;">
+                            <p class="tab_nome" id="n_cela2"><em>A87</em></p><i id="icon_n_cela"
+                              class="fas fa-pen text-primary bg-transparent pr-3"
+                              style="margin-left: 330px; display: none"></i>
+                          </div>
+                        </div>
+
+                        <br>
+
+                        <div class="form-control" style="height: 50px">
+                          <h4 class="card-title form-control420" style="width: 185px"><strong>Nível de Ameaça</strong>
+                          </h4>
+                          <div id="n_ameaca" class="h6 ml-2 text-primary font-weight-600 full_tab"
+                            style="display: inline-flex;">
+                            <p class="tab_nome" id="n_ameaca2"><em>3</em></p><i id="icon_n_ameaca"
+                              class="fas fa-pen text-primary bg-transparent pr-3"
+                              style="margin-left: 350px; display: none"></i>
+                          </div>
+                        </div>
+
+                        <br>
+
+                        <div class="form-control" style="height: 50px">
+                          <h4 class="card-title form-control420" style="width: 125px"><strong>Instituição</strong>
+                          </h4>
+                          <div id="id_instituicao" class="h6 ml-2 text-primary font-weight-600"><em>a89287</em></div>
+                        </div>
+
+                        <br>
+
+                        <div class="form-control" style="height: 50px">
+                          <h4 class="card-title form-control420" style="width: 135px"><strong>ID Pulseira</strong></h4>
+                          <div id="id_pulseira" class="h6 ml-2 text-primary font-weight-600"
+                            style="display: inline-flex;">
+                            <p id="id_pulseira2"><em>35578</em></p><i id="icon_id_pulseira"
+                              class="fas fa-pen text-primary bg-transparent"
+                              style="margin-left: 550px; display: none"></i>
+                          </div>
+                        </div>
+
+                        <br>
+
+                        <div class="form-control" style="height: 50px">
+                          <h4 class="card-title form-control420" style="width: 195px"><strong>Pulsação Máxima</strong>
+                          </h4>
+                          <div id="max_pul" class="h6 ml-2 text-primary font-weight-600 full_tab"
+                            style="display: inline-flex;">
+                            <p class="tab_nome" id="max_pul2"><em>120</em></p><i id="icon_max_pul"
+                              class="fas fa-pen text-primary bg-transparent pr-3"
+                              style="margin-left: 330px; display: none"></i>
+                          </div>
+                        </div>
+
+                        <br>
+
+                        <div class="form-control" style="height: 50px">
+                          <h4 class="card-title form-control420" style="width: 190px"><strong>Pulsação Minima</strong>
+                          </h4>
+                          <div id="min_pul" class="h6 ml-2 text-primary font-weight-600 full_tab"
+                            style="display: inline-flex;">
+                            <p class="tab_nome" id="min_pul2"><em>60</em></p><i id="icon_min_pul"
+                              class="fas fa-pen text-primary bg-transparent pr-3"
+                              style="margin-left: 340px; display: none"></i>
+                          </div>
+                        </div>
+                      </div>
+                      <br>
+
+
                     </div>
                   </div>
-                  <br>
-
-
                 </div>
-              </div>
-            </div>
 
 
 
-            <div class="col-lg-8 ml-n2">
-              <!-- Pulsação Recluso -->
-              
-              <!--
-              <div id="pulsação_recluso_perfil"> 
-                  
-              </div>
-            -->
+                <div class="col-5">
 
-              <!-- Registo Criminal -->
-              <div class="row card shadow mb-4">
-                <!-- Card Header - Dropdown -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-secondary perfil_header">
-                  <h6 class="m-0 font-weight-bold text-white">Registo Criminal</h6>
-                  <button class="bg-transparent mr-4" id="edit_button" onclick="myfunction421()" style="border: none;margin-left: 71%;">
-                    <i class="fas fa-file-export font-weight-bold text-white"></i>
-                  </button>
-                  <button class="bg-transparent mr-4" id="edit_button" onclick="myfunction420()" style="border: none;">
-                    <i class="fas fa-pen font-weight-bold text-white"></i>
-                  </button>
-                </div>
-                <br>
-                <div>
-                  <textarea id="edit_registocriminal" rows="4" cols="105" class="ml-2" style="border-style: none;min-height: 60px;" readonly>
+                  <div class="w-100" style="margin-top: 8px;">
+                    <div class="full_tab">
+                      <div class="tab_nome">
+                        <h3 class="text-primary font-weight-bold">Receber alerta</h3>
+                      </div>
+                      <div class="tab_time">
+                        <label class="switch">
+                          <input id="notiR" type="checkbox" checked>
+                          <span class="slider round"></span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <hr>
+
+
+                  <!-- Registo Criminal -->
+                  <div class="w-100">
+                    <div class="card shadow mb-4">
+                      <!-- Card Header - Dropdown -->
+                      <div class="card-header py-3 bg-secondary">
+                        <div class="m-0 font-weight-bold text-white full_tab">
+                          <div class="tab_nome">Registo Criminal</div>
+                          <div class="d-flex tab_time">
+                            <div class="row">
+                              <div class="col-6">
+                                <button class="bg-transparent mr-4" id="edit_button" onclick="myfunction421()"
+                                  style="border: none;margin-left: 71%;">
+                                  <i class="fas fa-file-export font-weight-bold text-white"></i>
+                                </button>
+                              </div>
+                              <div class="col-6">
+                                <button class="bg-transparent mr-4" id="edit_button" onclick="myfunction420()"
+                                  style="border: none;">
+                                  <i class="fas fa-pen font-weight-bold text-white"></i>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Card Body -->
+                      <div class="card-body">
+                        <textarea id="edit_registocriminal" rows="4" cols="105" class="w-100"
+                          style="border-style: none;min-height: 60px;" readonly>
 Nesta secção encontra-se informação acerca do registo criminal do recluso
                   </textarea>
-                </div>
-              </div>
-
-              <!-- Receitas Médicas -->
-              <div class="row card shadow mb-4">
-                <!-- Card Header - Dropdown -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-secondary perfil_header">
-                  <h6 class="m-0 font-weight-bold text-white">Receitas Médicas</h6>
-                  <button class="bg-transparent mr-4" id="edit_button" onclick="myfunction423()" style="border: none;margin-left: 71%;">
-                    <i class="fas fa-file-export font-weight-bold text-white"></i>
-                  </button>
-                  <button class="bg-transparent mr-4" id="edit_button" onclick="myfunction422()" style="border: none;">
-                    <i class="fas fa-pen font-weight-bold text-white"></i>
-                  </button>
-                </div>
-                <br>
-                <div>
-                  <textarea id="edit_receita" rows="4" cols="105" class="ml-2" style="border-style: none; min-height: 60px;" readonly>
-1 bruffen
-                  </textarea>
-                </div>
-              </div>
-            </div>
-
-            
-
-
-
-
-
-          </div>
-          <br>
-
-
-          <button type="button" class="btn btn-primary"> <i class="fas fa-edit"></i>
-            Editar
-          </button>
-          <button type="button" class="btn btn-primary"> <i class="fas fa-save"></i>
-            Guardar
-          </button>
-        </div>  
-      </div>
-
-      <div class="col-2 mt-n4 px-0" id="rec12">
-        <div class="col pl-0">
-        <input type="text" id="myFilter" placeholder="Pesquisar recluso" class="form-control py-2 mr-3 myFilter">
-      </div>
-        <ul class="teste w-100 px-0" style="list-style-type: none;">
-        
-        <!--Recluso-->
-          <div class="col py-2 mr-3 pl-0 pr-1 myfilter">
-            <div class="card border-left-danger shadow h-100 py-2">
-              <div class="card-body pl-3">
-                <div class="row no-gutters align-items-center">
-                  <div class="col-auto pr-2">
-                    <img class="picNotes40 img-profile rounded-circle" src="img/perfil2.jpg">
+                      </div>
+                    </div>
                   </div>
-                  <div class="col mr-2">
-                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">João Teixeira</div>
-                    <div class="h5 mb-0 font-weight-bold text-gray-800">50 bpm</div>
-                  </div>                  
-                </div>
-              </div>
-            </div>
-          </div>
 
-          <!--Recluso-->
-          <div class="col py-2 mr-3 pl-0 pr-1 myfilter">
-            <div class="card border-left-danger shadow h-100 py-2">
-              <div class="card-body pl-3">
-                <div class="row no-gutters align-items-center">
-                  <div class="col-auto pr-2">
-                    <img class="picNotes40 img-profile rounded-circle" src="img/perfil1.png">
+
+
+
+                  <!-- Receitas Médicas -->
+                  <div class="w-100">
+                    <div class="card shadow mb-4">
+                      <!-- Card Header - Dropdown -->
+                      <div class="card-header py-3 bg-secondary">
+                        <div class="m-0 font-weight-bold text-white full_tab">
+                          <div class="tab_nome">Receita Médica</div>
+                          <div class="d-flex tab_time">
+                            <div class="row">
+                              <div class="col-6">
+                                <button class="bg-transparent mr-4" id="edit_button" onclick="myfunction423()"
+                                  style="border: none;margin-left: 71%;">
+                                  <i class="fas fa-file-export font-weight-bold text-white"></i>
+                                </button>
+                              </div>
+                              <div class="col-6">
+                                <button class="bg-transparent mr-4" id="edit_button" onclick="myfunction422()"
+                                  style="border: none;">
+                                  <i class="fas fa-pen font-weight-bold text-white"></i>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Card Body -->
+                      <div class="card-body">
+                        <textarea id="edit_receita" rows="4" cols="105" class="w-100"
+                          style="border-style: none; min-height: 60px;" readonly>1 bruffen</textarea>
+                      </div>
+                    </div>
                   </div>
-                  <div class="col mr-2">
-                    <div class="text font-weight-bold text-primary text-uppercase mb-1">Rui Pires</div>
-                    <div class="h5 mb-0 font-weight-bold text-red">120 bpm</div>
-                  </div>                  
+
+
+
+
+
+
+
+                  <!-- Receitas Médicas -->
+
                 </div>
+
+
+
+
+
+
+
               </div>
+              <br>
+
             </div>
           </div>
 
-          <!--Recluso-->
-          <div class="col py-2 mr-3 pl-0 pr-1 myfilter">
-            <div class="card border-left-danger shadow h-100 py-2">
-              <div class="card-body pl-3">
-                <div class="row no-gutters align-items-center">
-                  <div class="col-auto pr-2">
-                    <img class="picNotes40 img-profile rounded-circle" src="img/perfil2.jpg">
+          <div class="col-2 mt-n4 px-0" id="rec12">
+            <div class="col pl-0">
+              <input type="text" id="myFilter" placeholder="Pesquisar recluso" class="form-control py-2 mr-3 myFilter">
+            </div>
+            <div id="tPulsacoes">
+              <ul class="teste w-100 px-0" style="list-style-type: none;">
+
+                <!--Recluso-->
+                <div class="col py-2 mr-3 pl-0 pr-1 myfilter">
+                  <div class="card border-left-danger shadow h-100 py-2">
+                    <div class="card-body pl-3">
+                      <div class="row no-gutters align-items-center">
+                        <div class="col-auto pr-2">
+                          <img class="picNotes40 img-profile rounded-circle" src="img/perfil2.jpg">
+                        </div>
+                        <div class="col mr-2">
+                          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">João Teixeira</div>
+                          <div class="h5 mb-0 font-weight-bold text-gray-800">50 bpm</div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div class="col mr-2">
-                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Luis Carvalho</div>
-                    <div class="h5 mb-0 font-weight-bold text-gray-800">50 bpm</div>
-                  </div>                  
                 </div>
-              </div>
-            </div>
-          </div>
 
-          <!--Recluso-->
-          <div class="col py-2 mr-3 pl-0 pr-1 myfilter">
-            <div class="card border-left-danger shadow h-100 py-2">
-              <div class="card-body pl-3">
-                <div class="row no-gutters align-items-center">
-                  <div class="col-auto pr-2">
-                    <img class="picNotes40 img-profile rounded-circle" src="img/perfil2.jpg">
+                <!--Recluso-->
+                <div class="col py-2 mr-3 pl-0 pr-1 myfilter">
+                  <div class="card border-left-danger shadow h-100 py-2">
+                    <div class="card-body pl-3">
+                      <div class="row no-gutters align-items-center">
+                        <div class="col-auto pr-2">
+                          <img class="picNotes40 img-profile rounded-circle" src="img/perfil1.png">
+                        </div>
+                        <div class="col mr-2">
+                          <div class="text font-weight-bold text-primary text-uppercase mb-1">Rui Pires</div>
+                          <div class="h5 mb-0 font-weight-bold text-red">120 bpm</div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div class="col mr-2">
-                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Ana Alice</div>
-                    <div class="h5 mb-0 font-weight-bold text-gray-800">50 bpm</div>
-                  </div>                  
                 </div>
-              </div>
-            </div>
-          </div>
 
-          <!--Recluso-->
-          <div class="col py-2 mr-3 pl-0 pr-1 myfilter">
-            <div class="card border-left-danger shadow h-100 py-2">
-              <div class="card-body pl-3">
-                <div class="row no-gutters align-items-center">
-                  <div class="col-auto pr-2">
-                    <img class="picNotes40 img-profile rounded-circle" src="img/perfil2.jpg">
+                <!--Recluso-->
+                <div class="col py-2 mr-3 pl-0 pr-1 myfilter">
+                  <div class="card border-left-danger shadow h-100 py-2">
+                    <div class="card-body pl-3">
+                      <div class="row no-gutters align-items-center">
+                        <div class="col-auto pr-2">
+                          <img class="picNotes40 img-profile rounded-circle" src="img/perfil2.jpg">
+                        </div>
+                        <div class="col mr-2">
+                          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Luis Carvalho</div>
+                          <div class="h5 mb-0 font-weight-bold text-gray-800">50 bpm</div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div class="col mr-2">
-                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Jorge Pedro</div>
-                    <div class="h5 mb-0 font-weight-bold text-gray-800">50 bpm</div>
-                  </div>                  
                 </div>
-              </div>
-            </div>
-          </div>
 
-          <!--Recluso-->
-          <div class="col py-2 mr-3 pl-0 pr-1 myfilter">
-            <div class="card border-left-danger shadow h-100 py-2">
-              <div class="card-body pl-3">
-                <div class="row no-gutters align-items-center">
-                  <div class="col-auto pr-2">
-                    <img class="picNotes40 img-profile rounded-circle" src="img/perfil2.jpg">
+                <!--Recluso-->
+                <div class="col py-2 mr-3 pl-0 pr-1 myfilter">
+                  <div class="card border-left-danger shadow h-100 py-2">
+                    <div class="card-body pl-3">
+                      <div class="row no-gutters align-items-center">
+                        <div class="col-auto pr-2">
+                          <img class="picNotes40 img-profile rounded-circle" src="img/perfil2.jpg">
+                        </div>
+                        <div class="col mr-2">
+                          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Ana Alice</div>
+                          <div class="h5 mb-0 font-weight-bold text-gray-800">50 bpm</div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div class="col mr-2">
-                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Bruno Alves</div>
-                    <div class="h5 mb-0 font-weight-bold text-gray-800">50 bpm</div>
-                  </div>                  
                 </div>
-              </div>
-            </div>
-          </div>
 
-          <!--Recluso-->
-          <div class="col py-2 mr-3 pl-0 pr-1 myfilter">
-            <div class="card border-left-danger shadow h-100 py-2">
-              <div class="card-body pl-3">
-                <div class="row no-gutters align-items-center">
-                  <div class="col-auto pr-2">
-                    <img class="picNotes40 img-profile rounded-circle" src="img/perfil2.jpg">
+                <!--Recluso-->
+                <div class="col py-2 mr-3 pl-0 pr-1 myfilter">
+                  <div class="card border-left-danger shadow h-100 py-2">
+                    <div class="card-body pl-3">
+                      <div class="row no-gutters align-items-center">
+                        <div class="col-auto pr-2">
+                          <img class="picNotes40 img-profile rounded-circle" src="img/perfil2.jpg">
+                        </div>
+                        <div class="col mr-2">
+                          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Jorge Pedro</div>
+                          <div class="h5 mb-0 font-weight-bold text-gray-800">50 bpm</div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div class="col mr-2">
-                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Carlos Costa</div>
-                    <div class="h5 mb-0 font-weight-bold text-gray-800">50 bpm</div>
-                  </div>                  
                 </div>
-              </div>
+
+                <!--Recluso-->
+                <div class="col py-2 mr-3 pl-0 pr-1 myfilter">
+                  <div class="card border-left-danger shadow h-100 py-2">
+                    <div class="card-body pl-3">
+                      <div class="row no-gutters align-items-center">
+                        <div class="col-auto pr-2">
+                          <img class="picNotes40 img-profile rounded-circle" src="img/perfil2.jpg">
+                        </div>
+                        <div class="col mr-2">
+                          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Bruno Alves</div>
+                          <div class="h5 mb-0 font-weight-bold text-gray-800">50 bpm</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!--Recluso-->
+                <div class="col py-2 mr-3 pl-0 pr-1 myfilter">
+                  <div class="card border-left-danger shadow h-100 py-2">
+                    <div class="card-body pl-3">
+                      <div class="row no-gutters align-items-center">
+                        <div class="col-auto pr-2">
+                          <img class="picNotes40 img-profile rounded-circle" src="img/perfil2.jpg">
+                        </div>
+                        <div class="col mr-2">
+                          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Carlos Costa</div>
+                          <div class="h5 mb-0 font-weight-bold text-gray-800">50 bpm</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ul>
             </div>
           </div>
-        </ul>
-      </div>
 
-    </div>
+        </div>
         <!-- /.container-fluid -->
 
       </div>
@@ -686,9 +797,10 @@ Nesta secção encontra-se informação acerca do registo criminal do recluso
   <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
   <!-- Page level custom scripts -->
-  <script src="js/demo/chart-area-demo.js"></script>
-  <script src="js/demo/chart-pie-demo.js"></script>
-  <script src="js/demo/datatables-demo.js"></script>
+
+  <!-- <script src="controller/recluso.js"></script>-->
+  <script src="controller/controlo.js"></script>
+  <script src="controller/recluso.js"></script>
 
 
   <script>
@@ -713,6 +825,8 @@ Nesta secção encontra-se informação acerca do registo criminal do recluso
     }
 
     function Myfunction424() {
+      document.getElementById("nacionalidade_recluso").contentEditable = true;
+      document.getElementById("icon_nacionalidade_recluso").style.display = "block";
       document.getElementById("contacto_recluso2").contentEditable = true;
       document.getElementById("icon_contacto_recluso").style.display = "block";
       document.getElementById("contacto_recluso_alternativo2").contentEditable = true;
@@ -730,6 +844,8 @@ Nesta secção encontra-se informação acerca do registo criminal do recluso
     }
 
     function Myfunction425() {
+      document.getElementById("nacionalidade_recluso").contentEditable = false;
+      document.getElementById("icon_nacionalidade_recluso").style.display = "none";
       document.getElementById("contacto_recluso2").contentEditable = false;
       document.getElementById("icon_contacto_recluso").style.display = "none";
       document.getElementById("contacto_recluso_alternativo2").contentEditable = false;
