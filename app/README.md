@@ -89,7 +89,7 @@
 	- **Packge config:**
 		- Implementação da class CorsConfig.
 
-# Frontend
+## Frontend
 
 - Update da página lista de funcionários;
 - Update da página lista de reclusos;
