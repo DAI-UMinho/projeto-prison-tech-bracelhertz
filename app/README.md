@@ -123,7 +123,7 @@
 - Tratamento de erros do no registo de um funcionário;
 
 ## Extra
-**Pontos focados este patch pela equipa do Backend:**
+**Pontos focados este patch pela equipa dos desenvolvedores:**
 1. O código backend e da base de dados foi mudada para inglês;
 2. Comprimento de politicas de boa programação. (O código do servidor main foi modificado para camelCase e o da BD com _ e minusculas);
 3. **MUITO IMPORTANTE:** Foi trabalhada a segurança da aplicação. Estamos a utilizar a dependência security da framework springboot que nos permite restringir todas as rotas da nossa aplicação através principalmente de tokens. Apenas quem está autenticado pode aceder às rotas da sua Role (função). A token de login tem de ser enviada e reenviada do back para o front e vice versa, assim sendo estamos a utilizar COOKIES ENCRIPTADAS para guardar a token do utilizador com sessão iniciada. A cookie é enviada no headers do fetch (ponte de comunicação entre back e front) e para isso instalamos (no server main) e estamos a utilizar o CORS, uma ferramenta que impede a cookie de ser criada em domínios diferentes aos indicados no servidor.
