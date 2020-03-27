@@ -1,4 +1,4 @@
-# Patch Notes 1.1
+# Patch Notes 1.0
 **Backend**
 - Update da interface UtilizadorRepository;
 - Update da class UtilizadorController;
