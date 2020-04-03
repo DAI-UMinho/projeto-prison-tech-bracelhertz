@@ -11905,6 +11905,34 @@ input:checked + .slider:before {
    display: block;
 
 }
+
+.mr-140{
+  margin-right: 140px;
+}
+.wid100{
+  width:100px;
+}
+
+.disinline{
+  display:inline;
+}
+
+.mr-200{
+  margin-right: 200px;
+}
+
+.mr-220{
+  margin-right: 220px;
+}
+
+.he-30{
+  height: 30px;
+}
+.wd-30{
+  width: 30px;
+}
+
+
 /*----------------------------------------------------------Novo Codigo---------------------------------------------------------*/
 
 
