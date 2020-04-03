@@ -1,6 +1,6 @@
 $(window).on("load", function () {
     
-    //avisos();
+    avisos();
 
 
     function avisos() {
