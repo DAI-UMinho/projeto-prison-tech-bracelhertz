@@ -11684,7 +11684,7 @@ input:checked + .slider:before {
       height: 5px;
       position: absolute;
       top: 7px;
-      right: 7px;
+      right: -3px;
       background: #1400c7; }
     .calendar .calendar-days li.active-day:after {
       color: white;
@@ -11775,5 +11775,138 @@ input:checked + .slider:before {
       .invalid420:before{
         position:relative;left:-35px
       }
-      /*----------------------------------------------------------Novo Codigo---------------------------------------------------------*/
+
+.tab_nome420{
+    display: table-cell !important;
+    width: 70% !important;
+    vertical-align: middle !important;
+}
+
+.txtb420{
+  border-bottom: 2px solid #adadad;
+  position: relative;
+  margin: 30px 0;
+}
+
+.txtb420 input{
+  font-size: 15px;
+  color: #333;
+  border: none;
+  width: 100%;
+  outline: none;
+  background: none;
+  padding: 0 5px;
+  height: 40px;
+}
+
+.txtb420 span{
+  content: attr(data-placeholder);
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  transition: .5s;
+}
+
+.txtb420 span::before{
+  content: attr(data-placeholder);
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  color: #adadad;
+  transform: translateY(-50%);
+  transition: .5s;
+  width: 200px;
+}
+
+.tab_nome70{
+  display: table-cell !important;
+    width: 70% !important;
+    vertical-align: middle !important;
+}
+
+.heart-rate {
+  width: 250px;
+  height: 140px;
+  position: relative;
+  margin: 20px auto;
+}
+
+.fade-in {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #FFFFFF;
+  top: 0;
+  right: 0;
+  animation: heartRateIn 2.5s linear infinite;
+}
+
+.fade-out {
+  position: absolute;
+  width: 140%;
+  height: 140%;
+  top: 0;
+  left: -120%;
+  animation: heartRateOut 2.5s linear infinite;
+  background: rgba(255, 255, 255, 1);
+  background: -moz-linear-gradient(left, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0) 100%);
+  background: -webkit-linear-gradient(left, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0) 100%);
+  background: -o-linear-gradient(left, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0) 100%);
+  background: -ms-linear-gradient(left, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0) 100%);
+  background: linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 80%, rgba(255, 255, 255, 0) 100%);
+}
+
+@keyframes heartRateIn {
+  0% {
+    width: 100%;
+  }
+  50% {
+    width: 0;
+  }
+  100% {
+    width: 0;
+  }
+}
+
+@keyframes heartRateOut {
+  0% {
+    left: -120%;
+  }
+  30% {
+    left: -120%;
+  }
+  100% {
+    left: 0;
+  }
+}
+
+
+.span123{
+  opacity:1;
+  animation: 1.5s ease 0s infinite beat;
+}
+@keyframes beat{
+  0%{
+      opacity:1;
+  }
+  70%{
+      opacity:.3;
+  }
+  100%{
+      opacity:1;
+  }
+}
+
+.car{
+  padding-left:3%;
+  padding-right:3%;
+     width: 100%;
+   height: 100%;
+   display: block;
+
+}
+/*----------------------------------------------------------Novo Codigo---------------------------------------------------------*/
+
+
+
 

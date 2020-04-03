@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>BracelHertZ - Funcionário</title>
+  <title>BracelHertZ - Registar Instituição</title>
   <link rel="icon" type="image/png" href="img/bracelhertzv3.png" />
 
   <!-- Custom fonts for this template-->
@@ -20,7 +20,143 @@
 
   <!-- Custom styles for this template-->
   <link href="css/sb-admin-2.css" rel="stylesheet">
-  <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+  <style>
+    @media (max-width: 1000px) {
+      #test123 {
+        width: 545px;
+        height: 285px;
+      }
+
+      #test1234 {
+        zoom: 50%;
+      }
+
+      #foto123 {
+        width: 55%;
+        height: 570px;
+      }
+
+      #whereithappens {
+        margin-left: -430px;
+      }
+
+      #whereithappens1 {
+        width: 560px;
+      }
+
+      #whereithappens2 {
+        width: 560px;
+      }
+
+      #whereithappens3 {
+        width: 560px;
+      }
+
+      #dot_dot {
+        display: flex;
+        margin-left: 595px;
+        margin-bottom: 1.5%;
+        zoom: 46%;
+        width: 275px;
+        margin-top: -45px;
+      }
+    }
+
+    @media (max-height: 650px) and (min-width:1000px) {
+      #content123 {
+        zoom: 80%;
+      }
+    }
+
+    @media (max-height: 540px) and (min-width:1000px) {
+      #content123 {
+        zoom: 70%;
+      }
+
+      #dot_dot {
+        margin-left: 740px;
+      }
+    }
+
+    @media (max-height: 480px) and (min-width:1000px) {
+      #content123 {
+        zoom: 60%;
+      }
+
+      #dot_dot {
+        margin-left: 740px;
+      }
+    }
+
+    @media (max-width: 650px) and (min-width:480px) {
+      #content123 {
+        zoom: 70%;
+      }
+
+      #dot_dot {
+        margin-left: 740px;
+      }
+    }
+
+    @media (min-width: 1000px) {
+      #foto123 {
+        width: 75%;
+        height: 100%;
+      }
+
+      #whereithappens {
+        margin-left: -25%;
+      }
+
+      #test123 {
+        height: 572px;
+        width: 100%;
+      }
+
+      #dot_dot {
+        display: flex;
+        margin-left: -6%;
+        margin-bottom: 1.5%;
+        margin-top: auto;
+      }
+    }
+
+    @media (max-width: 768px) {
+      #dot_dot {
+        margin-left: 740px;
+      }
+    }
+
+    @media (min-width: 768px) and (max-width: 1000px) {
+      .col-md-6 {
+        flex: 0 0 35%;
+      }
+
+      #dot_dot {
+        margin-left: 670px;
+      }
+    }
+
+    @media (max-height: 450px) {
+      #content123 {
+        display: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      #content123 {
+        display: none;
+      }
+    }
+
+    @media (max-width: 480px) and (max-height: 450px) {
+      #content123 {
+        display: none;
+      }
+    }
+  </style>
+  <!-- Include Jquery here in a script tag -->
 
 </head>
 
@@ -56,7 +192,7 @@
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link" href="dashboard.html">
+        <a class="nav-link" href="listaocorrencias.html">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Ocorrências</span></a>
       </li>
@@ -96,7 +232,7 @@
       <li class="nav-item">
         <a class="nav-link" href="listainstituicoes.html">
           <i class="fas fa-fw fa-table"></i>
-          <span>Instituiões</span></a>
+          <span>Instituições</span></a>
       </li>
 
       <!-- Divider -->
@@ -111,7 +247,7 @@
     <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column" style="zoom: 75%;">
+    <div id="content-wrapper" class="d-flex flex-column overflow-hidden" style="zoom: 90%;">
 
       <!-- Main Content -->
       <div id="content">
@@ -163,7 +299,7 @@
               </div>
             </li>
 
-
+         
 
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
@@ -199,209 +335,137 @@
         <!-- Begin Page Content -->
         <div class="row">
           <div class="col-10 pr-0">
-            <div id="body" class="container-fluid">
+            <div id="content123" class="container-fluid w-75 h-100 pr-2" style="justify-content: center">
+
+              <!-- Page Heading -->
+              <h1 class="h3 mb-4 text-secondary">Adicionar Instituição</h1>
+
+              <!-- Page Container -->
+              <div id="test123" class="row bg-primary">
+                <div id="test1234" class="col-lg-6 pr-0 pl-0" style="display: -webkit-inline-box;">
+                  <div>
+                    <img src="img/evora.jpg" id="foto123">
+                  </div>
+                  <div id="whereithappens" class="slideshow-container h-100"
+                    style="min-inline-size: -webkit-fill-available;">
+                    <div id="whereithappens1" class="card mySlides fade2 mb-5 pb-3" style="display: block; height: 90%">
+
+                      <form>
+                        <h6 class="text-secondary text-center mt-4"> Bem Vindo! Pronto para adicionar uma nova instituição?
+                        </h6>
+                        <div class="txtb txtb  ml-auto mr-auto" style="width: 90%;">
+                          <input type="name" class="space1 form-control form-control-user" id="Fname"
+                            aria-describedby="emailHelp" required>
+                          <span data-placeholder="Nome"></span>
+                        </div>
+                        <div id="nomeinf"
+                          style="display: none; margin-left: 30px; margin-top: -22px; font-size: small; color: red;">
+                          Nome apenas pode conter letras</div>
+
+                        <div class="txtb txtb  ml-auto mr-auto" style="width: 90%;">
+                          <input type="email" class=" form-control form-control-user" id="email"
+                            aria-describedby="emailHelp" required>
+                          <span data-placeholder="Email"></span>
+                        </div>
+                        <div id="mailinf"
+                          style="display: none; margin-left: 30px; margin-top: -22px; font-size: small; color: red;">
+                          Email inválido</div>
+
+                        
+                        <div class="txtb txtb  ml-auto mr-auto" style="width: 90%;">
+                          <input type="text" class="form-control form-control-user" id="contact"
+                            aria-describedby="emailHelp" required
+                            onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                            data-rule="required|minlength-9" maxlength="9">
+                          <span data-placeholder="Contacto"></span>
+                        </div>
+                        <div id="continf"
+                          style="display: none; margin-left: 30px; margin-top: -22px; font-size: small;color: red;">
+                          Contacto tem de conter 9 números</div>
 
 
 
-              <!-- Content Row -->
-              <div class="w-100">
-                <div class="card shadow mb-4">
-                  <!-- Card Header - Dropdown -->
-                  <div class="card-header py-3 bg-secondary">
-                    <div class="m-0 font-weight-bold text-white full_tab d-inline">
-                      <div class="tab_nome70">Perfil</div>
-                      <div class="tab_time" style="text-align: right;" id="last_login">last login:01-20-2000                
+                      </form>
+
+                    </div>
+                    <div id="whereithappens2" class="card mySlides fade2 mb-5 pb-3" style="display: block;">
+
+                     
+
+                      <div class="txtb txtb  ml-auto mr-auto" style="width: 90%;">
+                        <input type="name" class="space1 form-control form-control-user" id="localidade"
+                          aria-describedby="emailHelp" required>
+                        <span data-placeholder="Localidade"></span>
+                      </div>
+                      <div id="locinf"
+                      style="display: none; margin-left: 30px; margin-top: -22px; font-size: small;color: red;">
+                      Localidade apenas pode conter letra</div>
+
+                      <div class="txtb txtb  ml-auto mr-auto" style="width: 90%;">
+                        <input type="name" class=" form-control form-control-user" id="morada"
+                          aria-describedby="emailHelp" required>
+                        <span data-placeholder="Morada"></span>
+                      </div>
+
+                      <h5 class="text-secondary text-center mt-4"> Fotografias da Instituição </h5>
+                      <div>
+
+
+                        <form>
+                          <input class="ml-3 mt-4" id="foto" type="file" accept="image/*" onchange="loadFile(event)" multiple>
+                          <div class="mt-4" id="preview"></div>
+                        </form>
                       </div>
                     </div>
-                  </div>
-                  <!-- Card Body -->
-                  <div class="card-body">
-                    <div class="row" style="justify-content: center">
-                      <div class="col-5 mr-4">
-                        <img id="imagemPerfil" class="imagemlogo w-100" src="img/mmm.jpg">
-                        <br><br>
-                        <div class="form-control mt-4" style="height: 50px">
-                          <h5 class="card-title form-control420" style="width: 100px;"><strong>Username</strong>
-                          </h5>
-                          <div class="h6 ml-2 text-primary font-weight-600"><em id="nFuncionario">G21389268</em></div>
-                        </div>
+
+                    <div id="whereithappens3" class="card mySlides fade2 mb-5 pb-3" style="display: block;">
+                      <!-- <h4 class="text-danger text-center mt-4"> <strong> Danger Zone</strong></h4>-->
+                      <div class="container mt-4 ml-2">
+                        <form>
+                     
 
 
-                        <br>
+                            <div class="txtb txtb  ml-auto mr-auto" style="width: 90%;">
+                                <input type="descricao" class="space1 form-control form-control-user" id="descricao"
+                                  aria-describedby="emailHelp" required>
+                                <span data-placeholder="Breve descrição"></span>
+                              </div>
 
-                        <div class="form-control mt-4" style="height: 50px">
-                          <h5 class="card-title form-control420" style="width: 100px;"><strong>Instituição</strong></h5>
-                          <div class="h6 ml-2 text-primary font-weight-600"><em id="InstituicaoF">Campus de Azurem</em>
-                          </div>
-                        </div>
+                          <br>
 
-                        <br>
+                          <div>
+                            <!--    <h5 class="text-success text-center mt-3"><strong> Dados Funcionário:</strong></h5>-->
+                     
 
-                        <div class="form-control mt-4" style="height: 50px">
-                          <h5 class="card-title form-control420" style="width: 75px;"><strong>Função</strong></h5>
-                          <div class="h6 ml-2 text-primary font-weight-600"><em id="funcaoF">Guarda prisional</em>
-                          </div>
-                        </div>
-
-                        <br>
-
-                      </div>
-                      <div class="col-6 ">
-
-                        <form class="mt-4">
-
-                          <div class="form-control" style="height: 50px">
-                            <h5 class="card-title form-control420"><strong>Nome</strong></h5>
-                            <div class="h6 ml-2 text-primary font-weight-600"><em id="nomeF">Carla Andrade</em></div>
-                          </div>
-
-                          <br><br>
-
-                          <div class="form-control" style="height: 50px">
-                            <h5 class="card-title form-control420" style="width: 180px"><strong>Data de
-                                Nascimento</strong></h5>
-                            <div class="h6 ml-2 text-primary font-weight-600"><em id="dataNascimentoF">02-09-1996</em>
+                           
+                            <div class="w-100 text-center">
+                              <input type="submit" class="mt-1 btn btn-secondary" id="botaoRegistar" value="Registar"
+                                required>
                             </div>
                           </div>
 
-                          <br><br>
-
-                          <div class="form-control" style="height: 50px">
-                            <h5 class="card-title form-control420"><strong>Email</strong></h5>
-                            <div class="h6 ml-2 text-primary font-weight-600"><em id="emailF">blabla@blabla.com</em>
-                            </div>
-                          </div>
-
-                          <br><br>
-
-                          <div class="form-control" style="height: 50px">
-                            <h5 class="card-title form-control420" style="width: 100px"><strong>Contacto</strong></h5>
-                            <div class="h6 ml-2 text-primary font-weight-600"><em id="contactoF">blabla@blabla.com</em>
-                            </div>
-                          </div>
-
-                          <br><br>
-
-                          <div class="form-control" style="height: 50px">
-                            <h5 class="card-title form-control420" style="width: 140px"><strong>Nascionalidade</strong>
-                            </h5>
-                            <div class="h6 ml-2 text-primary font-weight-600"><em id="nacionalidadeF">coisa</em></div>
-                          </div>
-
-                          <br><br>
-
-                          <div class="form-control" style="height: 50px">
-                            <h5 class="card-title form-control420" style="width: 80px"><strong>Morada</strong></h5>
-                            <div class="h6 ml-2 text-primary font-weight-600"><em id="moradaF">Rua da Puta que te
-                                pariu</em></div>
-                          </div>
-
-                          <br><br>
-
-                          <div class="form-control" style="height: 50px">
-                            <h5 class="card-title form-control420" style="width: 110px"><strong>Localidade</strong></h5>
-                            <div class="h6 ml-2 text-primary font-weight-600"><em id="localidadeF">Fafe</em></div>
-                          </div>
 
 
                         </form>
                       </div>
                     </div>
+
                   </div>
+
+                </div>
+                <div id="dot_dot" class="text-center col-md-6">
+                  <span class="dot dot2" onclick="currentSlide(1)">Passo 1</span>
+                  <span class="dot dot2" onclick="currentSlide(2)">Passo 2</span>
+                  <span class="dot dot2" onclick="currentSlide(3)">Passo 3</span>
                 </div>
               </div>
 
 
 
 
-
-
-
-              <!-- Anotações-->
-              <div class="w-100">
-                <div class="card shadow mb-4">
-                  <!-- Card Header - Dropdown -->
-                  <div class="card-header py-3 bg-secondary">
-                    <div class="m-0 font-weight-bold text-white full_tab">
-                      <div class="tab_nome">Anotações refentes ao utilizador</div>
-                      <div class="d-flex" type="button">
-                        <div type="button" data-toggle="modal" data-target="#NotaModal"
-                          class="d-flex d-sm btn btn-sm btn-white font-weight-bold shadow-sm"><i
-                            class="mt-1 mr-1 fas fa-plus fa-xs tab_time text-secondary"></i> Adicionar</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Card Body -->
-                  <div style="height: 370px; overflow-y: scroll;">
-                    <div class="card-body">
-                      <div style="margin-top:-12px;" class="text-primary">
-                        <img class="img-profile rounded-circle picNotes" src="img/perfil1.png"> Nelson Pereira
-                        <span class="text-xs"> 15:56</span>
-                      </div>
-                      <br><div class="text-black">Limpezas</div>
-                      <div class="mt-3">
-                        Dropdown menus can be placed in the card header in order to extend the functionality of a
-                        basic
-                        card. In this dropdown card example, the Font Awesome vertical ellipsis icon in the card
-                        header
-                        can be clicked on in order to toggle a dropdown menu.
-                      </div>
-                    </div>
-
-                    <div class="card-body">
-                      <div style="margin-top:-12px;" class="text-primary">
-                        <img class="img-profile rounded-circle picNotes" src="img/perfil1.png"> Nelson Pereira
-                        <span class="text-xs"> 15:56</span>
-                      </div>
-                      <div class="mt-3">
-                        Dropdown menus can be placed in the card header in order to extend the functionality of a
-                        basic
-                        card. In this dropdown card example, the Font Awesome vertical ellipsis icon in the card
-                        header
-                        can be clicked on in order to toggle a dropdown menu.
-                      </div>
-                    </div>
-
-                    <div class="card-body">
-                      <div style="margin-top:-12px;" class="text-primary">
-                        <img class="img-profile rounded-circle picNotes" src="img/perfil1.png"> Nelson Pereira
-                        <span class="text-xs"> 15:56</span>
-                      </div>
-                      <div class="mt-3">
-                        Dropdown menus can be placed in the card header in order to extend the functionality of a
-                        basic
-                        card. In this dropdown card example, the Font Awesome vertical ellipsis icon in the card
-                        header
-                        can be clicked on in order to toggle a dropdown menu.
-                      </div>
-                    </div>
-
-                    <div class="card-body">
-                      <div style="margin-top:-12px;" class="text-primary">
-                        <img class="img-profile rounded-circle picNotes" src="img/perfil1.png"> Nelson Pereira
-                        <span class="text-xs"> 15:56</span>
-                      </div>
-                      <div class="mt-3">
-                        Dropdown menus can be placed in the card header in order to extend the functionality of a
-                        basic
-                        card. In this dropdown card example, the Font Awesome vertical ellipsis icon in the card
-                        header
-                        can be clicked on in order to toggle a dropdown menu.
-                      </div>
-                    </div>
-
-                  </div>
-
-                </div>
-              </div>
-
-
-              <br>
 
             </div>
           </div>
-
           <div class="col-2 mt-n4 px-0" id="rec12">
             <div class="col pl-0">
               <input type="text" id="myFilter" placeholder="Pesquisar recluso" class="form-control py-2 mr-3 myFilter">
@@ -530,7 +594,6 @@
               </ul>
             </div>
           </div>
-
         </div>
         <!-- /.container-fluid -->
 
@@ -577,50 +640,88 @@
     </div>
   </div>
 
-    <!-- Nota Modal-->
-    <div class="modal fade" id="NotaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <form class="modal-content">
-          <div class="modal-header bg-gradient-primary text-white" style="margin-right:-0.5px;">
-            <h5 class="modal-title text-white" id="exampleModalLabel">Nova Anotação</h5>
-            <button class="close text-white" type="button" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <textarea id="titleN" class="form-control mb-1 textarea2" rows="1" cols="1" placeholder="Assunto"></textarea>
-            <textarea id="descriptionN" class="form-control textarea1" rows="6" cols="60" placeholder="Escreva aqui a nota"></textarea>
-          </div>
-          <div class="modal-footer">
-            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-            <input type="submit" class="btn btn-primary" id="enviar_novo" value="Criar">
-          </div>
-        </form>
-      </div>
-    </div>
-
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  
+
+
+  <!-- Script that i added -->
+
+  <script type="text/javascript">
+    $(".txtb input").on("focus", function () {
+      $(this).addClass("focus");
+    });
+
+    $(".txtb input").on("blur", function () {
+      if ($(this).val() == "")
+        $(this).removeClass("focus");
+    });
+  </script>
 
   <!-- Core plugin JavaScript-->
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-  <!-- Custom scripts for all pages-->
-  <script src="js/sb-admin-2.js"></script>
-
-  <!-- Page level plugins -->
-  <script src="vendor/chart.js/Chart.min.js"></script>
-  <script src="vendor/datatables/jquery.dataTables.js"></script>
-  <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.26.9/sweetalert2.all.min.js"></script>
 
-  <!-- Page level custom scripts -->
-
-  <script src="js/demo/datatables-demo.js"></script>
-  <script src="controller/funcionario.js"></script>
+  <!-- Custom scripts for all pages-->
+  <script src="js/sb-admin-2.js"></script>
+  <script src="controller/registoInstituicao.js"></script>
   <script src="controller/controlo.js"></script>
+
+  <script>
+    function previewImages() {
+
+      var preview = document.querySelector('#preview');
+
+      if (this.files) {
+        [].forEach.call(this.files, readAndPreview);
+      }
+
+      function readAndPreview(file) {
+
+        // Make sure `file.name` matches our extensions criteria
+        if (!/\.(jpe?g|png|gif)$/i.test(file.name)) {
+          return alert(file.name + " is not an image");
+        } // else...
+
+        var reader = new FileReader();
+
+        reader.addEventListener("load", function () {
+          var image = new Image();
+          image.height = 200;
+          image.width = 150;
+          image.hspace = 17;
+          image.title = file.name;
+          image.src = this.result;
+          preview.appendChild(image);
+        });
+
+        reader.readAsDataURL(file);
+
+      }
+
+    }
+
+    document.querySelector('#file-input').addEventListener("change", previewImages);
+  </script>
+
+
+  <script>
+    function togglePW() {
+
+      //toggle password visibility
+      document.querySelector('.eye').classList.toggle('slash');
+
+      //show/hide the password
+      var password = document.querySelector('[name=password]');
+      if (password.getAttribute('type') === 'password') {
+        password.setAttribute('type', 'text');
+      } else {
+        password.setAttribute('type', 'password');
+      }
+    }
+  </script>
 
 
 </body>

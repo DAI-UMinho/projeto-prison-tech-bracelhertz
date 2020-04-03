@@ -5,40 +5,17 @@ $(window).on("load", function () {
     function display_instituicoes() {
         async function fetchAsync() {
 
-            //const response = await fetch('http://127.0.0.1:8080/api/instituicao');
-            //const func = await response.json();
+            const response = await fetch('http://127.0.0.1:8080/api/prison');
+            const func = await response.json();
 
             var conteudo = [];
 
-            var func = [
-                {
-                    idInstituicao: 1,
-                    nome: "Uminho",
-                    descricao: "balasdfasdfsadfd",
-                    morada: "Gualtar",
-                    localidade: "Braga",
-                    foto: "img/gualtar.jfif",
-                    email: "uminho@gmail.com",
-                    contacto: "123456789"
-                },
-                {
-                    idInstituicao: 2,
-                    nome: "Uminho",
-                    descricao: "hmjnbvcxz",
-                    morada: "Azurém",
-                    localidade: "Guimarães",
-                    foto: "img/azurem.jpg",
-                    email: "uminho@hotmail.com",
-                    contacto: "123456789"
-                }
-            ];
-
 
             for (const instituicao of func) {
-                conteudo.push(["<div id='" + instituicao.idInstituicao + "'>" + instituicao.nome + "</div>",
-                instituicao.localidade,
+                conteudo.push(["<div id='" + instituicao.prisonId + "'>" + instituicao.name + "</div>",
+                instituicao.location,
                 instituicao.email,
-                instituicao.contacto])
+                instituicao.contact])
             }
 
             $(document).ready(function () {
@@ -58,8 +35,11 @@ $(window).on("load", function () {
     $("#tabelaInstituicoes").on('click', 'tr', function () {
         var cRow = $(this).index();
         var clicked = document.getElementById("tabelaInstituicoes").rows[cRow].firstChild.firstChild.id;
-        location.href = "instituicao.html";
-        localStorage.setItem("id_inst_clicked", clicked);
+        if (typeof clicked !== 'undefined') {
+            location.href = "instituicao.html";
+            localStorage.setItem("id_inst_clicked", clicked);
+        }
+
     });
 
 

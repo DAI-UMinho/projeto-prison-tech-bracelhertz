@@ -1,4 +1,4 @@
-$( window ).on( "load", function () {
+$(window).on("load", function () {
 
     display_pulsacao();
     display_infoPerfil();
@@ -78,49 +78,32 @@ $( window ).on( "load", function () {
     }
 
 
-//------------------------------------------------INFO PERFIL-----------------------------------------
+    //------------------------------------------------INFO PERFIL-----------------------------------------
 
 
-function display_infoPerfil() {
-    async function fetchAsync() {
-        //id_user=localStorage.getItem("id_user");
-        //const response = await fetch('https://dd10afea8a444651a7975b97cdbc8a11.vfs.cloud9.us-east-2.amazonaws.com/users/' + id_user + '/friends-list');
-        //const friends = await response.json();
-        //console.log(friends);
-        //const show_friends = document.getElementById("show_friends");
-        var nomeUser = document.getElementById("nomeUser");
-        var avatarUser = document.getElementById("avatarUser");
+    function display_infoPerfil() {
+        async function fetchAsync() {
+            let userLogado = localStorage.getItem("userLogado");
+            const response = await fetch('http://127.0.0.1:8080/api/users/' + userLogado);
+            const logado = await response.json();
+            console.log(logado);
 
 
-        var perfilLogado = {
-            idUtilizador: 2,
-            idTipo: 2,
-            username: "#78ABC",
-            password: "123456Aa",
-            dataNascimento: "2019-02-03",
-            nacionalidade: "Portuguesa",
-            morada: "Rua X",
-            localidade: "Braga",
-            nome: "Rui Gomes",
-            foto: "https://crestedcranesolutions.com/wp-content/uploads/2013/07/facebook-profile-picture-no-pic-avatar.jpg",
-            contacto: 14,
-            email: "ruigo@gmail.com",
+            var nomeUser = document.getElementById("nomeUser");
+            var avatarUser = document.getElementById("avatarUser");
+
+            //envia a para a pagina
+            nomeUser.innerHTML = logado.name;
+            avatarUser.src = logado.photo;
+
+
         }
+        //chama a função fetchAsync()
+        fetchAsync().then(data => console.log("done")).catch(reason => console.log(reason.message));
 
-
-        //criação da demonstração de resultados recebidos
-        //envia a para a pagina
-        nomeUser.innerHTML = perfilLogado.nome;
-        avatarUser.src = perfilLogado.foto;
 
 
     }
-    //chama a função fetchAsync()
-    fetchAsync().then(data => console.log("done")).catch(reason => console.log(reason.message));
-
-
-
-}
 
 
     //-------------------------------------------------------------------------------------
@@ -128,3 +111,48 @@ function display_infoPerfil() {
 
 })
 
+const botaoLogout = document.getElementById("botaoLogout");
+
+botaoLogout.addEventListener("click", sair);
+
+async function sair() {
+    event.preventDefault();
+    var data = {};
+    //data.email = document.getElementById("email").value;
+    fetch('http://127.0.0.1:8080/api/auth/logout', {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        mode: 'cors',
+        method: 'GET',
+        credentials: 'include'
+    })
+        .then(function (response) {
+            console.log(response);
+            if (!response.ok) {
+                throw new Error(response.statusText);
+            }
+            return response.json();
+        })
+        .catch(function (err) {
+            //swal.showValidationError('Pedido falhado: ' + err);
+            alert(err);
+        })
+        .then(async function (result) {
+            if (result.success) {
+                Swal.fire(
+                    'Sessão terminada com sucesso!',
+                    '',
+                    'success'
+                ).then(() => {
+                    localStorage.clear();
+                    window.location.replace("./login.html");
+                })
+            }
+            else {
+                alert(result);
+                //swal({ title: `${result.value.userMessage.message.pt}` });
+            }
+        });
+
+};

@@ -8,17 +8,17 @@ $(window).on("load", function () {
 
             var conteudo = [];
 
-            const response = await fetch('http://127.0.0.1:8080/api/utilizador');
+            const response = await fetch('http://127.0.0.1:8080/api/users');
             const func = await response.json();
+            console.log(func);
 
 
             for (const funcionario of func) {
-                conteudo.push(["<div id='" + funcionario.idUtilizador + "'>" + funcionario.username + "</div>",
-                funcionario.nome,
-                //funcionario.Instituicao.nome,
-                "ola",
+                conteudo.push(["<div id='" + funcionario.userId + "'>" + funcionario.username + "</div>",
+                funcionario.name,
+                funcionario.prison.name,
                 funcionario.email,
-                funcionario.contacto])
+                funcionario.roles[0].name])
             }
 
             $(document).ready(function () {
@@ -26,7 +26,7 @@ $(window).on("load", function () {
                     data: conteudo
                 });
             });
-            
+
         }
         //chama a função fetchAsync()
         fetchAsync().then(data => console.log("done")).catch(reason => console.log(reason.message));
@@ -36,8 +36,11 @@ $(window).on("load", function () {
     $("#tabelaFuncionarios").on('click', 'tr', function () {
         var cRow = $(this).index();
         var clicked = document.getElementById("tabelaFuncionarios").rows[cRow].firstChild.firstChild.id;
-        location.href = "funcionario.html";
-        localStorage.setItem("id_user_clicked", clicked);
+        if (typeof clicked !== 'undefined') {
+            location.href = "funcionario.html";
+            localStorage.setItem("id_user_clicked", clicked);
+        }
+
     });
 
 })

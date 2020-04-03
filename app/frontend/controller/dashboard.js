@@ -4,7 +4,7 @@ $( window ).on( "load", function () {
     display_logs();
     display_info();
     render_Ultimas_Ocorrencias();
-    //renderOcorrencias_recluso();
+    renderOcorrencias_recluso();
 
     function display_logs() {
         async function fetchAsync() {
@@ -690,9 +690,68 @@ $( window ).on( "load", function () {
     
         //-------------------------------------------------------------------------------------
     
+    async function renderOcorrencias_recluso() {
+        try {
+            const response4 = await fetch(/*--------ROTA DA Tabela Recluso --------*/);
+            const reclusos = await response4.json();
+            const date = new Date();
+            var ocorrencias = 0;
+            var nao_ocorrencias = 0;
+
+            for (recluso of reclusos) {
+
+                const response5 = await fetch(/*--------ROTA DA TABELA REGISTO_ALERTA-------- + recluso.id_recluso */);
+                const n_ocorencias = await response5.json();
 
 
+                if (isIterable(n_ocorencias)) {
 
+                    ocorrencias++;
+
+                }
+                else {
+                    nao_ocorrencias++;
+                }
+
+            }
+        }
+            catch (err) {
+                throw err
+            }
+        
+        var ctx = document.getElementById("myPieChart");
+        var myPieChart = new Chart(ctx, {
+          type: 'doughnut',
+          data: {
+            labels: ["Reclusos com ocorrências", "Reclusos sem ocorrências"],
+            datasets: [{
+              data: [ocorrencias, nao_ocorrencias],
+              backgroundColor: ['#1b2c47', '#ff8800'],
+              hoverBackgroundColor: ['#0e1e37', '#e57a00'],
+              hoverBorderColor: "rgba(234, 236, 244, 1)",
+            }],
+          },
+          options: {
+            maintainAspectRatio: false,
+            tooltips: {
+              backgroundColor: "rgb(255,255,255)",
+              bodyFontColor: "#858796",
+              borderColor: '#dddfeb',
+              borderWidth: 1,
+              xPadding: 15,
+              yPadding: 15,
+              displayColors: false,
+              caretPadding: 10,
+            },
+            legend: {
+              display: false
+            },
+            cutoutPercentage: 80,
+          },
+        });
+        
+    }
+       
     //-------------------------------------------------------------------------------------
 
 
@@ -718,3 +777,11 @@ $( window ).on( "load", function () {
 })
 
 
+//FUN��ES AUXILIARES
+function isIterable(obj) {
+    // checks for null and undefined
+    if (obj == null) {
+        return false;
+    }
+    return typeof obj[Symbol.iterator] === 'function';
+}
