@@ -83,14 +83,28 @@ $(window).on("load", function () {
 
     function display_infoPerfil() {
         async function fetchAsync() {
-            let userLogado = localStorage.getItem("userLogado");
-            const response = await fetch('http://127.0.0.1:8080/api/users/' + userLogado);
+            let RoleLogado = localStorage.getItem("RoleLogado");
+            const response = await fetch('http://127.0.0.1:8080/api/users/logged-profiles', {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                mode: 'cors',
+                method: 'GET',
+                credentials: 'include'
+            });
             const logado = await response.json();
             console.log(logado);
 
 
             var nomeUser = document.getElementById("nomeUser");
             var avatarUser = document.getElementById("avatarUser");
+
+
+            if (RoleLogado == "ROLE_GUARD") {
+                document.getElementById("showInst").style.display = "none";
+            }
+
+
 
             //envia a para a pagina
             nomeUser.innerHTML = logado.name;

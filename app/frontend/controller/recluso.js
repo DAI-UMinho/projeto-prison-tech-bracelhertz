@@ -6,7 +6,14 @@ $(window).on("load", function () {
     function display_recluso() {
         async function fetchAsync() {
             let id_user_clicked = localStorage.getItem("id_user_clicked");
-            const response = await fetch('http://127.0.0.1:8080/api/prisoner/' + id_user_clicked);
+            const response = await fetch('http://127.0.0.1:8080/api/prisoner/' + id_user_clicked, {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                mode: 'cors',
+                method: 'GET',
+                credentials: 'include'
+            });
             const recluso = await response.json();
             console.log(recluso);
 
@@ -47,7 +54,14 @@ $(window).on("load", function () {
     function get_instituicoes() {
         async function fetchAsync() {
 
-            const response = await fetch('http://127.0.0.1:8080/api/prison');
+            const response = await fetch('http://127.0.0.1:8080/api/prisons', {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                mode: 'cors',
+                method: 'GET',
+                credentials: 'include'
+            });
             const instituicoes = await response.json();
             var show_inst = "";
 

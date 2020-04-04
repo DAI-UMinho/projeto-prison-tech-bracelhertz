@@ -11,7 +11,14 @@ Agenda();
 
 async function Agenda() {
 
-    const response1 = await fetch('http://127.0.0.1:8080/api/schedules');
+    const response1 = await fetch('http://127.0.0.1:8080/api/schedules', {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        mode: 'cors',
+        method: 'GET',
+        credentials: 'include'
+    });
     const agendas = await response1.json();
     console.log(agendas)
     var pi = ""
@@ -224,6 +231,7 @@ async function Agenda() {
                         },
                         mode: 'cors',
                         method: 'POST',
+                        credentials: 'include',
                         body: JSON.stringify(data)
 
                     }).then(function (response) {

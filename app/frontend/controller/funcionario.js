@@ -5,7 +5,14 @@ $(window).on("load", function () {
   function display_perfil() {
     async function fetchAsync() {
       let id_user_clicked = localStorage.getItem("id_user_clicked");
-      const response = await fetch('http://127.0.0.1:8080/api/users/' + id_user_clicked);
+      const response = await fetch('http://127.0.0.1:8080/api/users/' + id_user_clicked, {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        mode: 'cors',
+        method: 'GET',
+        credentials: 'include'
+    });
       const perfil = await response.json();
       console.log(perfil);
 
@@ -46,7 +53,14 @@ async function novaNota() {
   let id_user_clicked = localStorage.getItem("id_user_clicked");
 
   let userLogado = localStorage.getItem("userLogado");
-  const response = await fetch('http://127.0.0.1:8080/api/users/' + userLogado);
+  const response = await fetch('http://127.0.0.1:8080/api/users/' + userLogado, {
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    mode: 'cors',
+    method: 'GET',
+    credentials: 'include'
+});
   const logado = await response.json();
   console.log(logado);
 
@@ -72,6 +86,7 @@ async function novaNota() {
       },
       mode: 'cors',
       method: 'POST',
+      credentials: 'include',
       body: JSON.stringify(data)
 
     }).then(function (response) {

@@ -72,7 +72,7 @@ var pi = 0;
         var data = {};
 
         data.username = "a89218";
-        data.password = "12345";
+        data.password = "Aa123456";
         console.log(data);
 
         fetch('http://127.0.0.1:8080/api/auth/signin', {
@@ -99,7 +99,7 @@ var pi = 0;
             .then(async function (result) {
                 if (result) {
                     console.log(result);
-                    localStorage.setItem("userLogado", 1);
+                    localStorage.setItem("userLogado", result.userId);
                     localStorage.setItem("RoleLogado", result.role);
                     setTimeout(function () {
 

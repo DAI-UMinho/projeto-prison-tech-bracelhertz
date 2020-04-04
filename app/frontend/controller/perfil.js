@@ -1,11 +1,20 @@
 $(window).on("load", function () {
+  let userLogado = localStorage.getItem("userLogado");
 
   display_logado();
+  get_instituicoes();
 
   function display_logado() {
     async function fetchAsync() {
-      let userLogado = localStorage.getItem("userLogado");
-      const response = await fetch('http://127.0.0.1:8080/api/users/' + userLogado);
+
+      const response = await fetch('http://127.0.0.1:8080/api/users/logged-profiles', {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        mode: 'cors',
+        method: 'GET',
+        credentials: 'include'
+      });
       const logado = await response.json();
       console.log(logado);
 
@@ -14,7 +23,7 @@ $(window).on("load", function () {
       document.getElementById("contacto_perfil").value = logado.contact;
       document.getElementById("nacionalidade_perfil").value = logado.nationality;
       document.getElementById("morada_perfil").value = logado.address;
-      document.getElementById("prisao_perfil").innerHTML = logado.prison.name;
+      document.getElementById("id_instituicao").value = logado.prison.prisonId;
       document.getElementById("nome_perfil").value = logado.name;
       document.getElementById("dataNascimento_perfil").value = logado.birthDate;
       document.getElementById("email_perfil").value = logado.email;
@@ -31,7 +40,26 @@ $(window).on("load", function () {
   }
 
 
+  function get_instituicoes() {
+    async function fetchAsync() {
 
+        const response = await fetch('http://127.0.0.1:8080/api/prisons');
+        const instituicoes = await response.json();
+        var show_inst = "";
+
+
+
+        for (var inst of instituicoes) {
+            show_inst += "<option value='" + inst.prisonId + "'>" + inst.name + "</option>";
+        }
+
+        document.getElementById("id_instituicao").innerHTML = show_inst;
+
+    }
+    //chama a função fetchAsync()
+    fetchAsync().then(data => console.log("done")).catch(reason => console.log(reason.message));
+
+}
 
 
 })
@@ -45,27 +73,16 @@ async function editar() {
   event.preventDefault();
   data = {};
 
-
-  let userLogado = localStorage.getItem("userLogado");
-  const response = await fetch('http://127.0.0.1:8080/api/users/' + userLogado);
+  const response = await fetch('http://127.0.0.1:8080/api/users/logged-profiles', {
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    mode: 'cors',
+    method: 'GET',
+    credentials: 'include'
+  });
   const logado = await response.json();
 
-
-
-  data.userId = logado.userId;
-  data.username = document.getElementById("username_perfil").innerHTML;
-  data.contact = document.getElementById("contacto_perfil").value.trim();
-  data.nationality = document.getElementById("nacionalidade_perfil").value.trim();
-  data.address = document.getElementById("morada_perfil").value.trim();
-  data.prison = { prisonId: logado.prison.prisonId };
-  data.name = document.getElementById("nome_perfil").value.trim();
-  data.birthDate = document.getElementById("dataNascimento_perfil").value;
-  data.email = document.getElementById("email_perfil").value.trim();
-  data.location = document.getElementById("localidade_perfil").value.trim();
-  data.roles = [{ id: logado.roles[0].id }];
-  data.photo = document.getElementById("fotoR").src;
-
-  console.log(data);
 
 
   if (document.getElementById("contacto_perfil").value == "" || document.getElementById("contacto_perfil").value.length != 9 ||
@@ -80,61 +97,35 @@ async function editar() {
   } else {
     if (validacaoEmail(document.getElementById("email_perfil"))) {
 
+      let RoleLogado = localStorage.getItem("RoleLogado");
+      
+
+      if (RoleLogado == "ROLE_GUARD") {
+
+        data.userId = userLogado;
+        data.contact = document.getElementById("contacto_perfil").value.trim();
+        data.email = document.getElementById("email_perfil").value.trim();
+
+        console.log(data);
+
+        editar_guarda(data)
+      } else {
+
+        data.userId = userLogado;
+        data.contact = document.getElementById("contacto_perfil").value.trim();
+        data.nationality = document.getElementById("nacionalidade_perfil").value.trim();
+        data.address = document.getElementById("morada_perfil").value.trim();
+        data.prisonId = document.getElementById("id_instituicao").value ;
+        data.name = document.getElementById("nome_perfil").value.trim();
+        data.birthDate = document.getElementById("dataNascimento_perfil").value;
+        data.email = document.getElementById("email_perfil").value.trim();
+        data.location = document.getElementById("localidade_perfil").value.trim();
+
+        console.log(data);
 
 
-
-
-      fetch('http://127.0.0.1:8080/api/users', {
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        mode: 'cors',
-        method: 'PUT',
-        body: JSON.stringify(data),
-        credentials: 'include'
-      })
-        .then(function (response) {
-          //console.log(response.headers.get('Set-Cookie'));
-          console.log(response);
-          if (!response.ok) {
-            throw new Error(response.statusText);
-          }
-          return response.json();
-        })
-        .catch(function (err) {
-          //swal.showValidationError('Pedido falhado: ' + err);
-          console.log(err); // estava alert(err); coloquei console log para não estar sempre a aparecer pop-up ao utilizador
-        })
-        .then(async function (result) {
-          console.log(result);
-          if (result) {
-            //swal({ title: "Autenticação feita com sucesso!" });
-            //+ result.value.message.success);S
-            Swal.fire(
-              'Alterada com sucesso!',
-              '',
-              'success'
-            ).then(() => {
-              display_logado()
-              Myfunction425()
-            })
-          }
-          else {
-            Swal.fire(
-              'Ocorreu um erro!',
-              '',
-              'error'
-            ).then(() => {
-              location.reload();
-            })
-            console.log(result);
-            //swal({ title: `${result.value.userMessage.message.pt}` });
-          }
-        });
-
-
-
-
+        editar_outro(data)
+      }
 
 
     } else {
@@ -145,6 +136,116 @@ async function editar() {
       )
     }
   }
+
+
+  async function editar_guarda(coisa) {
+
+
+    fetch('http://127.0.0.1:8080/api/users/guards', {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      mode: 'cors',
+      method: 'PUT',
+      body: JSON.stringify(coisa),
+      credentials: 'include'
+    })
+      .then(function (response) {
+        //console.log(response.headers.get('Set-Cookie'));
+        console.log(response);
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+        return response.json();
+      })
+      .catch(function (err) {
+        //swal.showValidationError('Pedido falhado: ' + err);
+        console.log(err); // estava alert(err); coloquei console log para não estar sempre a aparecer pop-up ao utilizador
+      })
+      .then(async function (result) {
+        console.log(result);
+        if (result) {
+          //swal({ title: "Autenticação feita com sucesso!" });
+          //+ result.value.message.success);S
+          Swal.fire(
+            'Dados alterados com sucesso!',
+            '',
+            'success'
+          ).then(() => {
+            location.reload();
+          })
+        }
+        else {
+          Swal.fire(
+            'Ocorreu um erro!',
+            '',
+            'error'
+          ).then(() => {
+            location.reload();
+          })
+          console.log(result);
+          //swal({ title: `${result.value.userMessage.message.pt}` });
+        }
+      });
+
+
+  }
+
+
+  async function editar_outro(coisa) {
+
+
+    fetch('http://127.0.0.1:8080/api/users/managers', {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      mode: 'cors',
+      method: 'PUT',
+      body: JSON.stringify(coisa),
+      credentials: 'include'
+    })
+      .then(function (response) {
+        //console.log(response.headers.get('Set-Cookie'));
+        console.log(response);
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+        return response.json();
+      })
+      .catch(function (err) {
+        //swal.showValidationError('Pedido falhado: ' + err);
+        console.log(err); // estava alert(err); coloquei console log para não estar sempre a aparecer pop-up ao utilizador
+      })
+      .then(async function (result) {
+        console.log(result);
+        if (result) {
+          //swal({ title: "Autenticação feita com sucesso!" });
+          //+ result.value.message.success);S
+          Swal.fire(
+            'Dados alterados com sucesso!',
+            '',
+            'success'
+          ).then(() => {
+            location.reload();
+          })
+        }
+        else {
+          Swal.fire(
+            'Ocorreu um erro!',
+            '',
+            'error'
+          ).then(() => {
+            location.reload();
+          })
+          console.log(result);
+          //swal({ title: `${result.value.userMessage.message.pt}` });
+        }
+      });
+
+
+  }
+
+
 
 
 }
@@ -210,17 +311,27 @@ $('.snum').keyup(function () {
 
 
 
-document.getElementById("perfil_alterar_2").addEventListener("click", Myfunction424);
+document.getElementById("perfil_alterar_2").addEventListener("click", function(){
+  let RoleLogado = localStorage.getItem("RoleLogado");
+  if(RoleLogado == "ROLE_GUARD"){
+    Myfunction4245();
+  }else{
+    Myfunction424();
+    if(RoleLogado == "ROLE_NETWORKMAN"){
+      document.getElementById("id_instituicao").disabled = false;
+      document.getElementById("icon_id_instituicao").style.display = "block";
+    }
+  }
+});
 
 
 //------------------------------------------------------------------------------------------------------------------------
 function Myfunction424() {
+
   document.getElementById("nacionalidade_perfil").readOnly = false;
   document.getElementById("icon_nacionalidade_perfil").style.display = "block";
-  //document.getElementById("prisao_perfil").contentEditable = true;
-  //document.getElementById("icon_prisao_perfil").style.display = "block";
-  //document.getElementById("dataNascimento_perfil").disabled = false;
-  //document.getElementById("icon_dataNascimento_perfil").style.display = "block";
+  document.getElementById("dataNascimento_perfil").disabled = false;
+  document.getElementById("icon_dataNascimento_perfil").style.display = "block";
   document.getElementById("nome_perfil").readOnly = false;
   document.getElementById("icon_nome_perfil").style.display = "block";
   document.getElementById("localidade_perfil").readOnly = false;
@@ -235,17 +346,27 @@ function Myfunction424() {
   document.getElementById("perfil_save_2").style.display = "block";
   document.getElementById("foto420").style.color = "#ffffff";
   document.getElementById("file").disabled = false;
-  
+}
+
+function Myfunction4245() {
+  document.getElementById("contacto_perfil").readOnly = false;
+  document.getElementById("icon_contacto_perfil").style.display = "block";
+  document.getElementById("email_perfil").readOnly = false;
+  document.getElementById("icon_email_perfil").style.display = "block";
+  document.getElementById("perfil_alterar_2").style.display = "none";
+  document.getElementById("perfil_save_2").style.display = "block";
+  document.getElementById("foto420").style.color = "#ffffff";
+  document.getElementById("file").disabled = false;
 
 }
+
+
 
 function Myfunction425() {
   document.getElementById("nacionalidade_perfil").readOnly = true;
   document.getElementById("icon_nacionalidade_perfil").style.display = "none";
-  //document.getElementById("prisao_perfil").contentEditable = false;
-  //document.getElementById("icon_prisao_perfil").style.display = "none";
-  //document.getElementById("dataNascimento_perfil").disabled = true;
-  //document.getElementById("icon_dataNascimento_perfil").style.display = "none";
+  document.getElementById("dataNascimento_perfil").disabled = true;
+  document.getElementById("icon_dataNascimento_perfil").style.display = "none";
   document.getElementById("nome_perfil").readOnly = true;
   document.getElementById("icon_nome_perfil").style.display = "none";
   document.getElementById("localidade_perfil").readOnly = true;

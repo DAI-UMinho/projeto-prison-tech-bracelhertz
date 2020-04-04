@@ -7,7 +7,14 @@ $(window).on("load", function () {
 
             var conteudo = [];
 
-            const response = await fetch('http://127.0.0.1:8080/api/alert-logs');
+            const response = await fetch('http://127.0.0.1:8080/api/alert-logs', {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                mode: 'cors',
+                method: 'GET',
+                credentials: 'include'
+            });
             const func = await response.json();
             console.log(func)
 

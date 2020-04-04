@@ -1,6 +1,5 @@
 window.onload = async function () {
-  var instituicoes = [];
-  var thisis = "";
+
 
   get_instituicoes()
 
@@ -30,8 +29,6 @@ window.onload = async function () {
     data.password = document.getElementById("password").value.trim();
     data.prison = { prisonId: document.getElementById("local").value };
     
-    //data.createdBy = { userId: thisis };
-
 
 
     if (Fname.value == "" || email.value == "" || dataNascimento.value == "" ||
@@ -64,6 +61,7 @@ window.onload = async function () {
               },
               mode: 'cors',
               method: 'POST',
+              credentials: 'include',
               body: JSON.stringify(data)
 
             }).then(function (response) {
@@ -120,7 +118,14 @@ window.onload = async function () {
   function get_instituicoes() {
     async function fetchAsync() {
 
-      const response = await fetch('http://127.0.0.1:8080/api/prison');
+      const response = await fetch('http://127.0.0.1:8080/api/prisons', {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        mode: 'cors',
+        method: 'GET',
+        credentials: 'include'
+    });
       const instituicoes = await response.json();
       var show_inst = "";
 

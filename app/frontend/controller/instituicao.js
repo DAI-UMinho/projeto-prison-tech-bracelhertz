@@ -6,7 +6,14 @@ $(window).on("load", function () {
         async function fetchAsync() {
 
             let id_inst_clicked = localStorage.getItem("id_inst_clicked");
-            const response = await fetch('http://127.0.0.1:8080/api/prison/' + id_inst_clicked);
+            const response = await fetch('http://127.0.0.1:8080/api/prisons/' + id_inst_clicked, {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                mode: 'cors',
+                method: 'GET',
+                credentials: 'include'
+            });
             const instituicao = await response.json();
             console.log(instituicao);
 
