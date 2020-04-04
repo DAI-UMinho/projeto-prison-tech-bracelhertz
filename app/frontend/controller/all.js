@@ -256,7 +256,7 @@ async function Agenda() {
                                 title: 'Adicionado com sucesso'
                             })
                             .then(() => {
-                                
+                                location.reload();
                             })
                            
 
