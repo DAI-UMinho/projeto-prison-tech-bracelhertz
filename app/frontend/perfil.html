@@ -23,6 +23,13 @@
   <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
   <style>
+select {
+    -webkit-appearance: none;
+
+}
+
+
+
     @media (min-width: 1000px) and (max-width: 1400px) {
       #firstone {
         height: 246px;
@@ -345,9 +352,9 @@
                     <div class="font-weight-bold text-white full_tab" style="margin-top:-15px;" id="baixoheader420">
                       <div class="tab_nome" style="width:70%">Fotografia</div>
                       <p><input type="file" accept="image/*" name="image" id="file" onchange="loadFile(event)"
-                          style="display: none;" disabled="true"></p>
+                          style="display: none;"></p>
                       <p><label for="file" id="foto420" class="mb-0 text-uppercase"
-                          style="cursor: pointer; color: #ff8800;">Editar</label></p>
+                        style="cursor: pointer;">Editar</label></p>
                     </div>
                   </div>
                   <!-- Card Body -->
@@ -791,13 +798,6 @@
   <script src="controller/controlo.js"></script>
 
 
-
-  <script>
-    var loadFile = function (event) {
-      var image = document.getElementById('fotoR');
-      image.src = URL.createObjectURL(event.target.files[0]);
-    };
-  </script>
 </body>
 
 </html>

@@ -19,20 +19,18 @@ window.onload = async function () {
     data.birthDate = document.getElementById("dataNascimento").value.trim();
     data.username = document.getElementById("username").value.trim();
     data.contact = document.getElementById("contact").value.trim();
-
-    data.photo = pic;
-
+    data.photo="";
     data.nationality = document.getElementById("nacionalidade").value.trim();
     data.location = document.getElementById("localidade").value.trim();
     data.address = document.getElementById("morada").value.trim();
-    data.roles = [{ id: parseInt(document.getElementById("type").value.trim()) }];
+    data.roles = [{ id: parseInt(document.getElementById("instt").value.trim()) }];
     data.password = document.getElementById("password").value.trim();
     data.prison = { prisonId: document.getElementById("local").value };
 
 
 
     if (Fname.value == "" || email.value == "" || dataNascimento.value == "" ||
-      username.value == "" || contact.value == "" || nacionalidade.value == "" || pic == "" ||
+      username.value == "" || contact.value == "" || nacionalidade.value == "" || 
       localidade.value == "" || morada.value == "" || password.value == "" || contact.value.length != 9) {
       Swal.fire(
         'Preencha todos os campos!',
@@ -40,7 +38,15 @@ window.onload = async function () {
         'warning'
       )
     } else {
-      if (validacaoEmail(document.getElementById("email"))) {
+
+if(pic == ""){
+  Swal.fire(
+    'É obrigatória uma fotografia!',
+    '',
+    'warning'
+  )
+}else{
+   if (validacaoEmail(document.getElementById("email"))) {
         if (valida_nome(Fname.value) || valida_nome(document.getElementById("nacionalidade"))
           || valida_nome(document.getElementById("localidade"))) {
           if (valida()) {
@@ -74,15 +80,19 @@ window.onload = async function () {
             }).then(async function (result) {
               console.log(result);
               if (result) {
-                swal("Sucesso!",
-                  "Registou um novo Utilizador com sucesso!",
-                  "success");
+
+
+                post_photo(formData, result.objectId);
+
+
               }
+
+
+
+
             }).catch(function (err) {
               swal("Erro!", "Erro!", "error");
             })
-
-
 
           }
 
@@ -103,10 +113,10 @@ window.onload = async function () {
       }
     }
 
+}
 
 
-
-
+   
 
 
   }
@@ -377,8 +387,65 @@ locinf.onkeyup = function () {
 }
 
 //--------------------------------------Acept image---------------------------------------------------
-var pic = "";
+let userLogado = localStorage.getItem("userLogado");
+var pic="";
+var formData="";
 var loadFile = function (event) {
-  pic = "";
-  pic = URL.createObjectURL(event.target.files[0]);
+
+  formData = new FormData();
+  formData.append("file", event.target.files[0]);
+pic="a";
+  
 };
+
+async function post_photo(photoC, idGajo) {
+
+
+  fetch('http://127.0.0.1:8080/api/users/upload-photos/' + idGajo, {
+    mode: 'cors',
+    method: 'PUT',
+    body: photoC,
+    credentials: 'include'
+  })
+    .then(function (response) {
+      //console.log(response.headers.get('Set-Cookie'));
+      console.log(response);
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      return response.json();
+    })
+    .catch(function (err) {
+      //swal.showValidationError('Pedido falhado: ' + err);
+      console.log(err); // estava alert(err); coloquei console log para não estar sempre a aparecer pop-up ao utilizador
+    })
+    .then(async function (result) {
+      console.log(result);
+      if (result) {
+
+
+
+        Swal.fire(
+          'Utilizador registado com sucesso!',
+          '',
+          'success'
+        ).then(() => {
+          location.reload();
+        })
+
+
+
+      }
+      else {
+        Swal.fire(
+          'Ocorreu um erro!',
+          '',
+          'error'
+        )
+        console.log(result);
+        //swal({ title: `${result.value.userMessage.message.pt}` });
+      }
+    });
+
+
+}

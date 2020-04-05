@@ -19,11 +19,11 @@ $(window).on("load", function () {
       console.log(logado);
 
 
-      if(logado.roles[0].name == "ROLE_NETWORKMAN"){
+      if (logado.roles[0].name == "ROLE_NETWORKMAN") {
         document.getElementById("role_perfil").innerHTML = "Gestor da Rede Prisonal";
-      }else if(logado.roles[0].name == "ROLE_GUARD"){
+      } else if (logado.roles[0].name == "ROLE_GUARD") {
         document.getElementById("role_perfil").innerHTML = "Gestor de Instituição";
-      }else{
+      } else {
         document.getElementById("role_perfil").innerHTML = "Guarda Prisional";
       }
 
@@ -52,23 +52,30 @@ $(window).on("load", function () {
   function get_instituicoes() {
     async function fetchAsync() {
 
-        const response = await fetch('http://127.0.0.1:8080/api/prisons');
-        const instituicoes = await response.json();
-        var show_inst = "";
+      const response = await fetch('http://127.0.0.1:8080/api/prisons',{
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        mode: 'cors',
+        method: 'GET',
+        credentials: 'include'
+      });
+      const instituicoes = await response.json();
+      var show_inst = "";
+      console.log(instituicoes);
 
 
+      for (var inst of instituicoes) {
+        show_inst += "<option value='" + inst.prisonId + "'>" + inst.name + "</option>";
+      }
 
-        for (var inst of instituicoes) {
-            show_inst += "<option value='" + inst.prisonId + "'>" + inst.name + "</option>";
-        }
-
-        document.getElementById("id_instituicao").innerHTML = show_inst;
+      document.getElementById("id_instituicao").innerHTML = show_inst;
 
     }
     //chama a função fetchAsync()
     fetchAsync().then(data => console.log("done")).catch(reason => console.log(reason.message));
 
-}
+  }
 
 
 })
@@ -107,7 +114,7 @@ async function editar() {
     if (validacaoEmail(document.getElementById("email_perfil"))) {
 
       let RoleLogado = localStorage.getItem("RoleLogado");
-      
+
 
       if (RoleLogado == "ROLE_GUARD") {
 
@@ -124,7 +131,7 @@ async function editar() {
         data.contact = document.getElementById("contacto_perfil").value.trim();
         data.nationality = document.getElementById("nacionalidade_perfil").value.trim();
         data.address = document.getElementById("morada_perfil").value.trim();
-        data.prisonId = document.getElementById("id_instituicao").value ;
+        data.prisonId = document.getElementById("id_instituicao").value;
         data.name = document.getElementById("nome_perfil").value.trim();
         data.birthDate = document.getElementById("dataNascimento_perfil").value;
         data.email = document.getElementById("email_perfil").value.trim();
@@ -174,15 +181,37 @@ async function editar() {
       .then(async function (result) {
         console.log(result);
         if (result) {
-          //swal({ title: "Autenticação feita com sucesso!" });
-          //+ result.value.message.success);S
-          Swal.fire(
-            'Dados alterados com sucesso!',
-            '',
-            'success'
-          ).then(() => {
+
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 1000,
+            timerProgressBar: true,
+            onOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+          })
+
+          Toast.fire({
+            icon: 'success',
+            title: 'Dados alterados com sucesso'
+          }).then(() => {
             location.reload();
           })
+
+
+          /*
+                    Swal.fire(
+                      'Dados alterados com sucesso!',
+                      '',
+                      'success'
+                    ).then(() => {
+                      location.reload();
+                    })*/
+
+
         }
         else {
           Swal.fire(
@@ -228,15 +257,39 @@ async function editar() {
       .then(async function (result) {
         console.log(result);
         if (result) {
-          //swal({ title: "Autenticação feita com sucesso!" });
-          //+ result.value.message.success);S
-          Swal.fire(
-            'Dados alterados com sucesso!',
-            '',
-            'success'
-          ).then(() => {
+
+
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 1000,
+            timerProgressBar: true,
+            onOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+          })
+
+          Toast.fire({
+            icon: 'success',
+            title: 'Dados alterados com sucesso'
+          }).then(() => {
             location.reload();
           })
+
+
+          /*
+                    Swal.fire(
+                      'Dados alterados com sucesso!',
+                      '',
+                      'success'
+                    ).then(() => {
+                      location.reload();
+                    })*/
+
+
+
         }
         else {
           Swal.fire(
@@ -254,10 +307,85 @@ async function editar() {
 
   }
 
+}
+//------------------------------------------UPLOAD PHOTO------------------------------------------------------
 
+
+var loadFile = function (event) {
+  var image = document.getElementById('fotoR');
+  image.src = URL.createObjectURL(event.target.files[0]);
+
+  const formData = new FormData();
+  formData.append("file", event.target.files[0]);
+
+  editar_photo(formData);
+
+
+};
+
+async function editar_photo(photoC) {
+
+
+  fetch('http://127.0.0.1:8080/api/users/upload-photos/' + userLogado, {
+    mode: 'cors',
+    method: 'PUT',
+    body: photoC,
+    credentials: 'include'
+  })
+    .then(function (response) {
+      //console.log(response.headers.get('Set-Cookie'));
+      console.log(response);
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      return response.json();
+    })
+    .catch(function (err) {
+      //swal.showValidationError('Pedido falhado: ' + err);
+      console.log(err); // estava alert(err); coloquei console log para não estar sempre a aparecer pop-up ao utilizador
+    })
+    .then(async function (result) {
+      console.log(result);
+      if (result) {
+
+
+
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 1000,
+          timerProgressBar: true,
+          onOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+        })
+
+        Toast.fire({
+          icon: 'success',
+          title: 'Dados alterados com sucesso'
+        }).then(() => {
+          location.reload();
+        })
+
+
+
+      }
+      else {
+        Swal.fire(
+          'Ocorreu um erro!',
+          '',
+          'error'
+        )
+        console.log(result);
+        //swal({ title: `${result.value.userMessage.message.pt}` });
+      }
+    });
 
 
 }
+
 
 
 //-------------------------------------------------------------------------------------------------------
@@ -320,19 +448,18 @@ $('.snum').keyup(function () {
 
 
 
-document.getElementById("perfil_alterar_2").addEventListener("click", function(){
+document.getElementById("perfil_alterar_2").addEventListener("click", function () {
   let RoleLogado = localStorage.getItem("RoleLogado");
-  if(RoleLogado == "ROLE_GUARD"){
+  if (RoleLogado == "ROLE_GUARD") {
     Myfunction4245();
-  }else{
+  } else {
     Myfunction424();
-    if(RoleLogado == "ROLE_NETWORKMAN"){
+    if (RoleLogado == "ROLE_NETWORKMAN") {
       document.getElementById("id_instituicao").disabled = false;
       document.getElementById("icon_id_instituicao").style.display = "block";
     }
   }
 });
-
 
 //------------------------------------------------------------------------------------------------------------------------
 function Myfunction424() {
@@ -353,8 +480,6 @@ function Myfunction424() {
   document.getElementById("icon_morada_perfil").style.display = "block";
   document.getElementById("perfil_alterar_2").style.display = "none";
   document.getElementById("perfil_save_2").style.display = "block";
-  document.getElementById("foto420").style.color = "#ffffff";
-  document.getElementById("file").disabled = false;
 }
 
 function Myfunction4245() {
@@ -364,9 +489,6 @@ function Myfunction4245() {
   document.getElementById("icon_email_perfil").style.display = "block";
   document.getElementById("perfil_alterar_2").style.display = "none";
   document.getElementById("perfil_save_2").style.display = "block";
-  document.getElementById("foto420").style.color = "#ffffff";
-  document.getElementById("file").disabled = false;
-
 }
 
 
@@ -388,6 +510,4 @@ function Myfunction425() {
   document.getElementById("icon_morada_perfil").style.display = "none";
   document.getElementById("perfil_save_2").style.display = "none";
   document.getElementById("perfil_alterar_2").style.display = "block";
-  document.getElementById("foto420").style.color = "#ff8800";
-  document.getElementById("file").disabled = true;
 }
