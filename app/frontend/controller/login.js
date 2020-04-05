@@ -1,5 +1,6 @@
 window.onload = async function () {
-var pi = 0;
+    localStorage.clear();
+    var pi = 0;
     const botaoLogin = document.getElementById("botaoLogin");
 
 
@@ -103,16 +104,16 @@ var pi = 0;
                     localStorage.setItem("RoleLogado", result.role);
                     setTimeout(function () {
 
-                        if(pi==0){
-                            
+                        if (pi == 0) {
+
                             swal("Sucesso!",
-                            "Autenticado com sucesso!",
-                            "success")
-                        .then(() => {
-                            window.location.replace("./avisos.html");
-                        })
-                        }else{
-                         //   pi-=1;
+                                "Autenticado com sucesso!",
+                                "success")
+                                .then(() => {
+                                    window.location.replace("./avisos.html");
+                                })
+                        } else {
+                            //   pi-=1;
                             Swal.fire(
                                 'Não foi reconhecido nenhum rosto!',
                                 '',

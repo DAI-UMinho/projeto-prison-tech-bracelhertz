@@ -11932,7 +11932,32 @@ input:checked + .slider:before {
   width: 30px;
 }
 
+div.label {  
+  -webkit-font-smoothing: antialiased; 
+}
 
+label {
+  display:inline;
+  text-align:center;
+}
+
+input[type=checkbox] {
+  display: none;
+}
+
+input:checked + div {
+  background-color: gray;
+}
+
+input:checked + div:before {
+  background-color: transparent;
+}
+
+.tab_nome85{
+  display: table-cell !important;
+    width: 85% !important;
+    vertical-align: middle !important;
+}
 /*----------------------------------------------------------Novo Codigo---------------------------------------------------------*/
 
 

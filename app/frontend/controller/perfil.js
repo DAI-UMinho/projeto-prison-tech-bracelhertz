@@ -19,6 +19,15 @@ $(window).on("load", function () {
       console.log(logado);
 
 
+      if(logado.roles[0].name == "ROLE_NETWORKMAN"){
+        document.getElementById("role_perfil").innerHTML = "Gestor da Rede Prisonal";
+      }else if(logado.roles[0].name == "ROLE_GUARD"){
+        document.getElementById("role_perfil").innerHTML = "Gestor de Instituição";
+      }else{
+        document.getElementById("role_perfil").innerHTML = "Guarda Prisional";
+      }
+
+
       document.getElementById("username_perfil").innerHTML = logado.username;
       document.getElementById("contacto_perfil").value = logado.contact;
       document.getElementById("nacionalidade_perfil").value = logado.nationality;
@@ -28,7 +37,7 @@ $(window).on("load", function () {
       document.getElementById("dataNascimento_perfil").value = logado.birthDate;
       document.getElementById("email_perfil").value = logado.email;
       document.getElementById("localidade_perfil").value = logado.location;
-      document.getElementById("role_perfil").innerHTML = logado.roles[0].name;
+      //document.getElementById("role_perfil").innerHTML = logado.roles[0].name;
       document.getElementById("fotoR").src = logado.photo;
 
     }

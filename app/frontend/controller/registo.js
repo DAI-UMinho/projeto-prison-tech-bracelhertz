@@ -28,7 +28,7 @@ window.onload = async function () {
     data.roles = [{ id: parseInt(document.getElementById("type").value.trim()) }];
     data.password = document.getElementById("password").value.trim();
     data.prison = { prisonId: document.getElementById("local").value };
-    
+
 
 
     if (Fname.value == "" || email.value == "" || dataNascimento.value == "" ||
@@ -120,19 +120,35 @@ window.onload = async function () {
 
       const response = await fetch('http://127.0.0.1:8080/api/prisons', {
         headers: {
-            'Content-Type': 'application/json'
+          'Content-Type': 'application/json'
         },
         mode: 'cors',
         method: 'GET',
         credentials: 'include'
-    });
+      });
+
+      const response1 = await fetch('http://127.0.0.1:8080/api/users/logged-profiles', {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        mode: 'cors',
+        method: 'GET',
+        credentials: 'include'
+      });
       const instituicoes = await response.json();
+      const logado = await response1.json();
       var show_inst = "";
 
+      let RoleLogado = localStorage.getItem("RoleLogado");
 
-
-      for (var inst of instituicoes) {
-        show_inst += "<option value='" + inst.prisonId + "'>" + inst.name + "</option>";
+      if (RoleLogado == "ROLE_MANAGER") {
+        show_inst += "<option value='" + logado.prison.prisonId + "'>" + logado.prison.name + "</option>";
+        document.getElementById("instt").remove(1);
+        document.getElementById("instt").remove(1);
+      } else {
+        for (var inst of instituicoes) {
+          show_inst += "<option value='" + inst.prisonId + "'>" + inst.name + "</option>";
+        }
       }
 
       document.getElementById("local").innerHTML = show_inst;

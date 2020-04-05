@@ -1,9 +1,9 @@
 const AVAILABLE_WEEK_DAYS = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
-const localStorageName = 'calendar-events';
+//const localStorageName = 'calendar-events';
 let userLogado = localStorage.getItem("userLogado");
 var listaa = {};
 var data = {};
-
+var clicked = false;
 var faz;
 
 Agenda();
@@ -23,16 +23,15 @@ async function Agenda() {
     console.log(agendas)
     var pi = ""
     for (var agenda of agendas) {
-        if (agenda.user.userId == userLogado) {
-            pi = "";
-            pi = getDate(new Date(agenda.date))
-            if (typeof listaa[pi] == 'undefined') {
-                listaa[pi] = [agenda.description];
-            } else {
-                listaa[pi].push(agenda.description);
-            }
-
+        pi = "";
+        pi = getDate(new Date(agenda.date))
+        if (typeof listaa[pi] == 'undefined') {
+            listaa[pi] = ["<input class='testee' id='" + agenda.scheduleId + "' type='checkbox' name='" + agenda.scheduleId + "' disabled ='true' /><div class='label'><label for='" + agenda.scheduleId + "'>" + agenda.description + "</label> <br></div>"];
+        } else {
+            listaa[pi].push("<input class='testee' id='" + agenda.scheduleId + "' type='checkbox' name='" + agenda.scheduleId + "' disabled ='true' /><div class='label'><label for='" + agenda.scheduleId + "'>" + agenda.description + "</label> <br></div>");
         }
+
+
 
     }
     console.log(listaa)
@@ -76,6 +75,11 @@ async function Agenda() {
             this.drawYearAndCurrentDay();
             this.drawEvents();
 
+            if(!clicked){
+                document.getElementById("trashSche").style.display = "none";
+                trocaClasse(document.getElementById("tab_nomeCH"), "tab_nome");
+                trocaClasse(document.getElementById("editSche"), "fas", "fa-pen");
+            }
         }
 
         drawEvents() {
@@ -85,6 +89,9 @@ async function Agenda() {
             eventList.forEach(item => {
                 eventTemplate += `<li>${item}</li>`;
             });
+
+
+
 
             this.elements.eventList.innerHTML = eventTemplate;
         }
@@ -196,6 +203,9 @@ async function Agenda() {
 
 
             this.elements.days.addEventListener('click', e => {
+
+                clicked = false;
+
                 let element = e.srcElement;
                 let day = element.getAttribute('data-day');
                 let month = element.getAttribute('data-month');
@@ -204,6 +214,7 @@ async function Agenda() {
                 let strDate = `${Number(month) + 1}/${day}/${year}`;
                 this.updateTime(strDate);
                 this.drawAll()
+                
             });
 
 
@@ -214,12 +225,11 @@ async function Agenda() {
                 if (!this.eventList[dateFormatted]) this.eventList[dateFormatted] = [];
                 this.eventList[dateFormatted].push(fieldValue);
 
-                data.user = { userId: userLogado };
                 data.description = fieldValue;
                 data.date = getDate2(dateFormatted);
                 console.log(data)
 
-                localStorage.setItem(localStorageName, JSON.stringify(this.eventList));
+                //localStorage.setItem(localStorageName, JSON.stringify(this.eventList));
                 enviar();
 
 
@@ -263,10 +273,10 @@ async function Agenda() {
                                 icon: 'success',
                                 title: 'Adicionado com sucesso'
                             })
-                            .then(() => {
-                                location.reload();
-                            })
-                           
+                                .then(() => {
+                                    location.reload();
+                                })
+
 
                         }
                     }).catch(function (err) {
@@ -277,7 +287,7 @@ async function Agenda() {
                 }
 
 
-                
+
                 this.elements.eventField.value = '';
                 this.drawAll()
                 console.log("3");
@@ -378,10 +388,156 @@ function getDate2(date) {
     var mo = today.getMonth()
     var a = today.getFullYear();
     d = checkTime(d);
-    mo = checkTime(mo+1);
+    mo = checkTime(mo + 1);
     return a + "-" + mo + "-" + d;
 }
 function checkTime(i) {
     if (i < 10) { i = "0" + i };  // add zero in front of numbers < 10
     return i;
+}
+
+
+
+
+
+
+$('#editSche').click(function () {
+
+
+    $('.testee').each(function () {
+        if (!clicked) {
+            this.disabled = false;
+            trocaClasse(document.getElementById("editSche"), "fas", "fa-times");
+            trocaClasse(document.getElementById("tab_nomeCH"), "tab_nome85");
+            document.getElementById("trashSche").style.display = "inline";
+
+        } else {
+            this.checked = false;
+            this.disabled = true;
+            document.getElementById("trashSche").style.display = "none";
+            trocaClasse(document.getElementById("tab_nomeCH"), "tab_nome");
+            trocaClasse(document.getElementById("editSche"), "fas", "fa-pen");
+        }
+    });
+
+    //switch
+    if (clicked) {
+        clicked = false;
+    } else {
+        clicked = true;
+    }
+
+});
+
+
+function trocaClasse(elemento, nova1, nova2) {
+    elemento.className = "";
+    elemento.classList.add(nova1);
+    elemento.classList.add(nova2);
+}
+
+function trocaClasse1(elemento, nova1, nova2) {
+    elemento.className = "";
+    elemento.classList.add(nova1);
+    elemento.classList.add(nova2);
+}
+
+
+document.getElementById("trashSche").addEventListener("click", function(){
+    getIds();
+
+    if(ids==""){
+        Swal.fire(
+            'Seleciona pelo menos um atividade!',
+            '',
+            'warning'
+          )
+    }else{
+        for(let id of ids){
+            eliminar(id);
+        }
+        
+    }
+
+})
+
+let ids = [];
+function getIds(){
+    ids=[];
+    const selecList = document.getElementById("listaSche");
+    for(let elem of selecList.children){
+        if (elem.firstChild.checked){
+            ids.push(elem.firstChild.id);
+            
+        }
+    }
+    console.log(ids)
+    return ids
+}
+
+
+async function eliminar(id) {
+    fetch('http://127.0.0.1:8080/api/schedules/'+ id, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      mode: 'cors',
+      method: 'DELETE',
+      body: JSON.stringify(id),
+      credentials: 'include'
+    })
+      .then(function (response) {
+        //console.log(response.headers.get('Set-Cookie'));
+        console.log(response);
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+        return response.json();
+      })
+      .catch(function (err) {
+        //swal.showValidationError('Pedido falhado: ' + err);
+        console.log(err); // estava alert(err); coloquei console log para não estar sempre a aparecer pop-up ao utilizador
+      })
+      .then(async function (result) {
+        console.log(result);
+        if (result) {
+
+
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 1000,
+                timerProgressBar: true,
+                onOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            Toast.fire({
+                icon: 'success',
+                title: 'Alterada com sucesso'
+            }).then(() => {
+                location.reload();
+            })
+
+
+
+        }
+
+
+
+        else {
+          Swal.fire(
+            'Ocorreu um erro!',
+            '',
+            'error'
+          ).then(() => {
+            location.reload();
+          })
+          console.log(result);
+          //swal({ title: `${result.value.userMessage.message.pt}` });
+        }
+      });
 }

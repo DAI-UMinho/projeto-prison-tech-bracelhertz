@@ -373,10 +373,13 @@
                     </div>
                     <div class="current-day-events" style="padding-top: 20px;">
                       <div class="full_tab">
-                        <div class="tab_nome">Eventos:</div>
-                        <i class="fas fa-pen tab_time"></i>
+                        <div id="tab_nomeCH" class="tab_nome">Eventos:</div>
+                        <div class="tab_time">
+                        <i id="trashSche" type="button" class="fas fa-trash mr-2" style="display: none;"></i>
+                        <i id="editSche" type="button" class="fas fa-pen" style="display: inline;"></i>
                       </div>
-                      <ul class="current-day-events-list" style="overflow-y: scroll; height: 170px;"></ul>
+                      </div>
+                      <ul id="listaSche" class="current-day-events-list" style="overflow-y: scroll; height: 170px;"></ul>
                     </div>
                     <div class="add-event-day full_tab">
                       <input type="text" class="add-event-day-field tab_name" placeholder="Adicionar evento">
