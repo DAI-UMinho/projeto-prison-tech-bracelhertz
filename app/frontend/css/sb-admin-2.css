@@ -11958,6 +11958,11 @@ input:checked + div:before {
     width: 85% !important;
     vertical-align: middle !important;
 }
+
+.imgSide{
+  width: 15px;
+  height: 15px;
+}
 /*----------------------------------------------------------Novo Codigo---------------------------------------------------------*/
 
 

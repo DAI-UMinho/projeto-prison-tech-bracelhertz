@@ -4,7 +4,14 @@ window.onload = async function () {
 
 
   let userLogado = localStorage.getItem("userLogado");
-  const response = await fetch('http://127.0.0.1:8080/api/users/' + userLogado);
+  const response = await fetch('http://127.0.0.1:8080/api/users/' + userLogado, {
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    mode: 'cors',
+    method: 'GET',
+    credentials: 'include'
+});
   const logado = await response.json();
   console.log(logado);
 
@@ -71,6 +78,7 @@ window.onload = async function () {
           },
           mode: 'cors',
           method: 'POST',
+          credentials: 'include',
           body: JSON.stringify(data)
 
         }).then(function (response) {
@@ -128,7 +136,14 @@ window.onload = async function () {
   function get_instituicoes() {
     async function fetchAsync() {
 
-      const response = await fetch('http://127.0.0.1:8080/api/prison');
+      const response = await fetch('http://127.0.0.1:8080/api/prison', {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        mode: 'cors',
+        method: 'GET',
+        credentials: 'include'
+    });
       const instituicoes = await response.json();
       var show_inst = "";
 
