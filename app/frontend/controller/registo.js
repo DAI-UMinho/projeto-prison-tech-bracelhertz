@@ -19,7 +19,7 @@ window.onload = async function () {
     data.birthDate = document.getElementById("dataNascimento").value.trim();
     data.username = document.getElementById("username").value.trim();
     data.contact = document.getElementById("contact").value.trim();
-    data.photo="";
+    data.photo = "";
     data.nationality = document.getElementById("nacionalidade").value.trim();
     data.location = document.getElementById("localidade").value.trim();
     data.address = document.getElementById("morada").value.trim();
@@ -30,7 +30,7 @@ window.onload = async function () {
 
 
     if (Fname.value == "" || email.value == "" || dataNascimento.value == "" ||
-      username.value == "" || contact.value == "" || nacionalidade.value == "" || 
+      username.value == "" || contact.value == "" || nacionalidade.value == "" ||
       localidade.value == "" || morada.value == "" || password.value == "" || contact.value.length != 9) {
       Swal.fire(
         'Preencha todos os campos!',
@@ -39,84 +39,84 @@ window.onload = async function () {
       )
     } else {
 
-if(pic == ""){
-  Swal.fire(
-    'É obrigatória uma fotografia!',
-    '',
-    'warning'
-  )
-}else{
-   if (validacaoEmail(document.getElementById("email"))) {
-        if (valida_nome(Fname.value) || valida_nome(document.getElementById("nacionalidade"))
-          || valida_nome(document.getElementById("localidade"))) {
-          if (valida()) {
+      if (pic == "") {
+        Swal.fire(
+          'É obrigatória uma fotografia!',
+          '',
+          'warning'
+        )
+      } else {
+        if (validacaoEmail(document.getElementById("email"))) {
+          if (valida_nome(Fname.value) || valida_nome(document.getElementById("nacionalidade"))
+            || valida_nome(document.getElementById("localidade"))) {
+            if (valida()) {
+              Swal.fire(
+                'Palavra-passe não cumpre os requisitos!',
+                '',
+                'warning'
+              )
+            } else {
+              console.log(data);
+
+
+
+
+              await fetch('http://127.0.0.1:8080/api/users', {
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                mode: 'cors',
+                method: 'POST',
+                credentials: 'include',
+                body: JSON.stringify(data)
+
+              }).then(function (response) {
+                if (!response.ok) {
+                  alert(response);
+                  throw new Error("ERRO");
+                }
+                console.log(response);
+                return response.json();
+              }).then(async function (result) {
+                console.log(result);
+                if (result) {
+
+
+                  post_photo(formData, result.objectId);
+
+
+                }
+
+
+
+
+              }).catch(function (err) {
+                swal("Erro!", "Erro!", "error");
+              })
+
+            }
+
+
+          } else {
             Swal.fire(
-              'Palavra-passe não cumpre os requisitos!',
+              'Nome, Localidade e Nacionalidade apenas podem ter letras!',
               '',
               'warning'
             )
-          } else {
-            console.log(data);
-
-
-
-
-            await fetch('http://127.0.0.1:8080/api/users', {
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              mode: 'cors',
-              method: 'POST',
-              credentials: 'include',
-              body: JSON.stringify(data)
-
-            }).then(function (response) {
-              if (!response.ok) {
-                alert(response);
-                throw new Error("ERRO");
-              }
-              console.log(response);
-              return response.json();
-            }).then(async function (result) {
-              console.log(result);
-              if (result) {
-
-
-                post_photo(formData, result.objectId);
-
-
-              }
-
-
-
-
-            }).catch(function (err) {
-              swal("Erro!", "Erro!", "error");
-            })
-
           }
-
-
         } else {
           Swal.fire(
-            'Nome, Localidade e Nacionalidade apenas podem ter letras!',
+            'Este email não é válido!',
             '',
             'warning'
           )
         }
-      } else {
-        Swal.fire(
-          'Este email não é válido!',
-          '',
-          'warning'
-        )
       }
+
     }
 
-}
 
 
-   
 
 
   }
@@ -345,6 +345,7 @@ var nomeinf = document.getElementById("Fname");
 var mailinf = document.getElementById("email");
 var nacinf = document.getElementById("nacionalidade")
 var locinf = document.getElementById("localidade");
+var existeUser = document.getElementById("username");
 
 continf.onkeyup = function () {
   if (document.getElementById("contact").value.length == 9 || document.getElementById("contact").value.length == 0) {
@@ -386,16 +387,27 @@ locinf.onkeyup = function () {
   }
 }
 
+existeUser.onblur = function () {
+  var ver = document.getElementById("username").value.trim();
+  if (UsernameTaken(ver)) {
+    document.getElementById("existeUser").style.display = "none";
+  } else {
+    document.getElementById("existeUser").style.display = "block";
+  }
+
+}
+
+
 //--------------------------------------Acept image---------------------------------------------------
 let userLogado = localStorage.getItem("userLogado");
-var pic="";
-var formData="";
+var pic = "";
+var formData = "";
 var loadFile = function (event) {
 
   formData = new FormData();
   formData.append("file", event.target.files[0]);
-pic="a";
-  
+  pic = "a";
+
 };
 
 async function post_photo(photoC, idGajo) {
@@ -448,4 +460,18 @@ async function post_photo(photoC, idGajo) {
     });
 
 
+}
+
+
+async function UsernameTaken(verificar) {
+  const response = await fetch('http://127.0.0.1:8080/api/users/username-exists/' + verificar, {
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    mode: 'cors',
+    method: 'GET',
+    credentials: 'include'
+  });
+  const existe = await response.json();
+  return existe;
 }

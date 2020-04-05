@@ -3,19 +3,6 @@ window.onload = async function () {
   get_instituicoes();
 
 
-  let userLogado = localStorage.getItem("userLogado");
-  const response = await fetch('http://127.0.0.1:8080/api/users/' + userLogado, {
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    mode: 'cors',
-    method: 'GET',
-    credentials: 'include'
-});
-  const logado = await response.json();
-  console.log(logado);
-
-
   const botaoRegistar = document.getElementById("botaoRegistar");
   botaoRegistar.addEventListener("click", registar);
 
@@ -31,15 +18,14 @@ window.onload = async function () {
     data.identifierId = document.getElementById("Identification").value.trim();
     data.contact = document.getElementById("contact").value.trim();
     data.alternativeContact = document.getElementById("contactAlt").value.trim();
-    data.photo = pic;
+    data.photo = "";
     data.prison = { prisonId: document.getElementById("instituicao").value };
     data.threatLevel = document.getElementById("nivel").value.trim();
     data.cell = document.getElementById("cela").value.trim();
     data.braceletId = document.getElementById("idpulseira").value.trim();
-    data.MinHB = document.getElementById("pulsacaomin").value.trim();
-    data.MaxHB = document.getElementById("pulsacaomax").value.trim();
+    data.minHB = document.getElementById("pulsacaomin").value.trim();
+    data.maxHB = document.getElementById("pulsacaomax").value.trim();
 
-    data.createdBy = { userId: userLogado };
 
 
 
@@ -62,50 +48,50 @@ window.onload = async function () {
           'warning'
         )
       } else {
-        if(parseInt(document.getElementById("pulsacaomax").value) > parseInt(document.getElementById("pulsacaomin").value)){
+        if (parseInt(document.getElementById("pulsacaomax").value) > parseInt(document.getElementById("pulsacaomin").value)) {
 
 
 
 
-        console.log(data);
+          console.log(data);
 
 
 
 
-        await fetch('http://127.0.0.1:8080/api/prisoner', {
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          mode: 'cors',
-          method: 'POST',
-          credentials: 'include',
-          body: JSON.stringify(data)
+          await fetch('http://127.0.0.1:8080/api/prisoners', {
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            mode: 'cors',
+            method: 'POST',
+            credentials: 'include',
+            body: JSON.stringify(data)
 
-        }).then(function (response) {
-          if (!response.ok) {
-            alert(response);
-            throw new Error("ERRO");
-          }
-          console.log(response);
-          return response.json();
-        }).then(async function (result) {
-          console.log(result);
-          if (result) {
-            swal("Sucesso!",
-              "Registou um novo Recluso com sucesso!",
-              "success");
-          }
-        }).catch(function (err) {
-          swal("Erro!", "Erro!", "error");
-        })
-
-
+          }).then(function (response) {
+            if (!response.ok) {
+              alert(response);
+              throw new Error("ERRO");
+            }
+            console.log(response);
+            return response.json();
+          }).then(async function (result) {
+            console.log(result);
+            if (result) {
+              swal("Sucesso!",
+                "Registou um novo Recluso com sucesso!",
+                "success");
+            }
+          }).catch(function (err) {
+            swal("Erro!", "Erro!", "error");
+          })
 
 
 
 
 
-        }else{
+
+
+        } else {
           Swal.fire(
             'Pulsação máxima tem de ser maior que a pulsação minima!',
             '',
@@ -135,23 +121,40 @@ window.onload = async function () {
 
   function get_instituicoes() {
     async function fetchAsync() {
-
-      const response = await fetch('http://127.0.0.1:8080/api/prison', {
+      let RoleLogado = localStorage.getItem("RoleLogado");
+      const response1 = await fetch('http://127.0.0.1:8080/api/users/logged-profiles', {
         headers: {
-            'Content-Type': 'application/json'
+          'Content-Type': 'application/json'
         },
         mode: 'cors',
         method: 'GET',
         credentials: 'include'
-    });
+      });
+      const logado = await response1.json();
+      console.log(logado);
+
+
+
+      const response = await fetch('http://127.0.0.1:8080/api/prisons', {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        mode: 'cors',
+        method: 'GET',
+        credentials: 'include'
+      });
       const instituicoes = await response.json();
       var show_inst = "";
 
+      if (RoleLogado == "ROLE_GUARD") {
+        show_inst += "<option value='" + logado.prison.prisonId + "'>" + logado.prison.name + "</option>";
+      } else {
+        for (var inst of instituicoes) {
+          show_inst += "<option value='" + inst.prisonId + "'>" + inst.name + "</option>";
+        }
 
-
-      for (var inst of instituicoes) {
-        show_inst += "<option value='" + inst.prisonId + "'>" + inst.name + "</option>";
       }
+
 
       document.getElementById("instituicao").innerHTML = show_inst;
 
@@ -254,6 +257,15 @@ contalinf.onkeyup = function () {
   }
 }
 
+existeRec.onblur = function () {
+  var ver = document.getElementById("Identification").value.trim();
+  if (RecTaken(ver)) {
+    document.getElementById("existeRec").style.display = "none";
+  } else {
+    document.getElementById("existeRec").style.display = "block";
+  }
+
+}
 
 
 //--------------------------------------Acept image---------------------------------------------------
@@ -262,3 +274,17 @@ var loadFile = function (event) {
   pic = "";
   pic = URL.createObjectURL(event.target.files[0]);
 };
+
+/*
+async function RecTaken(verificar) {
+  const response = await fetch('http://127.0.0.1:8080/api/users/username-exists/' + verificar, {
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    mode: 'cors',
+    method: 'GET',
+    credentials: 'include'
+  });
+  const existe = await response.json();
+  return existe;
+}*/
