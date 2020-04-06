@@ -9,7 +9,7 @@ $(window).on("load", function () {
             let RoleLogado = localStorage.getItem("RoleLogado");
             var conteudo = [];
 
-            if(RoleLogado == "ROLE_GUARD"){
+            if (RoleLogado == "ROLE_GUARD") {
                 const response = await fetch('http://127.0.0.1:8080/api/prisoners/by-guards', {
                     headers: {
                         'Content-Type': 'application/json'
@@ -17,10 +17,11 @@ $(window).on("load", function () {
                     mode: 'cors',
                     method: 'GET',
                     credentials: 'include'
-               });           
-               const func = await response.json();
-               display(func);
-            }else{
+                });
+                const func = await response.json();
+                display(func);
+
+            } else {
                 const response = await fetch('http://127.0.0.1:8080/api/prisoners', {
                     headers: {
                         'Content-Type': 'application/json'
@@ -28,31 +29,33 @@ $(window).on("load", function () {
                     mode: 'cors',
                     method: 'GET',
                     credentials: 'include'
-               });           
-               const func = await response.json();
-               display(func);
+                });
+                const func = await response.json();
+                display(func);
+
+                document.getElementById("esconder").style.display="inline";
             }
 
-function display(func){
+            function display(func) {
 
-    for (const recluso of func) {
+                for (const recluso of func) {
 
-        conteudo.push(["<div id='" + recluso.prisonerId + "'>" + recluso.identifierId + "</div>",
-        recluso.name,
-        recluso.contact,
-        recluso.prison.name,
-        recluso.threatLevel,
-        recluso.cell])
+                    conteudo.push(["<div id='" + recluso.prisonerId + "'>" + recluso.identifierId + "</div>",
+                    recluso.name,
+                    recluso.contact,
+                    recluso.prison.name,
+                    recluso.threatLevel,
+                    recluso.cell])
 
-    }
+                }
 
-    $(document).ready(function () {
-        $('#dataTable').DataTable({
-            data: conteudo
-        });
-    });
+                $(document).ready(function () {
+                    $('#dataTable').DataTable({
+                        data: conteudo
+                    });
+                });
 
-}
+            }
 
 
 
@@ -66,7 +69,7 @@ function display(func){
     $("#tabelaRecluso").on('click', 'tr', function () {
         var cRow = $(this).index();
         var clicked = document.getElementById("tabelaRecluso").rows[cRow].firstChild.firstChild.id;
-        if(typeof clicked !== 'undefined'){
+        if (typeof clicked !== 'undefined') {
             location.href = "recluso.html";
             localStorage.setItem("id_user_clicked", clicked);
         }

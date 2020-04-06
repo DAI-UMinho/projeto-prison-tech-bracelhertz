@@ -412,7 +412,7 @@
 
 
                         <form>
-                          <input class="ml-3 mt-4" id="foto" type="file" accept="image/*" onchange="loadFile(event)" multiple>
+                          <input class="ml-3 mt-4" id="foto" type="file" accept="image/*" onchange="loadFile(event)">
                           <div class="mt-4" id="preview"></div>
                         </form>
                       </div>
@@ -695,6 +695,7 @@
           image.title = file.name;
           image.src = this.result;
           preview.appendChild(image);
+          console.log("ola")
         });
 
         reader.readAsDataURL(file);

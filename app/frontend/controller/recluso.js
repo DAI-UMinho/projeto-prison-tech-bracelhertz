@@ -1,45 +1,68 @@
 $(window).on("load", function () {
+    let id_user_clicked = localStorage.getItem("id_user_clicked");
+    let RoleLogado = localStorage.getItem("RoleLogado");
 
     display_recluso();
     get_instituicoes();
 
+
     function display_recluso() {
         async function fetchAsync() {
-            let id_user_clicked = localStorage.getItem("id_user_clicked");
-            const response = await fetch('http://127.0.0.1:8080/api/prisoner/' + id_user_clicked, {
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                mode: 'cors',
-                method: 'GET',
-                credentials: 'include'
-            });
-            const recluso = await response.json();
-            console.log(recluso);
+
+
+
+
+            if (RoleLogado == "ROLE_GUARD") {
+                const response = await fetch('http://127.0.0.1:8080/api/prisoners/by-guards/' + id_user_clicked, {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    mode: 'cors',
+                    method: 'GET',
+                    credentials: 'include'
+                });
+                const recluso = await response.json();
+                console.log(recluso);
+                display(recluso);
+            } else {
+                const response = await fetch('http://127.0.0.1:8080/api/prisoners/' + id_user_clicked, {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    mode: 'cors',
+                    method: 'GET',
+                    credentials: 'include'
+                });
+                const recluso = await response.json();
+                console.log(recluso);
+                display(recluso);
+            }
 
             //criação da demonstração de resultados recebidos
+            function display(recluso) {
 
+                //envia a para a pagina
+                document.getElementById("fotoR").src = recluso.photo;
+                document.getElementById("id_recluso").innerHTML = recluso.identifierId;
+                document.getElementById("nome_recluso").innerHTML = recluso.name;
+                document.getElementById("dn_recluso").innerHTML = recluso.birthDate;
+                document.getElementById("nacionalidade_recluso").value = recluso.nationality;
+                document.getElementById("contacto_recluso").value = recluso.contact;
+                document.getElementById("contacto_recluso_alternativo").value = recluso.alternativeContact;
+                document.getElementById("n_cela").value = recluso.cell;
+                document.getElementById("n_ameaca").value = recluso.threatLevel;
+                document.getElementById("id_instituicao").value = recluso.prison.prisonId;
+                document.getElementById("id_pulseira").value = recluso.braceletId;
+                document.getElementById("max_pul").value = recluso.maxHB;
+                document.getElementById("min_pul").value = recluso.minHB;
 
-            //envia a para a pagina
-            document.getElementById("fotoR").src = recluso.photo;
-            document.getElementById("id_recluso").innerHTML = recluso.identifierId;
-            document.getElementById("nome_recluso").innerHTML = recluso.name;
-            document.getElementById("dn_recluso").innerHTML = recluso.birthDate;
-            document.getElementById("nacionalidade_recluso").value = recluso.nationality;
-            document.getElementById("contacto_recluso").value = recluso.contact;
-            document.getElementById("contacto_recluso_alternativo").value = recluso.alternativeContact;
-            document.getElementById("n_cela").value = recluso.cell;
-            document.getElementById("n_ameaca").value = recluso.threatLevel;
-            document.getElementById("id_instituicao").value = recluso.prison.prisonId;
-            document.getElementById("id_pulseira").value = recluso.braceletId;
-            document.getElementById("max_pul").value = recluso.maxHB;
-            document.getElementById("min_pul").value = recluso.minHB;
-
-            if (recluso.alertOff) {
-                document.getElementById("notiR").checked = false;
-            } else {
-                document.getElementById("notiR").checked = true;
+                if (recluso.alertOff) {
+                    document.getElementById("notiR").checked = false;
+                } else {
+                    document.getElementById("notiR").checked = true;
+                }
             }
+
 
         }
         //chama a função fetchAsync()
@@ -64,8 +87,6 @@ $(window).on("load", function () {
             });
             const instituicoes = await response.json();
             var show_inst = "";
-
-
 
             for (var inst of instituicoes) {
                 show_inst += "<option value='" + inst.prisonId + "'>" + inst.name + "</option>";
@@ -98,7 +119,7 @@ async function editar() {
 
 
     let id_user_clicked = localStorage.getItem("id_user_clicked");
-    const response = await fetch('http://127.0.0.1:8080/api/prisoner/' + id_user_clicked, {
+    const response = await fetch('http://127.0.0.1:8080/api/prisoners/' + id_user_clicked, {
         headers: {
             'Content-Type': 'application/json'
         },
@@ -163,7 +184,7 @@ async function editar() {
                 console.log(data);
 
 
-                fetch('http://127.0.0.1:8080/api/prisoner', {
+                fetch('http://127.0.0.1:8080/api/prisoners', {
                     headers: {
                         'Content-Type': 'application/json'
                     },
@@ -402,24 +423,23 @@ async function novaNota() {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //--------------------------------------------------------------------------------
-document.getElementById("perfil_alterar_2").addEventListener("click", Myfunction424);
+
+
+document.getElementById("perfil_alterar_2").addEventListener("click", function () {
+    let RoleLogado = localStorage.getItem("RoleLogado");
+    if (RoleLogado == "ROLE_GUARD") {
+      Myfunction4245();
+    } else {
+      Myfunction424();
+      if (RoleLogado == "ROLE_NETWORKMAN") {
+        document.getElementById("id_instituicao").disabled = false;
+        document.getElementById("icon_id_instituicao").style.display = "block";
+      }
+    }
+  });
+
+
 
 function myfunction420() {
     document.getElementById("edit_registocriminal").readOnly = false;
@@ -444,8 +464,6 @@ function myfunction423() {
 function Myfunction424() {
     document.getElementById("id_pulseira").readOnly = false;
     document.getElementById("icon_id_pulseira").style.display = "block";
-    document.getElementById("id_instituicao").disabled = false;
-    document.getElementById("icon_id_instituicao").style.display = "block";
     document.getElementById("nacionalidade_recluso").readOnly = false;
     document.getElementById("icon_nacionalidade_recluso").style.display = "block";
     document.getElementById("contacto_recluso").readOnly = false;
@@ -460,6 +478,24 @@ function Myfunction424() {
     document.getElementById("icon_max_pul").style.display = "block";
     document.getElementById("min_pul").readOnly = false;
     document.getElementById("icon_min_pul").style.display = "block";
+    document.getElementById("perfil_alterar_2").style.display = "none";
+    document.getElementById("perfil_save_2").style.display = "block";
+}
+
+
+function Myfunction4245() {
+    document.getElementById("id_pulseira").readOnly = false;
+    document.getElementById("icon_id_pulseira").style.display = "block";
+
+    document.getElementById("n_cela").readOnly = false;
+    document.getElementById("icon_n_cela").style.display = "block";
+
+    document.getElementById("max_pul").readOnly = false;
+    document.getElementById("icon_max_pul").style.display = "block";
+
+    document.getElementById("min_pul").readOnly = false;
+    document.getElementById("icon_min_pul").style.display = "block";
+
     document.getElementById("perfil_alterar_2").style.display = "none";
     document.getElementById("perfil_save_2").style.display = "block";
 }

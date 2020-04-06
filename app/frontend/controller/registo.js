@@ -387,15 +387,31 @@ locinf.onkeyup = function () {
   }
 }
 
-existeUser.onblur = function () {
-  var ver = document.getElementById("username").value.trim();
-  if (UsernameTaken(ver)) {
-    document.getElementById("existeUser").style.display = "none";
-  } else {
+existeUser.onblur = async function UsernameTaken() {
+
+  var verificar = document.getElementById("username").value.trim();
+
+  const response = await fetch('http://127.0.0.1:8080/api/users/username-exists/' + verificar, {
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    mode: 'cors',
+    method: 'GET',
+    credentials: 'include'
+  });
+  const existe = await response.json();
+
+
+  if (existe) {
     document.getElementById("existeUser").style.display = "block";
+  } else {
+    document.getElementById("existeUser").style.display = "none";
   }
 
+
 }
+
+
 
 
 //--------------------------------------Acept image---------------------------------------------------
@@ -462,16 +478,3 @@ async function post_photo(photoC, idGajo) {
 
 }
 
-
-async function UsernameTaken(verificar) {
-  const response = await fetch('http://127.0.0.1:8080/api/users/username-exists/' + verificar, {
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    mode: 'cors',
-    method: 'GET',
-    credentials: 'include'
-  });
-  const existe = await response.json();
-  return existe;
-}

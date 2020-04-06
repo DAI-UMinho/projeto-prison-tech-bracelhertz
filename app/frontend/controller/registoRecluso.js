@@ -77,18 +77,13 @@ window.onload = async function () {
           }).then(async function (result) {
             console.log(result);
             if (result) {
-              swal("Sucesso!",
-                "Registou um novo Recluso com sucesso!",
-                "success");
+
+              post_photo(formData, result.objectId);
+
             }
           }).catch(function (err) {
             swal("Erro!", "Erro!", "error");
           })
-
-
-
-
-
 
 
         } else {
@@ -239,7 +234,7 @@ function showSlides(n) {
 
 var continf = document.getElementById("contact");
 var contalinf = document.getElementById("contactAlt");
-
+var existeRec = document.getElementById("Identification");
 
 continf.onkeyup = function () {
   if (document.getElementById("contact").value.length == 9 || document.getElementById("contact").value.length == 0) {
@@ -257,27 +252,12 @@ contalinf.onkeyup = function () {
   }
 }
 
-existeRec.onblur = function () {
-  var ver = document.getElementById("Identification").value.trim();
-  if (RecTaken(ver)) {
-    document.getElementById("existeRec").style.display = "none";
-  } else {
-    document.getElementById("existeRec").style.display = "block";
-  }
+existeRec.onblur = async function RecTaken() {
 
-}
+  var verificar = document.getElementById("Identification").value.trim();
 
+  const response = await fetch('http://127.0.0.1:8080/api/users/identifier-exists/' + verificar, {
 
-//--------------------------------------Acept image---------------------------------------------------
-var pic = "";
-var loadFile = function (event) {
-  pic = "";
-  pic = URL.createObjectURL(event.target.files[0]);
-};
-
-/*
-async function RecTaken(verificar) {
-  const response = await fetch('http://127.0.0.1:8080/api/users/username-exists/' + verificar, {
     headers: {
       'Content-Type': 'application/json'
     },
@@ -286,5 +266,77 @@ async function RecTaken(verificar) {
     credentials: 'include'
   });
   const existe = await response.json();
-  return existe;
-}*/
+  console.log(existe);
+
+  if (existe) {
+    document.getElementById("existeRec").style.display = "block";
+  } else {
+    document.getElementById("existeRec").style.display = "none";
+  }
+
+}
+
+
+
+//--------------------------------------Acept image---------------------------------------------------
+var pic = "";
+var formData = "";
+var loadFile = function (event) {
+
+  formData = new FormData();
+  formData.append("file", event.target.files[0]);
+  pic = "a";
+
+};
+
+async function post_photo(photoC, idGajo) {
+
+
+  fetch('http://127.0.0.1:8080/api/prisoners/upload-photos/' + idGajo, {
+    mode: 'cors',
+    method: 'PUT',
+    body: photoC,
+    credentials: 'include'
+  })
+    .then(function (response) {
+      //console.log(response.headers.get('Set-Cookie'));
+      console.log(response);
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      return response.json();
+    })
+    .catch(function (err) {
+      //swal.showValidationError('Pedido falhado: ' + err);
+      console.log(err); // estava alert(err); coloquei console log para não estar sempre a aparecer pop-up ao utilizador
+    })
+    .then(async function (result) {
+      console.log(result);
+      if (result) {
+
+
+
+        Swal.fire(
+          'Recluso registado com sucesso!',
+          '',
+          'success'
+        ).then(() => {
+          location.reload();
+        })
+
+
+
+      }
+      else {
+        Swal.fire(
+          'Ocorreu um erro!',
+          '',
+          'error'
+        )
+        console.log(result);
+        //swal({ title: `${result.value.userMessage.message.pt}` });
+      }
+    });
+
+
+}
