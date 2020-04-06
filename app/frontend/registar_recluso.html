@@ -462,7 +462,9 @@
                     </div>
 
                     <div id="whereithappens3" class="card mySlides fade2 mb-5 pb-3" style="display: block;">
-                      <h4 class="text-secondary text-center mt-4"> <strong> Pulseira</strong></h4>
+                      <h4 class="text-secondary text-center mt-4"> <strong> Pulseira</strong><br>
+                        <span style="color: red; font-size: 15px;"> Campos não obrigatórios</span></h4>
+
                       <div class="container mt-4 ml-2">
                         <form>
 
@@ -472,25 +474,33 @@
                             <span data-placeholder="ID pulseira"></span>
                           </div>
 
+                          <div style="text-align: center; opacity: 0.3;" class="px-3" id="paraVer">
+                            <label>Pulsação minima:</label>
+                            <input type="range" min="40" max="119" value="79" id="mminHB" class="sliderPul" disabled="true">
+                            <table class="w-100">
+                              <tbody>
+                                <tr>
+                                  <th style="text-align: left; width: 150px;">min: 40</th>
+                                  <th style="text-align:center;" id="minValue"></th>
+                                  <th style="text-align: right; width: 150px;">max: 119</th>
+                                </tr>
+                              </tbody>
+                            </table>
+                            
 
-
-
-                          <div class="txtb txtb  ml-auto mr-auto" style="width: 90%;">
-                            <input type="name" class="snum form-control form-control-user" id="pulsacaomin"
-                              aria-describedby="emailHelp"
-                              onkeypress="return event.charCode >= 48 && event.charCode <= 57"
-                              data-rule="required|minlength-2" maxlength="3">
-                            <span data-placeholder="Pulsação mínima"></span>
+                            <label>Pulsação maxima:</label>
+                            <input type="range" min="40" max="120" value="80" id="mmaxHB" class="sliderPul" disabled="true">
+                            <table class="w-100">
+                              <tbody>
+                                <tr>
+                                  <th style="text-align: left; width: 150px;" id="newMin">min: 40</th>
+                                  <th style="text-align:center;" id="maxValue"></th>
+                                  <th style="text-align: right; width: 150px;">max: 120</th>
+                                </tr>
+                              </tbody>
+                            </table>
                           </div>
 
-
-                          <div class="txtb txtb  ml-auto mr-auto" style="width: 90%;">
-                            <input type="name" class="snum form-control form-control-user" id="pulsacaomax"
-                              aria-describedby="emailHelp"
-                              onkeypress="return event.charCode >= 48 && event.charCode <= 57"
-                              data-rule="required|minlength-2" maxlength="3">
-                            <span data-placeholder="Pulsação máxima"></span>
-                          </div>
 
                           <div>
                             <!---<h5 class="text-success text-center mt-3"><strong> Dados Recluso:</strong></h5>

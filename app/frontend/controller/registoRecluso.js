@@ -22,9 +22,8 @@ window.onload = async function () {
     data.prison = { prisonId: document.getElementById("instituicao").value };
     data.threatLevel = document.getElementById("nivel").value.trim();
     data.cell = document.getElementById("cela").value.trim();
-    data.braceletId = document.getElementById("idpulseira").value.trim();
-    data.minHB = document.getElementById("pulsacaomin").value.trim();
-    data.maxHB = document.getElementById("pulsacaomax").value.trim();
+
+
 
 
 
@@ -33,8 +32,7 @@ window.onload = async function () {
 
     if (Rname.value == "" || nacionalidade.value == "" || dataNascimento.value == "" ||
       Identification.value == "" || contact.value == "" || contactAlt.value == "" ||
-      cela.value == "" || idpulseira.value == "" || pulsacaomin.value == "" || pulsacaomax.value == "" ||
-      contact.value.length != 9 || contactAlt.value.length != 9) {
+      cela.value == "" || contact.value.length != 9 || contactAlt.value.length != 9) {
       Swal.fire(
         'Preencha todos os campos!',
         '',
@@ -48,53 +46,47 @@ window.onload = async function () {
           'warning'
         )
       } else {
-        if (parseInt(document.getElementById("pulsacaomax").value) > parseInt(document.getElementById("pulsacaomin").value)) {
+        if(idpulseira.value !== ""){
 
-
-
-
-          console.log(data);
-
-
-
-
-          await fetch('http://127.0.0.1:8080/api/prisoners', {
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            mode: 'cors',
-            method: 'POST',
-            credentials: 'include',
-            body: JSON.stringify(data)
-
-          }).then(function (response) {
-            if (!response.ok) {
-              alert(response);
-              throw new Error("ERRO");
-            }
-            console.log(response);
-            return response.json();
-          }).then(async function (result) {
-            console.log(result);
-            if (result) {
-
-              post_photo(formData, result.objectId);
-
-            }
-          }).catch(function (err) {
-            swal("Erro!", "Erro!", "error");
-          })
-
-
-        } else {
-          Swal.fire(
-            'Pulsação máxima tem de ser maior que a pulsação minima!',
-            '',
-            'warning'
-          )
+          data.braceletId = document.getElementById("idpulseira").value.trim();
+          data.minHB = document.getElementById("mminHB").value.trim();
+          data.maxHB = document.getElementById("mmaxHB").value.trim();
+         
+        }else{
+          data.braceletId = "";
+          data.minHB = "";
+          data.maxHB = "";
         }
 
 
+        console.log(data);
+
+        await fetch('http://127.0.0.1:8080/api/prisoners', {
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          mode: 'cors',
+          method: 'POST',
+          credentials: 'include',
+          body: JSON.stringify(data)
+
+        }).then(function (response) {
+          if (!response.ok) {
+            alert(response);
+            throw new Error("ERRO");
+          }
+          console.log(response);
+          return response.json();
+        }).then(async function (result) {
+          console.log(result);
+          if (result) {
+
+            post_photo(formData, result.objectId);
+
+          }
+        }).catch(function (err) {
+          swal("Erro!", "Erro!", "error");
+        })
 
 
       }
@@ -339,4 +331,33 @@ async function post_photo(photoC, idGajo) {
     });
 
 
+}
+
+//------------------------------------------------------------------------------------------------------
+document.getElementById("mminHB").addEventListener("input", function () {
+  document.getElementById("minValue").innerHTML = document.getElementById("mminHB").value;
+  var valor = parseInt(document.getElementById("mminHB").value);
+  valor += 1;
+  document.getElementById("mmaxHB").min = valor;
+  document.getElementById("maxValue").innerHTML = document.getElementById("mmaxHB").value
+
+  document.getElementById("newMin").innerHTML = "min: " + valor;
+})
+
+document.getElementById("mmaxHB").addEventListener("input", function () {
+  document.getElementById("maxValue").innerHTML = document.getElementById("mmaxHB").value;
+})
+
+var inPul = document.getElementById("idpulseira");
+
+inPul.onkeyup = function () {
+  if (inPul.value.length !== 0) {
+    document.getElementById("paraVer").style.opacity = 1;
+    document.getElementById("mminHB").disabled = false;
+    document.getElementById("mmaxHB").disabled = false;
+  } else {
+    document.getElementById("paraVer").style.opacity = 0.3;
+    document.getElementById("mminHB").disabled = true;
+    document.getElementById("mmaxHB").disabled = true;
+  }
 }

@@ -52,9 +52,9 @@ $(window).on("load", function () {
                 document.getElementById("n_cela").value = recluso.cell;
                 document.getElementById("n_ameaca").value = recluso.threatLevel;
                 document.getElementById("id_instituicao").value = recluso.prison.prisonId;
-                document.getElementById("id_pulseira").value = recluso.braceletId;
-                document.getElementById("max_pul").value = recluso.maxHB;
-                document.getElementById("min_pul").value = recluso.minHB;
+                //document.getElementById("id_pulseira").value = recluso.braceletId;
+                //document.getElementById("max_pul").value = recluso.maxHB;
+                //document.getElementById("min_pul").value = recluso.minHB;
 
                 if (recluso.alertOff) {
                     document.getElementById("notiR").checked = false;
@@ -474,10 +474,10 @@ function Myfunction424() {
     document.getElementById("icon_n_cela").style.display = "block";
     document.getElementById("n_ameaca").disabled = false;
     document.getElementById("icon_n_ameaca").style.display = "block";
-    document.getElementById("max_pul").readOnly = false;
-    document.getElementById("icon_max_pul").style.display = "block";
-    document.getElementById("min_pul").readOnly = false;
-    document.getElementById("icon_min_pul").style.display = "block";
+    //document.getElementById("max_pul").readOnly = false;
+    //document.getElementById("icon_max_pul").style.display = "block";
+    //document.getElementById("min_pul").readOnly = false;
+    //document.getElementById("icon_min_pul").style.display = "block";
     document.getElementById("perfil_alterar_2").style.display = "none";
     document.getElementById("perfil_save_2").style.display = "block";
 }
@@ -490,11 +490,11 @@ function Myfunction4245() {
     document.getElementById("n_cela").readOnly = false;
     document.getElementById("icon_n_cela").style.display = "block";
 
-    document.getElementById("max_pul").readOnly = false;
-    document.getElementById("icon_max_pul").style.display = "block";
+    //document.getElementById("max_pul").readOnly = false;
+    //document.getElementById("icon_max_pul").style.display = "block";
 
-    document.getElementById("min_pul").readOnly = false;
-    document.getElementById("icon_min_pul").style.display = "block";
+    //document.getElementById("min_pul").readOnly = false;
+    //document.getElementById("icon_min_pul").style.display = "block";
 
     document.getElementById("perfil_alterar_2").style.display = "none";
     document.getElementById("perfil_save_2").style.display = "block";

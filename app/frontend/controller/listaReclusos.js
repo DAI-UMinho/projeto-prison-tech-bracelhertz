@@ -1,12 +1,12 @@
 $(window).on("load", function () {
-
+    let RoleLogado = localStorage.getItem("RoleLogado");
     display_reclusos();
 
 
 
     function display_reclusos() {
         async function fetchAsync() {
-            let RoleLogado = localStorage.getItem("RoleLogado");
+            
             var conteudo = [];
 
             if (RoleLogado == "ROLE_GUARD") {

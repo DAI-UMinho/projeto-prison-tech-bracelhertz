@@ -759,6 +759,9 @@
           image.hspace = 17;
           image.title = file.name;
           image.src = this.result;
+          if(preview.firstChild !== null){
+            preview.removeChild(preview.childNodes[0])
+          }
           preview.appendChild(image);
         });
 
