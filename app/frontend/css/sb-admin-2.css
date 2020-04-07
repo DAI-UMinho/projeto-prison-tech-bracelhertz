@@ -11828,7 +11828,7 @@ input:checked + .slider:before {
   width: 250px;
   height: 140px;
   position: relative;
-  margin: 20px auto;
+
 }
 
 .fade-in {
@@ -11844,7 +11844,7 @@ input:checked + .slider:before {
 .fade-out {
   position: absolute;
   width: 140%;
-  height: 140%;
+  height: 120%;
   top: 0;
   left: -120%;
   animation: heartRateOut 2.5s linear infinite;

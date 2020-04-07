@@ -21,12 +21,12 @@
   <!-- Custom styles for this template-->
   <link href="css/sb-admin-2.css" rel="stylesheet">
   <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-<style>
-  select {
-    -webkit-appearance: none;
+  <style>
+    select {
+      -webkit-appearance: none;
 
-}
-</style>
+    }
+  </style>
 </head>
 
 <body id="page-top">
@@ -223,11 +223,9 @@
                   <div class="m-0 font-weight-bold text-white full_tab">
                     <div class="tab_nome">Perfil</div>
                     <div class="d-flex" type="button tab_time">
-                      <button class="bg-transparent" id="perfil_save_2" 
-                        style="border: none; display:none"><i
+                      <button class="bg-transparent" id="perfil_save_2" style="border: none; display:none"><i
                           class="fas fa-file-export font-weight-bold text-white"></i></button>
-                      <button  id="perfil_alterar_2"
-                        style="background-color:transparent; border: none;"><i
+                      <button id="perfil_alterar_2" style="background-color:transparent; border: none;"><i
                           class="fas fa-user-edit font-weight-bold text-white"></i></button>
                     </div>
                   </div>
@@ -252,8 +250,11 @@
 
                       <div class="form-control" style="height: 50px">
                         <h5 class="card-title form-control420"><strong>Nome</strong></h5>
-                        <div id="nome_recluso" class="h6 ml-2 text-primary font-weight-600"><em>Carla Andrade</em>
-                        </div>
+                        <input type="text" class="space1 h6 ml-2 text-primary font-weight-600"
+                        id="nome_recluso" value="outro pais"
+                        style="border: none; background-color: transparent;" readonly="true">
+                      <i id="icon_nome_recluso" class="fas fa-pen text-primary bg-transparent pr-3"
+                        style="float:right; display: none"></i>
                       </div>
 
                       <br>
@@ -262,11 +263,12 @@
                         <h4 class="card-title form-control420" style="width: 185px; margin-bottom: 5px;"><strong>Nível
                             de Ameaça</strong></h4>
 
-                          <select id="n_ameaca" class="h6 ml-2 text-primary font-weight-600" style="border: none; width: 92%;" disabled="true">
-                            <option value="1">nível 1</option>
-                            <option value="2">nível 2</option>
-                            <option value="3">nível 3</option>
-                          </select>
+                        <select id="n_ameaca" class="h6 ml-2 text-primary font-weight-600"
+                          style="border: none; width: 92%;" disabled="true">
+                          <option value="1">nível 1</option>
+                          <option value="2">nível 2</option>
+                          <option value="3">nível 3</option>
+                        </select>
                         <i id="icon_n_ameaca" class="fas fa-pen text-primary bg-transparent pr-3"
                           style="float:right; display: none"></i>
                       </div>
@@ -289,8 +291,8 @@
                       <div class="form-control" style="height: 50px">
                         <h4 class="card-title form-control420" style="width: 135px; margin-bottom: 5px;"><strong>ID
                             Pulseira</strong></h4>
-                        <input type="text" class="nspace h6 ml-2 text-primary font-weight-600" id="id_pulseira" value="12345"
-                          style="border: none; background-color: transparent;" readonly="true">
+                        <input type="text" class="nspace h6 ml-2 text-primary font-weight-600" id="id_pulseira"
+                          value="12345" style="border: none; background-color: transparent;" readonly="true">
                         <i id="icon_id_pulseira" class="fas fa-pen text-primary bg-transparent pr-3"
                           style="float:right; display: none"></i>
                       </div>
@@ -320,51 +322,55 @@
                       <hr>
 
                       <!--Heart Rate-->
-                      <div class="heart-rate">
-                        <svg version="1.0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                          x="0px" y="0px" width="250px" height="140px" viewBox="0 0 150 73"
-                          enable-background="new 0 0 150 73" xml:space="preserve">
-                          <polyline fill="none" stroke="#ff8800" stroke-width="3" stroke-miterlimit="10"
-                            points="0,45.486 38.514,45.486 44.595,33.324 50.676,45.486 57.771,45.486 62.838,55.622 71.959,9 80.067,63.729 84.122,45.486 97.297,45.486 103.379,40.419 110.473,45.486 150,45.486" />
-                        </svg>
-                        <div class="fade-in"></div>
-                        <div class="fade-out"></div>
-                      </div>
+                      <table class="w-100">
+                        <tbody>
+                          <tr>
+                            <th>
+                              <div class="heart-rate">
+                                <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+                                  xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="250px"
+                                  height="140px" viewBox="0 0 150 73" enable-background="new 0 0 150 73"
+                                  xml:space="preserve">
+                                  <polyline fill="none" stroke="#ff8800" stroke-width="3" stroke-miterlimit="10"
+                                    points="0,45.486 38.514,45.486 44.595,33.324 50.676,45.486 57.771,45.486 62.838,55.622 71.959,9 80.067,63.729 84.122,45.486 97.297,45.486 103.379,40.419 110.473,45.486 150,45.486" />
+                                </svg>
+                                <div class="fade-in"></div>
+                                <div class="fade-out"></div>
+                              </div>
+                            </th>
+                            <th style="text-align:center;">
+                              <div style="font-size: 2rem;">136<span class="span123" style="color: red;">&#9829;</span>
+                              </div>
+                            </th>
+                          </tr>
+                        </tbody>
+                      </table>
 
                       <br>
                       <div class="w-100 text-primary">
-                        <div class="row" >
-                          <div class="col-4">
-                            <div style="font-size: 3rem; text-align: center;">136<span class="span123"
-                                style="color: red;">&#9829;</span></div>
-                          </div>
-                          <div class="col-8 mt-2 w-100" style="display: inline;">
 
 
-                            <table>
-                              <tr>
-                                <th class="text-secondary" style="text-align: right;">Pulsação Máxima:</th>
-                                <th><input type="text" value="12" id="max_pul" style="border: none; width: 50%; text-align: left;" readonly="true"
-                                    onkeypress="return event.charCode >= 48 && event.charCode <= 57"
-                                    data-rule="required|minlength-2" maxlength="3">
-                                </th>
-                                <th><i id="icon_max_pul" class="fas fa-pen text-primary bg-transparent pr-3"
-                                    style="display: none;"></i></th>
-                              </tr>
-                              <tr>
-                                <th class="text-secondary" style="text-align: right;">Pulsação Mínima:</th>
-                                <td><input type="text" value="12" id="min_pul" style="border: none; width: 50%; text-align: left;" readonly="true"
-                                    onkeypress="return event.charCode >= 48 && event.charCode <= 57"
-                                    data-rule="required|minlength-2" maxlength="3">
-                                </td>
-                                <td><i id="icon_min_pul" class="fas fa-pen text-primary bg-transparent pr-3"
-                                    style="display: none;"></i></td>
-                              </tr>
-                            </table>
 
 
-                          </div>
-                        </div>
+
+                        <table class="w-100" style="margin-top: 20px; margin-bottom: 20px;">
+                          <tr>
+                            <th class="text-secondary" style="text-align: center;">Pulsação Máxima: <span
+                                class="text-black" id="minValue">50</span></th>
+                            <th id="showMin" style="opacity: 0.3;"><input type="range" min="40" max="119" value="79"
+                                id="mminHB" class="sliderPul" disabled="true"></th>
+                          </tr>
+                          <tr>
+                            <th class="text-secondary" style="text-align: center;">Pulsação Mínima: <span
+                                class="text-black" id="maxValue">120</span></th>
+                            <th id="showMax" style="opacity: 0.3;"><input type="range" min="40" max="120" value="80"
+                                id="mmaxHB" class="sliderPul" disabled="true"></th>
+                          </tr>
+                        </table>
+
+
+
+
                       </div>
                       <br>
                       <br>
@@ -373,7 +379,11 @@
                       <div class="form-control" style="height: 50px">
                         <h5 class="card-title form-control420" style="width: 180px"><strong>Data de
                             Nascimento</strong></h5>
-                        <div id="dn_recluso" class="h6 ml-2 text-primary font-weight-600"><em>02-09-1996</em></div>
+                            <input type="date" class="nspace1 h6 ml-2 text-primary font-weight-600"
+                            id="dn_recluso" value=""
+                            style="border: none; background-color: transparent;" readonly="true">
+                          <i id="icon_dn_recluso" class="fas fa-pen text-primary bg-transparent pr-3"
+                            style="float:right; display: none"></i>
                       </div>
 
 
@@ -383,8 +393,9 @@
                       <div class="form-control" style="height: 50px">
                         <h5 class="card-title form-control420" style="width: 135px;"><strong>Nacionalidade</strong>
                         </h5>
-                        <input type="text" class="nspace1 h6 ml-2 text-primary font-weight-600" id="nacionalidade_recluso"
-                          value="outro pais" style="border: none; background-color: transparent;" readonly="true">
+                        <input type="text" class="nspace1 h6 ml-2 text-primary font-weight-600"
+                          id="nacionalidade_recluso" value="outro pais"
+                          style="border: none; background-color: transparent;" readonly="true">
                         <i id="icon_nacionalidade_recluso" class="fas fa-pen text-primary bg-transparent pr-3"
                           style="float:right; display: none"></i>
                       </div>
@@ -423,11 +434,12 @@
                         <h4 class="card-title form-control420" style="width: 125px; margin-bottom: 5px;">
                           <strong>Instituição</strong>
                         </h4>
-                          <select id="id_instituicao" class=" h6 ml-2 text-primary font-weight-600" style="border: none; width: 92%;" disabled="true">
-                            <option value="1">nível 1</option>
-                            <option value="2">nível 2</option>
-                            <option value="3">nível 3</option>
-                          </select>
+                        <select id="id_instituicao" class=" h6 ml-2 text-primary font-weight-600"
+                          style="border: none; width: 92%;" disabled="true">
+                          <option value="1">nível 1</option>
+                          <option value="2">nível 2</option>
+                          <option value="3">nível 3</option>
+                        </select>
                         <i id="icon_id_instituicao" class="fas fa-pen text-primary bg-transparent pr-3"
                           style="float:right; display: none"></i>
                       </div>

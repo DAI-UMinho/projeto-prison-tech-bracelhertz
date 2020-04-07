@@ -22,6 +22,7 @@ window.onload = async function () {
     data.prison = { prisonId: document.getElementById("instituicao").value };
     data.threatLevel = document.getElementById("nivel").value.trim();
     data.cell = document.getElementById("cela").value.trim();
+    
 
 
 
@@ -50,14 +51,11 @@ window.onload = async function () {
 
           data.braceletId = document.getElementById("idpulseira").value.trim();
           data.minHB = document.getElementById("mminHB").value.trim();
-          data.maxHB = document.getElementById("mmaxHB").value.trim();
-         
+          data.maxHB = document.getElementById("mmaxHB").value.trim();        
         }else{
-          data.braceletId = "";
-          data.minHB = "";
-          data.maxHB = "";
+          data.minHB = 40;
+          data.maxHB = 120;  
         }
-
 
         console.log(data);
 
@@ -133,7 +131,7 @@ window.onload = async function () {
       const instituicoes = await response.json();
       var show_inst = "";
 
-      if (RoleLogado == "ROLE_GUARD") {
+      if (RoleLogado == "ROLE_MANAGER") {
         show_inst += "<option value='" + logado.prison.prisonId + "'>" + logado.prison.name + "</option>";
       } else {
         for (var inst of instituicoes) {
