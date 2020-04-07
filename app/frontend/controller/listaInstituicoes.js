@@ -1,6 +1,12 @@
 $(window).on("load", function () {
-
+    let RoleLogado = localStorage.getItem("RoleLogado");
     display_instituicoes();
+
+
+
+    if(RoleLogado == "ROLE_NETWORKMAN"){
+        document.getElementById("esconder").style.display="inline";
+    }
 
     function display_instituicoes() {
         async function fetchAsync() {
