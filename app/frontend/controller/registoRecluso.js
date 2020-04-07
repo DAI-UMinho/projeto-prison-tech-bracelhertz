@@ -22,7 +22,7 @@ window.onload = async function () {
     data.prison = { prisonId: document.getElementById("instituicao").value };
     data.threatLevel = document.getElementById("nivel").value.trim();
     data.cell = document.getElementById("cela").value.trim();
-    
+
 
 
 
@@ -40,62 +40,87 @@ window.onload = async function () {
         'warning'
       )
     } else {
-      if (pic == "") {
+
+
+      var verificar = document.getElementById("Identification").value.trim();
+
+      const response = await fetch('http://127.0.0.1:8080/api/users/identifier-exists/' + verificar, {
+
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        mode: 'cors',
+        method: 'GET',
+        credentials: 'include'
+      });
+      const existe = await response.json();
+      console.log(existe);
+
+      if (existe) {
         Swal.fire(
-          'É obrigatória uma fotografia!',
+          'Este identificador já existe!',
           '',
           'warning'
         )
       } else {
-        if(idpulseira.value !== ""){
 
-          data.braceletId = document.getElementById("idpulseira").value.trim();
-          data.minHB = document.getElementById("mminHB").value.trim();
-          data.maxHB = document.getElementById("mmaxHB").value.trim();        
-        }else{
-          data.minHB = 40;
-          data.maxHB = 120;  
+
+        if (pic == "") {
+          Swal.fire(
+            'É obrigatória uma fotografia!',
+            '',
+            'warning'
+          )
+        } else {
+          if (idpulseira.value !== "") {
+
+            data.braceletId = document.getElementById("idpulseira").value.trim();
+            data.minHB = document.getElementById("mminHB").value.trim();
+            data.maxHB = document.getElementById("mmaxHB").value.trim();
+          } else {
+            data.minHB = 40;
+            data.maxHB = 120;
+          }
+
+          console.log(data);
+
+          await fetch('http://127.0.0.1:8080/api/prisoners', {
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            mode: 'cors',
+            method: 'POST',
+            credentials: 'include',
+            body: JSON.stringify(data)
+
+          }).then(function (response) {
+            if (!response.ok) {
+              alert(response);
+              throw new Error("ERRO");
+            }
+            console.log(response);
+            return response.json();
+          }).then(async function (result) {
+            console.log(result);
+            if (result) {
+
+              post_photo(formData, result.objectId);
+
+            }
+          }).catch(function (err) {
+            swal("Erro!", "Erro!", "error");
+          })
+
+
         }
-
-        console.log(data);
-
-        await fetch('http://127.0.0.1:8080/api/prisoners', {
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          mode: 'cors',
-          method: 'POST',
-          credentials: 'include',
-          body: JSON.stringify(data)
-
-        }).then(function (response) {
-          if (!response.ok) {
-            alert(response);
-            throw new Error("ERRO");
-          }
-          console.log(response);
-          return response.json();
-        }).then(async function (result) {
-          console.log(result);
-          if (result) {
-
-            post_photo(formData, result.objectId);
-
-          }
-        }).catch(function (err) {
-          swal("Erro!", "Erro!", "error");
-        })
 
 
       }
 
 
+
+
     }
-
-
-
-
-
 
 
   }

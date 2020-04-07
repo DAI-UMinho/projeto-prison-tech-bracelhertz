@@ -38,8 +38,30 @@ window.onload = async function () {
         'warning'
       )
     } else {
+      
+      var verificar = document.getElementById("username").value.trim();
 
-      if (pic == "") {
+      const response = await fetch('http://127.0.0.1:8080/api/users/username-exists/' + verificar, {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        mode: 'cors',
+        method: 'GET',
+        credentials: 'include'
+      });
+      const existe = await response.json();
+    
+    
+      if (existe) {
+        Swal.fire(
+          'Este username já existe!',
+          '',
+          'warning'
+        )
+      } else {
+        
+
+if (pic == "") {
         Swal.fire(
           'É obrigatória uma fotografia!',
           '',
@@ -113,9 +135,11 @@ window.onload = async function () {
         }
       }
 
+
+      }
+      
+
     }
-
-
 
 
 

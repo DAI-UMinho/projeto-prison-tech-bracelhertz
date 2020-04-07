@@ -12,8 +12,6 @@ $(window).on("load", function () {
         async function fetchAsync() {
 
 
-
-
             if (RoleLogado == "ROLE_GUARD") {
                 const response = await fetch('http://127.0.0.1:8080/api/prisoners/by-guards/' + id_user_clicked, {
                     headers: {
@@ -41,7 +39,25 @@ $(window).on("load", function () {
             }
 
             //criação da demonstração de resultados recebidos
-            function display(recluso) {
+            async function display(recluso) {
+
+                const response = await fetch('http://127.0.0.1:8080/api/users/logged-profiles', {
+                    headers: {
+                      'Content-Type': 'application/json'
+                    },
+                    mode: 'cors',
+                    method: 'GET',
+                    credentials: 'include'
+                  });
+                  const logado = await response.json();
+                  console.log(logado);
+
+
+                if(RoleLogado == "ROLE_MANAGER"){
+                    if(recluso.prison.prisonId !== logado.prison.prisonId){
+                        document.getElementById("perfil_alterar_2").style.display="none";
+                    }
+                }
 
                 //envia a para a pagina
                 document.getElementById("fotoR").src = recluso.photo;
@@ -67,8 +83,8 @@ $(window).on("load", function () {
                 }
 
                 if (recluso.braceletId == null || recluso.braceletId == "") {
-                    
-                }else{
+
+                } else {
                     temPulseira = true;
                     console.log(recluso.braceletId)
                 }
@@ -173,14 +189,14 @@ async function editar() {
         data.minHB = document.getElementById("mminHB").value;
         data.maxHB = document.getElementById("mmaxHB").value;
 
-        /*
-                if (document.getElementById("notiR").checked) {
-                    data.alertOff = false;
-                } else {
-                    data.alertOff = true;
-                }
-        
-        */
+
+        if (document.getElementById("notiR").checked) {
+            data.alertOff = false;
+        } else {
+            data.alertOff = true;
+        }
+
+
 
 
         if (document.getElementById("contacto_recluso").value == "" || document.getElementById("n_cela").value == "" ||
@@ -201,7 +217,6 @@ async function editar() {
                 )
             } else {
                 if (document.getElementById("id_pulseira").value == "") {
-                    data.braceletId = null
                     data.minHB = 40;
                     data.maxHB = 120;
                 }
@@ -673,5 +688,81 @@ document.getElementById("mmaxHB").addEventListener("input", function () {
 })
 
 
-//-----------------------------------------------------------------------------
+//------------------------------------------UPLOAD PHOTO------------------------------------------------------
+let id_user_clicked = localStorage.getItem("id_user_clicked");
+
+var loadFile = function (event) {
+    var image = document.getElementById('fotoR');
+    image.src = URL.createObjectURL(event.target.files[0]);
+  
+    const formData = new FormData();
+    formData.append("file", event.target.files[0]);
+  
+    editar_photo(formData);
+  
+  
+  };
+  
+  async function editar_photo(photoC) {
+  
+  
+    fetch('http://127.0.0.1:8080/api/prisoners/upload-photos/' + id_user_clicked, {
+      mode: 'cors',
+      method: 'PUT',
+      body: photoC,
+      credentials: 'include'
+    })
+      .then(function (response) {
+        //console.log(response.headers.get('Set-Cookie'));
+        console.log(response);
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+        return response.json();
+      })
+      .catch(function (err) {
+        //swal.showValidationError('Pedido falhado: ' + err);
+        console.log(err); // estava alert(err); coloquei console log para não estar sempre a aparecer pop-up ao utilizador
+      })
+      .then(async function (result) {
+        console.log(result);
+        if (result) {
+  
+  
+  
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 1000,
+            timerProgressBar: true,
+            onOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+          })
+  
+          Toast.fire({
+            icon: 'success',
+            title: 'Dados alterados com sucesso'
+          }).then(() => {
+            location.reload();
+          })
+  
+  
+  
+        }
+        else {
+          Swal.fire(
+            'Ocorreu um erro!',
+            '',
+            'error'
+          )
+          console.log(result);
+          //swal({ title: `${result.value.userMessage.message.pt}` });
+        }
+      });
+  
+  
+  }
 

@@ -236,9 +236,13 @@
                     <div class="col-5 mr-4" style="z-index: 100;">
                       <div class="imagem ">
                         <img id="fotoR" class="imagemlogo w-100" src="img/rec2.jpg">
+                        <p><input type="file" accept="image/*" name="image" id="file" onchange="loadFile(event)"
+                          style="display: none; text-align: right;"></p>
+                      <p style="text-align: right;"><label for="file" id="foto420" class="mb-0 text-uppercase text-secondary"
+                        style="cursor: pointer; text-align: right;">Editar</label></p>
                       </div>
 
-                      <br>
+        
 
                       <div class="form-control mt-4" style="height: 50px">
                         <h5 class="card-title form-control420" style="width: 110px;"><strong>ID Recluso</strong></h5>
@@ -376,7 +380,7 @@
                       <br>
                       <br>
 
-                      <div class="form-control" style="height: 50px">
+                      <div class="form-control" style="height: 50px; margin-top: 18px;">
                         <h5 class="card-title form-control420" style="width: 180px"><strong>Data de
                             Nascimento</strong></h5>
                             <input type="date" class="nspace1 h6 ml-2 text-primary font-weight-600"
