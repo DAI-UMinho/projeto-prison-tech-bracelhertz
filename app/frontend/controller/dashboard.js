@@ -3,8 +3,8 @@ $(window).on("load", function () {
     startTime();
     display_logs();
     display_info();
-    render_Ultimas_Ocorrencias();
-    renderOcorrencias_recluso();
+    //render_Ultimas_Ocorrencias();
+    //renderOcorrencias_recluso();
 
     function display_logs() {
         async function fetchAsync() {
@@ -71,99 +71,35 @@ $(window).on("load", function () {
     function display_info() {
         async function fetchAsync() {
 
-            var nOcorrencias = document.getElementById("nOcorrencias");
-            var nFuncionarios = document.getElementById("nFuncionarios");
-            var nReclusos = document.getElementById("nReclusos");
-            var nomeUser = document.getElementById("nomeUser");
-            var avatarUser = document.getElementById("avatarUser");
-
-
-            var tOcorrencias = 50;
-            var tFuncionarios = 100;
-            var tReclusos = 1000;
-
-            // idUser = localStorage.getItem("id_user");
-
-            //const response = await fetch('https://dd10afea8a444651a7975b97cdbc8a11.vfs.cloud9.us-east-2.amazonaws.com/play-spaces/' + idEspaco);
-            //const user = await response.json();
-
-            var user = {
-                nome: "João Teixeira",
-                dataNascimento: "...",
-                avatar: "img/perfil2.jpg",
-                idTipo: 2
-            }
-
-
-            //criação da demonstração de resultados recebidos
-
-            if (user.tipo == 0) {
-                // document.getElementById("listafuncionarios.html").style.display = "none";
-                // document.getElementById("listagestores.html").style.display = "none";
-                document.getElementById("dashBoard").href = "#";
-            } else if (user.tipo == 1) {
-                // document.getElementById("listagestores.html").style.display = "none";
-            }
-
-            //envia a para a pagina
-            nOcorrencias.innerHTML = tOcorrencias;
-            nFuncionarios.innerHTML = tFuncionarios;
-            nReclusos.innerHTML = tReclusos;
-            nomeUser.innerHTML = user.nome;
-            avatarUser.src = user.avatar;
-
-
-        }
-        //chama a função fetchAsync()
-        fetchAsync().then(data => console.log("done")).catch(reason => console.log(reason.message));
-    }
-
-    //------------------------------------DISPLAY INFO-------------------------------------------------
-
-
-    function display_info() {
-        async function fetchAsync() {
+            const response = await fetch('http://127.0.0.1:8080/api/dashboard', {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                mode: 'cors',
+                method: 'GET',
+                credentials: 'include'
+            });
+            const info = await response.json();
+            console.log(info);
 
             var nOcorrencias = document.getElementById("nOcorrencias");
             var nFuncionarios = document.getElementById("nFuncionarios");
             var nReclusos = document.getElementById("nReclusos");
 
 
-            var tOcorrencias = 50;
-            var tFuncionarios = 100;
-            var tReclusos = 1000;
-
-            // idUser = localStorage.getItem("id_user");
-
-            //const response = await fetch('https://dd10afea8a444651a7975b97cdbc8a11.vfs.cloud9.us-east-2.amazonaws.com/play-spaces/' + idEspaco);
-            //const user = await response.json();
-
-            var user = {
-                username: "João Teixeira",
-                data_nascimento: "...",
-                avatar: "img/perfil2.jpg",
-                tipo: 2
-            }
 
 
-            //criação da demonstração de resultados recebidos
-
-            if (user.tipo == 0) {
-                document.getElementById("listafuncionarios.html").style.display = "none";
-                document.getElementById("dashBoard").href = "#";
-            }
 
             //envia a para a pagina
-            nOcorrencias.innerHTML = tOcorrencias;
-            nFuncionarios.innerHTML = tFuncionarios;
-            nReclusos.innerHTML = tReclusos;
+            nOcorrencias.innerHTML = info.totalAlerts;
+            nFuncionarios.innerHTML = info.totalUsers;
+            nReclusos.innerHTML = info.totalPrisoners;
 
 
         }
         //chama a função fetchAsync()
         fetchAsync().then(data => console.log("done")).catch(reason => console.log(reason.message));
     }
-    //-------------------------------------------------------------------------------------
 
 
     //-------------------------------------------------------------------------------------

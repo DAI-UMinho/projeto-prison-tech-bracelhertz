@@ -102,6 +102,7 @@ $(window).on("load", function () {
 
             if (RoleLogado == "ROLE_GUARD") {
                 document.getElementById("showInst").style.display = "none";
+                document.getElementById("dashBoard").href ="#";
             }
 
 

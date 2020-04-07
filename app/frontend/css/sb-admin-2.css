@@ -11670,7 +11670,8 @@ input:checked + .slider:before {
       width: 40px;
       height: 40px;
       line-height: 40px;
-      color: #959595; }
+      color: #959595; 
+    margin-left: -20px;}
     .calendar .calendar-days li.another-month:after {
       color: #ccc; }
     .calendar .calendar-days li:hover:after, .calendar .calendar-days li.selected-day:after, .calendar .calendar-days li.event-day:before, .calendar .calendar-days li.active-day:after {
@@ -11684,7 +11685,7 @@ input:checked + .slider:before {
       height: 5px;
       position: absolute;
       top: 7px;
-      right: -3px;
+      right: 10px;
       background: #1400c7; }
     .calendar .calendar-days li.active-day:after {
       color: white;

@@ -110,7 +110,11 @@ window.onload = async function () {
                                 "Autenticado com sucesso!",
                                 "success")
                                 .then(() => {
-                                    window.location.replace("./avisos.html");
+                                    if(result.role!=="ROLE_GUARD"){
+                                        window.location.replace("./dashboard.html");
+                                    }else{
+                                        window.location.replace("./avisos.html");
+                                    }
                                 })
                         } else {
                             //   pi-=1;
