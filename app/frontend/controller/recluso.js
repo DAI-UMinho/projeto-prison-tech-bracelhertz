@@ -56,6 +56,17 @@ $(window).on("load", function () {
                 if (RoleLogado == "ROLE_MANAGER") {
                     if (recluso.prison.prisonId !== logado.prison.prisonId) {
                         document.getElementById("perfil_alterar_2").style.display = "none";
+                        document.getElementById("editRegisto").style.display = "none";
+                        document.getElementById("editFicha").style.display = "none";
+                        document.getElementById("addRegisto").style.display = "none";
+                        document.getElementById("addFicha").style.display = "none";
+                    }
+                } else {
+                    if (RoleLogado !== "ROLE_NETWORKMAN") {
+                        document.getElementById("editRegisto").style.display = "none";
+                        document.getElementById("editFicha").style.display = "none";
+                        document.getElementById("addRegisto").style.display = "none";
+                        document.getElementById("addFicha").style.display = "none";
                     }
                 }
 
@@ -88,7 +99,9 @@ $(window).on("load", function () {
                     var atual = new Date();
                     for (var registo of recluso.criminalRecord) {
                         showRegisto += "<li><input class='testee' id='" + registo.criminalRecordId + "' type='checkbox' name='" + registo.criminalRecordId + "' disabled='true'>"
-                        showRegisto += "<div class='label'><label for='" + registo.criminalRecordId + "'>" + registo.description + "</label><br></div></li>";
+                        showRegisto += "<div class='label'><label for='" + registo.criminalRecordId + "'>";
+                        showRegisto += "<span data-tooltip='Emissão "+getDate3(registo.emissionDate)+"' data-tooltip-position='bottom'>" + registo.description + "</span></label><br></div></li>";
+                        showRegisto += "";
                         if (i == 0) {
                             mrecente = new Date(registo.lastUpdatedTimestamp);
                             c = atual.getTime() - mrecente.getTime();
@@ -102,7 +115,6 @@ $(window).on("load", function () {
 
                         i++;
                     }
-                    console.log(mrecente);
                     showtolipRegisto += "Registo Criminal<span data-tooltip='" + getDate2(mrecente) + "'";
                     showtolipRegisto += "data-tooltip-position='bottom' class='text-white font-small font-weight-normal solve'>(Editado)</span>";
                     document.getElementById("tabCH").innerHTML = showtolipRegisto;
@@ -111,7 +123,39 @@ $(window).on("load", function () {
                 document.getElementById("listCrimes").innerHTML = showRegisto;
 
 
+                var showFicha = "";
+                var showtolipFicha = ""
 
+                if (recluso.medicalPrescription.length == 0) {
+                    showFicha = "<li>Sem registo criminal</li>";
+                } else {
+                    var mrecente2 = "";
+                    var o = 0;
+                    var b, w;
+                    var atual = new Date();
+                    for (var registo of recluso.medicalPrescription) {
+                        showFicha += "<li><input class='testee' id='" + registo.medicalPrescriptionId + "' type='checkbox' name='" + registo.medicalPrescriptionId + "' disabled='true'>"
+                        showFicha += "<div class='label'><label for='" + registo.medicalPrescriptionId + "'>" + registo.description + "</label><br></div></li>";
+                        if (o == 0) {
+                            mrecente2 = new Date(registo.lastUpdatedTimestamp);
+                            w = atual.getTime() - mrecente2.getTime();
+                        } else {
+                            b = new Date(registo.lastUpdatedTimestamp);
+                            if ((atual.getTime() - b.getTime()) < w) {
+                                mrecente2 = new Date(registo.lastUpdatedTimestamp);
+                                w = mrecente2.getTime();
+                            }
+                        }
+
+                        o++;
+                    }
+
+                    showtolipFicha += "Cuidados a ter com o recluso<span data-tooltip='" + getDate2(mrecente2) + "'";
+                    showtolipFicha += "data-tooltip-position='bottom' class='text-white font-small font-weight-normal solve'>(Editado)</span>";
+                    document.getElementById("tabCH2").innerHTML = showtolipFicha;
+
+                }
+                document.getElementById("listMedica").innerHTML = showFicha;
 
 
                 if (recluso.alertOff) {
@@ -809,6 +853,19 @@ function getIds() {
     return ids
 }
 
+function getIds2() {
+    ids = [];
+    const selecList = document.getElementById("listMedica");
+    for (let elem of selecList.children) {
+        if (elem.firstChild.checked) {
+            ids.push(elem.firstChild.id);
+
+        }
+    }
+    console.log(ids)
+    return ids
+}
+
 //-------------------------------------------------DATA Formato------------------------------------------
 function getDate(date) {
     var today = new Date(date);
@@ -839,9 +896,15 @@ function getDate2(date) {
     mo = checkTime(mo + 1);
     return dias[dia] + " " + d + " " + mo + " " + a + " " + h + ":" + m + "h";
 }
-function checkTime(i) {
-    if (i < 10) { i = "0" + i };  // add zero in front of numbers < 10
-    return i;
+
+function getDate3(date) {
+    var today = new Date(date);
+    var d = today.getDate();
+    var mo = today.getMonth()
+    var a = today.getFullYear();
+    d = checkTime(d);
+    mo = checkTime(mo + 1);
+    return d + "/" + mo + "/" + a;
 }
 
 //---------------------------------------------REGISTO CRIMINAL----------------------------------------------
@@ -1041,6 +1104,200 @@ document.getElementById("postRegisto").addEventListener("click", async function 
 
 
         }
+
+    }
+
+})
+
+
+
+//---------------------------------------------Ficha Médica----------------------------------------------
+var clickteste2 = false;
+$('#editFicha').click(function () {
+
+
+    $('.testeee').each(function () {
+        if (!clickteste2) {
+            this.disabled = false;
+            trocaClasse2(document.getElementById("editFicha"), "fas", "fa-times");
+            trocaClasse(document.getElementById("tabCH2"), "tab_nome94");
+            document.getElementById("trashFicha").style.display = "inline";
+
+        } else {
+            this.checked = false;
+            this.disabled = true;
+            document.getElementById("trashFicha").style.display = "none";
+            trocaClasse(document.getElementById("tabCH2"), "tab_nome");
+            trocaClasse2(document.getElementById("editFicha"), "fas", "fa-pen");
+        }
+    });
+
+    //switch
+    if (clickteste2) {
+        clickteste2 = false;
+    } else {
+        clickteste2 = true;
+    }
+
+});
+
+document.getElementById("trashFicha").addEventListener("click", function () {
+    getIds2();
+
+    if (ids == "") {
+        Swal.fire(
+            'Seleciona pelo menos um registo!',
+            '',
+            'warning'
+        )
+    } else {
+        for (let id of ids) {
+            eliminarFicha(id);
+        }
+
+    }
+
+})
+
+
+//---------------------------------------------ELIMINAR REGISTO MEDICO------------------------
+async function eliminarFicha(id) {
+    fetch('http://127.0.0.1:8080/api/medical-prescriptions/' + id, {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        mode: 'cors',
+        method: 'DELETE',
+        body: JSON.stringify(id),
+        credentials: 'include'
+    })
+        .then(function (response) {
+            //console.log(response.headers.get('Set-Cookie'));
+            console.log(response);
+            if (!response.ok) {
+                throw new Error(response.statusText);
+            }
+            return response.json();
+        })
+        .catch(function (err) {
+            //swal.showValidationError('Pedido falhado: ' + err);
+            console.log(err); // estava alert(err); coloquei console log para não estar sempre a aparecer pop-up ao utilizador
+        })
+        .then(async function (result) {
+            console.log(result);
+            if (result) {
+
+
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 1000,
+                    timerProgressBar: true,
+                    onOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Alterada com sucesso'
+                }).then(() => {
+                    location.reload();
+                })
+
+
+
+            }
+
+            else {
+                Swal.fire(
+                    'Ocorreu um erro!',
+                    '',
+                    'error'
+                ).then(() => {
+                    location.reload();
+                })
+                console.log(result);
+                //swal({ title: `${result.value.userMessage.message.pt}` });
+            }
+        });
+}
+
+
+//-----------------------------------------------POST DE FICHA MEDICA------------------------------------------------
+
+document.getElementById("postFicha").addEventListener("click", async function () {
+
+    if (document.getElementById("novaFicha").value.trim() == "") {
+        Swal.fire(
+            'Insira algo novo a registar!',
+            '',
+            'warning'
+        )
+    } else {
+
+        var data = {}
+
+        data.prisoner = { prisonerId: id_user_clicked };
+        data.name = "Medical";
+        data.description = document.getElementById("novaFicha").value.trim();
+
+        console.log(data);
+
+
+
+
+        await fetch('http://127.0.0.1:8080/api/medical-prescriptions', {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            mode: 'cors',
+            method: 'POST',
+            credentials: 'include',
+            body: JSON.stringify(data)
+
+        }).then(function (response) {
+            if (!response.ok) {
+                alert(response);
+                throw new Error("ERRO");
+            }
+
+            return response.json();
+        }).then(async function (result) {
+
+            if (result) {
+
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 500,
+                    timerProgressBar: true,
+                    onOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Adicionado com sucesso'
+                })
+                    .then(() => {
+                        location.reload();
+                    })
+
+
+            }
+        }).catch(function (err) {
+            swal("Erro!", err, "error");
+        })
+
+
+
+
 
     }
 
