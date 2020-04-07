@@ -458,47 +458,49 @@
 
 
               <div class="row">
+ <!------------------------------------------------- Registo Criminal ---------------------------------------------->
+
                 <div class="col-6">
 
-                  <!------------------------------------------------- Registo Criminal ---------------------------------------------->
+                 
                   <div class="w-100">
                     <div class="card shadow mb-4">
                       <!-- Card Header - Dropdown -->
                       <div class="card-header py-3 bg-secondary">
                         <div class="m-0 font-weight-bold text-white full_tab">
-                          <div class="tab_nome">Registo Criminal</div>
-                          <div class="d-flex tab_time">
-                            <div class="row">
-                              <div class="col-6">
-                                <button class="bg-transparent mr-4" id="edit_button" onclick="myfunction421()"
-                                  style="border: none;margin-left: 71%;">
-                                  <i class="fas fa-file-export font-weight-bold text-white"></i>
-                                </button>
-                              </div>
-                              <div class="col-6">
-                                <button class="bg-transparent mr-4" id="edit_button" onclick="myfunction420()"
-                                  style="border: none;">
-                                  <i class="fas fa-pen font-weight-bold text-white"></i>
-                                </button>
-                              </div>
+                          <div id="tabCH" class="tab_nome">Registo Criminal
                             </div>
+                          <div class="tab_time">
+                            <i id="trashRegisto" type="button" class="fas fa-trash mr-2" style="display: none;"></i>
+                            <i id="editRegisto" type="button" class="fas fa-pen" style="display: inline;"></i>
                           </div>
                         </div>
                       </div>
                       <!-- Card Body -->
                       <div class="card-body">
-                        <textarea id="edit_registocriminal" rows="4" cols="105" class="w-100"
-                          style="border-style: none;min-height: 60px; resize: none;" readonly>
-Nesta secção encontra-se informação acerca do registo criminal do recluso
-</textarea>
+                        <ul id="listCrimes" style="padding-left: 20px;">
+                          <li><input class="testee" id="11" type="checkbox" name="11" disabled="true"><div class="label"><label for="11">Comprar ovos</label><br></div></li>
+                          <li><input class="testee" id="12" type="checkbox" name="12" disabled="true"><div class="label"><label for="12">Comprar ovos</label><br></div></li>
+                        </ul>
+                        <div class="w-100 row">
+                          <div class="col-3 mt-2">Data de emissão:</div>
+                          <input class="form-control col-4" type="date" id="dataEmissao">
+                        </div>
+                        <diV class="w-100 form-control full_tab">
+                          <input id="novoRegisto" type="text" placeholder="Escreva aqui" class="tab_nome" style="border: none;">
+                          <span id="postRegisto" class="fa fa-plus-circle cursor-pointer tab_time" style="text-align: right;"></span>
+                        </diV>
+                        
                       </div>
                     </div>
                   </div>
 
                 </div>
+
+                <!----------------------------------------- Receitas Médicas ---------------------------------------->
                 <div class="col-6">
 
-                  <!----------------------------------------- Receitas Médicas ---------------------------------------->
+                  
                   <div class="w-100">
                     <div class="card shadow mb-4">
                       <!-- Card Header - Dropdown -->

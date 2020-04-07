@@ -43,19 +43,19 @@ $(window).on("load", function () {
 
                 const response = await fetch('http://127.0.0.1:8080/api/users/logged-profiles', {
                     headers: {
-                      'Content-Type': 'application/json'
+                        'Content-Type': 'application/json'
                     },
                     mode: 'cors',
                     method: 'GET',
                     credentials: 'include'
-                  });
-                  const logado = await response.json();
-                  console.log(logado);
+                });
+                const logado = await response.json();
+                console.log(logado);
 
 
-                if(RoleLogado == "ROLE_MANAGER"){
-                    if(recluso.prison.prisonId !== logado.prison.prisonId){
-                        document.getElementById("perfil_alterar_2").style.display="none";
+                if (RoleLogado == "ROLE_MANAGER") {
+                    if (recluso.prison.prisonId !== logado.prison.prisonId) {
+                        document.getElementById("perfil_alterar_2").style.display = "none";
                     }
                 }
 
@@ -76,6 +76,44 @@ $(window).on("load", function () {
                 document.getElementById("maxValue").innerHTML = recluso.maxHB;
                 document.getElementById("minValue").innerHTML = recluso.minHB;
 
+                var showRegisto = "";
+                var showtolipRegisto = ""
+
+                if (recluso.criminalRecord.length == 0) {
+                    showRegisto = "<li>Sem registo criminal</li>";
+                } else {
+                    var mrecente = "";
+                    var i = 0;
+                    var a, c;
+                    var atual = new Date();
+                    for (var registo of recluso.criminalRecord) {
+                        showRegisto += "<li><input class='testee' id='" + registo.criminalRecordId + "' type='checkbox' name='" + registo.criminalRecordId + "' disabled='true'>"
+                        showRegisto += "<div class='label'><label for='" + registo.criminalRecordId + "'>" + registo.description + "</label><br></div></li>";
+                        if (i == 0) {
+                            mrecente = new Date(registo.lastUpdatedTimestamp);
+                            c = atual.getTime() - mrecente.getTime();
+                        } else {
+                            a = new Date(registo.lastUpdatedTimestamp);
+                            if ((atual.getTime() - a.getTime()) < c) {
+                                mrecente = new Date(registo.lastUpdatedTimestamp);
+                                c = mrecente.getTime();
+                            }
+                        }
+
+                        i++;
+                    }
+                    console.log(mrecente);
+                    showtolipRegisto += "Registo Criminal<span data-tooltip='" + getDate2(mrecente) + "'";
+                    showtolipRegisto += "data-tooltip-position='bottom' class='text-white font-small font-weight-normal solve'>(Editado)</span>";
+                    document.getElementById("tabCH").innerHTML = showtolipRegisto;
+
+                }
+                document.getElementById("listCrimes").innerHTML = showRegisto;
+
+
+
+
+
                 if (recluso.alertOff) {
                     document.getElementById("notiR").checked = false;
                 } else {
@@ -86,7 +124,6 @@ $(window).on("load", function () {
 
                 } else {
                     temPulseira = true;
-                    console.log(recluso.braceletId)
                 }
 
 
@@ -580,26 +617,6 @@ document.getElementById("perfil_alterar_2").addEventListener("click", function (
 
 
 
-function myfunction420() {
-    document.getElementById("edit_registocriminal").readOnly = false;
-    document.getElementById("edit_registocriminal").style.border = "groove";
-}
-
-function myfunction421() {
-    document.getElementById("edit_registocriminal").readOnly = true;
-    document.getElementById("edit_registocriminal").style.border = "hidden";
-}
-
-function myfunction422() {
-    document.getElementById("edit_receita").readOnly = false;
-    document.getElementById("edit_receita").style.border = "groove";
-}
-
-function myfunction423() {
-    document.getElementById("edit_receita").readOnly = true;
-    document.getElementById("edit_receita").style.border = "hidden";
-}
-
 function myfunction1234() {
     document.getElementById("showMin").style.opacity = 1;
     document.getElementById("showMax").style.opacity = 1;
@@ -694,75 +711,343 @@ let id_user_clicked = localStorage.getItem("id_user_clicked");
 var loadFile = function (event) {
     var image = document.getElementById('fotoR');
     image.src = URL.createObjectURL(event.target.files[0]);
-  
+
     const formData = new FormData();
     formData.append("file", event.target.files[0]);
-  
+
     editar_photo(formData);
-  
-  
-  };
-  
-  async function editar_photo(photoC) {
-  
-  
+
+
+};
+//------------------------------------------------PUT da foto----------------------------------------------------
+async function editar_photo(photoC) {
+
+
     fetch('http://127.0.0.1:8080/api/prisoners/upload-photos/' + id_user_clicked, {
-      mode: 'cors',
-      method: 'PUT',
-      body: photoC,
-      credentials: 'include'
+        mode: 'cors',
+        method: 'PUT',
+        body: photoC,
+        credentials: 'include'
     })
-      .then(function (response) {
-        //console.log(response.headers.get('Set-Cookie'));
-        console.log(response);
-        if (!response.ok) {
-          throw new Error(response.statusText);
-        }
-        return response.json();
-      })
-      .catch(function (err) {
-        //swal.showValidationError('Pedido falhado: ' + err);
-        console.log(err); // estava alert(err); coloquei console log para não estar sempre a aparecer pop-up ao utilizador
-      })
-      .then(async function (result) {
-        console.log(result);
-        if (result) {
-  
-  
-  
-          const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 1000,
-            timerProgressBar: true,
-            onOpen: (toast) => {
-              toast.addEventListener('mouseenter', Swal.stopTimer)
-              toast.addEventListener('mouseleave', Swal.resumeTimer)
+        .then(function (response) {
+            //console.log(response.headers.get('Set-Cookie'));
+            console.log(response);
+            if (!response.ok) {
+                throw new Error(response.statusText);
             }
-          })
-  
-          Toast.fire({
-            icon: 'success',
-            title: 'Dados alterados com sucesso'
-          }).then(() => {
-            location.reload();
-          })
-  
-  
-  
+            return response.json();
+        })
+        .catch(function (err) {
+            //swal.showValidationError('Pedido falhado: ' + err);
+            console.log(err); // estava alert(err); coloquei console log para não estar sempre a aparecer pop-up ao utilizador
+        })
+        .then(async function (result) {
+            console.log(result);
+            if (result) {
+
+
+
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 1000,
+                    timerProgressBar: true,
+                    onOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Dados alterados com sucesso'
+                }).then(() => {
+                    location.reload();
+                })
+
+
+
+            }
+            else {
+                Swal.fire(
+                    'Ocorreu um erro!',
+                    '',
+                    'error'
+                )
+                console.log(result);
+                //swal({ title: `${result.value.userMessage.message.pt}` });
+            }
+        });
+
+
+}
+
+//------------------------------------------MUDAR CLASSES----------------------------------------------
+function trocaClasse(elemento, nova1) {
+    elemento.className = "";
+    elemento.classList.add(nova1);
+}
+
+function trocaClasse2(elemento, nova1, nova2) {
+    elemento.className = "";
+    elemento.classList.add(nova1);
+    elemento.classList.add(nova2);
+}
+//---------------------------------------------GET IDS------------------------------------------------------
+let ids = [];
+function getIds() {
+    ids = [];
+    const selecList = document.getElementById("listCrimes");
+    for (let elem of selecList.children) {
+        if (elem.firstChild.checked) {
+            ids.push(elem.firstChild.id);
+
         }
-        else {
-          Swal.fire(
-            'Ocorreu um erro!',
+    }
+    console.log(ids)
+    return ids
+}
+
+//-------------------------------------------------DATA Formato------------------------------------------
+function getDate(date) {
+    var today = new Date(date);
+    var d = today.getDate();
+    var mo = today.getMonth()
+    var a = today.getFullYear();
+    d = checkTime(d);
+    mo = checkTime(mo + 1);
+    return a + "-" + mo + "-" + d;
+}
+function checkTime(i) {
+    if (i < 10) { i = "0" + i };  // add zero in front of numbers < 10
+    return i;
+}
+
+function getDate2(date) {
+    var dias = ["Domingo", "Segunda-Feira", "Terça-Feira", "Quarta-Feira", "Quinta-Feira", "Sexta-Feira", "Sábado"];
+    var today = new Date(date);
+    var dia = today.getDay();
+    var d = today.getDate();
+    var mo = today.getMonth();
+    var a = today.getFullYear();
+    var h = today.getHours();
+    var m = today.getMinutes();
+    h = checkTime(h);
+    m = checkTime(m);
+    d = checkTime(d);
+    mo = checkTime(mo + 1);
+    return dias[dia] + " " + d + " " + mo + " " + a + " " + h + ":" + m + "h";
+}
+function checkTime(i) {
+    if (i < 10) { i = "0" + i };  // add zero in front of numbers < 10
+    return i;
+}
+
+//---------------------------------------------REGISTO CRIMINAL----------------------------------------------
+var clickteste = false;
+$('#editRegisto').click(function () {
+
+
+    $('.testee').each(function () {
+        if (!clickteste) {
+            this.disabled = false;
+            trocaClasse2(document.getElementById("editRegisto"), "fas", "fa-times");
+            trocaClasse(document.getElementById("tabCH"), "tab_nome94");
+            document.getElementById("trashRegisto").style.display = "inline";
+
+        } else {
+            this.checked = false;
+            this.disabled = true;
+            document.getElementById("trashRegisto").style.display = "none";
+            trocaClasse(document.getElementById("tabCH"), "tab_nome");
+            trocaClasse2(document.getElementById("editRegisto"), "fas", "fa-pen");
+        }
+    });
+
+    //switch
+    if (clickteste) {
+        clickteste = false;
+    } else {
+        clickteste = true;
+    }
+
+});
+
+document.getElementById("trashRegisto").addEventListener("click", function () {
+    getIds();
+
+    if (ids == "") {
+        Swal.fire(
+            'Seleciona pelo menos um registo!',
             '',
-            'error'
-          )
-          console.log(result);
-          //swal({ title: `${result.value.userMessage.message.pt}` });
+            'warning'
+        )
+    } else {
+        for (let id of ids) {
+            eliminar(id);
         }
-      });
-  
-  
-  }
+
+    }
+
+})
+
+
+//---------------------------------------------ELIMINAR REGISTO CRIMINAL------------------------
+async function eliminar(id) {
+    fetch('http://127.0.0.1:8080/api/criminal-records/' + id, {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        mode: 'cors',
+        method: 'DELETE',
+        body: JSON.stringify(id),
+        credentials: 'include'
+    })
+        .then(function (response) {
+            //console.log(response.headers.get('Set-Cookie'));
+            console.log(response);
+            if (!response.ok) {
+                throw new Error(response.statusText);
+            }
+            return response.json();
+        })
+        .catch(function (err) {
+            //swal.showValidationError('Pedido falhado: ' + err);
+            console.log(err); // estava alert(err); coloquei console log para não estar sempre a aparecer pop-up ao utilizador
+        })
+        .then(async function (result) {
+            console.log(result);
+            if (result) {
+
+
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 1000,
+                    timerProgressBar: true,
+                    onOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Alterada com sucesso'
+                }).then(() => {
+                    location.reload();
+                })
+
+
+
+            }
+
+            else {
+                Swal.fire(
+                    'Ocorreu um erro!',
+                    '',
+                    'error'
+                ).then(() => {
+                    location.reload();
+                })
+                console.log(result);
+                //swal({ title: `${result.value.userMessage.message.pt}` });
+            }
+        });
+}
+
+
+//-----------------------------------------------POST DE REGISTO CRIMINAL------------------------------------------------
+
+document.getElementById("postRegisto").addEventListener("click", async function () {
+
+    if (document.getElementById("novoRegisto").value.trim() == "") {
+        Swal.fire(
+            'Insira algo novo a registar!',
+            '',
+            'warning'
+        )
+    } else {
+
+        if (document.getElementById("dataEmissao").value == "") {
+            Swal.fire(
+                'Data de emissão obrigatória!',
+                '',
+                'warning'
+            )
+        } else {
+
+            var data = {}
+
+            data.prisoner = { prisonerId: id_user_clicked };
+            data.name = "Registo Criminal";
+            data.description = document.getElementById("novoRegisto").value.trim();
+
+            data.emissionDate = document.getElementById("dataEmissao").value;
+
+            console.log(data);
+
+
+
+
+            await fetch('http://127.0.0.1:8080/api/criminal-records', {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                mode: 'cors',
+                method: 'POST',
+                credentials: 'include',
+                body: JSON.stringify(data)
+
+            }).then(function (response) {
+                if (!response.ok) {
+                    alert(response);
+                    throw new Error("ERRO");
+                }
+
+                return response.json();
+            }).then(async function (result) {
+
+                if (result) {
+
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 500,
+                        timerProgressBar: true,
+                        onOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    })
+
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Adicionado com sucesso'
+                    })
+                        .then(() => {
+                            location.reload();
+                        })
+
+
+                }
+            }).catch(function (err) {
+                swal("Erro!", err, "error");
+            })
+
+
+
+        }
+
+    }
+
+})
+
+
+
+
+
 

@@ -11948,6 +11948,7 @@ input[type=checkbox] {
 
 input:checked + div {
   background-color: gray;
+  color:white;
 }
 
 input:checked + div:before {
@@ -11994,6 +11995,13 @@ input:checked + div:before {
   background: #4CAF50;
   cursor: pointer;
 }
+
+.tab_nome94{
+  display: table-cell !important;
+    width: 94% !important;
+    vertical-align: middle !important;
+}
+
 /*----------------------------------------------------------Novo Codigo---------------------------------------------------------*/
 
 
