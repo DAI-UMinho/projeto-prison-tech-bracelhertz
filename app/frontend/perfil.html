@@ -23,10 +23,10 @@
   <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
   <style>
-select {
-    -webkit-appearance: none;
+    select {
+      -webkit-appearance: none;
 
-}
+    }
 
 
 
@@ -322,9 +322,9 @@ select {
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                   Perfil
                 </a>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#PassModal">
                   <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Definições
+                  Editar Password
                 </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
@@ -354,7 +354,7 @@ select {
                       <p><input type="file" accept="image/*" name="image" id="file" onchange="loadFile(event)"
                           style="display: none;"></p>
                       <p><label for="file" id="foto420" class="mb-0 text-uppercase"
-                        style="cursor: pointer;">Editar</label></p>
+                          style="cursor: pointer;">Editar</label></p>
                     </div>
                   </div>
                   <!-- Card Body -->
@@ -382,11 +382,12 @@ select {
                       <div class="full_tab">
                         <div id="tab_nomeCH" class="tab_nome">Eventos:</div>
                         <div class="tab_time">
-                        <i id="trashSche" type="button" class="fas fa-trash mr-2" style="display: none;"></i>
-                        <i id="editSche" type="button" class="fas fa-pen" style="display: inline;"></i>
+                          <i id="trashSche" type="button" class="fas fa-trash mr-2" style="display: none;"></i>
+                          <i id="editSche" type="button" class="fas fa-pen" style="display: inline;"></i>
+                        </div>
                       </div>
-                      </div>
-                      <ul id="listaSche" class="current-day-events-list" style="overflow-y: scroll; height: 170px;"></ul>
+                      <ul id="listaSche" class="current-day-events-list" style="overflow-y: scroll; height: 170px;">
+                      </ul>
                     </div>
                     <div class="add-event-day full_tab">
                       <input type="text" class="add-event-day-field tab_name" placeholder="Adicionar evento">
@@ -560,11 +561,9 @@ select {
               style="border-radius:0.35rem; height: 50px; display: table;">
               <h5 class="text-center mt-3"><strong>Os meus dados</strong></h5>
               <div class="d-flex" type="button tab_time" style="float:right; margin-top: -35px; margin-right: 10px">
-                <button class="bg-transparent" id="perfil_save_2"
-                  style="border: none; display:none"><i
+                <button class="bg-transparent" id="perfil_save_2" style="border: none; display:none"><i
                     class="fas fa-file-export font-weight-bold text-white"></i></button>
-                <button id="perfil_alterar_2"
-                  style="background-color:transparent; border: none;"><i
+                <button id="perfil_alterar_2" style="background-color:transparent; border: none;"><i
                     class="fas fa-user-edit font-weight-bold text-white"></i></button>
               </div>
             </div>
@@ -588,7 +587,7 @@ select {
                 </div>
 
 
-                
+
 
                 <div class="form-control mt-4" style="height: 50px">
                   <h5 class="card-title form-control420"><strong>Nome</strong></h5>
@@ -708,7 +707,8 @@ select {
                 <div class="form-control" style="height: 50px">
                   <h5 class="card-title form-control420" style="width:100px;"><strong>Instituição</strong></h5>
                   <div style="display: unset;">
-                    <select id="id_instituicao" class=" h6 ml-2 text-primary font-weight-600" style="border: none; width: 92%;" disabled="true">
+                    <select id="id_instituicao" class=" h6 ml-2 text-primary font-weight-600"
+                      style="border: none; width: 92%;" disabled="true">
                       <option value="1">nível 1</option>
                       <option value="2">nível 2</option>
                       <option value="3">nível 3</option>
@@ -755,7 +755,8 @@ select {
   </a>
 
   <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -768,6 +769,45 @@ select {
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
           <button class="btn btn-primary" id="botaoLogout">Terminar Sessão</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Editar password-->
+  <div class="modal fade" id="PassModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Editar Password</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <div class="txtb">
+            <input type="password" id="aPassword" name="password" class="form-control form-control-user">
+            <span data-placeholder="Antiga Password"></span>
+          </div>
+
+
+          <div class="txtb" id="paraPass">
+            <input type="password" id="nPassword" name="password" class="form-control form-control-user">
+            <span data-placeholder="Nova Password"></span>
+            <div class="eye slash" onclick="togglePW()"
+              style="float: right;margin-top: -6%;margin-right: 4%;color:#1b2c47;">
+              <div></div>
+              <div></div>
+            </div>
+          </div>
+
+
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+          <button class="btn btn-primary" id="editPass">Editar</button>
         </div>
       </div>
     </div>
@@ -797,6 +837,67 @@ select {
   <script src="controller/perfil.js"></script>
   <script src="controller/controlo.js"></script>
 
+  <script>
+    function togglePW() {
+
+      //toggle password visibility
+      document.querySelector('.eye').classList.toggle('slash');
+
+      //show/hide the password
+      var password = document.querySelector('[name=password]');
+      if (password.getAttribute('type') === 'password') {
+        password.setAttribute('type', 'text');
+      } else {
+        password.setAttribute('type', 'password');
+      }
+    }
+  </script>
+
+  <script type="text/javascript">
+    $(".txtb input").on("focus", function () {
+      $(this).addClass("focus");
+    });
+
+    $(".txtb input").on("blur", function () {
+      if ($(this).val() == "")
+        $(this).removeClass("focus");
+    });
+
+  </script>
+
+
+  <script>
+    function doSomething() {
+      var video = document.getElementById("vid-show"),
+        canvas = document.getElementById("vid-canvas"),
+        take = document.getElementById("vid_take");
+
+      // [2] ASK FOR USER PERMISSION TO ACCESS CAMERA
+      // WILL FAIL IF NO CAMERA IS ATTACHED TO COMPUTER
+      navigator.mediaDevices.getUserMedia({ video: true })
+        .then(function (stream) {
+          // [3] SHOW VIDEO STREAM ON VIDEO TAG
+          video.srcObject = stream;
+          video.play();
+
+          // [4] WHEN WE CLICK ON "TAKE PHOTO" BUTTON
+          take.addEventListener("click", function () {
+            // Create snapshot from video
+            var draw = document.createElement("canvas");
+            draw.width = video.videoWidth;
+            draw.height = video.videoHeight;
+            var context2D = draw.getContext("2d");
+            context2D.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
+            // Put into canvas container
+            canvas.innerHTML = "";
+            //canvas.appendChild(draw);
+          });
+        })
+        .catch(function (err) {
+          document.getElementById("vid-controls").innerHTML = "Please enable access and attach a camera";
+        });
+    } 
+  </script>
 
 </body>
 

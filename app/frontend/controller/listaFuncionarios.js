@@ -1,5 +1,6 @@
 $(window).on("load", function () {
-
+    let userLogado = localStorage.getItem("userLogado");
+    
     display_funcionarios();
 
 
@@ -21,11 +22,15 @@ $(window).on("load", function () {
 
 
             for (const funcionario of func) {
-                conteudo.push(["<div id='" + funcionario.userId + "'>" + funcionario.username + "</div>",
-                funcionario.name,
-                funcionario.prison.name,
-                funcionario.email,
-                funcionario.roles[0].name])
+                if (funcionario.userId !== parseInt(userLogado)) {
+                    conteudo.push(["<div id='" + funcionario.userId + "'>" + funcionario.username + "</div>",
+                    funcionario.name,
+                    funcionario.prison.name,
+                    funcionario.email,
+                    funcionario.roles[0].name])
+                }
+
+
             }
 
             $(document).ready(function () {

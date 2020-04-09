@@ -52,7 +52,7 @@ $(window).on("load", function () {
   function get_instituicoes() {
     async function fetchAsync() {
 
-      const response = await fetch('http://127.0.0.1:8080/api/prisons',{
+      const response = await fetch('http://127.0.0.1:8080/api/prisons', {
         headers: {
           'Content-Type': 'application/json'
         },
@@ -511,3 +511,83 @@ function Myfunction425() {
   document.getElementById("perfil_save_2").style.display = "none";
   document.getElementById("perfil_alterar_2").style.display = "block";
 }
+
+
+//------------------------------------------------ALTERAR PASSWORD---------------------------------------------------------------
+
+document.getElementById("editPass").addEventListener("click", function () {
+var aPassword = document.getElementById("aPassword");
+var nPassword = document.getElementById("nPassword");
+  var data = {};
+
+  if (aPassword.value.trim() == "" || nPassword.value.trim() == "") {
+    Swal.fire(
+      'Preencha todos os campos!',
+      '',
+      'warning'
+    )
+  } else {
+    if (aPassword.value.trim() == nPassword.value.trim()) {
+      Swal.fire(
+        'Password nova não pode ser igual à antiga!',
+        '',
+        'warning'
+      )
+    } else {
+
+      data.oldPassword = aPassword.value.trim();
+      data.newPassword = nPassword.value.trim();
+
+
+      fetch('http://127.0.0.1:8080/api/users/logged-passwords', {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        mode: 'cors',
+        method: 'PUT',
+        body: JSON.stringify(data),
+        credentials: 'include'
+      })
+        .then(function (response) {
+          //console.log(response.headers.get('Set-Cookie'));
+          console.log(response);
+          if (!response.ok) {
+            throw new Error(response.statusText);
+          }
+          return response.json();
+        })
+        .catch(function (err) {
+          //swal.showValidationError('Pedido falhado: ' + err);
+          console.log(err); // estava alert(err); coloquei console log para não estar sempre a aparecer pop-up ao utilizador
+        })
+        .then(async function (result) {
+          console.log(result);
+          if (result) {
+
+            Swal.fire(
+              'Password alterada com sucesso!',
+              '',
+              'success'
+          ).then(() => {
+            location.reload();
+          })
+
+
+          }
+          else {
+            Swal.fire(
+              'Ocorreu um erro!',
+              '',
+              'error'
+            )
+            console.log(result);
+            //swal({ title: `${result.value.userMessage.message.pt}` });
+          }
+        });
+
+
+
+    }
+  }
+
+})

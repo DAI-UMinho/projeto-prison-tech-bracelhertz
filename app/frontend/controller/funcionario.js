@@ -1,5 +1,5 @@
 $(window).on("load", function () {
-
+  let RoleLogado = localStorage.getItem("RoleLogado");
   display_perfil();
 
   function display_perfil() {
@@ -7,12 +7,12 @@ $(window).on("load", function () {
       let id_user_clicked = localStorage.getItem("id_user_clicked");
       const response = await fetch('http://127.0.0.1:8080/api/users/' + id_user_clicked, {
         headers: {
-            'Content-Type': 'application/json'
+          'Content-Type': 'application/json'
         },
         mode: 'cors',
         method: 'GET',
         credentials: 'include'
-    });
+      });
       const perfil = await response.json();
       console.log(perfil);
 
@@ -30,6 +30,16 @@ $(window).on("load", function () {
       document.getElementById("contactoF").innerHTML = perfil.contact;
       document.getElementById("emailF").innerHTML = perfil.email;
 
+      if (RoleLogado == "ROLE_MANAGER" && perfil.roles[0].name == "ROLE_MANAGER") {
+        document.getElementById("editPassoutro").style.display = "none";
+      }
+      if (RoleLogado !== "ROLE_NETWORKMAN" && perfil.roles[0].name == "ROLE_NETWORKMAN") {
+        document.getElementById("editPassoutro").style.display = "none";
+      }
+      if (RoleLogado !== "ROLE_MANAGER" && perfil.roles[0].name == "ROLE_NETWORKMAN") {
+        document.getElementById("editPassoutro").style.display = "none";
+      }
+      
 
 
       document.getElementById("last_login").innerHTML = "Último login: " + getDate(perfil.lastLogin);
@@ -55,12 +65,12 @@ async function novaNota() {
   let userLogado = localStorage.getItem("userLogado");
   const response = await fetch('http://127.0.0.1:8080/api/users/' + userLogado, {
     headers: {
-        'Content-Type': 'application/json'
+      'Content-Type': 'application/json'
     },
     mode: 'cors',
     method: 'GET',
     credentials: 'include'
-});
+  });
   const logado = await response.json();
   console.log(logado);
 
@@ -100,12 +110,12 @@ async function novaNota() {
       console.log(result);
       if (result) {
         swal("Sucesso!",
-        "Anotação enviada com sucesso!",
-        "success").then(() => {
+          "Anotação enviada com sucesso!",
+          "success").then(() => {
             document.getElementById("titleN").value = "";
             document.getElementById("descriptionN").value = "";
             $('#NotaModal').modal('hide');
-        })
+          })
       }
     }).catch(function (err) {
       swal("Erro!", "Erro!", "error");
@@ -137,3 +147,78 @@ function checkTime(i) {
   if (i < 10) { i = "0" + i };  // add zero in front of numbers < 10
   return i;
 }
+
+
+//------------------------------------------------ALTERAR PASSWORD---------------------------------------------------------------
+
+document.getElementById("editPass").addEventListener("click", function () {
+  let id_user_clicked = localStorage.getItem("id_user_clicked");
+  var nPassword = document.getElementById("nPassword");
+    var data = {};
+  
+    if (nPassword.value.trim() == "") {
+      Swal.fire(
+        'Preencha o campo!',
+        '',
+        'warning'
+      )
+    } else {
+
+      data.userId= id_user_clicked;
+        data.newPassword = nPassword.value.trim();
+  console.log(data)
+  
+        fetch('http://127.0.0.1:8080/api/users/passwords', {
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          mode: 'cors',
+          method: 'PUT',
+          body: JSON.stringify(data),
+          credentials: 'include'
+        })
+          .then(function (response) {
+            //console.log(response.headers.get('Set-Cookie'));
+            console.log(response);
+            if (!response.ok) {
+              throw new Error(response.statusText);
+            }
+            return response.json();
+          })
+          .catch(function (err) {
+            //swal.showValidationError('Pedido falhado: ' + err);
+            console.log(err); // estava alert(err); coloquei console log para não estar sempre a aparecer pop-up ao utilizador
+          })
+          .then(async function (result) {
+            console.log(result);
+            if (result) {
+  
+              Swal.fire(
+                'Password alterada com sucesso!',
+                '',
+                'success'
+            ).then(() => {
+              location.reload();
+            })
+  
+  
+            }
+            else {
+              Swal.fire(
+                'Ocorreu um erro!',
+                '',
+                'error'
+              )
+              console.log(result);
+              //swal({ title: `${result.value.userMessage.message.pt}` });
+            }
+          });
+  
+  
+  
+  
+    }
+  
+  })
+
+

@@ -179,9 +179,9 @@
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                   Perfil
                 </a>
-                <a class="dropdown-item" href="#">
+                <a id="editPassoutro" class="dropdown-item" href="#" data-toggle="modal" data-target="#PassModal">
                   <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Definições
+                  Editar Password
                 </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
@@ -599,6 +599,41 @@
       </div>
     </div>
 
+
+  <!-- Editar password-->
+  <div class="modal fade" id="PassModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Editar Password</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <div class="txtb" id="paraPass">
+            <input type="password" id="nPassword" name="password" class="form-control form-control-user">
+            <span data-placeholder="Nova Password"></span>
+            <div class="eye slash" onclick="togglePW()"
+              style="float: right;margin-top: -6%;margin-right: 4%;color:#1b2c47;">
+              <div></div>
+              <div></div>
+            </div>
+          </div>
+
+
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+          <button class="btn btn-primary" id="editPass">Editar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -622,6 +657,67 @@
   <script src="controller/funcionario.js"></script>
   <script src="controller/controlo.js"></script>
 
+  <script>
+    function togglePW() {
+
+      //toggle password visibility
+      document.querySelector('.eye').classList.toggle('slash');
+
+      //show/hide the password
+      var password = document.querySelector('[name=password]');
+      if (password.getAttribute('type') === 'password') {
+        password.setAttribute('type', 'text');
+      } else {
+        password.setAttribute('type', 'password');
+      }
+    }
+  </script>
+
+  <script type="text/javascript">
+    $(".txtb input").on("focus", function () {
+      $(this).addClass("focus");
+    });
+
+    $(".txtb input").on("blur", function () {
+      if ($(this).val() == "")
+        $(this).removeClass("focus");
+    });
+
+  </script>
+
+
+  <script>
+    function doSomething() {
+      var video = document.getElementById("vid-show"),
+        canvas = document.getElementById("vid-canvas"),
+        take = document.getElementById("vid_take");
+
+      // [2] ASK FOR USER PERMISSION TO ACCESS CAMERA
+      // WILL FAIL IF NO CAMERA IS ATTACHED TO COMPUTER
+      navigator.mediaDevices.getUserMedia({ video: true })
+        .then(function (stream) {
+          // [3] SHOW VIDEO STREAM ON VIDEO TAG
+          video.srcObject = stream;
+          video.play();
+
+          // [4] WHEN WE CLICK ON "TAKE PHOTO" BUTTON
+          take.addEventListener("click", function () {
+            // Create snapshot from video
+            var draw = document.createElement("canvas");
+            draw.width = video.videoWidth;
+            draw.height = video.videoHeight;
+            var context2D = draw.getContext("2d");
+            context2D.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
+            // Put into canvas container
+            canvas.innerHTML = "";
+            //canvas.appendChild(draw);
+          });
+        })
+        .catch(function (err) {
+          document.getElementById("vid-controls").innerHTML = "Please enable access and attach a camera";
+        });
+    } 
+  </script>
 
 </body>
 
