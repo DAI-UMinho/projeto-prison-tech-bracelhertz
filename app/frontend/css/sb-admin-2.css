@@ -11933,6 +11933,14 @@ input:checked + .slider:before {
   width: 30px;
 }
 
+.t-1{
+  top:170px;
+}
+
+.mt-23{
+  margin-top: -23px;
+}
+
 div.label {  
   -webkit-font-smoothing: antialiased; 
 }
@@ -12005,5 +12013,7 @@ input:checked + div:before {
 /*----------------------------------------------------------Novo Codigo---------------------------------------------------------*/
 
 
-
+#minhaTabela tr.selecionado td{
+  background-color: #aff7ff;
+}
 
