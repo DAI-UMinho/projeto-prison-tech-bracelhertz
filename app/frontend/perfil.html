@@ -794,7 +794,7 @@
 
 
           <div class="txtb" id="paraPass">
-            <input type="password" id="nPassword" name="password" class="form-control form-control-user">
+            <input type="password" id="nPassword" name="nPassword" class="form-control form-control-user">
             <span data-placeholder="Nova Password"></span>
             <div class="eye slash" onclick="togglePW()"
               style="float: right;margin-top: -6%;margin-right: 4%;color:#1b2c47;">
@@ -844,7 +844,7 @@
       document.querySelector('.eye').classList.toggle('slash');
 
       //show/hide the password
-      var password = document.querySelector('[name=password]');
+      var password = document.querySelector('[name=nPassword]');
       if (password.getAttribute('type') === 'password') {
         password.setAttribute('type', 'text');
       } else {
