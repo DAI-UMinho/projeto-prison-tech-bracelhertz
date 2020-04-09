@@ -202,15 +202,6 @@ async function editar() {
           })
 
 
-          /*
-                    Swal.fire(
-                      'Dados alterados com sucesso!',
-                      '',
-                      'success'
-                    ).then(() => {
-                      location.reload();
-                    })*/
-
 
         }
         else {
@@ -219,7 +210,7 @@ async function editar() {
             '',
             'error'
           ).then(() => {
-            location.reload();
+            Myfunction425()
           })
           console.log(result);
           //swal({ title: `${result.value.userMessage.message.pt}` });
@@ -275,19 +266,8 @@ async function editar() {
             icon: 'success',
             title: 'Dados alterados com sucesso'
           }).then(() => {
-            location.reload();
+            Myfunction425()
           })
-
-
-          /*
-                    Swal.fire(
-                      'Dados alterados com sucesso!',
-                      '',
-                      'success'
-                    ).then(() => {
-                      location.reload();
-                    })*/
-
 
 
         }

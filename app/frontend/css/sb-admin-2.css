@@ -12019,8 +12019,11 @@ input:checked + div:before {
   background-color: #1b2c47;
   color: white;
 }
+
+.tab_nome80{
+  display: table-cell !important;
+    width: 80% !important;
+    vertical-align: middle !important;
+}
 /*----------------------------------------------------------Novo Codigo---------------------------------------------------------*/
 
-img:focus {
-  outline: 2px solid blue;
-}

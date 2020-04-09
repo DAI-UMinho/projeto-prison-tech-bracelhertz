@@ -220,7 +220,7 @@
                     <!-- Card Body -->
                     <div class="card-body">
                       <div class="w-100" style="text-align: center; height: 440px;">
-                        <img id="fotoinst" src="img/evora3.jpeg" style="height: 600px; border-radius: 20px;">
+                        <img data-enlargable width="100" style="cursor: zoom-in" id="fotoinst" src="img/evora3.jpeg" style="height: 600px; border-radius: 20px;">
                       </div>
                     </div>
                   </div>
@@ -628,6 +628,32 @@
 
   <script src="controller/controlo.js"></script>
   <script src="controller/instituicao.js"></script>
+
+
+  <script>
+
+    $('img[data-enlargable]').addClass('img-enlargable').click(function(){
+        var src = $(this).attr('src');
+        var modal;
+        function removeModal(){ modal.remove(); $('body').off('keyup.modal-close'); }
+        modal = $('<div>').css({
+            background: 'RGBA(0,0,0,.5) url('+src+') no-repeat center',
+            backgroundSize: 'contain',
+            width:'100%', height:'100%',
+            position:'fixed',
+            zIndex:'10000',
+            top:'0', left:'0',
+            cursor: 'zoom-out'
+        }).click(function(){
+            removeModal();
+        }).appendTo('body');
+        //handling ESC
+        $('body').on('keyup.modal-close', function(e){
+          if(e.key==='Escape'){ removeModal(); } 
+        });
+    });
+    
+    </script>
 
 </body>
 

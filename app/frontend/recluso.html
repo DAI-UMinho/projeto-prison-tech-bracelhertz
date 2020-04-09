@@ -235,7 +235,7 @@
                   <div class="row" style="justify-content: center;">
                     <div class="col-5 mr-4" style="z-index: 100;">
                       <div class="imagem ">
-                        <img id="fotoR" class="imagemlogo w-100" src="img/rec2.jpg">
+                        <img data-enlargable width="100" style="cursor: zoom-in" id="fotoR" class="imagemlogo w-100" src="img/rec2.jpg">
                         <p><input type="file" accept="image/*" name="image" id="file" onchange="loadFile(event)"
                             style="display: none; text-align: right;"></p>
                         <p style="text-align: right;"><label for="file" id="foto420"
@@ -855,6 +855,32 @@
   <!-- <script src="controller/recluso.js"></script>-->
   <script src="controller/controlo.js"></script>
   <script src="controller/recluso.js"></script>
+
+
+  <script>
+
+    $('img[data-enlargable]').addClass('img-enlargable').click(function(){
+        var src = $(this).attr('src');
+        var modal;
+        function removeModal(){ modal.remove(); $('body').off('keyup.modal-close'); }
+        modal = $('<div>').css({
+            background: 'RGBA(0,0,0,.5) url('+src+') no-repeat center',
+            backgroundSize: 'contain',
+            width:'100%', height:'100%',
+            position:'fixed',
+            zIndex:'10000',
+            top:'0', left:'0',
+            cursor: 'zoom-out'
+        }).click(function(){
+            removeModal();
+        }).appendTo('body');
+        //handling ESC
+        $('body').on('keyup.modal-close', function(e){
+          if(e.key==='Escape'){ removeModal(); } 
+        });
+    });
+    
+    </script>
 
 
 </body>
