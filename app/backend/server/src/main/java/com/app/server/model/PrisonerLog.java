@@ -14,94 +14,80 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-
-@Entity(name="prisonerLog")
-@Table(name="prisonerLog")
+@Entity(name = "prisonerLog")
+@Table(name = "prisonerLog")
 public class PrisonerLog {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long prisonerLogId;
-	
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long prisonerLogId;
+
 	@ManyToOne
-    @JoinColumn(name = "updatedBy", referencedColumnName = "userId", nullable = false)
+	@JoinColumn(name = "byUser", referencedColumnName = "userId", nullable = false)
 	@OnDelete(action = OnDeleteAction.CASCADE)
-	private User updatedBy;
-	
+	private User byUser;
+
 	@ManyToOne
-    @JoinColumn(name = "prisonerUpdated", referencedColumnName = "prisonerId", nullable = false)
+	@JoinColumn(name = "prisonerId", referencedColumnName = "prisonerId", nullable = false)
 	@OnDelete(action = OnDeleteAction.CASCADE)
-	private Prisoner prisonerUpdated;
-	
+	private Prisoner prisoner;
+
 	private String description;
-	
+
 	@CreationTimestamp
-	private LocalDateTime updatedTimestamp;
-	
-	
+	private LocalDateTime logTimestamp;
+
 	public PrisonerLog() {
 	}
 
-
-	public PrisonerLog(Long prisonerLogId, User updatedBy, Prisoner prisonerUpdated, String description,
-			LocalDateTime updatedTimestamp) {
+	public PrisonerLog(Long prisonerLogId, User byUser, Prisoner prisoner, String description,
+			LocalDateTime logTimestamp) {
 		super();
 		this.prisonerLogId = prisonerLogId;
-		this.updatedBy = updatedBy;
-		this.prisonerUpdated = prisonerUpdated;
+		this.byUser = byUser;
+		this.prisoner = prisoner;
 		this.description = description;
-		this.updatedTimestamp = updatedTimestamp;
+		this.logTimestamp = logTimestamp;
 	}
-
 
 	public Long getPrisonerLogId() {
 		return prisonerLogId;
 	}
 
-
 	public void setPrisonerLogId(Long prisonerLogId) {
 		this.prisonerLogId = prisonerLogId;
 	}
 
-
-	public User getUpdatedBy() {
-		return updatedBy;
+	public User getByUser() {
+		return byUser;
 	}
 
-
-	public void setUpdatedBy(User updatedBy) {
-		this.updatedBy = updatedBy;
+	public void setByUser(User byUser) {
+		this.byUser = byUser;
 	}
 
-
-	public Prisoner getPrisonerUpdated() {
-		return prisonerUpdated;
+	public Prisoner getPrisoner() {
+		return prisoner;
 	}
 
-
-	public void setPrisonerUpdated(Prisoner prisonerUpdated) {
-		this.prisonerUpdated = prisonerUpdated;
+	public void setPrisoner(Prisoner prisoner) {
+		this.prisoner = prisoner;
 	}
-
 
 	public String getDescription() {
 		return description;
 	}
 
-
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
-
-	public LocalDateTime getUpdatedTimestamp() {
-		return updatedTimestamp;
+	public LocalDateTime getLogTimestamp() {
+		return logTimestamp;
 	}
 
-
-	public void setUpdatedTimestamp(LocalDateTime updatedTimestamp) {
-		this.updatedTimestamp = updatedTimestamp;
+	public void setLogTimestamp(LocalDateTime logTimestamp) {
+		this.logTimestamp = logTimestamp;
 	}
-
 
 }

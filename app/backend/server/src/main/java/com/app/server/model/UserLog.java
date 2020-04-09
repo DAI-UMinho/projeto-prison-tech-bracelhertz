@@ -14,96 +14,79 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-
-@Entity
-@Table(name="userLog")
+@Entity(name = "userLog")
+@Table(name = "userLog")
 public class UserLog {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long userLogId;
-	
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long userLogId;
+
 	@ManyToOne
-    @JoinColumn(name = "updatedBy", referencedColumnName = "userId", nullable = false)
+	@JoinColumn(name = "byUser", referencedColumnName = "userId", nullable = false)
 	@OnDelete(action = OnDeleteAction.CASCADE)
-	private User updatedBy;
-	
+	private User byUser;
+
 	@ManyToOne
-    @JoinColumn(name = "userUpdated", referencedColumnName = "userId", nullable = false)
+	@JoinColumn(name = "userId", referencedColumnName = "userId", nullable = false)
 	@OnDelete(action = OnDeleteAction.CASCADE)
-	private User userUpdated;
-	
+	private User user;
+
 	private String description;
-	
-	
+
 	@CreationTimestamp
-	private LocalDateTime updatedTimestamp;
+	private LocalDateTime logTimestamp;
 
-
-	public UserLog() {}
-
-
-	public UserLog(Long userLogId, User updatedBy, User userUpdated, String description,
-			LocalDateTime updatedTimestamp) {
-		super();
-		this.userLogId = userLogId;
-		this.updatedBy = updatedBy;
-		this.userUpdated = userUpdated;
-		this.description = description;
-		this.updatedTimestamp = updatedTimestamp;
+	public UserLog() {
 	}
 
+	public UserLog(Long userLogId, User byUser, User user, String description, LocalDateTime logTimestamp) {
+		super();
+		this.userLogId = userLogId;
+		this.byUser = byUser;
+		this.user = user;
+		this.description = description;
+		this.logTimestamp = logTimestamp;
+	}
 
 	public Long getUserLogId() {
 		return userLogId;
 	}
 
-
 	public void setUserLogId(Long userLogId) {
 		this.userLogId = userLogId;
 	}
 
-
-	public User getUpdatedBy() {
-		return updatedBy;
+	public User getByUser() {
+		return byUser;
 	}
 
-
-	public void setUpdatedBy(User updatedBy) {
-		this.updatedBy = updatedBy;
+	public void setByUser(User byUser) {
+		this.byUser = byUser;
 	}
 
-
-	public User getUserUpdated() {
-		return userUpdated;
+	public User getUser() {
+		return user;
 	}
 
-
-	public void setUserUpdated(User userUpdated) {
-		this.userUpdated = userUpdated;
+	public void setUser(User user) {
+		this.user = user;
 	}
-
 
 	public String getDescription() {
 		return description;
 	}
 
-
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
-
-	public LocalDateTime getUpdatedTimestamp() {
-		return updatedTimestamp;
+	public LocalDateTime getLogTimestamp() {
+		return logTimestamp;
 	}
 
-
-	public void setUpdatedTimestamp(LocalDateTime updatedTimestamp) {
-		this.updatedTimestamp = updatedTimestamp;
+	public void setLogTimestamp(LocalDateTime logTimestamp) {
+		this.logTimestamp = logTimestamp;
 	}
-
-
-
 
 }

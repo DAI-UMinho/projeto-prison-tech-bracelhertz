@@ -20,7 +20,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
-
 import com.app.server.exception.AppException;
 import com.app.server.exception.ResourceNotFoundException;
 import com.app.server.model.Role;
@@ -62,12 +61,11 @@ public class AuthService {
 				.orElseThrow(() -> new ResourceNotFoundException("User", "email", loginRequest.getUsername()));
 
 		Set<Role> roles = user.getRoles();
-		Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
+		Role userRole = roleRepository.findByName(RoleName.ROLE_GUARD)
 				.orElseThrow(() -> new AppException("User role not set."));
 
-		if(!isUser(roles, userRole)) {
-			return new ResponseEntity<ApiResponse>(new ApiResponse(false, "You're not a User"),
-					HttpStatus.FORBIDDEN);
+		if (!isUser(roles, userRole)) {
+			return new ResponseEntity<ApiResponse>(new ApiResponse(false, "You're not a User"), HttpStatus.FORBIDDEN);
 		}
 
 		Date today = new Date();
@@ -85,9 +83,9 @@ public class AuthService {
 
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 
-		String jwt = tokenProvider.generateToken(authentication); 	
+		String jwt = tokenProvider.generateToken(authentication);
 		CookieUtils.addCookie(response, "token", jwt, 604800000);
-		
+
 		return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
 	}
 
@@ -111,7 +109,7 @@ public class AuthService {
 		}
 		String roleString = "";
 		Set<Role> roles = user.getRoles();
-		for(Role role: roles) {
+		for (Role role : roles) {
 			roleString = role.getName().toString();
 		}
 		userRepository.save(user);
@@ -121,10 +119,8 @@ public class AuthService {
 		String jwt = tokenProvider.generateToken(authentication);
 		CookieUtils.addCookie(response, "token", jwt, 604800000);
 
-		return ResponseEntity.ok(new JwtAuthenticationResponseRole(jwt, roleString));
+		return ResponseEntity.ok(new JwtAuthenticationResponseRole(jwt, roleString, user.getUserId()));
 	}
-
-
 
 	public ResponseEntity<ApiResponse> logoutUser(HttpServletRequest request, HttpServletResponse response) {
 		boolean isOK = CookieUtils.deleteCookie(request, response, "token");
@@ -145,7 +141,7 @@ public class AuthService {
 				isUser = true;
 			}
 		}
-		
+
 		return isUser;
 	}
 }

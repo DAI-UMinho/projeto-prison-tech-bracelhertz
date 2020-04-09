@@ -1,23 +1,27 @@
 package com.app.server.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.Date;
+import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.app.server.model.CriminalRecord;
 
-
-
-
-
 @Repository
-public interface CriminalRecordRepository extends JpaRepository<CriminalRecord, Long>{
+public interface CriminalRecordRepository extends JpaRepository<CriminalRecord, Long> {
 
-	
-	CriminalRecord findById(long criminalRecordId);
+	CriminalRecord findByCriminalRecordId(Long criminalRecordId);
 
-	/*
-	@Query("Select U.id_user, U.primeiro_nome, I FROM utilizador U, Instituicao I WHERE I.id_instituicao = U.id_instituicao AND I.id_instituicao = :id_instituicao")
-	Optional<List<Instituicao>> findByIdInstituicao(@Param("id_instituicao") Long id_instituicao);
-	*/
+	List<CriminalRecord> findAllByOrderByCreatedTimestampAsc();
+
+	@Transactional
+	@Modifying
+	@Query("UPDATE criminalRecord SET name = ?1, description = ?2, emission_date = ?3 WHERE criminal_record_id = ?4 AND prisoner_id = ?5")
+	void updateCriminalRecordAsManager(String name, String description, Date emissionDate, Long criminalRecordId,
+			Long prisonerId);
+
 }

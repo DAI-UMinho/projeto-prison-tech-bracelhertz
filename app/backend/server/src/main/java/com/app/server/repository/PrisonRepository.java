@@ -1,21 +1,26 @@
 package com.app.server.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.app.server.model.Prison;
 
-
 @Repository
-public interface PrisonRepository extends JpaRepository<Prison, Long>{
+public interface PrisonRepository extends JpaRepository<Prison, Long> {
 
-	
-	Prison findById(long prisonId);
+	Prison findByPrisonId(Long prisonId);
 
-	/*
-	@Query("Select U.id_user, U.primeiro_nome, I FROM utilizador U, Instituicao I WHERE I.id_instituicao = U.id_instituicao AND I.id_instituicao = :id_instituicao")
-	Optional<List<Instituicao>> findByIdInstituicao(@Param("id_instituicao") Long id_instituicao);
-	*/
-	
-	
+	List<Prison> findAllByOrderByPrisonIdAsc();
+
+	Boolean existsByPrisonId(Long PrisonId);
+
+	@Transactional
+	@Modifying
+	@Query("UPDATE prison SET photo = ?1 WHERE prison_id = ?2")
+	void updatePrisonPhoto(String photo, Long prisonId);
 }

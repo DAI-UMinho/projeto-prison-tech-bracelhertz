@@ -7,7 +7,6 @@ import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 
 import com.app.server.ServerApplication;
 
-
 @SpringBootApplication
 @EntityScan(basePackageClasses = { ServerApplication.class, Jsr310JpaConverters.class })
 public class ServerApplication {
