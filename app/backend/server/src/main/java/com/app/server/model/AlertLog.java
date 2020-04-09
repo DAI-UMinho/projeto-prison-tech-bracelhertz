@@ -15,31 +15,31 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.UpdateTimestamp;
 
-
-@Entity(name="alertLog")
-@Table(name="alertLog")
+@Entity(name = "alertLog")
+@Table(name = "alertLog")
 public class AlertLog {
-	
+
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long alertLogId;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "prisonerId", referencedColumnName = "prisonerId", nullable = true)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Prisoner prisonerId;
-	
+
 	private String title;
-		
+
 	private String description;
-	
+
 	@CreationTimestamp
 	private LocalDateTime createdTimestamp;
-	
-	@UpdateTimestamp
-    private LocalDateTime lastUpdatedTimestamp;
 
-	public AlertLog() {}
+	@UpdateTimestamp
+	private LocalDateTime lastUpdatedTimestamp;
+
+	public AlertLog() {
+	}
 
 	public AlertLog(Long alertLogId, Prisoner prisonerId, String title, String description,
 			LocalDateTime createdTimestamp, LocalDateTime lastUpdatedTimestamp) {

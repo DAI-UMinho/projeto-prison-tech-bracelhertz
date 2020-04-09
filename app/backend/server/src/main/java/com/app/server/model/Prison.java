@@ -1,6 +1,5 @@
 package com.app.server.model;
 
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,49 +7,49 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
-@Entity(name="prison")
-@Table(name="prison")
+import com.app.server.util.ConstantUtils;
+
+@Entity(name = "prison")
+@Table(name = "prison")
 public class Prison {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long prisonId;
-	
-	@NotBlank
+
+	@NotBlank(message = "Can't be blank")
+	@Pattern(regexp = ConstantUtils.CHAR_PATTERN, message = "Can only letters, letters with special characters and spaces")
 	private String name;
-	
+
 	private String description;
-	
-	@NotBlank
+
+	@NotBlank(message = "Can't be blank")
+	@Pattern(regexp = ConstantUtils.ADDRESS_PATTERN, message = "Can only letters, letters with special characters, numbers and special characters (\",\", \"º\", \" \")")
 	private String address;
-	
-	@NotBlank
+
+	@NotBlank(message = "Can't be blank")
+	@Pattern(regexp = ConstantUtils.CHAR_PATTERN, message = "Can only letters, letters with special characters and spaces")
 	private String location;
-	
-	@NotBlank
+
 	private String photo;
-	
-	@NotNull
-	@Email
+
+	@NotBlank(message = "Can't be blank")
+	@Email(message = "Insert a valid email")
 	private String email;
-	
-	@NotNull
-	private int contact;
-	
+
+	@NotBlank(message = "Can't be blank")
+	@Size(max = 9, min = 9, message = "Must contain exacly 9 numbers")
+	@Pattern(regexp = ConstantUtils.CODE_PATTERN, message = "Can only contain numbers")
+	private String contact;
 
 	public Prison() {
 	}
-	
-	
-	
 
-
-
-
-	public Prison(Long prisonId,String name, String description, String address,
-			String location,String photo, String email, int contact) {
+	public Prison(Long prisonId, String name, String description, String address, String location, String photo,
+			String email, String contact) {
 		super();
 		this.prisonId = prisonId;
 		this.name = name;
@@ -62,91 +61,73 @@ public class Prison {
 		this.contact = contact;
 	}
 
-
-
-
-
-
-
 	public Long getPrisonId() {
 		return prisonId;
 	}
-
 
 	public void setPrisonId(Long prisonId) {
 		this.prisonId = prisonId;
 	}
 
-
 	public String getName() {
 		return name;
 	}
-
 
 	public void setName(String name) {
 		this.name = name;
 	}
 
-
 	public String getDescription() {
 		return description;
 	}
-
 
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
-
 	public String getAddress() {
 		return address;
 	}
-
 
 	public void setAddress(String address) {
 		this.address = address;
 	}
 
-
 	public String getLocation() {
 		return location;
 	}
-
 
 	public void setLocation(String location) {
 		this.location = location;
 	}
 
-
 	public String getPhoto() {
 		return photo;
 	}
-
 
 	public void setPhoto(String photo) {
 		this.photo = photo;
 	}
 
-
 	public String getEmail() {
 		return email;
 	}
-
 
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-
-	public int getContact() {
+	public String getContact() {
 		return contact;
 	}
 
-
-	public void setContact(int contact) {
+	public void setContact(String contact) {
 		this.contact = contact;
 	}
 
-	
-	
+	@Override
+	public String toString() {
+		return "Prison [prisonId=" + prisonId + "]";
+	}
+
 }

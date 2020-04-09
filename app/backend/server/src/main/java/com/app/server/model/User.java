@@ -20,59 +20,69 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import com.app.server.util.ConstantUtils;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity(name = "user")
 @Table(name = "user")
 public class User {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long userId;
 
-	@NotBlank
+	@Column(unique = true)
+	@NotBlank(message = "Can't be blank")
+	@Pattern(regexp = ConstantUtils.USERNAME_PATTERN, message = "Can only contain letters and numbers")
 	private String username;
 
-	@NotBlank
-	@Size(max = 100)
+	@NotBlank(message = "Can't be blank")
+	@Pattern(regexp = ConstantUtils.PASSWORD_PATTERN, message = "Needs at least 1 UpperCase, 1 LowerCase and 1 Number")
 	private String password;
 
 	@Temporal(TemporalType.DATE)
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	@NotNull(message = "Can't be null")
 	private Date birthDate;
 
-	@NotBlank
+	@NotBlank(message = "Can't be blank")
+	@Pattern(regexp = ConstantUtils.ONLYCHAR_PATTERN, message = "Can only letters or letters with special characters")
 	private String nationality;
 
-	@NotBlank
+	@NotBlank(message = "Can't be blank")
+	@Pattern(regexp = ConstantUtils.ADDRESS_PATTERN, message = "Can only letters, letters with special characters, numbers and special characters (\",\", \"º\", \" \")")
 	private String address;
 
-	@NotBlank
+	@NotBlank(message = "Can't be blank")
+	@Pattern(regexp = ConstantUtils.CHAR_PATTERN, message = "Can only letters, letters with special characters and spaces")
 	private String location;
 
+	@NotBlank(message = "Can't be blank")
+	@Pattern(regexp = ConstantUtils.CHAR_PATTERN, message = "Can only letters, letters with special characters and spaces")
 	private String name;
 
-	@NotBlank
 	private String photo;
 
-	private int contact;
+	@NotBlank(message = "Can't be blank")
+	@Size(max = 9, min = 9, message = "Must contain exacly 9 numbers")
+	@Pattern(regexp = ConstantUtils.CODE_PATTERN, message = "Can only contain numbers")
+	private String contact;
 
-	@Email
+	@Email(message = "Insert a valid email")
 	private String email;
 
 	@ManyToOne
 	@JoinColumn(name = "prisonId", referencedColumnName = "prisonId", nullable = true)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Prison prison;
-
-	@ManyToOne
-	@JoinColumn(name = "createdBy", referencedColumnName = "userId", nullable = true)
-	@OnDelete(action = OnDeleteAction.CASCADE)
-	private User createdBy;
 
 	@CreationTimestamp
 	private LocalDateTime createdTimestamp;
@@ -89,14 +99,12 @@ public class User {
 	}
 
 	public User(Long userId, String username, String password, Date birthDate, String nationality, String address,
-			String location, String name, String photo, int contact, String email, Prison prison, User createdBy,
+			String location, String name, String photo, String contact, String email, Prison prison,
 			LocalDateTime createdTimestamp, Set<Role> roles, Date lastLogin) {
 		super();
 		this.userId = userId;
 		this.username = username;
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		String hashedPassword = passwordEncoder.encode(password);
-		this.password = hashedPassword;
+		this.password = password;
 		this.birthDate = birthDate;
 		this.nationality = nationality;
 		this.address = address;
@@ -106,7 +114,6 @@ public class User {
 		this.contact = contact;
 		this.email = email;
 		this.prison = prison;
-		this.createdBy = createdBy;
 		this.createdTimestamp = createdTimestamp;
 		this.roles = roles;
 		this.lastLogin = lastLogin;
@@ -148,7 +155,7 @@ public class User {
 		return photo;
 	}
 
-	public int getContact() {
+	public String getContact() {
 		return contact;
 	}
 
@@ -158,10 +165,6 @@ public class User {
 
 	public Prison getPrison() {
 		return prison;
-	}
-
-	public User getCreatedBy() {
-		return createdBy;
 	}
 
 	public LocalDateTime getCreatedTimestamp() {
@@ -185,9 +188,7 @@ public class User {
 	}
 
 	public void setPassword(String password) {
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		String hashedPassword = passwordEncoder.encode(password);
-		this.password = hashedPassword;
+		this.password = password;
 	}
 
 	public void setBirthDate(Date birthDate) {
@@ -214,7 +215,7 @@ public class User {
 		this.photo = photo;
 	}
 
-	public void setContact(int contact) {
+	public void setContact(String contact) {
 		this.contact = contact;
 	}
 
@@ -224,10 +225,6 @@ public class User {
 
 	public void setPrison(Prison prison) {
 		this.prison = prison;
-	}
-
-	public void setCreatedBy(User createdBy) {
-		this.createdBy = createdBy;
 	}
 
 	public void setCreatedTimestamp(LocalDateTime createdTimestamp) {

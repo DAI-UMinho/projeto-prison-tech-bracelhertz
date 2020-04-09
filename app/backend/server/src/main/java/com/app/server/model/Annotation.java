@@ -1,7 +1,8 @@
 package com.app.server.model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,81 +17,77 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.UpdateTimestamp;
 
+@Entity(name = "annotation")
+@Table(name = "annotation")
+public class Annotation {
 
-@Entity(name="anotation")
-@Table(name="anotation")
-public class Anotation{
-	
-	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long anotationId;
-	
-	
-	@ManyToOne()
-    @JoinColumn(name = "createdBy", referencedColumnName = "userId", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long annotationId;
+
+	@ManyToOne
+	@JoinColumn(name = "createdBy", referencedColumnName = "userId", nullable = false)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private User createdBy;
-	
-	@ManyToOne()
-    @JoinColumn(name = "userDestId", referencedColumnName = "userId", nullable = true)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+
+	@ManyToOne
+	@JoinColumn(name = "userDestId", referencedColumnName = "userId", nullable = true)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private User userDest;
-	
-	
-	@ManyToOne()
-    @JoinColumn(name = "prisonDestId", referencedColumnName = "prisonId", nullable = true)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+
+	@ManyToOne
+	@JoinColumn(name = "prisonDestId", referencedColumnName = "prisonId", nullable = true)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Prison prisonDest;
-	
-	
-	@ManyToOne()
-    @JoinColumn(name = "prisonerDestId", referencedColumnName = "prisonerId", nullable = true)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+
+	@ManyToOne
+	@JoinColumn(name = "prisonerDestId", referencedColumnName = "prisonerId", nullable = true)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Prisoner prisonerDest;
-	
-	@ManyToOne()
-    @JoinColumn(name = "anotationDestId", referencedColumnName = "anotationId", nullable = true)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-	private Anotation anotationDest;
-	
+
+	@ManyToOne
+	@JoinColumn(name = "annotationDestId", referencedColumnName = "annotationId", nullable = true)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	private Annotation annotationDest;
+
 	@NotBlank
 	private String title;
-	
-	
+
 	@NotBlank
 	private String description;
-	
+
 	@CreationTimestamp
-	private Date createdTimestamp;
-	
+	@Column(columnDefinition = "datetime default CURRENT_TIMESTAMP")
+	private LocalDateTime createdTimestamp;
+
 	@UpdateTimestamp
-	private Date lastUpdatedTimestamp;
+	private LocalDateTime lastUpdatedTimestamp;
 
-	public Anotation() {}
+	public Annotation() {
+	}
 
-	public Anotation(Long anotationId, User createdBy, User userDest, Prison prisonDest, Prisoner prisonerDest,
-			Anotation anotationDest, String title, String description, Date createdTimestamp,
-			Date lastUpdatedTimestamp) {
+	public Annotation(Long annotationId, User createdBy, User userDest, Prison prisonDest, Prisoner prisonerDest,
+			Annotation annotationDest, String title, String description, LocalDateTime createdTimestamp,
+			LocalDateTime lastUpdatedTimestamp) {
 		super();
-		this.anotationId = anotationId;
+		this.annotationId = annotationId;
 		this.createdBy = createdBy;
 		this.userDest = userDest;
 		this.prisonDest = prisonDest;
 		this.prisonerDest = prisonerDest;
-		this.anotationDest = anotationDest;
+		this.annotationDest = annotationDest;
 		this.title = title;
 		this.description = description;
 		this.createdTimestamp = createdTimestamp;
 		this.lastUpdatedTimestamp = lastUpdatedTimestamp;
 	}
 
-	public Long getAnotationId() {
-		return anotationId;
+	public Long getAnnotationId() {
+		return annotationId;
 	}
 
-	public void setAnotationId(Long anotationId) {
-		this.anotationId = anotationId;
+	public void setAnnotationId(Long annotationId) {
+		this.annotationId = annotationId;
 	}
 
 	public User getCreatedBy() {
@@ -125,12 +122,12 @@ public class Anotation{
 		this.prisonerDest = prisonerDest;
 	}
 
-	public Anotation getAnotationDest() {
-		return anotationDest;
+	public Annotation getAnnotationDest() {
+		return annotationDest;
 	}
 
-	public void setAnotationDest(Anotation anotationDest) {
-		this.anotationDest = anotationDest;
+	public void setAnnotationDest(Annotation annotationDest) {
+		this.annotationDest = annotationDest;
 	}
 
 	public String getTitle() {
@@ -149,21 +146,20 @@ public class Anotation{
 		this.description = description;
 	}
 
-	public Date getCreatedTimestamp() {
+	public LocalDateTime getCreatedTimestamp() {
 		return createdTimestamp;
 	}
 
-	public void setCreatedTimestamp(Date createdTimestamp) {
+	public void setCreatedTimestamp(LocalDateTime createdTimestamp) {
 		this.createdTimestamp = createdTimestamp;
 	}
 
-	public Date getLastUpdatedTimestamp() {
+	public LocalDateTime getLastUpdatedTimestamp() {
 		return lastUpdatedTimestamp;
 	}
 
-	public void setLastUpdatedTimestamp(Date lastUpdatedTimestamp) {
+	public void setLastUpdatedTimestamp(LocalDateTime lastUpdatedTimestamp) {
 		this.lastUpdatedTimestamp = lastUpdatedTimestamp;
 	}
-
 
 }

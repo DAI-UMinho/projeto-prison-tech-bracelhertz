@@ -1,19 +1,26 @@
 package com.app.server.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.app.server.model.Schedule;
-
+import com.app.server.model.User;
 
 @Repository
-public interface ScheduleRepository extends JpaRepository<Schedule, Long>{
+public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
 
-	Schedule findById(long scheduleId);
-	
-	/*
-	@Query("Select U.id_user, I.nome, A FROM utilizador U, Recluso R,  Agenda A, Instituicao I WHERE R.id_instituicao = U.id_instituicao  AND A.id_agenda = :id_agenda")
-	Optional<List<Agenda>> findByIdAgenda(@Param("idAgenda") Long idAgenda);
-	*/
-	
+	Schedule findByScheduleId(Long scheduleId);
+
+	List<Schedule> findByUser(User user);
+
+	@Transactional
+	@Modifying
+	@Query("DELETE From schedule WHERE schedule_id = ?1 AND user_id = ?2")
+	void deleteSchedule(Long scheduleId, Long userId);
+
 }

@@ -16,36 +16,35 @@ import org.springframework.web.bind.annotation.RestController;
 import com.app.server.model.AlertLog;
 import com.app.server.repository.AlertLogRepository;
 
-
 @RestController
 @RequestMapping(value = "/api")
 public class AlertLogController {
 
 	@Autowired
 	AlertLogRepository alertLogRepository;
-	
+
 	@GetMapping("/alert-logs")
-	public List<AlertLog> listAlertLog(){
+	public List<AlertLog> listAlertLog() {
 		return alertLogRepository.findAll();
 	}
-	
+
 	@GetMapping("/alert-logs/{alertLogId}")
-	public AlertLog listAlertLog(@PathVariable(value="alertLogId") long alertLogId){
+	public AlertLog listAlertLog(@PathVariable(value = "alertLogId") long alertLogId) {
 		return alertLogRepository.findById(alertLogId);
 	}
-	
+
 	@PostMapping("/alert-logs")
 	public AlertLog saveAlertLog(@RequestBody AlertLog alertLog) {
 		return alertLogRepository.save(alertLog);
 	}
-	
+
 	@PutMapping("/alert-logs")
 	public AlertLog updateAlertLog(@RequestBody AlertLog alertLog) {
 		return alertLogRepository.save(alertLog);
 	}
-	
+
 	@DeleteMapping("/alert-logs/{alertLogId}")
-	public void deleteAlertLog(@PathVariable(value="alertLogId") long alertLogId){
+	public void deleteAlertLog(@PathVariable(value = "alertLogId") long alertLogId) {
 		alertLogRepository.deleteById(alertLogId);
 	}
 }
