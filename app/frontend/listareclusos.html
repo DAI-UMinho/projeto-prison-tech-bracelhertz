@@ -165,7 +165,7 @@
               </div>
             </li>
 
-         
+
 
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
@@ -211,10 +211,31 @@
               <div class="card shadow mb-4">
                 <div class="card-header py-3 bg-secondary">
                   <div class="m-0 font-weight-bold text-white full_tab">
-                    <div class="tab_nome">Lista de Reclusos:</div>
-                    <div id="esconder" style="display: none;"><div type="button" onclick="location.href='registar_recluso.html'"
-                      class="d-flex d-sm btn btn-sm btn-white font-weight-bold shadow-sm"><i
-                        class="mt-1 mr-1 fas fa-plus fa-xs tab_time text-secondary"></i> Adicionar</div></div>
+                    <div class="tab_nome col-10">Lista de Reclusos:</div>
+
+
+
+                    <div class="row" id="esconder" style="display: none;">
+                      <div class="col-2" id="show_information">
+                      </div>
+
+
+                      <div id="ck-button" class="col-4" style="padding-right: 4px;">
+                        <label class="mt-23">
+                          <input type="checkbox" name="editar_check" style="opacity: 0;" value="1"><span id="coisaa"
+                            style="padding-left: 6px;"
+                            class="d-flex d-sm btn btn-sm btn-white font-weight-bold shadow-sm mb-0 w-100"><i
+                              class="mt-1 mr-1 fas fa-pen fa-xs tab_time text-secondary disinline"></i>Editar</span>
+                        </label>
+                      </div>
+                      <div class="col-5">
+                        <button onclick="location.href='registar_recluso.html'"
+                          class="d-flex d-sm btn btn-sm btn-white font-weight-bold shadow-sm wid100 mr-140"> <i
+                            class="mt-1 mr-1 fas fa-plus fa-xs tab_time text-secondary disinline"></i>
+                          Adicionar
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div class="card-body">
@@ -476,7 +497,8 @@
   </a>
 
   <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -489,6 +511,32 @@
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
           <button class="btn btn-primary" id="botaoLogout">Terminar Sessão</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Delete Modal-->
+  <div class="modal fade t-1" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Eliminar conteúdo</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Tens a certeza que queres eliminar os elementos selecionados?</div>
+        <ul id="displayList" style="list-style: none;">
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+          <button class="btn btn-primary" id="eliminar_linhas">Eliminar</button>
         </div>
       </div>
     </div>

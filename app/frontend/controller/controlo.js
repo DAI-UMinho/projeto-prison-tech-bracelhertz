@@ -126,6 +126,8 @@ $(window).on("load", function () {
 
 })
 
+//-----------------------------------LOGOUT-----------------------------------------
+
 const botaoLogout = document.getElementById("botaoLogout");
 
 botaoLogout.addEventListener("click", sair);

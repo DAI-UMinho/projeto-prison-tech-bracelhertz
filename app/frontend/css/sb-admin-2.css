@@ -12010,10 +12010,16 @@ input:checked + div:before {
     vertical-align: middle !important;
 }
 
+#tabelaRecluso tr.selecionado td{
+  background-color: #1b2c47;
+  color: white;
+}
+
+#tabelaFuncionarios tr.selecionado td{
+  background-color: #1b2c47;
+  color: white;
+}
 /*----------------------------------------------------------Novo Codigo---------------------------------------------------------*/
 
 
-#minhaTabela tr.selecionado td{
-  background-color: #aff7ff;
-}
 

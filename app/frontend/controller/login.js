@@ -1,5 +1,5 @@
 window.onload = async function () {
-    localStorage.clear();
+    
     var pi = 0;
     const botaoLogin = document.getElementById("botaoLogin");
 
