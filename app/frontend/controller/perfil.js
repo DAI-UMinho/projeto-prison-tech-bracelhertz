@@ -157,7 +157,7 @@ async function editar() {
   async function editar_guarda(coisa) {
 
 
-    fetch('http://127.0.0.1:8080/api/users/guards', {
+    fetch('http://127.0.0.1:8080/api/users/by-guards', {
       headers: {
         'Content-Type': 'application/json'
       },
@@ -355,9 +355,11 @@ async function editar_photo(photoC) {
       else {
         Swal.fire(
           'Ocorreu um erro!',
-          '',
+          'Foto apenas pode ter até 1.048576 MB',
           'error'
-        )
+        ).then(() => {
+          location.reload();
+        })
         console.log(result);
         //swal({ title: `${result.value.userMessage.message.pt}` });
       }
@@ -496,8 +498,8 @@ function Myfunction425() {
 //------------------------------------------------ALTERAR PASSWORD---------------------------------------------------------------
 
 document.getElementById("editPass").addEventListener("click", function () {
-var aPassword = document.getElementById("aPassword");
-var nPassword = document.getElementById("nPassword");
+  var aPassword = document.getElementById("aPassword");
+  var nPassword = document.getElementById("nPassword");
   var data = {};
 
   if (aPassword.value.trim() == "" || nPassword.value.trim() == "") {
@@ -548,9 +550,9 @@ var nPassword = document.getElementById("nPassword");
               'Password alterada com sucesso!',
               '',
               'success'
-          ).then(() => {
-            location.reload();
-          })
+            ).then(() => {
+              location.reload();
+            })
 
 
           }

@@ -154,7 +154,7 @@ async function post_photo(photoC, idPrisao) {
       else {
         Swal.fire(
           'Ocorreu um erro!',
-          '',
+          'Foto apenas pode ter até 1.048576 MB',
           'error'
         )
         console.log(result);

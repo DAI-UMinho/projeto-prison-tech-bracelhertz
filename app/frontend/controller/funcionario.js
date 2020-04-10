@@ -20,7 +20,7 @@ $(window).on("load", function () {
 
       //envia a para a pagina
       document.getElementById("funcaoF").value = perfil.roles[0].name;
-      document.getElementById("nFuncionario").value = perfil.username;
+      document.getElementById("nFuncionario").innerHTML = perfil.username;
       document.getElementById("id_instituicao").value = perfil.prison.prisonId;
       document.getElementById("dn_funcionario").value = perfil.birthDate;
       document.getElementById("nacF").value = perfil.nationality;
@@ -34,9 +34,11 @@ $(window).on("load", function () {
       document.getElementById("last_login").innerHTML = "Último login: " + getDate(perfil.lastLogin);
 
 
+
       if (!(RoleLogado == "ROLE_NETWORKMAN" && perfil.roles[0].name !== "ROLE_NETWORKMAN" || RoleLogado == "ROLE_MANAGER" && perfil.roles[0].name == "ROLE_GUARD")) {
         document.getElementById("perfil_alterar_2").style.display = "none";
         document.getElementById("editPassoutro").style.display = "none";
+        document.getElementById("naoAnotar").style.display = "none";
       }
 
     }
@@ -159,16 +161,16 @@ document.getElementById("perfil_save_2").addEventListener("click", async functio
   data.contact = document.getElementById("contactoF").value.trim();
   data.email = document.getElementById("emailF").value.trim();
   data.prisonId = document.getElementById("id_instituicao").value;
-  
+
 
   if (data.birthDate == "" || data.nationality == "" || data.address == "" || data.location == "" || data.name == "" ||
     data.contact == "" || data.contact.length !== 9 || data.email == "") {
 
-      Swal.fire(
-        'Preencha todos os campos!',
-        '',
-        'warning'
-      )
+    Swal.fire(
+      'Preencha todos os campos!',
+      '',
+      'warning'
+    )
 
   } else {
     if (validacaoEmail(document.getElementById("emailF"))) {
@@ -177,68 +179,68 @@ document.getElementById("perfil_save_2").addEventListener("click", async functio
 
 
       console.log(data)
-  
-    fetch('http://127.0.0.1:8080/api/users/managers', {
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      mode: 'cors',
-      method: 'PUT',
-      body: JSON.stringify(data),
-      credentials: 'include'
-    })
-      .then(function (response) {
-        //console.log(response.headers.get('Set-Cookie'));
-        console.log(response);
-        if (!response.ok) {
-          throw new Error(response.statusText);
-        }
-        return response.json();
-      })
-      .catch(function (err) {
-        //swal.showValidationError('Pedido falhado: ' + err);
-        console.log(err); // estava alert(err); coloquei console log para não estar sempre a aparecer pop-up ao utilizador
-      })
-      .then(async function (result) {
-        console.log(result);
-        if (result) {
-  
-  
-          const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 1000,
-            timerProgressBar: true,
-            onOpen: (toast) => {
-              toast.addEventListener('mouseenter', Swal.stopTimer)
-              toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-          })
-  
-          Toast.fire({
-            icon: 'success',
-            title: 'Dados alterados com sucesso'
-          }).then(() => {
-            Myfunction425()
-          })
-  
-  
-        }
-        else {
-          Swal.fire(
-            'Ocorreu um erro!',
-            '',
-            'error'
-          ).then(() => {
-            location.reload();
-          })
-          console.log(result);
-          //swal({ title: `${result.value.userMessage.message.pt}` });
-        }
-      });
 
-    }else{
+      fetch('http://127.0.0.1:8080/api/users/managers', {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        mode: 'cors',
+        method: 'PUT',
+        body: JSON.stringify(data),
+        credentials: 'include'
+      })
+        .then(function (response) {
+          //console.log(response.headers.get('Set-Cookie'));
+          console.log(response);
+          if (!response.ok) {
+            throw new Error(response.statusText);
+          }
+          return response.json();
+        })
+        .catch(function (err) {
+          //swal.showValidationError('Pedido falhado: ' + err);
+          console.log(err); // estava alert(err); coloquei console log para não estar sempre a aparecer pop-up ao utilizador
+        })
+        .then(async function (result) {
+          console.log(result);
+          if (result) {
+
+
+            const Toast = Swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 1000,
+              timerProgressBar: true,
+              onOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+              }
+            })
+
+            Toast.fire({
+              icon: 'success',
+              title: 'Dados alterados com sucesso'
+            }).then(() => {
+              Myfunction425()
+            })
+
+
+          }
+          else {
+            Swal.fire(
+              'Ocorreu um erro!',
+              '',
+              'error'
+            ).then(() => {
+              location.reload();
+            })
+            console.log(result);
+            //swal({ title: `${result.value.userMessage.message.pt}` });
+          }
+        });
+
+    } else {
       Swal.fire(
         'Este email não é válido!',
         '',

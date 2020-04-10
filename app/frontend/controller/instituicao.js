@@ -341,9 +341,11 @@ async function editar_photo(photoC) {
             else {
                 Swal.fire(
                     'Ocorreu um erro!',
-                    '',
+                    'Foto apenas pode ter até 1.048576 MB',
                     'error'
-                )
+                ).then(() => {
+                    location.reload();
+                })
                 console.log(result);
                 //swal({ title: `${result.value.userMessage.message.pt}` });
             }

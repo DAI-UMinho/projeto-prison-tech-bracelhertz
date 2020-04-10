@@ -38,7 +38,7 @@ window.onload = async function () {
         'warning'
       )
     } else {
-      
+
       var verificar = document.getElementById("username").value.trim();
 
       const response = await fetch('http://127.0.0.1:8080/api/users/username-exists/' + verificar, {
@@ -50,8 +50,8 @@ window.onload = async function () {
         credentials: 'include'
       });
       const existe = await response.json();
-    
-    
+
+
       if (existe) {
         Swal.fire(
           'Este username já existe!',
@@ -59,85 +59,85 @@ window.onload = async function () {
           'warning'
         )
       } else {
-        
 
-if (pic == "") {
-        Swal.fire(
-          'É obrigatória uma fotografia!',
-          '',
-          'warning'
-        )
-      } else {
-        if (validacaoEmail(document.getElementById("email"))) {
-          if (valida_nome(Fname.value) || valida_nome(document.getElementById("nacionalidade"))
-            || valida_nome(document.getElementById("localidade"))) {
-            if (valida()) {
+
+        if (pic == "") {
+          Swal.fire(
+            'É obrigatória uma fotografia!',
+            '',
+            'warning'
+          )
+        } else {
+          if (validacaoEmail(document.getElementById("email"))) {
+            if (valida_nome(Fname.value) || valida_nome(document.getElementById("nacionalidade"))
+              || valida_nome(document.getElementById("localidade"))) {
+              if (valida()) {
+                Swal.fire(
+                  'Palavra-passe não cumpre os requisitos!',
+                  '',
+                  'warning'
+                )
+              } else {
+                console.log(data);
+
+
+
+
+                await fetch('http://127.0.0.1:8080/api/users', {
+                  headers: {
+                    'Content-Type': 'application/json'
+                  },
+                  mode: 'cors',
+                  method: 'POST',
+                  credentials: 'include',
+                  body: JSON.stringify(data)
+
+                }).then(function (response) {
+                  if (!response.ok) {
+                    alert(response);
+                    throw new Error("ERRO");
+                  }
+                  console.log(response);
+                  return response.json();
+                }).then(async function (result) {
+                  console.log(result);
+                  if (result) {
+
+
+                    post_photo(formData, result.objectId);
+
+
+                  }
+
+
+
+
+                }).catch(function (err) {
+                  swal("Erro!", "Erro!", "error");
+                })
+
+              }
+
+
+            } else {
               Swal.fire(
-                'Palavra-passe não cumpre os requisitos!',
+                'Nome, Localidade e Nacionalidade apenas podem ter letras!',
                 '',
                 'warning'
               )
-            } else {
-              console.log(data);
-
-
-
-
-              await fetch('http://127.0.0.1:8080/api/users', {
-                headers: {
-                  'Content-Type': 'application/json'
-                },
-                mode: 'cors',
-                method: 'POST',
-                credentials: 'include',
-                body: JSON.stringify(data)
-
-              }).then(function (response) {
-                if (!response.ok) {
-                  alert(response);
-                  throw new Error("ERRO");
-                }
-                console.log(response);
-                return response.json();
-              }).then(async function (result) {
-                console.log(result);
-                if (result) {
-
-
-                  post_photo(formData, result.objectId);
-
-
-                }
-
-
-
-
-              }).catch(function (err) {
-                swal("Erro!", "Erro!", "error");
-              })
-
             }
-
-
           } else {
             Swal.fire(
-              'Nome, Localidade e Nacionalidade apenas podem ter letras!',
+              'Este email não é válido!',
               '',
               'warning'
             )
           }
-        } else {
-          Swal.fire(
-            'Este email não é válido!',
-            '',
-            'warning'
-          )
         }
-      }
 
 
       }
-      
+
 
     }
 
@@ -491,7 +491,7 @@ async function post_photo(photoC, idGajo) {
       else {
         Swal.fire(
           'Ocorreu um erro!',
-          '',
+          'Foto apenas pode ter até 1.048576 MB',
           'error'
         )
         console.log(result);

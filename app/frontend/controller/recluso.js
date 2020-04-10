@@ -100,7 +100,7 @@ $(window).on("load", function () {
                     for (var registo of recluso.criminalRecord) {
                         showRegisto += "<li><input class='testee' id='" + registo.criminalRecordId + "' type='checkbox' name='" + registo.criminalRecordId + "' disabled='true'>"
                         showRegisto += "<div class='label'><label for='" + registo.criminalRecordId + "'>";
-                        showRegisto += "<span data-tooltip='Emissão "+getDate3(registo.emissionDate)+"' data-tooltip-position='bottom'>" + registo.description + "</span></label><br></div></li>";
+                        showRegisto += "<span data-tooltip='Emissão " + getDate3(registo.emissionDate) + "' data-tooltip-position='bottom'>" + registo.description + "</span></label><br></div></li>";
                         showRegisto += "";
                         if (i == 0) {
                             mrecente = new Date(registo.lastUpdatedTimestamp);
@@ -251,7 +251,7 @@ $(window).on("load", function () {
 
 
 
-    
+
 })
 
 
@@ -842,9 +842,11 @@ async function editar_photo(photoC) {
             else {
                 Swal.fire(
                     'Ocorreu um erro!',
-                    '',
+                    'Foto apenas pode ter até 1.048576 MB',
                     'error'
-                )
+                ).then(() => {
+                    location.reload();
+                })
                 console.log(result);
                 //swal({ title: `${result.value.userMessage.message.pt}` });
             }

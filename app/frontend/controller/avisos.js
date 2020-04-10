@@ -157,7 +157,7 @@ $(window).on("load", function () {
                 true_content += "<div class='card-body'><div style='margin-top:-12px;'class='text-primary'>";
                 true_content += "<img class='img-profile rounded-circle picNotes' src=" + aviso.utilizador.img + "> " + aviso.utilizador.nome;
                 true_content += " <span class='text-xs'> " + aviso.createdTimestamp + "</span></div><br>";
-                true_content += "<div>Recluso: " + aviso.idReclusoDestino + "</div><textarea class='alterar form-control' style='resize: none; border: none; background-color:transparent;'>" + aviso.descricao + "</textarea>";
+                true_content += "<div>Recluso: " + aviso.idReclusoDestino + "</div><textarea class='alterar form-control' style='resize: none; border: none; background-color:transparent;' readonly='true'>" + aviso.descricao + "</textarea>";
 
                 if (aviso.comentarios.length == 0) {
 
@@ -196,7 +196,7 @@ $(window).on("load", function () {
 
 });
 
-//---------------------------------------------------DISPLAY INSTITUIÇÕES------------------------------------------------
+//---------------------------------------------------DISPLAY POST INSTITUIÇÕES------------------------------------------------
 
 function get_instituicoes() {
     async function fetchAsync() {
@@ -226,7 +226,7 @@ function get_instituicoes() {
 
 
 
-//---------------------------------------------------DISPLAY PRISIONEIROS------------------------------------------------
+//---------------------------------------------------DISPLAY POST PRISIONEIROS------------------------------------------------
 
 function get_reclusos() {
     async function fetchAsync() {
@@ -279,7 +279,7 @@ async function novaNota() {
 
     data.title = document.getElementById("titleN").value.trim();
     data.description = document.getElementById("descriptionN").value.trim();
-    
+
 
     if (titleN.value == "" || descriptionN.value == "") {
         Swal.fire(
@@ -301,7 +301,7 @@ async function novaNota() {
 
 }
 
-//-------------------------------POST DE INSTITUIÇÃO-------------------------------
+//-------------------------------POST DE ANOTAÇÃO INSTITUIÇÃO-------------------------------
 async function postInst(data) {
 
     await fetch('http://127.0.0.1:8080/api/prison-annotations', {
@@ -337,7 +337,7 @@ async function postInst(data) {
 
 }
 
-//-------------------------------POST DE RECLUSO-------------------------------
+//-------------------------------POST REC ANOTAÇÃO RECLUSO-------------------------------
 async function postRec(data) {
 
     await fetch('http://127.0.0.1:8080/api/prisoner-annotations', {
@@ -392,32 +392,5 @@ document.getElementById("tipoDest").addEventListener("change", function () {
 
 //-------------------------------------------------------------------------------------------------------------
 
-
-$(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-})
-
-function changeTooltip() {
-    document.getElementById('cona').setAttribute('data-tooltip', aviso.editado.lastUpdatedTimestamp);
-}
-
-
-
-const willEdit = document.getElementById("willEdit");
-willEdit.addEventListener("click", function () {
-    const showInformation = document.getElementById("show_information");
-
-    let show_information = "";
-
-
-
-    show_information += "<textarea class='form-control mb-1 textarea2' rows='1' cols='1' placeholder='Recluso'> '" + aviso.recluso + "' </textarea>"
-    show_information += "<textarea class='form-control mb-1 textarea2' rows='1' cols='1' placeholder='Assunto'> '" + aviso.name + "' </textarea>"
-    show_information += "<textarea class='form-control textarea1' rows='6' cols='60' placeholder='Escreva aqui a nota...'> '" + aviso.content + "' </textarea>"
-    show_information += "<div class='modal-footer'><button class='btn btn-secondary' type='button' data-dismiss='modal'>Cancelar</button>"
-    show_information += "<a class='btn btn-primary' id='enviar_edicao' href='#'>Enviar</a></div>"
-
-    showInformation.innerHTML = show_information;
-});
 
 
