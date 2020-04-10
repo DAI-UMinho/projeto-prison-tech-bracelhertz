@@ -606,6 +606,30 @@
     </div>
   </div>
 
+    <!-- Nota Modal-->
+    <div class="modal fade" id="NotaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <form class="modal-content">
+          <div class="modal-header bg-gradient-primary text-white" style="margin-right:-0.5px;">
+            <h5 class="modal-title text-white" id="exampleModalLabel">Nova Anotação</h5>
+            <button class="close text-white" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <textarea id="titleN" class="form-control mb-1 textarea2" rows="1" cols="1" placeholder="Assunto (título)"></textarea>
+            <textarea id="descriptionN" class="form-control textarea1" rows="6" cols="60" placeholder="Escreva aqui a nota"></textarea>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+            <input type="submit" class="btn btn-primary" id="enviar_novo" value="Criar">
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

@@ -212,6 +212,46 @@ $(window).on("load", function () {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
 })
 
 
@@ -571,23 +611,9 @@ async function novaNota() {
 
     let id_user_clicked = localStorage.getItem("id_user_clicked");
 
-    let userLogado = localStorage.getItem("userLogado");
-    const response = await fetch('http://127.0.0.1:8080/api/users/' + userLogado, {
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        mode: 'cors',
-        method: 'GET',
-        credentials: 'include'
-    });
-    const logado = await response.json();
-    console.log(logado);
-
-
     data.title = document.getElementById("titleN").value.trim();
     data.description = document.getElementById("descriptionN").value.trim();
-    data.createdBy = { userId: logado.userId };
-    data.prisonerDest = { prisonerId: parseInt(id_user_clicked) };
+    data.prisonerDestId = id_user_clicked;
 
     if (titleN.value == "" || descriptionN.value == "") {
         Swal.fire(
@@ -599,7 +625,7 @@ async function novaNota() {
 
         console.log(data);
 
-        await fetch('http://127.0.0.1:8080/api/anotations', {
+        await fetch('http://127.0.0.1:8080/api/prisoner-annotations', {
             headers: {
                 'Content-Type': 'application/json'
             },

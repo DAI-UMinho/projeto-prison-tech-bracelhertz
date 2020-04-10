@@ -280,74 +280,140 @@ let id_inst_clicked = localStorage.getItem("id_inst_clicked");
 var loadFile = function (event) {
     var image = document.getElementById('fotoinst');
     image.src = URL.createObjectURL(event.target.files[0]);
-  
+
     const formData = new FormData();
     formData.append("file", event.target.files[0]);
-  
+
     editar_photo(formData);
-  
-  
-  };
-  
-  async function editar_photo(photoC) {
-  
-  
+
+
+};
+
+async function editar_photo(photoC) {
+
+
     fetch('http://127.0.0.1:8080/api/prisons/upload-photos/' + id_inst_clicked, {
-      mode: 'cors',
-      method: 'PUT',
-      body: photoC,
-      credentials: 'include'
+        mode: 'cors',
+        method: 'PUT',
+        body: photoC,
+        credentials: 'include'
     })
-      .then(function (response) {
-        //console.log(response.headers.get('Set-Cookie'));
-        console.log(response);
-        if (!response.ok) {
-          throw new Error(response.statusText);
-        }
-        return response.json();
-      })
-      .catch(function (err) {
-        //swal.showValidationError('Pedido falhado: ' + err);
-        console.log(err); // estava alert(err); coloquei console log para não estar sempre a aparecer pop-up ao utilizador
-      })
-      .then(async function (result) {
-        console.log(result);
-        if (result) {
-  
-  
-  
-          const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 1000,
-            timerProgressBar: true,
-            onOpen: (toast) => {
-              toast.addEventListener('mouseenter', Swal.stopTimer)
-              toast.addEventListener('mouseleave', Swal.resumeTimer)
+        .then(function (response) {
+            //console.log(response.headers.get('Set-Cookie'));
+            console.log(response);
+            if (!response.ok) {
+                throw new Error(response.statusText);
             }
-          })
-  
-          Toast.fire({
-            icon: 'success',
-            title: 'Dados alterados com sucesso'
-          }).then(() => {
-            location.reload();
-          })
-  
-  
-  
-        }
-        else {
-          Swal.fire(
-            'Ocorreu um erro!',
+            return response.json();
+        })
+        .catch(function (err) {
+            //swal.showValidationError('Pedido falhado: ' + err);
+            console.log(err); // estava alert(err); coloquei console log para não estar sempre a aparecer pop-up ao utilizador
+        })
+        .then(async function (result) {
+            console.log(result);
+            if (result) {
+
+
+
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 1000,
+                    timerProgressBar: true,
+                    onOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Dados alterados com sucesso'
+                }).then(() => {
+                    location.reload();
+                })
+
+
+
+            }
+            else {
+                Swal.fire(
+                    'Ocorreu um erro!',
+                    '',
+                    'error'
+                )
+                console.log(result);
+                //swal({ title: `${result.value.userMessage.message.pt}` });
+            }
+        });
+
+
+}
+
+
+
+//------------------------------------------ANOTAÇÃO--------------------------------------------------------
+
+
+const enviar_novo = document.getElementById("enviar_novo");
+enviar_novo.addEventListener("click", novaNota);
+
+async function novaNota() {
+    event.preventDefault();
+    var data = {};
+
+    let id_inst_clicked = localStorage.getItem("id_inst_clicked");
+
+
+    data.title = document.getElementById("titleN").value.trim();
+    data.description = document.getElementById("descriptionN").value.trim();
+    data.prisonDestId = id_inst_clicked;
+
+    if (titleN.value == "" || descriptionN.value == "") {
+        Swal.fire(
+            'Preencha todos os campos!',
             '',
-            'error'
-          )
-          console.log(result);
-          //swal({ title: `${result.value.userMessage.message.pt}` });
-        }
-      });
-  
-  
-  }
+            'warning'
+        )
+    } else {
+
+
+
+        await fetch('http://127.0.0.1:8080/api/prison-annotations', {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            mode: 'cors',
+            method: 'POST',
+            credentials: 'include',
+            body: JSON.stringify(data)
+
+        }).then(function (response) {
+            if (!response.ok) {
+                alert(response);
+                throw new Error("ERRO");
+            }
+            console.log(response);
+            return response.json();
+        }).then(async function (result) {
+            console.log(result);
+            if (result) {
+                swal("Sucesso!",
+                    "Anotação enviada com sucesso!",
+                    "success").then(() => {
+                        document.getElementById("titleN").value = "";
+                        document.getElementById("descriptionN").value = "";
+                        $('#NotaModal').modal('hide');
+                    })
+            }
+        }).catch(function (err) {
+            swal("Erro!", "Erro!", "error");
+        })
+
+
+
+    }
+
+}

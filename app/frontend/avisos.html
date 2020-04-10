@@ -10,18 +10,18 @@
   <meta name="author" content="">
 
   <title>BracelHertZ - Avisos</title>
-  <link rel="icon" 
-      type="image/png" 
-      href="img/bracelhertzv3.png" />
+  <link rel="icon" type="image/png" href="img/bracelhertzv3.png" />
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
 
   <!-- Custom styles for this template-->
   <link href="css/sb-admin-2.css" rel="stylesheet">
 
-  
+
   <!-- Include Jquery here in a script tag -->
 
 </head>
@@ -129,7 +129,8 @@
           <!-- Topbar Search -->
           <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
             <div class="input-group">
-              <input type="text" class="form-control bg-light border-0 small" placeholder="Pesquisa aqui" aria-label="Search" aria-describedby="basic-addon2">
+              <input type="text" class="form-control bg-light border-0 small" placeholder="Pesquisa aqui"
+                aria-label="Search" aria-describedby="basic-addon2">
               <div class="input-group-append">
                 <button class="btn btn-primary" type="button">
                   <i class="fas fa-search fa-sm"></i>
@@ -143,14 +144,17 @@
 
             <!-- Nav Item - Search Dropdown (Visible Only XS) -->
             <li class="nav-item dropdown no-arrow d-sm-none">
-              <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-search fa-fw"></i>
               </a>
               <!-- Dropdown - Messages -->
-              <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
+              <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                aria-labelledby="searchDropdown">
                 <form class="form-inline mr-auto w-100 navbar-search">
                   <div class="input-group">
-                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                      aria-label="Search" aria-describedby="basic-addon2">
                     <div class="input-group-append">
                       <button class="btn btn-primary" type="button">
                         <i class="fas fa-search fa-sm"></i>
@@ -165,9 +169,11 @@
 
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
-              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
                 <span id="nomeUser" class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
-                <img id="avatarUser" class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                <img id="avatarUser" class="img-profile rounded-circle"
+                  src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -194,480 +200,524 @@
 
         <!-- Begin Page Content -->
         <div class="row">
-        <div class="col-10 pr-0">
-        <div class="container-fluid ">
+          <div class="col-10 pr-0">
+            <div class="container-fluid ">
 
-          <!-- Page Heading -->
-          <div class="d-sm-flex align-items-center justify-content-between mb-4 border-bottom-secondary">
-            <h1 class="h3 mb-0 text-secondary">Avisos</h1>
-            <div class="justify-content-end">
-            <select id="filtro" style="width: 137px;" class="dropdown form-control" onchange="getSelectValue();">
-              <span>Filtrar por...</span>
-              <div class="dropdown-content">
-                <option class="mb-n05" style="border: none; background: none;" value="reclusos">Reclusos</option>
-                <option class="mb-n1" style="border: none; background: none;" value="instituicoes">Instituições</option>
-              </div>
-            </select>
-          <span>
-            <a href="#" data-toggle="modal" data-target="#NotaModal" class="d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Nova Anotação</a>
-          </span>
-        </div>
-            <!---<a href="#" data-toggle="modal" data-target="#NotaModal" class="d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Nova nota</a>--->
-          </div>
-          <div id="real_content">
-          <!-- Dropdown Card Example -->
-          <div class="card shadow mb-4">
-            <!-- Card Header - Dropdown -->
-            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-secondary">
-              <h6 class="m-0 font-weight-bold text-white">Espancamento
-              
-              <span data-tooltip="Sexta-feira 11 Março 2020 14:24h" data-tooltip-position="bottom" class="text-white font-small font-weight-normal solve" id="cona">(Editado)</span></h6>
-              
-              <div class="dropdown no-arrow">
-                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="fas fa-ellipsis-v fa-sm fa-fw text-white"></i>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                  <div class="dropdown-header text-secondary">Opções:</div>
-                  <a class="dropdown-item" data-toggle="modal" data-target="#EditarNotaModal" id="willEdit" href="#">Editar</a>
-                  <a class="dropdown-item" href="#" id="apagar_aviso">Apagar</a>
-                  
-                  <a class="dropdown-item" href="#"></a>
+              <!-- Page Heading -->
+              <div class="d-sm-flex align-items-center justify-content-between mb-4 border-bottom-secondary">
+                <h1 class="h3 mb-0 text-secondary">Avisos</h1>
+                <div class="justify-content-end">
+                  <select id="filtro" style="width: 137px;" class="dropdown form-control">
+                    <span>Filtrar por...</span>
+                    <div class="dropdown-content">
+                      <option class="mb-n05" style="border: none; background: none;" value="reclusos">Reclusos</option>
+                      <option class="mb-n1" style="border: none; background: none;" value="instituicoes">Instituições
+                      </option>
+                    </div>
+                  </select>
+                  <span>
+                    <a href="#" data-toggle="modal" data-target="#NotaModal"
+                      class="d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm"><i
+                        class="fas fa-download fa-sm text-white-50"></i> Nova Anotação</a>
+                  </span>
                 </div>
+                <!---<a href="#" data-toggle="modal" data-target="#NotaModal" class="d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Nova nota</a>--->
               </div>
-            </div>
-            <!-- Card Body -->
-            <div class="card-body">
-              <div style="margin-top:-12px;" class="text-primary">
-                <img class="img-profile rounded-circle picNotes" src="img/perfil2.jpg"> João Teixeira
-                <span class="text-xs"> 12:35</span></div>
-                <br>
-                <div>Recluso: Carlos Teixeira</div>
-              <div class="mt-3">
+              <div id="real_content">
+                <!-- Dropdown Card Example -->
+                <div class="card shadow mb-4">
+                  <!-- Card Header - Dropdown -->
+                  <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-secondary">
+                    <h6 class="m-0 font-weight-bold text-white">Espancamento
+
+                      <span data-tooltip="Sexta-feira 11 Março 2020 14:24h" data-tooltip-position="bottom"
+                        class="text-white font-small font-weight-normal solve" id="cona">(Editado)</span></h6>
+
+                    <div class="dropdown no-arrow">
+                      <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-white"></i>
+                      </a>
+                      <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                        aria-labelledby="dropdownMenuLink">
+                        <div class="dropdown-header text-secondary">Opções:</div>
+                        <a class="dropdown-item" data-toggle="modal" data-target="#EditarNotaModal" id="willEdit"
+                          href="#">Editar</a>
+                        <a class="dropdown-item" href="#" id="apagar_aviso">Apagar</a>
+
+                        <a class="dropdown-item" href="#"></a>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Card Body -->
+                  <div class="card-body">
+                    <div style="margin-top:-12px;" class="text-primary">
+                      <img class="img-profile rounded-circle picNotes" src="img/perfil2.jpg"> João Teixeira
+                      <span class="text-xs"> 12:35</span></div>
+                    <br>
+                    <div>Recluso: Carlos Teixeira</div>
+                    <textarea class="alterar form-control" style="height: auto; resize: none; border: none;">
+Dropdown menus can be placed in the card header in order to extend the functionality of a basic card. In this dropdown card example, the Font Awesome vertical ellipsis icon in the card header can be clicked on in order to toggle a dropdown menu.
+                </textarea>
+                    <!--<div class="mt-3">
                 Dropdown menus can be placed in the card header in order to extend the functionality of a basic card. In this dropdown card example, the Font Awesome vertical ellipsis icon in the card header can be clicked on in order to toggle a dropdown menu.
-              </div>
-              <div class="text-black caixa-de-comentario no-border">
-                <div class="caixa-de-cometario-interior mt-1 mg-1">
-               <div class="comentario2">
-                <img class="img-profile rounded-circle picNotes mt-1 ml-1" src="img/perfil1.png"> Nelson Pereira
-                <div class="font-small text-gray-600 ml-3 mb-1 mt-1">
-                  Comentário...................
-                </div>
-               </div>
-                </div>
-              <div class="text-black">
-                <div class="caixa-de-cometario-interior mt-1 mg-1">
-               <div class="comentario2">
-                <img class="img-profile rounded-circle picNotes mt-1 ml-1" src="img/perfil1.png"> Nelson Pereira
-                <div class="font-small text-gray-600 ml-3 mb-1 mt-1">
-                  Comentário...................
-                </div>
-               </div>
-                </div>
-              </div>
-              <div class="text-black">
-                <div class="caixa-de-cometario-interior mt-1 mg-1">
-               <div class="comentario2">
-                <img class="img-profile rounded-circle picNotes mt-1 ml-1" src="img/perfil1.png"> Nelson Pereira
-                <div class="font-small text-gray-600 ml-3 mb-1 mt-1">
-                  Comentário...................
-                </div>
-               </div>
-                </div>
-              </div>
-              <div class="text-black">
-                <div class="caixa-de-cometario-interior mt-1 mg-1">
-               <div class="comentario2">
-                <img class="img-profile rounded-circle picNotes mt-1 ml-1" src="img/perfil1.png"> Nelson Pereira
-                <div class="font-small text-gray-600 ml-3 mb-1 mt-1">
-                  Comentário...................
-                </div>
-               </div>
-                </div>
-              </div>
-            </div>
+              </div>-->
+                    <br>
+                    <div class="w-100"> Comentários: </div>
+                    <div class="text-black caixa-de-comentario no-border">
+                      <div class="caixa-de-cometario-interior mt-1 mg-1">
+                        <div class="comentario2">
+                          <img class="img-profile rounded-circle picNotes mt-1 ml-1" src="img/perfil1.png"> Nelson
+                          Pereira
+                          <div class="font-small text-gray-600 ml-3 mb-1 mt-1">
+                            Comentário...................
+                          </div>
+                        </div>
+                      </div>
+                      <div class="text-black">
+                        <div class="caixa-de-cometario-interior mt-1 mg-1">
+                          <div class="comentario2">
+                            <img class="img-profile rounded-circle picNotes mt-1 ml-1" src="img/perfil1.png"> Nelson
+                            Pereira
+                            <div class="font-small text-gray-600 ml-3 mb-1 mt-1">
+                              Comentário...................
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="text-black">
+                        <div class="caixa-de-cometario-interior mt-1 mg-1">
+                          <div class="comentario2">
+                            <img class="img-profile rounded-circle picNotes mt-1 ml-1" src="img/perfil1.png"> Nelson
+                            Pereira
+                            <div class="font-small text-gray-600 ml-3 mb-1 mt-1">
+                              Comentário...................
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="text-black">
+                        <div class="caixa-de-cometario-interior mt-1 mg-1">
+                          <div class="comentario2">
+                            <img class="img-profile rounded-circle picNotes mt-1 ml-1" src="img/perfil1.png"> Nelson
+                            Pereira
+                            <div class="font-small text-gray-600 ml-3 mb-1 mt-1">
+                              Comentário...................
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
 
-              <div class="input-group">
-                <input type="text" class="form-control bg-light border-0 small mt-2" placeholder="Comente aqui..." aria-label="Add" aria-describedby="basic-addon2">
-                <div class="input-group-append">
-                  <button class="btn btn-secondary mt-2" id="botaoEnviarComentario" type="button">
-                    <i class="fas fa-envelope fa-sm"></i>
-                  </button>
+                    <div class="input-group">
+                      <input type="text" class="form-control bg-light border-0 small mt-2" placeholder="Comente aqui..."
+                        aria-label="Add" aria-describedby="basic-addon2">
+                      <div class="input-group-append">
+                        <button class="btn btn-secondary mt-2" id="botaoEnviarComentario" type="button">
+                          <i class="fas fa-envelope fa-sm"></i>
+                        </button>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <!-- Dropdown Card Example -->
+                <div class="card shadow mb-4">
+                  <!-- Card Header - Dropdown -->
+                  <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-secondary">
+                    <h6 class="m-0 font-weight-bold text-white">Utensilios perigosos</h6>
+                    <div class="dropdown no-arrow">
+                      <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-white"></i>
+                      </a>
+                      <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                        aria-labelledby="dropdownMenuLink">
+                        <div class="dropdown-header text-secondary">Opções:</div>
+                        <a class="dropdown-item" data-toggle="modal" data-target="#EditarNotaModal" href="#">Editar</a>
+                        <a class="dropdown-item" href="#">Apagar</a>
+
+                        <a class="dropdown-item" href="#"></a>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Card Body -->
+                  <div class="card-body">
+                    <div style="margin-top:-12px;" class="text-primary">
+                      <img class="img-profile rounded-circle picNotes" src="img/perfil1.png"> Nelson Pereira
+                      <span class="text-xs"> 15:56</span></div>
+                    <div class="mt-3">
+                      Dropdown menus can be placed in the card header in order to extend the functionality of a basic
+                      card. In this dropdown card example, the Font Awesome vertical ellipsis icon in the card header
+                      can be clicked on in order to toggle a dropdown menu.
+                    </div>
+
+                    <div class="text-black caixa-de-comentario no-border">
+                      <div class="caixa-de-cometario-interior mt-1 mg-1">
+                        <div class="comentario2">
+                          <img class="img-profile rounded-circle picNotes mt-1 ml-1" src="img/perfil1.png"> Nelson
+                          Pereira
+                          <div class="font-small text-gray-600 ml-3 mb-1 mt-1">
+                            Comentário...................
+                          </div>
+                        </div>
+                      </div>
+                      <div class="text-black">
+                        <div class="caixa-de-cometario-interior mt-1 mg-1">
+                          <div class="comentario2">
+                            <img class="img-profile rounded-circle picNotes mt-1 ml-1" src="img/perfil1.png"> Nelson
+                            Pereira
+                            <div class="font-small text-gray-600 ml-3 mb-1 mt-1">
+                              Comentário...................
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="text-black">
+                        <div class="caixa-de-cometario-interior mt-1 mg-1">
+                          <div class="comentario2">
+                            <img class="img-profile rounded-circle picNotes mt-1 ml-1" src="img/perfil1.png"> Nelson
+                            Pereira
+                            <div class="font-small text-gray-600 ml-3 mb-1 mt-1">
+                              Comentário...................
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="text-black">
+                        <div class="caixa-de-cometario-interior mt-1 mg-1">
+                          <div class="comentario2">
+                            <img class="img-profile rounded-circle picNotes mt-1 ml-1" src="img/perfil1.png"> Nelson
+                            Pereira
+                            <div class="font-small text-gray-600 ml-3 mb-1 mt-1">
+                              Comentário...................
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="input-group">
+                      <input type="text" class="form-control bg-light border-0 small mt-2" placeholder="Comente aqui..."
+                        aria-label="Add" aria-describedby="basic-addon2">
+                      <div class="input-group-append">
+                        <button class="btn btn-secondary mt-2" type="button">
+                          <i class="fas fa-envelope fa-sm"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Dropdown Card Example -->
+                <div class="card shadow mb-4">
+                  <!-- Card Header - Dropdown -->
+                  <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-secondary">
+                    <h6 class="m-0 font-weight-bold text-white">Vandalismo na casa de banho</h6>
+                    <div class="dropdown no-arrow">
+                      <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-white"></i>
+                      </a>
+                      <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                        aria-labelledby="dropdownMenuLink">
+                        <div class="dropdown-header text-secondary">Opções:</div>
+                        <a class="dropdown-item" data-toggle="modal" data-target="#EditarNotaModal" href="#">Editar</a>
+                        <a class="dropdown-item" href="#">Apagar</a>
+
+                        <a class="dropdown-item" href="#"></a>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Card Body -->
+                  <div class="card-body">
+                    <div style="margin-top:-12px;" class="text-primary">
+                      <img class="img-profile rounded-circle picNotes" src="img/perfil3.png"> Artur Silva
+                      <span class="text-xs"> 20:20</span></div>
+                    <div class="mt-3">
+                      Dropdown menus can be placed in the card header in order to extend the functionality of a basic
+                      card. In this dropdown card example, the Font Awesome vertical ellipsis icon in the card header
+                      can be clicked on in order to toggle a dropdown menu.
+                    </div>
+
+                    <div class="text-black caixa-de-comentario no-border">
+                      <div class="caixa-de-cometario-interior mt-1 mg-1">
+                        <div class="comentario2">
+                          <img class="img-profile rounded-circle picNotes mt-1 ml-1" src="img/perfil1.png"> Nelson
+                          Pereira
+                          <div class="font-small text-gray-600 ml-3 mb-1 mt-1">
+                            Comentário...................
+                          </div>
+                        </div>
+                      </div>
+                      <div class="text-black">
+                        <div class="caixa-de-cometario-interior mt-1 mg-1">
+                          <div class="comentario2">
+                            <img class="img-profile rounded-circle picNotes mt-1 ml-1" src="img/perfil1.png"> Nelson
+                            Pereira
+                            <div class="font-small text-gray-600 ml-3 mb-1 mt-1">
+                              Comentário...................
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="text-black">
+                        <div class="caixa-de-cometario-interior mt-1 mg-1">
+                          <div class="comentario2">
+                            <img class="img-profile rounded-circle picNotes mt-1 ml-1" src="img/perfil1.png"> Nelson
+                            Pereira
+                            <div class="font-small text-gray-600 ml-3 mb-1 mt-1">
+                              Comentário...................
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="text-black">
+                        <div class="caixa-de-cometario-interior mt-1 mg-1">
+                          <div class="comentario2">
+                            <img class="img-profile rounded-circle picNotes mt-1 ml-1" src="img/perfil1.png"> Nelson
+                            Pereira
+                            <div class="font-small text-gray-600 ml-3 mb-1 mt-1">
+                              Comentário...................
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="input-group">
+                      <input type="text" class="form-control bg-light border-0 small" placeholder="Comente aqui..."
+                        aria-label="Add" aria-describedby="basic-addon2">
+                      <div class="input-group-append">
+                        <button class="btn btn-secondary" type="button">
+                          <i class="fas fa-envelope fa-sm"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Dropdown Card Example -->
+                <div class="card shadow mb-4">
+                  <!-- Card Header - Dropdown -->
+                  <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-secondary">
+                    <h6 class="m-0 font-weight-bold text-white">Grupo dos Riders</h6>
+                    <div class="dropdown no-arrow">
+                      <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-white"></i>
+                      </a>
+                      <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                        aria-labelledby="dropdownMenuLink">
+                        <div class="dropdown-header text-secondary">Opções:</div>
+                        <a class="dropdown-item" data-toggle="modal" data-target="#EditarNotaModal" href="#">Editar</a>
+                        <a class="dropdown-item" href="#">Apagar</a>
+
+                        <a class="dropdown-item" href="#"></a>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Card Body -->
+                  <div class="card-body">
+                    <div style="margin-top:-12px;" class="text-primary">
+                      <img class="img-profile rounded-circle picNotes" src="img/perfil.jpeg"> Alice Pires
+                      <span class="text-xs"> 15:56</span></div>
+                    <div class="mt-3">
+                      Dropdown menus can be placed in the card header in order to extend the functionality of a basic
+                      card. In this dropdown card example, the Font Awesome vertical ellipsis icon in the card header
+                      can be clicked on in order to toggle a dropdown menu.
+                    </div>
+
+                    <div class="text-black caixa-de-comentario no-border">
+                      <div class="caixa-de-cometario-interior mt-1 mg-1">
+                        <div class="comentario2">
+                          <img class="img-profile rounded-circle picNotes mt-1 ml-1" src="img/perfil1.png"> Nelson
+                          Pereira
+                          <div class="font-small text-gray-600 ml-3 mb-1 mt-1">
+                            Comentário...................
+                          </div>
+                        </div>
+                      </div>
+                      <div class="text-black">
+                        <div class="caixa-de-cometario-interior mt-1 mg-1">
+                          <div class="comentario2">
+                            <img class="img-profile rounded-circle picNotes mt-1 ml-1" src="img/perfil1.png"> Nelson
+                            Pereira
+                            <div class="font-small text-gray-600 ml-3 mb-1 mt-1">
+                              Comentário...................
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="text-black">
+                        <div class="caixa-de-cometario-interior mt-1 mg-1">
+                          <div class="comentario2">
+                            <img class="img-profile rounded-circle picNotes mt-1 ml-1" src="img/perfil1.png"> Nelson
+                            Pereira
+                            <div class="font-small text-gray-600 ml-3 mb-1 mt-1">
+                              Comentário...................
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="text-black">
+                        <div class="caixa-de-cometario-interior mt-1 mg-1">
+                          <div class="comentario2">
+                            <img class="img-profile rounded-circle picNotes mt-1 ml-1" src="img/perfil1.png"> Nelson
+                            Pereira
+                            <div class="font-small text-gray-600 ml-3 mb-1 mt-1">
+                              Comentário...................
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="input-group">
+                      <input type="text" class="form-control bg-light border-0 small" placeholder="Comente aqui..."
+                        aria-label="Add" aria-describedby="basic-addon2">
+                      <div class="input-group-append">
+                        <button class="btn btn-secondary" type="button">
+                          <i class="fas fa-envelope fa-sm"></i>
+                        </button>
+                      </div>
+                    </div>
+
+                  </div>
                 </div>
               </div>
-              
             </div>
           </div>
 
-          <!-- Dropdown Card Example -->
-          <div class="card shadow mb-4">
-            <!-- Card Header - Dropdown -->
-            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-secondary">
-              <h6 class="m-0 font-weight-bold text-white">Utensilios perigosos</h6>
-              <div class="dropdown no-arrow">
-                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="fas fa-ellipsis-v fa-sm fa-fw text-white"></i>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                  <div class="dropdown-header text-secondary">Opções:</div>
-                  <a class="dropdown-item" data-toggle="modal" data-target="#EditarNotaModal" href="#">Editar</a>
-                  <a class="dropdown-item" href="#">Apagar</a>
-                  
-                  <a class="dropdown-item" href="#"></a>
-                </div>
-              </div>
+          <div class="col-2 mt-n4 px-0" id="rec12">
+            <div class="col pl-0">
+              <input type="text" id="myFilter" placeholder="Pesquisar recluso" class="form-control py-2 mr-3 myFilter">
             </div>
-            <!-- Card Body -->
-            <div class="card-body">
-              <div style="margin-top:-12px;" class="text-primary">
-                <img class="img-profile rounded-circle picNotes" src="img/perfil1.png"> Nelson Pereira
-                <span class="text-xs"> 15:56</span></div>
-              <div class="mt-3">
-                Dropdown menus can be placed in the card header in order to extend the functionality of a basic card. In this dropdown card example, the Font Awesome vertical ellipsis icon in the card header can be clicked on in order to toggle a dropdown menu.
-              </div>
+            <div id="tPulsacoes">
+              <ul class="teste w-100 px-0" style="list-style-type: none;">
 
-              <div class="text-black caixa-de-comentario no-border">
-                <div class="caixa-de-cometario-interior mt-1 mg-1">
-               <div class="comentario2">
-                <img class="img-profile rounded-circle picNotes mt-1 ml-1" src="img/perfil1.png"> Nelson Pereira
-                <div class="font-small text-gray-600 ml-3 mb-1 mt-1">
-                  Comentário...................
+                <!--Recluso-->
+                <div class="col py-2 mr-3 pl-0 pr-1 myfilter">
+                  <div class="card border-left-danger shadow h-100 py-2">
+                    <div class="card-body pl-3">
+                      <div class="row no-gutters align-items-center">
+                        <div class="col-auto pr-2">
+                          <img class="picNotes40 img-profile rounded-circle" src="img/perfil2.jpg">
+                        </div>
+                        <div class="col mr-2">
+                          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">João Teixeira</div>
+                          <div class="h5 mb-0 font-weight-bold text-gray-800">50 bpm</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-               </div>
-                </div>
-              <div class="text-black">
-                <div class="caixa-de-cometario-interior mt-1 mg-1">
-               <div class="comentario2">
-                <img class="img-profile rounded-circle picNotes mt-1 ml-1" src="img/perfil1.png"> Nelson Pereira
-                <div class="font-small text-gray-600 ml-3 mb-1 mt-1">
-                  Comentário...................
-                </div>
-               </div>
-                </div>
-              </div>
-              <div class="text-black">
-                <div class="caixa-de-cometario-interior mt-1 mg-1">
-               <div class="comentario2">
-                <img class="img-profile rounded-circle picNotes mt-1 ml-1" src="img/perfil1.png"> Nelson Pereira
-                <div class="font-small text-gray-600 ml-3 mb-1 mt-1">
-                  Comentário...................
-                </div>
-               </div>
-                </div>
-              </div>
-              <div class="text-black">
-                <div class="caixa-de-cometario-interior mt-1 mg-1">
-               <div class="comentario2">
-                <img class="img-profile rounded-circle picNotes mt-1 ml-1" src="img/perfil1.png"> Nelson Pereira
-                <div class="font-small text-gray-600 ml-3 mb-1 mt-1">
-                  Comentário...................
-                </div>
-               </div>
-                </div>
-              </div>
-            </div>
 
-              <div class="input-group">
-                <input type="text" class="form-control bg-light border-0 small mt-2" placeholder="Comente aqui..." aria-label="Add" aria-describedby="basic-addon2">
-                <div class="input-group-append">
-                  <button class="btn btn-secondary mt-2" type="button">
-                    <i class="fas fa-envelope fa-sm"></i>
-                  </button>
+                <!--Recluso-->
+                <div class="col py-2 mr-3 pl-0 pr-1 myfilter">
+                  <div class="card border-left-danger shadow h-100 py-2">
+                    <div class="card-body pl-3">
+                      <div class="row no-gutters align-items-center">
+                        <div class="col-auto pr-2">
+                          <img class="picNotes40 img-profile rounded-circle" src="img/perfil1.png">
+                        </div>
+                        <div class="col mr-2">
+                          <div class="text font-weight-bold text-primary text-uppercase mb-1">Rui Pires</div>
+                          <div class="h5 mb-0 font-weight-bold text-red">120 bpm</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
+
+                <!--Recluso-->
+                <div class="col py-2 mr-3 pl-0 pr-1 myfilter">
+                  <div class="card border-left-danger shadow h-100 py-2">
+                    <div class="card-body pl-3">
+                      <div class="row no-gutters align-items-center">
+                        <div class="col-auto pr-2">
+                          <img class="picNotes40 img-profile rounded-circle" src="img/perfil2.jpg">
+                        </div>
+                        <div class="col mr-2">
+                          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Luis Carvalho</div>
+                          <div class="h5 mb-0 font-weight-bold text-gray-800">50 bpm</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!--Recluso-->
+                <div class="col py-2 mr-3 pl-0 pr-1 myfilter">
+                  <div class="card border-left-danger shadow h-100 py-2">
+                    <div class="card-body pl-3">
+                      <div class="row no-gutters align-items-center">
+                        <div class="col-auto pr-2">
+                          <img class="picNotes40 img-profile rounded-circle" src="img/perfil2.jpg">
+                        </div>
+                        <div class="col mr-2">
+                          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Ana Alice</div>
+                          <div class="h5 mb-0 font-weight-bold text-gray-800">50 bpm</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!--Recluso-->
+                <div class="col py-2 mr-3 pl-0 pr-1 myfilter">
+                  <div class="card border-left-danger shadow h-100 py-2">
+                    <div class="card-body pl-3">
+                      <div class="row no-gutters align-items-center">
+                        <div class="col-auto pr-2">
+                          <img class="picNotes40 img-profile rounded-circle" src="img/perfil2.jpg">
+                        </div>
+                        <div class="col mr-2">
+                          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Jorge Pedro</div>
+                          <div class="h5 mb-0 font-weight-bold text-gray-800">50 bpm</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!--Recluso-->
+                <div class="col py-2 mr-3 pl-0 pr-1 myfilter">
+                  <div class="card border-left-danger shadow h-100 py-2">
+                    <div class="card-body pl-3">
+                      <div class="row no-gutters align-items-center">
+                        <div class="col-auto pr-2">
+                          <img class="picNotes40 img-profile rounded-circle" src="img/perfil2.jpg">
+                        </div>
+                        <div class="col mr-2">
+                          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Bruno Alves</div>
+                          <div class="h5 mb-0 font-weight-bold text-gray-800">50 bpm</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!--Recluso-->
+                <div class="col py-2 mr-3 pl-0 pr-1 myfilter">
+                  <div class="card border-left-danger shadow h-100 py-2">
+                    <div class="card-body pl-3">
+                      <div class="row no-gutters align-items-center">
+                        <div class="col-auto pr-2">
+                          <img class="picNotes40 img-profile rounded-circle" src="img/perfil2.jpg">
+                        </div>
+                        <div class="col mr-2">
+                          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Carlos Costa</div>
+                          <div class="h5 mb-0 font-weight-bold text-gray-800">50 bpm</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ul>
             </div>
           </div>
-        
-          <!-- Dropdown Card Example -->
-          <div class="card shadow mb-4">
-            <!-- Card Header - Dropdown -->
-            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-secondary">
-              <h6 class="m-0 font-weight-bold text-white">Vandalismo na casa de banho</h6>
-              <div class="dropdown no-arrow">
-                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="fas fa-ellipsis-v fa-sm fa-fw text-white"></i>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                  <div class="dropdown-header text-secondary">Opções:</div>
-                  <a class="dropdown-item" data-toggle="modal" data-target="#EditarNotaModal" href="#">Editar</a>
-                  <a class="dropdown-item" href="#">Apagar</a>
-                  
-                  <a class="dropdown-item" href="#"></a>
-                </div>
-              </div>
-            </div>
-            <!-- Card Body -->
-            <div class="card-body">
-              <div style="margin-top:-12px;" class="text-primary">
-                <img class="img-profile rounded-circle picNotes" src="img/perfil3.png"> Artur Silva
-                <span class="text-xs"> 20:20</span></div>
-              <div class="mt-3">
-                Dropdown menus can be placed in the card header in order to extend the functionality of a basic card. In this dropdown card example, the Font Awesome vertical ellipsis icon in the card header can be clicked on in order to toggle a dropdown menu.
-              </div>
-
-              <div class="text-black caixa-de-comentario no-border">
-                <div class="caixa-de-cometario-interior mt-1 mg-1">
-               <div class="comentario2">
-                <img class="img-profile rounded-circle picNotes mt-1 ml-1" src="img/perfil1.png"> Nelson Pereira
-                <div class="font-small text-gray-600 ml-3 mb-1 mt-1">
-                  Comentário...................
-                </div>
-               </div>
-                </div>
-              <div class="text-black">
-                <div class="caixa-de-cometario-interior mt-1 mg-1">
-               <div class="comentario2">
-                <img class="img-profile rounded-circle picNotes mt-1 ml-1" src="img/perfil1.png"> Nelson Pereira
-                <div class="font-small text-gray-600 ml-3 mb-1 mt-1">
-                  Comentário...................
-                </div>
-               </div>
-                </div>
-              </div>
-              <div class="text-black">
-                <div class="caixa-de-cometario-interior mt-1 mg-1">
-               <div class="comentario2">
-                <img class="img-profile rounded-circle picNotes mt-1 ml-1" src="img/perfil1.png"> Nelson Pereira
-                <div class="font-small text-gray-600 ml-3 mb-1 mt-1">
-                  Comentário...................
-                </div>
-               </div>
-                </div>
-              </div>
-              <div class="text-black">
-                <div class="caixa-de-cometario-interior mt-1 mg-1">
-               <div class="comentario2">
-                <img class="img-profile rounded-circle picNotes mt-1 ml-1" src="img/perfil1.png"> Nelson Pereira
-                <div class="font-small text-gray-600 ml-3 mb-1 mt-1">
-                  Comentário...................
-                </div>
-               </div>
-                </div>
-              </div>
-            </div>
-
-              <div class="input-group">
-                <input type="text" class="form-control bg-light border-0 small" placeholder="Comente aqui..." aria-label="Add" aria-describedby="basic-addon2">
-                <div class="input-group-append">
-                  <button class="btn btn-secondary" type="button">
-                    <i class="fas fa-envelope fa-sm"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Dropdown Card Example -->
-          <div class="card shadow mb-4">
-            <!-- Card Header - Dropdown -->
-            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-secondary">
-              <h6 class="m-0 font-weight-bold text-white">Grupo dos Riders</h6>
-              <div class="dropdown no-arrow">
-                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="fas fa-ellipsis-v fa-sm fa-fw text-white"></i>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                  <div class="dropdown-header text-secondary">Opções:</div>
-                  <a class="dropdown-item" data-toggle="modal" data-target="#EditarNotaModal" href="#">Editar</a>
-                  <a class="dropdown-item" href="#">Apagar</a>
-                  
-                  <a class="dropdown-item" href="#"></a>
-                </div>
-              </div>
-            </div>
-            <!-- Card Body -->
-            <div class="card-body">
-              <div style="margin-top:-12px;" class="text-primary">
-                <img class="img-profile rounded-circle picNotes" src="img/perfil.jpeg"> Alice Pires
-               <span class="text-xs"> 15:56</span></div>
-              <div class="mt-3">
-                Dropdown menus can be placed in the card header in order to extend the functionality of a basic card. In this dropdown card example, the Font Awesome vertical ellipsis icon in the card header can be clicked on in order to toggle a dropdown menu.
-              </div>
-
-              <div class="text-black caixa-de-comentario no-border">
-                <div class="caixa-de-cometario-interior mt-1 mg-1">
-               <div class="comentario2">
-                <img class="img-profile rounded-circle picNotes mt-1 ml-1" src="img/perfil1.png"> Nelson Pereira
-                <div class="font-small text-gray-600 ml-3 mb-1 mt-1">
-                  Comentário...................
-                </div>
-               </div>
-                </div>
-              <div class="text-black">
-                <div class="caixa-de-cometario-interior mt-1 mg-1">
-               <div class="comentario2">
-                <img class="img-profile rounded-circle picNotes mt-1 ml-1" src="img/perfil1.png"> Nelson Pereira
-                <div class="font-small text-gray-600 ml-3 mb-1 mt-1">
-                  Comentário...................
-                </div>
-               </div>
-                </div>
-              </div>
-              <div class="text-black">
-                <div class="caixa-de-cometario-interior mt-1 mg-1">
-               <div class="comentario2">
-                <img class="img-profile rounded-circle picNotes mt-1 ml-1" src="img/perfil1.png"> Nelson Pereira
-                <div class="font-small text-gray-600 ml-3 mb-1 mt-1">
-                  Comentário...................
-                </div>
-               </div>
-                </div>
-              </div>
-              <div class="text-black">
-                <div class="caixa-de-cometario-interior mt-1 mg-1">
-               <div class="comentario2">
-                <img class="img-profile rounded-circle picNotes mt-1 ml-1" src="img/perfil1.png"> Nelson Pereira
-                <div class="font-small text-gray-600 ml-3 mb-1 mt-1">
-                  Comentário...................
-                </div>
-               </div>
-                </div>
-              </div>
-            </div>
-              
-              <div class="input-group">
-                <input type="text" class="form-control bg-light border-0 small" placeholder="Comente aqui..." aria-label="Add" aria-describedby="basic-addon2">
-                <div class="input-group-append">
-                  <button class="btn btn-secondary" type="button">
-                    <i class="fas fa-envelope fa-sm"></i>
-                  </button>
-                </div>
-              </div>
-              
-            </div>
-          </div>
-          </div>
-        </div>
-        </div>
-
-        <div class="col-2 mt-n4 px-0" id="rec12">
-          <div class="col pl-0">
-          <input type="text" id="myFilter" placeholder="Pesquisar recluso" class="form-control py-2 mr-3 myFilter">
-        </div>
-        <div id="tPulsacoes">
-          <ul class="teste w-100 px-0" style="list-style-type: none;">
-          
-          <!--Recluso-->
-            <div class="col py-2 mr-3 pl-0 pr-1 myfilter">
-              <div class="card border-left-danger shadow h-100 py-2">
-                <div class="card-body pl-3">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col-auto pr-2">
-                      <img class="picNotes40 img-profile rounded-circle" src="img/perfil2.jpg">
-                    </div>
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">João Teixeira</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">50 bpm</div>
-                    </div>                  
-                  </div>
-                </div>
-              </div>
-            </div>
-  
-            <!--Recluso-->
-            <div class="col py-2 mr-3 pl-0 pr-1 myfilter">
-              <div class="card border-left-danger shadow h-100 py-2">
-                <div class="card-body pl-3">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col-auto pr-2">
-                      <img class="picNotes40 img-profile rounded-circle" src="img/perfil1.png">
-                    </div>
-                    <div class="col mr-2">
-                      <div class="text font-weight-bold text-primary text-uppercase mb-1">Rui Pires</div>
-                      <div class="h5 mb-0 font-weight-bold text-red">120 bpm</div>
-                    </div>                  
-                  </div>
-                </div>
-              </div>
-            </div>
-  
-            <!--Recluso-->
-            <div class="col py-2 mr-3 pl-0 pr-1 myfilter">
-              <div class="card border-left-danger shadow h-100 py-2">
-                <div class="card-body pl-3">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col-auto pr-2">
-                      <img class="picNotes40 img-profile rounded-circle" src="img/perfil2.jpg">
-                    </div>
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Luis Carvalho</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">50 bpm</div>
-                    </div>                  
-                  </div>
-                </div>
-              </div>
-            </div>
-  
-            <!--Recluso-->
-            <div class="col py-2 mr-3 pl-0 pr-1 myfilter">
-              <div class="card border-left-danger shadow h-100 py-2">
-                <div class="card-body pl-3">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col-auto pr-2">
-                      <img class="picNotes40 img-profile rounded-circle" src="img/perfil2.jpg">
-                    </div>
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Ana Alice</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">50 bpm</div>
-                    </div>                  
-                  </div>
-                </div>
-              </div>
-            </div>
-  
-            <!--Recluso-->
-            <div class="col py-2 mr-3 pl-0 pr-1 myfilter">
-              <div class="card border-left-danger shadow h-100 py-2">
-                <div class="card-body pl-3">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col-auto pr-2">
-                      <img class="picNotes40 img-profile rounded-circle" src="img/perfil2.jpg">
-                    </div>
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Jorge Pedro</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">50 bpm</div>
-                    </div>                  
-                  </div>
-                </div>
-              </div>
-            </div>
-  
-            <!--Recluso-->
-            <div class="col py-2 mr-3 pl-0 pr-1 myfilter">
-              <div class="card border-left-danger shadow h-100 py-2">
-                <div class="card-body pl-3">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col-auto pr-2">
-                      <img class="picNotes40 img-profile rounded-circle" src="img/perfil2.jpg">
-                    </div>
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Bruno Alves</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">50 bpm</div>
-                    </div>                  
-                  </div>
-                </div>
-              </div>
-            </div>
-  
-            <!--Recluso-->
-            <div class="col py-2 mr-3 pl-0 pr-1 myfilter">
-              <div class="card border-left-danger shadow h-100 py-2">
-                <div class="card-body pl-3">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col-auto pr-2">
-                      <img class="picNotes40 img-profile rounded-circle" src="img/perfil2.jpg">
-                    </div>
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Carlos Costa</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">50 bpm</div>
-                    </div>                  
-                  </div>
-                </div>
-              </div>
-            </div>
-          </ul>
-        </div>
-        </div>
 
         </div>
         <!-- /.container-fluid -->
@@ -698,7 +748,8 @@
 
 
   <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -717,7 +768,8 @@
   </div>
 
   <!-- Nota Modal-->
-  <div class="modal fade" id="NotaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="NotaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header bg-gradient-primary text-white" style="margin-right:-0.5px;">
@@ -727,42 +779,21 @@
           </button>
         </div>
         <div class="modal-body">
-          <select id="destino" class="select-css text-center form-control mb-1">
+          <select id="tipoDest" class="select-css text-center form-control mb-1">
             <option value="1">Recluso</option>
-            <option value="2">Funcionário</option>
-            <option value="3">Instituição</option>
+            <option value="2">Instituição</option>
           </select>
-          <textarea class="form-control mb-1 textarea2" rows="1" cols="1" placeholder="Assunto"></textarea>
-          <textarea class="form-control textarea1" rows="6" cols="60" placeholder="Escreva aqui a nota"></textarea>
+          <select id="Dest" class="select-css text-center form-control mb-1">
+          </select>
+          <textarea id="titleN" class="form-control mb-1 textarea2" rows="1" cols="1"
+            placeholder="Assunto (título)"></textarea>
+          <textarea id="descriptionN" class="form-control textarea1" rows="6" cols="60"
+            style="max-height: 158px; min-height: 158px;" placeholder="Escreva aqui a nota"></textarea>
         </div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
           <a class="btn btn-primary" id="enviar_novo" href="#">Criar</a>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Editar Nota Modal-->
-  <div class="modal fade" id="EditarNotaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header bg-gradient-primary text-white" style="margin-right:-0.5px;">
-          <h5 class="modal-title" id="exampleModalLabel">Editar Nota</h5>
-          <button class="close text-white" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <form class="modal-body" id="show_information">
-          <textarea class="form-control mb-1 textarea2" rows="1" cols="1" placeholder="Recluso"></textarea>
-          <textarea class="form-control mb-1 textarea2" rows="1" cols="1" placeholder="Assunto"></textarea>
-          <textarea class="form-control textarea1" rows="6" cols="60" placeholder="Escreva aqui a nota..."></textarea>
-        
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-          <a class="btn btn-primary" id="enviar_edicao" href="#">Enviar</a>
-        </div>
-      </form>
       </div>
     </div>
   </div>
@@ -781,6 +812,13 @@
   <script src="controller/avisos.js"></script>
   <script src="./controller/controlo.js"></script>
   <!---<script src="controller/controlo.js"></script>--->
+
+
+  <script>
+    $(document).on('input', 'textarea', function () {
+      $(this).outerHeight(38).outerHeight(this.scrollHeight); // 38 or '1em' -min-height
+    }); 
+  </script>
 
 </body>
 
