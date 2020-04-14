@@ -66,7 +66,7 @@
       <li class="nav-item">
         <a class="nav-link" href="avisos.html">
           <img src="img/bellG.png" class="imgSide">
-          <span>Avisos</span></a>
+          <span>Anotações</span></a>
       </li>
 
       <!-- Divider -->
@@ -354,16 +354,27 @@
               <!-- DataTales Example -->
               <div class="card shadow mb-4">
                 <div class="card-header py-3 bg-secondary">
-                  <h6 class="m-0 font-weight-bold text-white">Atividades</h6>
+                  <div class="m-0 font-weight-bold text-white full_tab">
+                    <div class="tab_nome col-10">Lista de Funcionários:</div>
+                    <div style="text-align: right;">
+
+                      <select id="tipoDest" class="select-css text-center form-control" style="width: 135px;">
+                        <option value="1">Funcionários</option>
+                        <option value="2">Recluso</option>
+                      </select>
+                    </div>
+
+                  </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body" style="min-height: 292px;">
                   <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                      <thead>
+                    <table class="table table-bordered scroll" id="dataTable" width="100%" cellspacing="0">
+                      <thead class="bg-primary text-white">
                         <tr>
                           <th>Hora</th>
                           <th>Nome</th>
                           <th>Ação</th>
+                          <th>A quem</th>
                         </tr>
                       </thead>
 
@@ -440,7 +451,9 @@
                         </tr>
 
                       </tbody>
+
                     </table>
+                    <a id="clickL" href="#endLog"></a>
                   </div>
                 </div>
               </div>
@@ -648,6 +661,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.26.9/sweetalert2.all.min.js"></script>
 
   <!-- Page level custom scripts -->
+  <!--<script src="js/demo/datatables-demo.js"></script>-->
   <script src="js/demo/chart-area-demo.js"></script>
   <script src="js/demo/chart-pie-demo.js"></script>
   <script src="./controller/dashboard.js"></script>

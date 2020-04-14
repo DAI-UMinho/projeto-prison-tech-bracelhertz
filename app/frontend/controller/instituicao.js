@@ -1,42 +1,56 @@
+let RoleLogado = localStorage.getItem("RoleLogado");
+let id_inst_clicked = localStorage.getItem("id_inst_clicked");
 $(window).on("load", function () {
-    let RoleLogado = localStorage.getItem("RoleLogado");
+
     display_instituicao();
-
-    function display_instituicao() {
-        async function fetchAsync() {
-
-            if (RoleLogado == "ROLE_NETWORKMAN") {
-                document.getElementById("perfil_alterar_2").style.display = "block";
-            }
-
-
-            let id_inst_clicked = localStorage.getItem("id_inst_clicked");
-            const response = await fetch('http://127.0.0.1:8080/api/prisons/' + id_inst_clicked, {
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                mode: 'cors',
-                method: 'GET',
-                credentials: 'include'
-            });
-            const instituicao = await response.json();
-            console.log(instituicao);
-
-            //envia a para a pagina
-            document.getElementById("fotoinst").src = instituicao.photo;
-            document.getElementById("nome_inst").value = instituicao.name;
-            document.getElementById("morada_inst").value = instituicao.address;
-            document.getElementById("local_inst").value = instituicao.location;
-            document.getElementById("email_inst").value = instituicao.email;
-            document.getElementById("contacto_inst").value = instituicao.contact;
-            document.getElementById("prisonDescrip").value = instituicao.description;
-        }
-        //chama a função fetchAsync()
-        fetchAsync().then(data => console.log("done")).catch(reason => console.log(reason.message));
-
-
-    }
 })
+
+
+function display_instituicao() {
+    async function fetchAsync() {
+
+        if (RoleLogado == "ROLE_NETWORKMAN") {
+            document.getElementById("perfil_alterar_2").style.display = "block";
+        }
+
+
+
+        const response = await fetch('http://127.0.0.1:8080/api/prisons/' + id_inst_clicked, {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            mode: 'cors',
+            method: 'GET',
+            credentials: 'include'
+        });
+        const instituicao = await response.json();
+        console.log(instituicao);
+
+        const response7 = await fetch('http://127.0.0.1:8080/api/photos/' + instituicao.photoId, {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            mode: 'cors',
+            method: 'GET',
+            credentials: 'include'
+        });
+        const photoD = await response7.json();
+
+        //envia a para a pagina
+        document.getElementById("fotoinst").src = "data:image/png;base64," + photoD.picByte;
+        document.getElementById("nome_inst").value = instituicao.name;
+        document.getElementById("morada_inst").value = instituicao.address;
+        document.getElementById("local_inst").value = instituicao.location;
+        document.getElementById("email_inst").value = instituicao.email;
+        document.getElementById("contacto_inst").value = instituicao.contact;
+        document.getElementById("prisonDescrip").value = instituicao.description;
+    }
+    //chama a função fetchAsync()
+    fetchAsync().then(data => console.log("done")).catch(reason => console.log(reason.message));
+
+
+}
+
 
 
 //--------------------------------------EDITAR PERFIL-----------------------------------------------------
@@ -48,7 +62,7 @@ async function editar() {
 
     data = {};
 
-    let id_inst_clicked = localStorage.getItem("id_inst_clicked");
+
     const response = await fetch('http://127.0.0.1:8080/api/prisons/' + id_inst_clicked, {
         headers: {
             'Content-Type': 'application/json'
@@ -275,7 +289,7 @@ function Myfunction425() {
 
 
 //------------------------------------------UPLOAD PHOTO------------------------------------------------------
-let id_inst_clicked = localStorage.getItem("id_inst_clicked");
+
 
 var loadFile = function (event) {
     var image = document.getElementById('fotoinst');
@@ -341,7 +355,7 @@ async function editar_photo(photoC) {
             else {
                 Swal.fire(
                     'Ocorreu um erro!',
-                    'Foto apenas pode ter até 1.048576 MB',
+                    'Foto apenas pode ter até 1 MB inclusive',
                     'error'
                 ).then(() => {
                     location.reload();
@@ -356,66 +370,3 @@ async function editar_photo(photoC) {
 
 
 
-//------------------------------------------ANOTAÇÃO--------------------------------------------------------
-
-
-const enviar_novo = document.getElementById("enviar_novo");
-enviar_novo.addEventListener("click", novaNota);
-
-async function novaNota() {
-    event.preventDefault();
-    var data = {};
-
-    let id_inst_clicked = localStorage.getItem("id_inst_clicked");
-
-
-    data.title = document.getElementById("titleN").value.trim();
-    data.description = document.getElementById("descriptionN").value.trim();
-    data.prisonDestId = id_inst_clicked;
-
-    if (titleN.value == "" || descriptionN.value == "") {
-        Swal.fire(
-            'Preencha todos os campos!',
-            '',
-            'warning'
-        )
-    } else {
-
-
-
-        await fetch('http://127.0.0.1:8080/api/prison-annotations', {
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            mode: 'cors',
-            method: 'POST',
-            credentials: 'include',
-            body: JSON.stringify(data)
-
-        }).then(function (response) {
-            if (!response.ok) {
-                alert(response);
-                throw new Error("ERRO");
-            }
-            console.log(response);
-            return response.json();
-        }).then(async function (result) {
-            console.log(result);
-            if (result) {
-                swal("Sucesso!",
-                    "Anotação enviada com sucesso!",
-                    "success").then(() => {
-                        document.getElementById("titleN").value = "";
-                        document.getElementById("descriptionN").value = "";
-                        $('#NotaModal').modal('hide');
-                    })
-            }
-        }).catch(function (err) {
-            swal("Erro!", "Erro!", "error");
-        })
-
-
-
-    }
-
-}

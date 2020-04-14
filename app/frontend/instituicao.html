@@ -66,7 +66,7 @@
       <li class="nav-item">
         <a class="nav-link" href="avisos.html">
           <img src="img/bellG.png" class="imgSide">
-          <span>Avisos</span></a>
+          <span>Anotações</span></a>
       </li>
 
       <!-- Divider -->
@@ -357,7 +357,7 @@
                   </div>
 
                   <!-- Card Body -->
-                  <div style="height: 370px; overflow-y: scroll;">
+                  <div id="dispAnotacoes" style="max-height: 370px; overflow-y: scroll;">
                     <div class="card-body">
                       <div style="margin-top:-12px;" class="text-primary">
                         <img class="img-profile rounded-circle picNotes" src="img/perfil1.png"> Nelson Pereira
@@ -606,6 +606,26 @@
     </div>
   </div>
 
+    <!-- Confimação apagar nota Modal-->
+    <div class="modal t-1 fade" id="confModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Terminar Sessão</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Deseja mesmo apagar esta anotação?</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+          <button class="btn btn-primary" id="botaoConf">Confirmar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
     <!-- Nota Modal-->
     <div class="modal fade" id="NotaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
@@ -652,6 +672,7 @@
 
   <script src="controller/controlo.js"></script>
   <script src="controller/instituicao.js"></script>
+  <script src="controller/anotFRI.js"></script>
 
 
   <script>

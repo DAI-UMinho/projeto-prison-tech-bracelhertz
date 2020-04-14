@@ -1,200 +1,219 @@
+let RoleLogado = localStorage.getItem("RoleLogado");
+let val = 1;
+var vamosVer = "";
 $(window).on("load", function () {
 
     avisos();
     get_reclusos();
+});
+
+async function avisos() {
+
+    if (val == 1) {
+        //-----------------------------------GET PRISIONEIRO-----------------------------------
+        const response = await fetch('http://127.0.0.1:8080/api/prisoner-annotations', {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            mode: 'cors',
+            method: 'GET',
+            credentials: 'include'
+        });
+        const avisos = await response.json();
+        console.log(avisos);
+        display(avisos);
+    } else {
+        document.getElementById("filtro").value = 2;
+        //-----------------------------------GET INSTITUIÇÃO-----------------------------------
+        const response = await fetch('http://127.0.0.1:8080/api/prison-annotations', {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            mode: 'cors',
+            method: 'GET',
+            credentials: 'include'
+        });
+        const avisos = await response.json();
+        console.log(avisos);
+        display(avisos);
+    }
+    //var t = setTimeout(avisos, 30000);
+}
 
 
-    function avisos() {
-        async function fetchAsync() {
-            const real_content = document.getElementById("real_content");
+async function display(avisos) {
 
+    let userLogado = localStorage.getItem("userLogado");
 
+    const real_content = document.getElementById("real_content");
+    let true_content = "";
 
-            let true_content = "";
-
-
-            const avisos = [
-                {
-                    utilizador: {
-                        nome: "pessoa",
-                        img: "img/mm.jpg",
-                    },
-                    idReclusoDestino: 123,
-                    titulo: "Ola",
-                    descricao: "Aloooooooooo",
-                    createdTimestamp: "22:02:09",
-
-                    comentarios: [{
-                        owner_img: "img/mm.jpg",
-                        owner: "pessoa1",
-                        content: "Aloooooooooo"
-                    },
-                    {
-                        owner_img: "img/mm.jpg",
-                        owner: "pessoa2",
-                        content: "Aloooooooooo"
-                    },
-                    {
-                        owner_img: "img/mm.jpg",
-                        owner: "pessoa3",
-                        content: "Aloooooooooo"
-                    }
-                    ],
-                    editado: {
-                        lastUpdatedTimestamp: "'Dec 31 2019 22:02:09'",
-                        value: true,
-                    }
-
-                },
-                {
-                    utilizador: {
-                        nome: "pessoa",
-                        img: "img/mm.jpg",
-                    },
-                    idReclusoDestino: 123,
-                    titulo: "Ola",
-                    descricao: "Aloooooooooo",
-                    createdTimestamp: "22:02:09",
-
-
-                    comentarios: [{
-                        owner_img: "img/mm.jpg",
-                        owner: "pessoa1",
-                        content: "Aloooooooooo"
-                    },
-                    {
-                        owner_img: "img/mm.jpg",
-                        owner: "pessoa2",
-                        content: "Aloooooooooo"
-                    },
-                    {
-                        owner_img: "img/mm.jpg",
-                        owner: "pessoa3",
-                        content: "Aloooooooooo"
-                    }
-                    ],
-                    editado: {
-                        lastUpdatedTimestamp: "'Dec 31 2019 22:02:09'",
-                        value: true,
-                    }
-
-                },
-                {
-                    utilizador: {
-                        nome: "pessoa",
-                        img: "img/mm.jpg",
-                    },
-                    idReclusoDestino: 123,
-                    titulo: "Ola",
-                    descricao: "Aloooooooooo",
-                    createdTimestamp: "22:02:09",
-
-
-                    comentarios: [{
-                        owner_img: "img/mm.jpg",
-                        owner: "pessoa1",
-                        content: "Aloooooooooo"
-                    },
-                    {
-                        owner_img: "img/mm.jpg",
-                        owner: "pessoa2",
-                        content: "Aloooooooooo"
-                    },
-                    {
-                        owner_img: "img/mm.jpg",
-                        owner: "pessoa3",
-                        content: "Aloooooooooo"
-                    }
-                    ],
-                    editado: {
-
-                        value: false,
-                    }
-
-                },
-                {
-                    utilizador: {
-                        nome: "pessoa",
-                        img: "img/mm.jpg",
-                    },
-                    idReclusoDestino: 123,
-                    titulo: "Ola",
-                    descricao: "Aloooooooooo",
-                    createdTimestamp: '22:02:09',
-
-
-                    comentarios: [],
-                    editado: {
-                        value: false,
-                    }
-
-                },
-            ]
+    const response1 = await fetch('http://127.0.0.1:8080/api/users/logged-profiles', {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        mode: 'cors',
+        method: 'GET',
+        credentials: 'include'
+    });
+    const logado = await response1.json();
+    console.log(logado);
 
 
 
-            //criação da demonstração de resultados recebidos
 
 
-            for (const aviso of avisos) {
-                true_content += "<div class='card shadow mb-4'>";
-                true_content += "<div class='card-header py-3 d-flex flex-row align-items-center justify-content-between bg-secondary'>"
-                true_content += "<h6 class='m-0 font-weight-bold text-white'>" + aviso.titulo + ""
-                if (aviso.editado.value == true) {
-                    true_content += "<span data-tooltip=" + aviso.editado.lastUpdatedTimestamp + " data-tooltip-position='bottom' class='text-white font-small font-weight-normal solve'>(Editado)</span>"
-                } else {
 
-                }
-                true_content += "</h6><div class='dropdown no-arrow'>";
+    if (avisos == null) {
+        true_content += "<div class='w-100'>Não há anotações</div>";
+    } else {
+        for (const aviso of avisos) {
+
+
+            true_content += "<div class='card shadow mb-4'>";
+            true_content += "<div id='" + aviso[0] + "' class='card-header py-3 d-flex flex-row align-items-center justify-content-between bg-secondary'>"
+            true_content += "<h6 class='tab_nome m-0 font-weight-bold text-white'>" + aviso[3] + ""
+            if (aviso[6] !== null) {
+                true_content += "<span data-tooltip='" + getDate2(aviso[6]) + "' data-tooltip-position='bottom' class='text-white font-small font-weight-normal solve'>(Editado)</span>"
+            }
+            true_content += "</h6>";
+            if (userLogado == aviso[1].userId) {
+                true_content += "<div onclick='permiteEditar()' id='" + aviso[0] + "podeAlterar' style='padding-right: 10px; display: none;' type='button'><i class='fas fa-check text-white'></i></div>";
+                true_content += "<div class='dropdown no-arrow'>";
                 true_content += "<a class='dropdown-toggle' href='#' role='button' id='dropdownMenuLink' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>";
                 true_content += "<i class='fas fa-ellipsis-v fa-sm fa-fw text-white'></i></a>"
                 true_content += "<div class='dropdown-menu dropdown-menu-right shadow animated--fade-in' aria-labelledby='dropdownMenuLink'>";
                 true_content += "<div class='dropdown-header text-secondary'>Opções:</div>";
-                true_content += "<button class='dropdown-item' data-toggle='modal' data-target='#EditarNotaModal' id='willEdit' href='#'>Editar</button>";
-                true_content += "<button class='dropdown-item' id='apagar_aviso' href='#''>Apagar</button>";
-                true_content += "<a class='dropdown-item' href='#''></a></div></div></div>";
+                true_content += "<button onclick='teste(this)' class='dropdown-item'>Editar</button>";
+                true_content += "<button onclick='teste(this)' class='dropdown-item' >Apagar</button>";
+                true_content += "<a class='dropdown-item' href='#'></a></div></div>";
+            }
+            true_content += "</div>";
+            true_content += "<div class='card-body'><div style='margin-top:-12px;'class='text-primary'>";
+            true_content += "<img class='img-profile rounded-circle picNotes' src=" + aviso[1].photo + "> " + aviso[1].name + " (" + aviso[1].username + ")";
+            true_content += " <span class='text-xs'> " + getDate(aviso[5]) + "</span></div><br>";
 
-                true_content += "<div class='card-body'><div style='margin-top:-12px;'class='text-primary'>";
-                true_content += "<img class='img-profile rounded-circle picNotes' src=" + aviso.utilizador.img + "> " + aviso.utilizador.nome;
-                true_content += " <span class='text-xs'> " + aviso.createdTimestamp + "</span></div><br>";
-                true_content += "<div>Recluso: " + aviso.idReclusoDestino + "</div><textarea class='alterar form-control' style='resize: none; border: none; background-color:transparent;' readonly='true'>" + aviso.descricao + "</textarea>";
-
-                if (aviso.comentarios.length == 0) {
-
-                } else {
-                    true_content += "<br><div class='w-100'> Comentários: </div>";
-                    true_content += "<div class='text-black caixa-de-comentario no-border'>";
-                    for (const comentario of aviso.comentarios) {
-
-
-                        true_content += "<div class='caixa-de-cometario-interior mt-1 mg-1'><div class='comentario2'>";
-                        true_content += "<img class='img-profile rounded-circle picNotes mt-1 ml-1' src=" + comentario.owner_img + "> " + comentario.owner + " <div class='text-gray-600 ml-3 mb-1 mt-1'>";
-                        true_content += "" + comentario.content + "</div></div></div>";
-
-                    }
-                    true_content += "</div>"
-                }
-
-
-
-                true_content += "<div class='input-group'><input type='text' class='form-control bg-light border-0 small mt-2' placeholder='Comente aqui...' aria-label='Add' aria-describedby='basic-addon2'>"
-                true_content += "<div class='input-group-append'><button class='btn btn-secondary mt-2' id='enviar_comentario' type='button'>"
-                true_content += "<i class='fas fa-envelope fa-sm'></i></button></div></div></div></div></div>"
-
+            if (document.getElementById("filtro").value == 1) {
+                true_content += "<div>Recluso: " + aviso[2].name + " (" + aviso[2].identifierId + ")</div><textarea id='" + aviso[0] + "text' class='alterar form-control' style='resize: none; border: none; background-color:transparent;' readonly='true'>" + aviso[4] + "</textarea>";
+            } else {
+                true_content += "<div>Instituição: " + aviso[2].name + "</div><textarea id='" + aviso[0] + "text' class='alterar form-control' style='resize: none; border: none; background-color:transparent;' readonly='true'>" + aviso[4] + "</textarea>";
             }
 
 
 
-            //envia a para a pagina
-            real_content.innerHTML = true_content;
 
+
+
+            const response1 = await fetch('http://127.0.0.1:8080/api/comments/annotations/' + aviso[0], {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                mode: 'cors',
+                method: 'GET',
+                credentials: 'include'
+            });
+            const comentarios = await response1.json();
+            console.log(comentarios);
+
+
+
+
+            if (comentarios !== null) {
+                true_content += "<div class='w-100'> Comentários: </div>";
+                true_content += "<div class='text-black caixa-de-comentario no-border'>";
+                for (const comentario of comentarios) {
+
+                    true_content += "<div class='caixa-de-cometario-interior mt-1 mg-1 full_tab90' id='" + comentario[0] + "'><div class='comentario2 tab_nome'>";
+                    true_content += "<img class='img-profile rounded-circle picNotes mt-1 ml-1' src=" + comentario[1].photo + "> " + comentario[1].name + "";
+                    true_content += "<textarea id='" + comentario[0] + "coment' class='font-small text-gray-600 my-1 ml-3'";
+                    true_content += "readonly='true' style='width: 90%; background-color: transparent; resize: none; border: none; height: 24px; overflow-y: hidden;'>";
+                    true_content += "" + comentario[4] + "</textarea></div>";
+
+
+                    if (comentario[1].userId == logado.userId) {
+                        true_content += "<div onclick='permiteEditarComent()' id='" + comentario[0] + "podeAlterarC'  style='display:none; padding: 26px 5px; padding-right:10px; background-color: #fed8b1; cursor: pointer;'><i class='fas fa-check text-white'></i></div>";
+                        true_content += "<div class='dropdown no-arrow tab_time' style='background-color: #fed8b1; cursor: pointer;'";
+                        true_content += "<a class='dropdown-toggle' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>";
+                        true_content += "<i class='fas fa-ellipsis-v fa-sm fa-fw text-white'></i></a>";
+                        true_content += "<div class='dropdown-menu dropdown-menu-right shadow animated--fade-in' aria-labelledby='dropdownMenuLink' x-placement='top-end'";
+                        true_content += "style='position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-142px, 1px, 0px);'>";
+                        true_content += "<div class='dropdown-header text-secondary'>Opções:</div>";
+                        true_content += "<button onclick='teste2(this)' class='dropdown-item'>Editar</button>";
+                        true_content += "<button onclick='teste2(this)' class='dropdown-item'>Apagar</button>";
+                        true_content += "</div></div>";
+
+                    }
+                    true_content += "</div>";
+
+                }
+                true_content += "</div>"
+            }
+
+
+
+            true_content += "<div class='input-group'><input id='" + aviso[0] + "Input' type='text' class='form-control bg-light border-0 small mt-2' placeholder='Comente aqui...' aria-label='Add' aria-describedby='basic-addon2'>"
+            true_content += "<div class='input-group-append'><button onclick='subComent(this.id)' id='" + aviso[0] + "Submit' class='btn btn-secondary mt-2' type='button'>"
+            true_content += "<i class='fas fa-envelope fa-sm'></i></button></div></div></div></div></div>"
 
         }
-        /*chama a função fetchAsync()*/
-        fetchAsync().then(data => console.log("done")).catch(reason => console.log(reason.message));
     }
 
-});
+
+
+    //envia a para a pagina
+    real_content.innerHTML = true_content;
+
+
+}
+
+
+
+
+
+
+
+
+//-----------------------------------------SELEÇÃO DE TIPO DE DESTINO DAS ANOTAÇÕES A MOSTRAR-------------------------------
+
+document.getElementById("filtro").addEventListener("change", async function () {
+
+    if (document.getElementById("filtro").value == 1) {
+        val = 1;
+        const response4 = await fetch('http://127.0.0.1:8080/api/prisoner-annotations', {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            mode: 'cors',
+            method: 'GET',
+            credentials: 'include'
+        });
+        const avisos = await response4.json();
+        console.log(avisos);
+        display(avisos);
+    } else {
+        val = 2;
+        const response5 = await fetch('http://127.0.0.1:8080/api/prison-annotations', {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            mode: 'cors',
+            method: 'GET',
+            credentials: 'include'
+        });
+        const avisos = await response5.json();
+        console.log(avisos);
+        display(avisos);
+    }
+
+
+})
+
+
+
+
+
+
+
 
 //---------------------------------------------------DISPLAY POST INSTITUIÇÕES------------------------------------------------
 
@@ -337,7 +356,7 @@ async function postInst(data) {
 
 }
 
-//-------------------------------POST REC ANOTAÇÃO RECLUSO-------------------------------
+//-------------------------------POST DE ANOTAÇÃO RECLUSO-------------------------------
 async function postRec(data) {
 
     await fetch('http://127.0.0.1:8080/api/prisoner-annotations', {
@@ -390,7 +409,462 @@ document.getElementById("tipoDest").addEventListener("change", function () {
 
 })
 
-//-------------------------------------------------------------------------------------------------------------
+//---------------------------------------------DATA FORMAT-------------------------------------------------------
+
+function getDate(date) {
+    var today = new Date(date);
+    var d = today.getDate();
+    var mo = today.getMonth()
+    var a = today.getFullYear();
+    d = checkTime(d);
+    mo = checkTime(mo + 1);
+    return d + "-" + mo + "-" + a;
+}
+
+function getDate2(date) {
+    var dias = ["Domingo", "Segunda-Feira", "Terça-Feira", "Quarta-Feira", "Quinta-Feira", "Sexta-Feira", "Sábado"];
+    var today = new Date(date);
+    var dia = today.getDay();
+    var d = today.getDate();
+    var mo = today.getMonth();
+    var a = today.getFullYear();
+    var h = today.getHours();
+    var m = today.getMinutes();
+    h = checkTime(h);
+    m = checkTime(m);
+    d = checkTime(d);
+    mo = checkTime(mo + 1);
+    return dias[dia] + " " + d + " " + mo + " " + a + " " + h + ":" + m + "h";
+}
+
+function checkTime(i) {
+    if (i < 10) { i = "0" + i };  // add zero in front of numbers < 10
+    return i;
+}
+
+//-----------------------------------------------DELETE ANOTAÇÃO-----------------------------------------------
+document.getElementById("botaoConf").addEventListener("click", async function () {
+
+
+    fetch('http://127.0.0.1:8080/api/prisons-annotations/' + anotDelete, {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        mode: 'cors',
+        method: 'DELETE',
+        credentials: 'include'
+    })
+        .then(function (response) {
+            //console.log(response.headers.get('Set-Cookie'));
+            console.log(response);
+            if (!response.ok) {
+                throw new Error(response.statusText);
+            }
+            return response.json();
+        })
+        .catch(function (err) {
+            //swal.showValidationError('Pedido falhado: ' + err);
+            console.log(err); // estava alert(err); coloquei console log para não estar sempre a aparecer pop-up ao utilizador
+        })
+        .then(async function (result) {
+            console.log(result);
+            if (result) {
+
+
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 1000,
+                    timerProgressBar: true,
+                    onOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Alterada com sucesso'
+                }).then(() => {
+                    anotDelete = "";
+
+                    if (document.getElementById("filtro").value == 1) {
+                        val = 1;
+                        avisos();
+                    } else {
+                        val = 2;
+                        avisos();
+                    }
+                })
 
 
 
+            }
+
+            else {
+                Swal.fire(
+                    'Ocorreu um erro!',
+                    '',
+                    'error'
+                ).then(() => {
+                    location.reload();
+                })
+                console.log(result);
+                //swal({ title: `${result.value.userMessage.message.pt}` });
+            }
+        });
+
+
+})
+
+//-----------------------------------------------GET ID PARA APAGAR OU EDITAR ANOTAÇÃO------------------------------------
+var anotDelete = "";
+function teste(este) {
+    console.log(este.closest('[id]').id)
+    if (este.innerHTML == "Apagar") {
+        $("#confModal").modal();
+        anotDelete = parseInt(este.closest('[id]').id);
+    } else {
+        ativarEdit(este.closest('[id]').id);
+    }
+}
+
+
+//-----------------------------------------------ATIVAR EDITAR ANOTAÇÃO------------------------------------------
+var anotEdit = "";
+function ativarEdit(id) {
+    anotEdit = id;
+    document.getElementById(id + "podeAlterar").style.display = "block";
+    document.getElementById(id + "text").readOnly = false;
+    document.getElementById(id + "text").style.border = "1px solid #d1d3e2";
+}
+
+function permiteEditar() {
+    editarAnotacao(anotEdit);
+    anotEdit = "";
+}
+
+
+//-----------------------------------------------EDITAR ANOTAÇÃO-----------------------------------------------
+
+async function editarAnotacao(id) {
+    var data = {};
+
+    data.annotationId = parseInt(id);
+    data.title = document.getElementById(id).children[0].innerHTML;
+    data.description = document.getElementById(id + "text").value;
+
+    console.log(data);
+
+    fetch('http://127.0.0.1:8080/api/annotations', {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        mode: 'cors',
+        method: 'PUT',
+        body: JSON.stringify(data),
+        credentials: 'include'
+    })
+        .then(function (response) {
+            //console.log(response.headers.get('Set-Cookie'));
+            console.log(response);
+            if (!response.ok) {
+                throw new Error(response.statusText);
+            }
+            return response.json();
+        })
+        .catch(function (err) {
+            //swal.showValidationError('Pedido falhado: ' + err);
+            console.log(err); // estava alert(err); coloquei console log para não estar sempre a aparecer pop-up ao utilizador
+        })
+        .then(async function (result) {
+            console.log(result);
+            if (result) {
+
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 1000,
+                    timerProgressBar: true,
+                    onOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Dados alterados com sucesso'
+                }).then(() => {
+
+                    if (document.getElementById("filtro").value == 1) {
+                        val = 1;
+                        avisos();
+                    } else {
+                        val = 2;
+                        avisos();
+                    }
+                })
+
+            }
+            else {
+                Swal.fire(
+                    'Ocorreu um erro!',
+                    '',
+                    'error'
+                ).then(() => {
+                    location.reload();
+                })
+                console.log(result);
+                //swal({ title: `${result.value.userMessage.message.pt}` });
+            }
+        });
+
+
+}
+
+
+//-----------------------------------------------GET ID PARA APAGAR OU EDITAR ANOTAÇÃO COMENTÁRIO------------------------------------
+function teste2(este) {
+    console.log(este.closest('[id]').id)
+    if (este.innerHTML == "Apagar") {
+        eliminarComentario(parseInt(este.closest('[id]').id));
+    } else {
+        ativEditComent(este.closest('[id]').id);
+    }
+}
+
+
+//-----------------------------------------------ATIVAR EDITAR COMENTÁRIO------------------------------------------
+var comentEdit = "";
+function ativEditComent(id) {
+    comentEdit = id;
+    document.getElementById(id + "podeAlterarC").style.display = "block";
+    document.getElementById(id + "coment").readOnly = false;
+    document.getElementById(id + "coment").style.border = "1px solid #c0c0c0";
+}
+
+function permiteEditarComent() {
+    editarComentario(comentEdit);
+    comentEdit = "";
+}
+
+//-----------------------------------------------EDITAR COMENTÁRIO-----------------------------------------------
+
+async function editarComentario(id) {
+    var data = {};
+
+    data.annotationId = parseInt(id);
+    data.title = "comentario";
+    data.description = document.getElementById(id + "coment").value;
+
+    console.log(data);
+
+    fetch('http://127.0.0.1:8080/api/annotations', {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        mode: 'cors',
+        method: 'PUT',
+        body: JSON.stringify(data),
+        credentials: 'include'
+    })
+        .then(function (response) {
+            //console.log(response.headers.get('Set-Cookie'));
+            console.log(response);
+            if (!response.ok) {
+                throw new Error(response.statusText);
+            }
+            return response.json();
+        })
+        .catch(function (err) {
+            //swal.showValidationError('Pedido falhado: ' + err);
+            console.log(err); // estava alert(err); coloquei console log para não estar sempre a aparecer pop-up ao utilizador
+        })
+        .then(async function (result) {
+            console.log(result);
+            if (result) {
+
+                if (document.getElementById("filtro").value == 1) {
+                    val = 1;
+                    avisos();
+                } else {
+                    val = 2;
+                    avisos();
+                }
+
+            }
+            else {
+                Swal.fire(
+                    'Ocorreu um erro!',
+                    '',
+                    'error'
+                ).then(() => {
+                    location.reload();
+                })
+                console.log(result);
+                //swal({ title: `${result.value.userMessage.message.pt}` });
+            }
+        });
+
+
+}
+
+//--------------------------------------------------------DELETE COMENTÁRIO-------------------------------------------------------
+async function eliminarComentario(anotDelete) {
+
+
+    fetch('http://127.0.0.1:8080/api/prisons-annotations/' + anotDelete, {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        mode: 'cors',
+        method: 'DELETE',
+        credentials: 'include'
+    })
+        .then(function (response) {
+            //console.log(response.headers.get('Set-Cookie'));
+            console.log(response);
+            if (!response.ok) {
+                throw new Error(response.statusText);
+            }
+            return response.json();
+        })
+        .catch(function (err) {
+            //swal.showValidationError('Pedido falhado: ' + err);
+            console.log(err); // estava alert(err); coloquei console log para não estar sempre a aparecer pop-up ao utilizador
+        })
+        .then(async function (result) {
+            console.log(result);
+            if (result) {
+
+
+                if (document.getElementById("filtro").value == 1) {
+                    val = 1;
+                    avisos();
+                } else {
+                    val = 2;
+                    avisos();
+                }
+
+
+            }
+
+            else {
+                Swal.fire(
+                    'Ocorreu um erro!',
+                    '',
+                    'error'
+                ).then(() => {
+                    location.reload();
+                })
+                console.log(result);
+                //swal({ title: `${result.value.userMessage.message.pt}` });
+            }
+        });
+
+
+}
+
+
+
+//---------------------------------------------------------POST COMENTÁRIO---------------------------------------------------------
+
+async function subComent(idbtn) {
+    var id = idbtn.replace('Submit', '');
+
+    var descrip = document.getElementById(id + "Input").value.trim();
+    var tit = document.getElementById(id).children[0].innerHTML;
+
+    var dat = {};
+
+    dat.annotationDestId = parseInt(id);
+    dat.title = tit;
+    dat.description = descrip;
+
+    if (descrip !== "") {
+        console.log(dat)
+
+        if (document.getElementById("filtro").value == 1) {
+
+            await fetch('http://127.0.0.1:8080/api/comments/prisoner-annotations', {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                mode: 'cors',
+                method: 'POST',
+                credentials: 'include',
+                body: JSON.stringify(dat)
+
+            }).then(function (response) {
+                if (!response.ok) {
+                    alert(response);
+                    throw new Error("ERRO");
+                }
+                console.log(response);
+                return response.json();
+            }).then(async function (result) {
+                console.log(result);
+                if (result) {
+
+                    if (document.getElementById("filtro").value == 1) {
+                        val = 1;
+                        avisos();
+                    } else {
+                        val = 2;
+                        avisos();
+                    }
+                }
+            }).catch(function (err) {
+                swal("Erro!", "Erro!", "error").then(() => {
+                    location.reload();
+                });
+            })
+
+
+        } else {
+
+            await fetch('http://127.0.0.1:8080/api/comments/prison-annotations', {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                mode: 'cors',
+                method: 'POST',
+                credentials: 'include',
+                body: JSON.stringify(dat)
+
+            }).then(function (response) {
+                if (!response.ok) {
+                    alert(response);
+                    throw new Error("ERRO");
+                }
+                console.log(response);
+                return response.json();
+            }).then(async function (result) {
+                console.log(result);
+                if (result) {
+
+                    if (document.getElementById("filtro").value == 1) {
+                        val = 1;
+                        avisos();
+                    } else {
+                        val = 2;
+                        avisos();
+                    }
+
+                }
+            }).catch(function (err) {
+                swal("Erro!", "Erro!", "error").then(() => {
+                    location.reload();
+                });
+            })
+
+        }
+
+
+    }
+
+
+}

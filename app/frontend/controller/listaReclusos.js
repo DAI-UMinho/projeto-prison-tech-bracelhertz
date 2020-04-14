@@ -105,6 +105,7 @@ $("#tabelaRecluso").on('click', 'tr', function () {
         } else {
             location.href = "recluso.html";
             localStorage.setItem("id_user_clicked", clicked);
+            localStorage.setItem("Anot", "rec");
         }
     }
 });

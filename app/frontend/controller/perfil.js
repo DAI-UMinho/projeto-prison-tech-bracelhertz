@@ -19,6 +19,17 @@ $(window).on("load", function () {
       console.log(logado);
 
 
+      const response7 = await fetch('http://127.0.0.1:8080/api/photos/' + logado.photoId, {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        mode: 'cors',
+        method: 'GET',
+        credentials: 'include'
+      });
+      const photoD = await response7.json();
+
+
       if (logado.roles[0].name == "ROLE_NETWORKMAN") {
         document.getElementById("role_perfil").innerHTML = "Gestor da Rede Prisonal";
       } else if (logado.roles[0].name == "ROLE_GUARD") {
@@ -38,7 +49,7 @@ $(window).on("load", function () {
       document.getElementById("email_perfil").value = logado.email;
       document.getElementById("localidade_perfil").value = logado.location;
       //document.getElementById("role_perfil").innerHTML = logado.roles[0].name;
-      document.getElementById("fotoR").src = logado.photo;
+      document.getElementById("fotoR").src = "data:image/png;base64," + photoD.picByte;
 
     }
     //chama a função fetchAsync()
@@ -355,7 +366,7 @@ async function editar_photo(photoC) {
       else {
         Swal.fire(
           'Ocorreu um erro!',
-          'Foto apenas pode ter até 1.048576 MB',
+          'Foto apenas pode ter até 1 MB inclusive',
           'error'
         ).then(() => {
           location.reload();

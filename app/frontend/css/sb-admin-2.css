@@ -11268,7 +11268,7 @@ body.sidebar-toggled footer.sticky-footer {
 
 .caixa-de-comentario{
   width: 100%;
-  height: 90px;
+  height: 132px;
   border: 2px solid /*#1b2c47*/ #ff8800;
   padding-left: 5px;
   overflow-y: scroll;
@@ -12025,5 +12025,41 @@ input:checked + div:before {
     width: 80% !important;
     vertical-align: middle !important;
 }
+
+.full_tab90{
+  display: table !important;
+    width: 90% !important;
+    border-spacing: 0px !important;
+}
 /*----------------------------------------------------------Novo Codigo---------------------------------------------------------*/
 
+table.scroll thead {
+  width: 100%;
+}
+
+table.scroll thead th {
+  flex: 1 auto;
+  display: block;
+}
+table.scroll tbody {
+  display: block;
+  width: 100%;
+  overflow-y: auto;
+  height: auto;
+  max-height: 200px;
+}
+table.scroll thead tr,
+table.scroll tbody tr {
+  display: flex;
+}
+table.scroll tbody tr td {
+  flex: 1 auto;
+  word-wrap: break;
+}
+table.scroll thead tr th,
+table.scroll tbody tr td {
+  width: 25%;
+  padding: 5px;
+  text-align: left;
+  border-bottom: 1px solid rgba(0,0,0,0.3);
+}

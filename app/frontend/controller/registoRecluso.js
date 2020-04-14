@@ -33,7 +33,8 @@ window.onload = async function () {
 
     if (Rname.value == "" || nacionalidade.value == "" || dataNascimento.value == "" ||
       Identification.value == "" || contact.value == "" || contactAlt.value == "" ||
-      cela.value == "" || contact.value.length != 9 || contactAlt.value.length != 9) {
+      cela.value == "" || contact.value.length != 9 || contactAlt.value.length != 9 ||
+      idpulseira.value == "") {
       Swal.fire(
         'Preencha todos os campos!',
         '',
@@ -345,7 +346,7 @@ async function post_photo(photoC, idGajo) {
       else {
         Swal.fire(
           'Ocorreu um erro!',
-          'Foto apenas pode ter até 1.048576 MB',
+          'Foto apenas pode ter até 1 MB inclusive',
           'error'
         )
         console.log(result);

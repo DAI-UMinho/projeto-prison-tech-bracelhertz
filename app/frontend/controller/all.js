@@ -255,29 +255,7 @@ async function Agenda() {
 
                         if (result) {
 
-                            console.log("1");
-
-                            const Toast = Swal.mixin({
-                                toast: true,
-                                position: 'top-end',
-                                showConfirmButton: false,
-                                timer: 500,
-                                timerProgressBar: true,
-                                onOpen: (toast) => {
-                                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                }
-                            })
-
-                            Toast.fire({
-                                icon: 'success',
-                                title: 'Adicionado com sucesso'
-                            })
-                                .then(() => {
-                                    location.reload();
-                                })
-
-
+                            location.reload();
                         }
                     }).catch(function (err) {
                         swal("Erro!", err, "error");

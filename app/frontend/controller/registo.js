@@ -26,6 +26,7 @@ window.onload = async function () {
     data.roles = [{ id: parseInt(document.getElementById("instt").value.trim()) }];
     data.password = document.getElementById("password").value.trim();
     data.prison = { prisonId: document.getElementById("local").value };
+    data.passwordToken = "";
 
 
 
@@ -491,7 +492,7 @@ async function post_photo(photoC, idGajo) {
       else {
         Swal.fire(
           'Ocorreu um erro!',
-          'Foto apenas pode ter até 1.048576 MB',
+          'Foto apenas pode ter até 1 MB inclusive',
           'error'
         )
         console.log(result);

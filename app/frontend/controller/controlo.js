@@ -96,6 +96,17 @@ $(window).on("load", function () {
             console.log(logado);
 
 
+            const response7 = await fetch('http://127.0.0.1:8080/api/photos/' + logado.photoId, {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                mode: 'cors',
+                method: 'GET',
+                credentials: 'include'
+            });
+            const photoD = await response7.json();
+
+
             var nomeUser = document.getElementById("nomeUser");
             var avatarUser = document.getElementById("avatarUser");
 
@@ -109,7 +120,7 @@ $(window).on("load", function () {
 
             //envia a para a pagina
             nomeUser.innerHTML = logado.name;
-            avatarUser.src = logado.photo;
+            avatarUser.src = "data:image/png;base64," + photoD.picByte;
 
 
         }

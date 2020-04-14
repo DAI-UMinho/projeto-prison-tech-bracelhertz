@@ -68,7 +68,7 @@
       <li class="nav-item">
         <a class="nav-link" href="avisos.html">
           <img src="img/bellG.png" class="imgSide">
-          <span>Avisos</span></a>
+          <span>Anotações</span></a>
       </li>
 
       <!-- Divider -->
@@ -205,13 +205,13 @@
 
               <!-- Page Heading -->
               <div class="d-sm-flex align-items-center justify-content-between mb-4 border-bottom-secondary">
-                <h1 class="h3 mb-0 text-secondary">Avisos</h1>
+                <h1 class="h3 mb-0 text-secondary">Anotações</h1>
                 <div class="justify-content-end">
                   <select id="filtro" style="width: 137px;" class="dropdown form-control">
                     <span>Filtrar por...</span>
                     <div class="dropdown-content">
-                      <option class="mb-n05" style="border: none; background: none;" value="reclusos">Reclusos</option>
-                      <option class="mb-n1" style="border: none; background: none;" value="instituicoes">Instituições
+                      <option class="mb-n05" style="border: none; background: none;" value="1">Reclusos</option>
+                      <option class="mb-n1" style="border: none; background: none;" value="2">Instituições
                       </option>
                     </div>
                   </select>
@@ -228,10 +228,12 @@
                 <div class="card shadow mb-4">
                   <!-- Card Header - Dropdown -->
                   <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-secondary">
-                    <h6 class="m-0 font-weight-bold text-white">Espancamento
+                    <h6 class="tab_nome m-0 font-weight-bold text-white">Espancamento
 
                       <span data-tooltip="Sexta-feira 11 Março 2020 14:24h" data-tooltip-position="bottom"
                         class="text-white font-small font-weight-normal solve" id="cona">(Editado)</span></h6>
+                    <div id='podeAlterar' style='padding-right: 10px; display: none;' type='button'><i
+                        class='fas fa-check text-white'></i></div>
 
                     <div class="dropdown no-arrow">
                       <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
@@ -265,12 +267,29 @@ Dropdown menus can be placed in the card header in order to extend the functiona
                     <br>
                     <div class="w-100"> Comentários: </div>
                     <div class="text-black caixa-de-comentario no-border">
-                      <div class="caixa-de-cometario-interior mt-1 mg-1">
-                        <div class="comentario2">
+                      <div class="caixa-de-cometario-interior mt-1 mg-1 full_tab90">
+                        <div class="comentario2 tab_nome">
                           <img class="img-profile rounded-circle picNotes mt-1 ml-1" src="img/perfil1.png"> Nelson
                           Pereira
-                          <div class="font-small text-gray-600 ml-3 mb-1 mt-1">
-                            Comentário...................
+                          <textarea class="font-small text-gray-600 my-1 ml-3"
+                            style="width: 90%; background-color: transparent; resize: none; border: none; height: 24px; overflow-y: hidden;">comentaeio</textarea>
+                        </div>
+                        <div class="dropdown no-arrow tab_time" style="
+    background-color: #fed8b1;
+">
+                          <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-white"></i>
+                          </a>
+                          <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                            aria-labelledby="dropdownMenuLink" x-placement="top-end"
+                            style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-142px, 1px, 0px);">
+                            <div class="dropdown-header text-secondary">Opções:</div>
+                            <a class="dropdown-item" data-toggle="modal" data-target="#EditarNotaModal" id="willEdit"
+                              href="#">Editar</a>
+                            <a class="dropdown-item" href="#" id="apagar_aviso">Apagar</a>
+
+                            <a class="dropdown-item" href="#"></a>
                           </div>
                         </div>
                       </div>
@@ -279,9 +298,8 @@ Dropdown menus can be placed in the card header in order to extend the functiona
                           <div class="comentario2">
                             <img class="img-profile rounded-circle picNotes mt-1 ml-1" src="img/perfil1.png"> Nelson
                             Pereira
-                            <div class="font-small text-gray-600 ml-3 mb-1 mt-1">
-                              Comentário...................
-                            </div>
+                            <textarea class="font-small text-gray-600 my-1 ml-3"
+                              style="width: 90%; background-color: transparent; resize: none; border: none;">comentaeio</textarea>
                           </div>
                         </div>
                       </div>
@@ -767,6 +785,26 @@ Dropdown menus can be placed in the card header in order to extend the functiona
     </div>
   </div>
 
+  <!-- Confimação apagar nota Modal-->
+  <div class="modal t-1 fade" id="confModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Terminar Sessão</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Deseja mesmo apagar esta anotação?</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+          <button class="btn btn-primary" id="botaoConf">Confirmar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Nota Modal-->
   <div class="modal fade" id="NotaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
@@ -817,7 +855,8 @@ Dropdown menus can be placed in the card header in order to extend the functiona
   <script>
     $(document).on('input', 'textarea', function () {
       $(this).outerHeight(38).outerHeight(this.scrollHeight); // 38 or '1em' -min-height
-    }); 
+    });
+
   </script>
 
 </body>

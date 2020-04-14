@@ -51,6 +51,7 @@ $(window).on("load", function () {
         if (typeof clicked !== 'undefined') {
             location.href = "instituicao.html";
             localStorage.setItem("id_inst_clicked", clicked);
+            localStorage.setItem("Anot", "inst");
         }
 
     });

@@ -18,6 +18,17 @@ $(window).on("load", function () {
       console.log(perfil);
 
 
+      const response7 = await fetch('http://127.0.0.1:8080/api/photos/' + perfil.photoId, {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        mode: 'cors',
+        method: 'GET',
+        credentials: 'include'
+    });
+    const photoD = await response7.json();
+
+
       //envia a para a pagina
       document.getElementById("funcaoF").value = perfil.roles[0].name;
       document.getElementById("nFuncionario").innerHTML = perfil.username;
@@ -27,12 +38,11 @@ $(window).on("load", function () {
       document.getElementById("moradaF").value = perfil.address;
       document.getElementById("localF").value = perfil.location;
       document.getElementById("nomeF").value = perfil.name;
-      document.getElementById("imagemPerfil").src = perfil.photo;
+      document.getElementById("imagemPerfil").src = "data:image/png;base64," + photoD.picByte;
       document.getElementById("contactoF").value = perfil.contact;
       document.getElementById("emailF").value = perfil.email;
 
       document.getElementById("last_login").innerHTML = "Último login: " + getDate(perfil.lastLogin);
-
 
 
       if (!(RoleLogado == "ROLE_NETWORKMAN" && perfil.roles[0].name !== "ROLE_NETWORKMAN" || RoleLogado == "ROLE_MANAGER" && perfil.roles[0].name == "ROLE_GUARD")) {
@@ -257,27 +267,19 @@ document.getElementById("perfil_save_2").addEventListener("click", async functio
 
 
 
-
-
-
-
-
-
 //---------------------------------------------DATAS-------------------------------------------------
 
 function getDate(date) {
   var today = new Date(date);
   var d = today.getDate();
-  var mo = today.getMonth() + 1;
+  var mo = today.getMonth();
   var a = today.getFullYear();
   var h = today.getHours();
   var m = today.getMinutes();
-  var s = today.getSeconds();
-  d = checkTime(d);
-  mo = checkTime(mo);
-
+  h = checkTime(h);
   m = checkTime(m);
-  s = checkTime(s);
+  d = checkTime(d);
+  mo = checkTime(mo + 1);
   return d + "/" + mo + "/" + a + " " + h + ":" + m;
 }
 function checkTime(i) {
@@ -339,97 +341,6 @@ function Myfunction425() {
   document.getElementById("icon_localF").style.display = "none";
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//------------------------------------------ANOTAÇÃO--------------------------------------------------------
-
-
-const enviar_novo = document.getElementById("enviar_novo");
-enviar_novo.addEventListener("click", novaNota);
-
-async function novaNota() {
-  event.preventDefault();
-  var data = {};
-
-  let id_user_clicked = localStorage.getItem("id_user_clicked");
-
-
-  data.title = document.getElementById("titleN").value.trim();
-  data.description = document.getElementById("descriptionN").value.trim();
-  data.userDestId = id_user_clicked;
-
-  if (titleN.value == "" || descriptionN.value == "") {
-    Swal.fire(
-      'Preencha todos os campos!',
-      '',
-      'warning'
-    )
-  } else {
-
-
-
-    await fetch('http://127.0.0.1:8080/api/user-annotations', {
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      mode: 'cors',
-      method: 'POST',
-      credentials: 'include',
-      body: JSON.stringify(data)
-
-    }).then(function (response) {
-      if (!response.ok) {
-        alert(response);
-        throw new Error("ERRO");
-      }
-      console.log(response);
-      return response.json();
-    }).then(async function (result) {
-      console.log(result);
-      if (result) {
-        swal("Sucesso!",
-          "Anotação enviada com sucesso!",
-          "success").then(() => {
-            document.getElementById("titleN").value = "";
-            document.getElementById("descriptionN").value = "";
-            $('#NotaModal').modal('hide');
-          })
-      }
-    }).catch(function (err) {
-      swal("Erro!", "Erro!", "error");
-    })
-
-
-
-  }
-
-}
 
 
 
