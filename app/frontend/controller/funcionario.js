@@ -43,7 +43,7 @@ $(window).on("load", function () {
       document.getElementById("emailF").value = perfil.email;
 
       if (perfil.lastLogin !== null) {
-        document.getElementById("last_login").innerHTML = "Último login: " + getDate(perfil.lastLogin);
+        document.getElementById("last_login").innerHTML = "Último login: " + getDate7(perfil.lastLogin);
       }else{
         document.getElementById("last_login").innerHTML = "Último login: ";
       }
@@ -273,7 +273,7 @@ document.getElementById("perfil_save_2").addEventListener("click", async functio
 
 //---------------------------------------------DATAS-------------------------------------------------
 
-function getDate(date) {
+function getDate7(date) {
   var today = new Date(date);
   var d = today.getDate();
   var mo = today.getMonth();

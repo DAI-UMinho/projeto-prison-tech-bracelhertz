@@ -112,7 +112,7 @@ $(window).on("load", function () {
                     for (var registo of recluso.criminalRecord) {
                         showRegisto += "<li><input class='testee' id='" + registo.criminalRecordId + "' type='checkbox' name='" + registo.criminalRecordId + "' disabled='true'>"
                         showRegisto += "<div class='label'><label for='" + registo.criminalRecordId + "'>";
-                        showRegisto += "<span data-tooltip='Emissão " + getDate3(registo.emissionDate) + "' data-tooltip-position='bottom'>" + registo.description + "</span></label><br></div></li>";
+                        showRegisto += "<span data-tooltip='Emissão " + getDate7(registo.emissionDate) + "' data-tooltip-position='bottom'>" + registo.description + "</span></label><br></div></li>";
                         showRegisto += "";
                         if (i == 0) {
                             mrecente = new Date(registo.lastUpdatedTimestamp);
@@ -127,7 +127,7 @@ $(window).on("load", function () {
 
                         i++;
                     }
-                    showtolipRegisto += "Registo Criminal<span data-tooltip='" + getDate2(mrecente) + "'";
+                    showtolipRegisto += "Registo Criminal<span data-tooltip='" + getDate6(mrecente) + "'";
                     showtolipRegisto += "data-tooltip-position='bottom' class='text-white font-small font-weight-normal solve'>(Editado)</span>";
                     document.getElementById("tabCH").innerHTML = showtolipRegisto;
 
@@ -162,7 +162,7 @@ $(window).on("load", function () {
                         o++;
                     }
 
-                    showtolipFicha += "Cuidados a ter com o recluso<span data-tooltip='" + getDate2(mrecente2) + "'";
+                    showtolipFicha += "Cuidados a ter com o recluso<span data-tooltip='" + getDate6(mrecente2) + "'";
                     showtolipFicha += "data-tooltip-position='bottom' class='text-white font-small font-weight-normal solve'>(Editado)</span>";
                     document.getElementById("tabCH2").innerHTML = showtolipFicha;
 
@@ -802,7 +802,7 @@ function getIds2() {
 }
 
 //-------------------------------------------------DATA Formato------------------------------------------
-function getDate(date) {
+function getDate5(date) {
     var today = new Date(date);
     var d = today.getDate();
     var mo = today.getMonth()
@@ -816,7 +816,7 @@ function checkTime(i) {
     return i;
 }
 
-function getDate2(date) {
+function getDate6(date) {
     var dias = ["Domingo", "Segunda-Feira", "Terça-Feira", "Quarta-Feira", "Quinta-Feira", "Sexta-Feira", "Sábado"];
     var today = new Date(date);
     var dia = today.getDay();
@@ -832,7 +832,7 @@ function getDate2(date) {
     return dias[dia] + " " + d + " " + mo + " " + a + " " + h + ":" + m + "h";
 }
 
-function getDate3(date) {
+function getDate7(date) {
     var today = new Date(date);
     var d = today.getDate();
     var mo = today.getMonth()

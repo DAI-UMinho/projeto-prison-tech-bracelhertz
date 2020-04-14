@@ -85,7 +85,7 @@ async function display(avisos) {
             true_content += "<div id='" + aviso[0] + "' class='card-header py-3 d-flex flex-row align-items-center justify-content-between bg-secondary'>"
             true_content += "<h6 class='tab_nome m-0 font-weight-bold text-white'>" + aviso[3] + ""
             if (aviso[6] !== null) {
-                true_content += "<span data-tooltip='" + getDate2(aviso[6]) + "' data-tooltip-position='bottom' class='text-white font-small font-weight-normal solve'>(Editado)</span>"
+                true_content += "<span data-tooltip='" + getDate6(aviso[6]) + "' data-tooltip-position='bottom' class='text-white font-small font-weight-normal solve'>(Editado)</span>"
             }
             true_content += "</h6>";
             if (userLogado == aviso[1].userId) {
@@ -102,7 +102,7 @@ async function display(avisos) {
             true_content += "</div>";
             true_content += "<div class='card-body'><div style='margin-top:-12px;'class='text-primary'>";
             true_content += "<img class='img-profile rounded-circle picNotes' src=" + "data:image/png;base64," + photoD.picByte + "> " + aviso[1].name + " (" + aviso[1].username + ")";
-            true_content += " <span class='text-xs'> " + getDate(aviso[5]) + "</span></div><br>";
+            true_content += " <span class='text-xs'> " + getDate5(aviso[5]) + "</span></div><br>";
 
             if (document.getElementById("filtro").value == 1) {
                 true_content += "<div>Recluso: " + aviso[2].name + " (" + aviso[2].identifierId + ")</div><textarea id='" + aviso[0] + "text' class='alterar form-control' style='resize: none; border: none; background-color:transparent;' readonly='true'>" + aviso[4] + "</textarea>";
@@ -433,7 +433,7 @@ document.getElementById("tipoDest").addEventListener("change", function () {
 
 //---------------------------------------------DATA FORMAT-------------------------------------------------------
 
-function getDate(date) {
+function getDate5(date) {
     var today = new Date(date);
     var d = today.getDate();
     var mo = today.getMonth()
@@ -443,7 +443,7 @@ function getDate(date) {
     return d + "-" + mo + "-" + a;
 }
 
-function getDate2(date) {
+function getDate6(date) {
     var dias = ["Domingo", "Segunda-Feira", "Terça-Feira", "Quarta-Feira", "Quinta-Feira", "Sexta-Feira", "Sábado"];
     var today = new Date(date);
     var dia = today.getDay();
