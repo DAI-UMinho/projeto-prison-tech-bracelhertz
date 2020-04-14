@@ -20,13 +20,13 @@ $(window).on("load", function () {
 
       const response7 = await fetch('http://127.0.0.1:8080/api/photos/' + perfil.photoId, {
         headers: {
-            'Content-Type': 'application/json'
+          'Content-Type': 'application/json'
         },
         mode: 'cors',
         method: 'GET',
         credentials: 'include'
-    });
-    const photoD = await response7.json();
+      });
+      const photoD = await response7.json();
 
 
       //envia a para a pagina
@@ -42,7 +42,11 @@ $(window).on("load", function () {
       document.getElementById("contactoF").value = perfil.contact;
       document.getElementById("emailF").value = perfil.email;
 
-      document.getElementById("last_login").innerHTML = "Último login: " + getDate(perfil.lastLogin);
+      if (perfil.lastLogin !== null) {
+        document.getElementById("last_login").innerHTML = "Último login: " + getDate(perfil.lastLogin);
+      }else{
+        document.getElementById("last_login").innerHTML = "Último login: ";
+      }
 
 
       if (!(RoleLogado == "ROLE_NETWORKMAN" && perfil.roles[0].name !== "ROLE_NETWORKMAN" || RoleLogado == "ROLE_MANAGER" && perfil.roles[0].name == "ROLE_GUARD")) {

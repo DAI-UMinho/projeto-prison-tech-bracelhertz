@@ -70,6 +70,17 @@ async function display(avisos) {
         for (const aviso of avisos) {
 
 
+            const response7 = await fetch('http://127.0.0.1:8080/api/photos/' + aviso[1].photoId, {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                mode: 'cors',
+                method: 'GET',
+                credentials: 'include'
+            });
+            const photoD = await response7.json();
+
+
             true_content += "<div class='card shadow mb-4'>";
             true_content += "<div id='" + aviso[0] + "' class='card-header py-3 d-flex flex-row align-items-center justify-content-between bg-secondary'>"
             true_content += "<h6 class='tab_nome m-0 font-weight-bold text-white'>" + aviso[3] + ""
@@ -90,7 +101,7 @@ async function display(avisos) {
             }
             true_content += "</div>";
             true_content += "<div class='card-body'><div style='margin-top:-12px;'class='text-primary'>";
-            true_content += "<img class='img-profile rounded-circle picNotes' src=" + aviso[1].photo + "> " + aviso[1].name + " (" + aviso[1].username + ")";
+            true_content += "<img class='img-profile rounded-circle picNotes' src=" + "data:image/png;base64," + photoD.picByte + "> " + aviso[1].name + " (" + aviso[1].username + ")";
             true_content += " <span class='text-xs'> " + getDate(aviso[5]) + "</span></div><br>";
 
             if (document.getElementById("filtro").value == 1) {
@@ -123,8 +134,19 @@ async function display(avisos) {
                 true_content += "<div class='text-black caixa-de-comentario no-border'>";
                 for (const comentario of comentarios) {
 
+
+                    const response8 = await fetch('http://127.0.0.1:8080/api/photos/' + comentario[1].photoId, {
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        mode: 'cors',
+                        method: 'GET',
+                        credentials: 'include'
+                    });
+                    const photoC = await response8.json();
+
                     true_content += "<div class='caixa-de-cometario-interior mt-1 mg-1 full_tab90' id='" + comentario[0] + "'><div class='comentario2 tab_nome'>";
-                    true_content += "<img class='img-profile rounded-circle picNotes mt-1 ml-1' src=" + comentario[1].photo + "> " + comentario[1].name + "";
+                    true_content += "<img class='img-profile rounded-circle picNotes mt-1 ml-1' src=" + "data:image/png;base64," + photoD.picByte + "> " + comentario[1].name + "";
                     true_content += "<textarea id='" + comentario[0] + "coment' class='font-small text-gray-600 my-1 ml-3'";
                     true_content += "readonly='true' style='width: 90%; background-color: transparent; resize: none; border: none; height: 24px; overflow-y: hidden;'>";
                     true_content += "" + comentario[4] + "</textarea></div>";
