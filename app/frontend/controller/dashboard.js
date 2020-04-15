@@ -74,29 +74,29 @@ function display_logs() {
         //criação da demonstração de resultados recebidos
         if (document.getElementById("tipoDest").value == 1) {
 
-                for (const logG of listaLogG) {
+            for (const logG of listaLogG) {
 
-                    see_logs += "<td>" + getDate(logG.logTimestamp) + "</td>";
-                    see_logs += "<td id='" + logG.byUser.userId + "' type='button' onclick='dothis(this.id)'>" + logG.byUser.name + " (" + logG.byUser.username + ")</td>";
-                    see_logs += "<td>" + logG.description + "</td>";
-                    see_logs += "<td id='" + logG.user.userId + "' type='button' onclick='dothis(this.id)'>" + logG.user.name + " (" + logG.user.username + ")</td>";
-                    see_logs += "<td id='" + logG.byUser.prison.prisonId + "' type='button' onclick='dothis(this.id)'>" + logG.byUser.prison.name + "</td>";
-                    see_logs += "</tr>";
-                }
-         
+                see_logs += "<td>" + getDate(logG.logTimestamp) + "</td>";
+                see_logs += "<td id='" + logG.byUser.userId + "' type='button' onclick='dothis(this.id)'>" + logG.byUser.name + " (" + logG.byUser.username + ")</td>";
+                see_logs += "<td>" + logG.description + "</td>";
+                see_logs += "<td id='" + logG.user.userId + "' type='button' onclick='dothis(this.id)'>" + logG.user.name + " (" + logG.user.username + ")</td>";
+                see_logs += "<td id='" + logG.byUser.prison.prisonId + "' type='button' onclick='dothis2(this.id)'>" + logG.byUser.prison.name + "</td>";
+                see_logs += "</tr>";
+            }
+
         } else {
 
-                for (const logR of listaLogR) {
+            for (const logR of listaLogR) {
 
-                    see_logs += "<td>" + getDate(logR.logTimestamp) + "</td>";
-                    see_logs += "<td id='" + logR.byUser.userId + "' type='button' onclick='dothis(this.id)'>" + logR.byUser.name + " (" + logR.byUser.username + ")</td>";
-                    see_logs += "<td>" + logR.description + "</td>";
-                    see_logs += "<td id='" + logR.prisoner.prisonerId + "' type='button' onclick='dothat(this.id)'>" + logR.prisoner.name + " (" + logR.prisoner.identifierId + ")</td>";
-                    see_logs += "<td id='" + logR.byUser.prison.prisonId + "' type='button' onclick='dothis(this.id)'>" + logR.byUser.prison.name + "</td>";
-                    see_logs += "</tr>";
-    
-                }
-     
+                see_logs += "<td>" + getDate(logR.logTimestamp) + "</td>";
+                see_logs += "<td id='" + logR.byUser.userId + "' type='button' onclick='dothis(this.id)'>" + logR.byUser.name + " (" + logR.byUser.username + ")</td>";
+                see_logs += "<td>" + logR.description + "</td>";
+                see_logs += "<td id='" + logR.prisoner.prisonerId + "' type='button' onclick='dothat(this.id)'>" + logR.prisoner.name + " (" + logR.prisoner.identifierId + ")</td>";
+                see_logs += "<td id='" + logR.byUser.prison.prisonId + "' type='button' onclick='dothis2(this.id)'>" + logR.byUser.prison.name + "</td>";
+                see_logs += "</tr>";
+
+            }
+
         }
 
         //envia a para a pagina
@@ -126,6 +126,12 @@ function dothis(id) {
         location.href = "funcionario.html";
     }
 
+}
+
+function dothis2(id) {
+    localStorage.setItem("id_inst_clicked", id);
+    localStorage.setItem("Anot", "inst");
+    location.href = "instituicao.html";
 }
 
 function dothat(id) {
