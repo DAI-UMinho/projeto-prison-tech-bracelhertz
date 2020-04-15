@@ -77,9 +77,18 @@ function display_logs() {
             for (const logG of listaLogG) {
 
                 see_logs += "<td>" + getDate(logG.logTimestamp) + "</td>";
-                see_logs += "<td id='" + logG.byUser.userId + "' type='button' onclick='dothis(this.id)'>" + logG.byUser.name + " (" + logG.byUser.username + ")</td>";
+                if (logG.byUser !== null) {
+                    see_logs += "<td id='" + logG.byUser.userId + "' type='button' onclick='dothis(this.id)'>" + logG.byUser.name + " (" + logG.byUser.username + ")</td>";
+                } else {
+                    see_logs += "<td>Utilizador apagado</td>";
+                }
                 see_logs += "<td>" + logG.description + "</td>";
-                see_logs += "<td id='" + logG.user.userId + "' type='button' onclick='dothis(this.id)'>" + logG.user.name + " (" + logG.user.username + ")</td>";
+                if (logG.user == null) {
+                    see_logs += "<td>Utilizador apagada</td>";
+                } else {
+                    see_logs += "<td id='" + logG.user.userId + "' type='button' onclick='dothis(this.id)'>" + logG.user.name + " (" + logG.user.username + ")</td>";
+                }
+
                 see_logs += "<td id='" + logG.byUser.prison.prisonId + "' type='button' onclick='dothis2(this.id)'>" + logG.byUser.prison.name + "</td>";
                 see_logs += "</tr>";
             }
@@ -89,9 +98,17 @@ function display_logs() {
             for (const logR of listaLogR) {
 
                 see_logs += "<td>" + getDate(logR.logTimestamp) + "</td>";
-                see_logs += "<td id='" + logR.byUser.userId + "' type='button' onclick='dothis(this.id)'>" + logR.byUser.name + " (" + logR.byUser.username + ")</td>";
+                if (logR.byUser !== null) {
+                    see_logs += "<td id='" + logR.byUser.userId + "' type='button' onclick='dothis(this.id)'>" + logR.byUser.name + " (" + logR.byUser.username + ")</td>";
+                } else {
+                    see_logs += "<td>Utilizador apagado</td>";
+                }
                 see_logs += "<td>" + logR.description + "</td>";
-                see_logs += "<td id='" + logR.prisoner.prisonerId + "' type='button' onclick='dothat(this.id)'>" + logR.prisoner.name + " (" + logR.prisoner.identifierId + ")</td>";
+                if (logR.prisoner !== null) {
+                    see_logs += "<td id='" + logR.prisoner.prisonerId + "' type='button' onclick='dothat(this.id)'>" + logR.prisoner.name + " (" + logR.prisoner.identifierId + ")</td>";
+                } else {
+                    see_logs += "<td>Reclusos apagado</td>";
+                }
                 see_logs += "<td id='" + logR.byUser.prison.prisonId + "' type='button' onclick='dothis2(this.id)'>" + logR.byUser.prison.name + "</td>";
                 see_logs += "</tr>";
 
