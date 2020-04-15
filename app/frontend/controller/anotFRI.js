@@ -92,7 +92,7 @@ async function displayAnot(avisos) {
 
             true_content += "<div style='margin-top:-12px;'class='text-primary full_tab'>";
             true_content += "<img class='img-profile rounded-circle picNotes tab_time' src=" + "data:image/png;base64," + photoD.picByte + "> ";
-            true_content += "<table class='tab_nome'><tbody><tr><th style='font-weight: normal;'>" + aviso[1].name + " (" + aviso[1].username + ")<span class='text-xs'>" + getDate(aviso[5]) + "</span></th></tr>";
+            true_content += "<table class='tab_nome pl-1'><tbody><tr><th style='font-weight: normal;'>" + aviso[1].name + " (" + aviso[1].username + ")<span class='text-xs'>" + getDate(aviso[5]) + "</span></th></tr>";
 
             if (aviso[6] !== null) {
                 true_content += "<tr><th><span data-tooltip='" + getDate2(aviso[6]) + "' data-tooltip-position='bottom' class='text-black font-small font-weight-normal solve'>(Editado)</span></th></tr>"
