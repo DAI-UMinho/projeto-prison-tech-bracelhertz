@@ -10,7 +10,7 @@ $(window).on("load", function () {
             var conteudo = [];
 
             if (RoleLogado == "ROLE_GUARD") {
-                const response = await fetch('https://backend-bracelhertz.herokuapp.com/api/prisoners/by-guards', {
+                const response = await fetch('http://127.0.0.1:8080/api/prisoners/by-guards', {
                     headers: {
                         'Content-Type': 'application/json'
                     },
@@ -22,7 +22,7 @@ $(window).on("load", function () {
                 display(func);
 
             } else {
-                const response = await fetch('https://backend-bracelhertz.herokuapp.com/api/prisoners', {
+                const response = await fetch('http://127.0.0.1:8080/api/prisoners', {
                     headers: {
                         'Content-Type': 'application/json'
                     },
@@ -124,7 +124,7 @@ async function VerApagar() {
     if (selecionados.length < 1) {
     } else {
 
-        const response = await fetch('https://backend-bracelhertz.herokuapp.com/api/users/logged-profiles', {
+        const response = await fetch('http://127.0.0.1:8080/api/users/logged-profiles', {
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -141,7 +141,7 @@ async function VerApagar() {
         for (selec of selecionados) {
             ids.push(selec.firstChild.firstChild.id);
 
-            const response4 = await fetch('https://backend-bracelhertz.herokuapp.com/api/prisoners/' + selec.firstChild.firstChild.id, {
+            const response4 = await fetch('http://127.0.0.1:8080/api/prisoners/' + selec.firstChild.firstChild.id, {
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -185,7 +185,7 @@ async function ListaApagar() {
             for (var rec of ids) {
                 var count = 0;
 
-                fetch('https://backend-bracelhertz.herokuapp.com/api/prisoners/' + rec, {
+                fetch('http://127.0.0.1:8080/api/prisoners/' + rec, {
                     headers: {
                         'Content-Type': 'application/json'
                     },

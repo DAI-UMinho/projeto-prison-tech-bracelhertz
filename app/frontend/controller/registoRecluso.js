@@ -45,7 +45,7 @@ window.onload = async function () {
 
       var verificar = document.getElementById("Identification").value.trim();
 
-      const response = await fetch('https://backend-bracelhertz.herokuapp.com/api/users/identifier-exists/' + verificar, {
+      const response = await fetch('http://127.0.0.1:8080/api/users/identifier-exists/' + verificar, {
 
         headers: {
           'Content-Type': 'application/json'
@@ -85,7 +85,7 @@ window.onload = async function () {
 
           console.log(data);
 
-          await fetch('https://backend-bracelhertz.herokuapp.com/api/prisoners', {
+          await fetch('http://127.0.0.1:8080/api/prisoners', {
             headers: {
               'Content-Type': 'application/json'
             },
@@ -133,7 +133,7 @@ window.onload = async function () {
   function get_instituicoes() {
     async function fetchAsync() {
       let RoleLogado = localStorage.getItem("RoleLogado");
-      const response1 = await fetch('https://backend-bracelhertz.herokuapp.com/api/users/logged-profiles', {
+      const response1 = await fetch('http://127.0.0.1:8080/api/users/logged-profiles', {
         headers: {
           'Content-Type': 'application/json'
         },
@@ -146,7 +146,7 @@ window.onload = async function () {
 
 
 
-      const response = await fetch('https://backend-bracelhertz.herokuapp.com/api/prisons', {
+      const response = await fetch('http://127.0.0.1:8080/api/prisons', {
         headers: {
           'Content-Type': 'application/json'
         },
@@ -272,7 +272,7 @@ existeRec.onblur = async function RecTaken() {
 
   var verificar = document.getElementById("Identification").value.trim();
 
-  const response = await fetch('https://backend-bracelhertz.herokuapp.com/api/users/identifier-exists/' + verificar, {
+  const response = await fetch('http://127.0.0.1:8080/api/users/identifier-exists/' + verificar, {
 
     headers: {
       'Content-Type': 'application/json'
@@ -308,7 +308,7 @@ var loadFile = function (event) {
 async function post_photo(photoC, idGajo) {
 
 
-  fetch('https://backend-bracelhertz.herokuapp.com/api/prisoners/upload-photos/' + idGajo, {
+  fetch('http://127.0.0.1:8080/api/prisoners/upload-photos/' + idGajo, {
     mode: 'cors',
     method: 'PUT',
     body: photoC,

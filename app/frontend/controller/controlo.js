@@ -84,7 +84,7 @@ $(window).on("load", function () {
     function display_infoPerfil() {
         async function fetchAsync() {
             let RoleLogado = localStorage.getItem("RoleLogado");
-            const response = await fetch('https://backend-bracelhertz.herokuapp.com/api/users/logged-profiles', {
+            const response = await fetch('http://127.0.0.1:8080/api/users/logged-profiles', {
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -96,7 +96,7 @@ $(window).on("load", function () {
             console.log(logado);
 
 
-            const response7 = await fetch('https://backend-bracelhertz.herokuapp.com/api/photos/' + logado.photoId, {
+            const response7 = await fetch('http://127.0.0.1:8080/api/photos/' + logado.photoId, {
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -147,7 +147,7 @@ async function sair() {
     event.preventDefault();
     var data = {};
     //data.email = document.getElementById("email").value;
-    fetch('https://backend-bracelhertz.herokuapp.com/api/auth/logout', {
+    fetch('http://127.0.0.1:8080/api/auth/logout', {
         headers: {
             'Content-Type': 'application/json'
         },

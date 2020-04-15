@@ -11,7 +11,7 @@ async function avisos() {
 
     if (val == 1) {
         //-----------------------------------GET PRISIONEIRO-----------------------------------
-        const response = await fetch('https://backend-bracelhertz.herokuapp.com/api/prisoner-annotations', {
+        const response = await fetch('http://127.0.0.1:8080/api/prisoner-annotations', {
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -25,7 +25,7 @@ async function avisos() {
     } else {
         document.getElementById("filtro").value = 2;
         //-----------------------------------GET INSTITUIÇÃO-----------------------------------
-        const response = await fetch('https://backend-bracelhertz.herokuapp.com/api/prison-annotations', {
+        const response = await fetch('http://127.0.0.1:8080/api/prison-annotations', {
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -48,7 +48,7 @@ async function display(avisos) {
     const real_content = document.getElementById("real_content");
     let true_content = "";
 
-    const response1 = await fetch('https://backend-bracelhertz.herokuapp.com/api/users/logged-profiles', {
+    const response1 = await fetch('http://127.0.0.1:8080/api/users/logged-profiles', {
         headers: {
             'Content-Type': 'application/json'
         },
@@ -70,7 +70,7 @@ async function display(avisos) {
         for (const aviso of avisos) {
 
 
-            const response7 = await fetch('https://backend-bracelhertz.herokuapp.com/api/photos/' + aviso[1].photoId, {
+            const response7 = await fetch('http://127.0.0.1:8080/api/photos/' + aviso[1].photoId, {
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -115,7 +115,7 @@ async function display(avisos) {
 
 
 
-            const response1 = await fetch('https://backend-bracelhertz.herokuapp.com/api/comments/annotations/' + aviso[0], {
+            const response1 = await fetch('http://127.0.0.1:8080/api/comments/annotations/' + aviso[0], {
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -135,7 +135,7 @@ async function display(avisos) {
                 for (const comentario of comentarios) {
 
 
-                    const response8 = await fetch('https://backend-bracelhertz.herokuapp.com/api/photos/' + comentario[1].photoId, {
+                    const response8 = await fetch('http://127.0.0.1:8080/api/photos/' + comentario[1].photoId, {
                         headers: {
                             'Content-Type': 'application/json'
                         },
@@ -201,7 +201,7 @@ document.getElementById("filtro").addEventListener("change", async function () {
 
     if (document.getElementById("filtro").value == 1) {
         val = 1;
-        const response4 = await fetch('https://backend-bracelhertz.herokuapp.com/api/prisoner-annotations', {
+        const response4 = await fetch('http://127.0.0.1:8080/api/prisoner-annotations', {
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -214,7 +214,7 @@ document.getElementById("filtro").addEventListener("change", async function () {
         display(avisos);
     } else {
         val = 2;
-        const response5 = await fetch('https://backend-bracelhertz.herokuapp.com/api/prison-annotations', {
+        const response5 = await fetch('http://127.0.0.1:8080/api/prison-annotations', {
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -242,7 +242,7 @@ document.getElementById("filtro").addEventListener("change", async function () {
 function get_instituicoes() {
     async function fetchAsync() {
 
-        const response = await fetch('https://backend-bracelhertz.herokuapp.com/api/prisons', {
+        const response = await fetch('http://127.0.0.1:8080/api/prisons', {
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -275,7 +275,7 @@ function get_reclusos() {
         var func = "";
         var show_rec = "";
         if (RoleLogado == "ROLE_GUARD") {
-            const response = await fetch('https://backend-bracelhertz.herokuapp.com/api/prisoners/by-guards', {
+            const response = await fetch('http://127.0.0.1:8080/api/prisoners/by-guards', {
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -286,7 +286,7 @@ function get_reclusos() {
             func = await response.json();
 
         } else {
-            const response = await fetch('https://backend-bracelhertz.herokuapp.com/api/prisoners', {
+            const response = await fetch('http://127.0.0.1:8080/api/prisoners', {
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -345,7 +345,7 @@ async function novaNota() {
 //-------------------------------POST DE ANOTAÇÃO INSTITUIÇÃO-------------------------------
 async function postInst(data) {
 
-    await fetch('https://backend-bracelhertz.herokuapp.com/api/prison-annotations', {
+    await fetch('http://127.0.0.1:8080/api/prison-annotations', {
         headers: {
             'Content-Type': 'application/json'
         },
@@ -381,7 +381,7 @@ async function postInst(data) {
 //-------------------------------POST DE ANOTAÇÃO RECLUSO-------------------------------
 async function postRec(data) {
 
-    await fetch('https://backend-bracelhertz.herokuapp.com/api/prisoner-annotations', {
+    await fetch('http://127.0.0.1:8080/api/prisoner-annotations', {
         headers: {
             'Content-Type': 'application/json'
         },
@@ -468,7 +468,7 @@ function checkTime(i) {
 document.getElementById("botaoConf").addEventListener("click", async function () {
 
 
-    fetch('https://backend-bracelhertz.herokuapp.com/api/prisons-annotations/' + anotDelete, {
+    fetch('http://127.0.0.1:8080/api/prisons-annotations/' + anotDelete, {
         headers: {
             'Content-Type': 'application/json'
         },
@@ -579,7 +579,7 @@ async function editarAnotacao(id) {
 
     console.log(data);
 
-    fetch('https://backend-bracelhertz.herokuapp.com/api/annotations', {
+    fetch('http://127.0.0.1:8080/api/annotations', {
         headers: {
             'Content-Type': 'application/json'
         },
@@ -684,7 +684,7 @@ async function editarComentario(id) {
 
     console.log(data);
 
-    fetch('https://backend-bracelhertz.herokuapp.com/api/annotations', {
+    fetch('http://127.0.0.1:8080/api/annotations', {
         headers: {
             'Content-Type': 'application/json'
         },
@@ -738,7 +738,7 @@ async function editarComentario(id) {
 async function eliminarComentario(anotDelete) {
 
 
-    fetch('https://backend-bracelhertz.herokuapp.com/api/prisons-annotations/' + anotDelete, {
+    fetch('http://127.0.0.1:8080/api/prisons-annotations/' + anotDelete, {
         headers: {
             'Content-Type': 'application/json'
         },
@@ -811,7 +811,7 @@ async function subComent(idbtn) {
 
         if (document.getElementById("filtro").value == 1) {
 
-            await fetch('https://backend-bracelhertz.herokuapp.com/api/comments/prisoner-annotations', {
+            await fetch('http://127.0.0.1:8080/api/comments/prisoner-annotations', {
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -848,7 +848,7 @@ async function subComent(idbtn) {
 
         } else {
 
-            await fetch('https://backend-bracelhertz.herokuapp.com/api/comments/prison-annotations', {
+            await fetch('http://127.0.0.1:8080/api/comments/prison-annotations', {
                 headers: {
                     'Content-Type': 'application/json'
                 },

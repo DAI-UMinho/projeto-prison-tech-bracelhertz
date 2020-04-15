@@ -13,7 +13,7 @@ $(window).on("load", function () {
 
 
             if (RoleLogado == "ROLE_GUARD") {
-                const response = await fetch('https://backend-bracelhertz.herokuapp.com/api/prisoners/by-guards/' + id_user_clicked, {
+                const response = await fetch('http://127.0.0.1:8080/api/prisoners/by-guards/' + id_user_clicked, {
                     headers: {
                         'Content-Type': 'application/json'
                     },
@@ -25,7 +25,7 @@ $(window).on("load", function () {
                 console.log(recluso);
                 display(recluso);
             } else {
-                const response = await fetch('https://backend-bracelhertz.herokuapp.com/api/prisoners/' + id_user_clicked, {
+                const response = await fetch('http://127.0.0.1:8080/api/prisoners/' + id_user_clicked, {
                     headers: {
                         'Content-Type': 'application/json'
                     },
@@ -41,7 +41,7 @@ $(window).on("load", function () {
             //criação da demonstração de resultados recebidos
             async function display(recluso) {
 
-                const response = await fetch('https://backend-bracelhertz.herokuapp.com/api/users/logged-profiles', {
+                const response = await fetch('http://127.0.0.1:8080/api/users/logged-profiles', {
                     headers: {
                         'Content-Type': 'application/json'
                     },
@@ -72,7 +72,7 @@ $(window).on("load", function () {
 
                 //envia a para a pagina
 
-                const response7 = await fetch('https://backend-bracelhertz.herokuapp.com/api/photos/' + recluso.photoId, {
+                const response7 = await fetch('http://127.0.0.1:8080/api/photos/' + recluso.photoId, {
                     headers: {
                         'Content-Type': 'application/json'
                     },
@@ -199,7 +199,7 @@ $(window).on("load", function () {
     function get_instituicoes() {
         async function fetchAsync() {
 
-            const response = await fetch('https://backend-bracelhertz.herokuapp.com/api/prisons', {
+            const response = await fetch('http://127.0.0.1:8080/api/prisons', {
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -239,7 +239,7 @@ async function editar() {
     let id_user_clicked = localStorage.getItem("id_user_clicked");
 
     if (RoleLogado == "ROLE_GUARD") {
-        const response = await fetch('https://backend-bracelhertz.herokuapp.com/api/prisoners/by-guards/' + id_user_clicked, {
+        const response = await fetch('http://127.0.0.1:8080/api/prisoners/by-guards/' + id_user_clicked, {
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -251,7 +251,7 @@ async function editar() {
         verificaGuarda(recluso);
 
     } else {
-        const response = await fetch('https://backend-bracelhertz.herokuapp.com/api/prisoners/' + id_user_clicked, {
+        const response = await fetch('http://127.0.0.1:8080/api/prisoners/' + id_user_clicked, {
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -367,7 +367,7 @@ async function editarGuarda(gajo) {
     console.log(gajo);
 
 
-    fetch('https://backend-bracelhertz.herokuapp.com/api/prisoners/by-guards', {
+    fetch('http://127.0.0.1:8080/api/prisoners/by-guards', {
         headers: {
             'Content-Type': 'application/json'
         },
@@ -440,7 +440,7 @@ async function editarOutro(gajo) {
     console.log(gajo);
 
 
-    fetch('https://backend-bracelhertz.herokuapp.com/api/prisoners', {
+    fetch('http://127.0.0.1:8080/api/prisoners', {
         headers: {
             'Content-Type': 'application/json'
         },
@@ -700,7 +700,7 @@ var loadFile = function (event) {
 async function editar_photo(photoC) {
 
 
-    fetch('https://backend-bracelhertz.herokuapp.com/api/prisoners/upload-photos/' + id_user_clicked, {
+    fetch('http://127.0.0.1:8080/api/prisoners/upload-photos/' + id_user_clicked, {
         mode: 'cors',
         method: 'PUT',
         body: photoC,
@@ -893,7 +893,7 @@ document.getElementById("trashRegisto").addEventListener("click", function () {
 
 //---------------------------------------------ELIMINAR REGISTO CRIMINAL------------------------
 async function eliminar(id) {
-    fetch('https://backend-bracelhertz.herokuapp.com/api/criminal-records/' + id, {
+    fetch('http://127.0.0.1:8080/api/criminal-records/' + id, {
         headers: {
             'Content-Type': 'application/json'
         },
@@ -990,7 +990,7 @@ document.getElementById("postRegisto").addEventListener("click", async function 
 
 
 
-            await fetch('https://backend-bracelhertz.herokuapp.com/api/criminal-records', {
+            await fetch('http://127.0.0.1:8080/api/criminal-records', {
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -1097,7 +1097,7 @@ document.getElementById("trashFicha").addEventListener("click", function () {
 
 //---------------------------------------------ELIMINAR REGISTO MEDICO------------------------
 async function eliminarFicha(id) {
-    fetch('https://backend-bracelhertz.herokuapp.com/api/medical-prescriptions/' + id, {
+    fetch('http://127.0.0.1:8080/api/medical-prescriptions/' + id, {
         headers: {
             'Content-Type': 'application/json'
         },
@@ -1184,7 +1184,7 @@ document.getElementById("postFicha").addEventListener("click", async function ()
 
 
 
-        await fetch('https://backend-bracelhertz.herokuapp.com/api/medical-prescriptions', {
+        await fetch('http://127.0.0.1:8080/api/medical-prescriptions', {
             headers: {
                 'Content-Type': 'application/json'
             },
