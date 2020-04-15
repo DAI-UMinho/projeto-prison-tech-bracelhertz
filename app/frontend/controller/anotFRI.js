@@ -71,6 +71,7 @@ async function displayAnot(avisos) {
     if (avisos == null) {
         true_content += "<div class='w-100 text-center'>Não há anotações</div>";
     } else {
+        console.log(avisos)
         for (const aviso of avisos) {
 
 
