@@ -73,9 +73,7 @@ function display_logs() {
 
         //criação da demonstração de resultados recebidos
         if (document.getElementById("tipoDest").value == 1) {
-            if(false){
 
-            }else{
                 for (const logG of listaLogG) {
 
                     see_logs += "<td>" + getDate(logG.logTimestamp) + "</td>";
@@ -85,11 +83,9 @@ function display_logs() {
                     see_logs += "<td id='" + logG.byUser.prison.prisonId + "' type='button' onclick='dothis(this.id)'>" + logG.byUser.prison.name + "</td>";
                     see_logs += "</tr>";
                 }
-            }
+         
         } else {
-            if(false){
 
-            }else{
                 for (const logR of listaLogR) {
 
                     see_logs += "<td>" + getDate(logR.logTimestamp) + "</td>";
@@ -100,7 +96,7 @@ function display_logs() {
                     see_logs += "</tr>";
     
                 }
-            }
+     
         }
 
         //envia a para a pagina
