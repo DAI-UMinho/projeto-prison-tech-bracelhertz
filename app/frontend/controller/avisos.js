@@ -82,10 +82,10 @@ async function display(avisos) {
 
 
             true_content += "<div class='card shadow mb-4'>";
-            true_content += "<div id='" + aviso[0] + "' class='card-header py-3 d-flex flex-row align-items-center justify-content-between bg-secondary'>"
-            true_content += "<h6 class='tab_nome m-0 font-weight-bold text-white'>" + aviso[3] + ""
+            true_content += "<div id='" + aviso[0] + "' class='card-header py-3 d-flex flex-row align-items-center justify-content-between bg-secondary'>";
+            true_content += "<h6 class='tab_nome m-0 font-weight-bold text-white'><label>" + aviso[3] + "</label>";
             if (aviso[6] !== null) {
-                true_content += "<span data-tooltip='" + getDate6(aviso[6]) + "' data-tooltip-position='bottom' class='text-white font-small font-weight-normal solve'>(Editado)</span>"
+                true_content += "<span data-tooltip='" + getDate6(aviso[6]) + "' data-tooltip-position='bottom' class='text-white font-small font-weight-normal solve'>(Editado)</span>";
             }
             true_content += "</h6>";
             if (userLogado == aviso[1].userId) {
@@ -146,7 +146,7 @@ async function display(avisos) {
                     const photoC = await response8.json();
 
                     true_content += "<div class='caixa-de-cometario-interior mt-1 mg-1 full_tab90' id='" + comentario[0] + "'><div class='comentario2 tab_nome'>";
-                    true_content += "<img class='img-profile rounded-circle picNotes mt-1 ml-1' src=" + "data:image/png;base64," + photoD.picByte + "> " + comentario[1].name + "";
+                    true_content += "<div class='w-100'><img class='img-profile rounded-circle picNotes mt-1 ml-1' src=" + "data:image/png;base64," + photoC.picByte + "> " + comentario[1].name + "</div>";
                     true_content += "<textarea id='" + comentario[0] + "coment' class='font-small text-gray-600 my-1 ml-3'";
                     true_content += "readonly='true' style='width: 90%; background-color: transparent; resize: none; border: none; height: 24px; overflow-y: hidden;'>";
                     true_content += "" + comentario[4] + "</textarea></div>";
@@ -574,7 +574,7 @@ async function editarAnotacao(id) {
     var data = {};
 
     data.annotationId = parseInt(id);
-    data.title = document.getElementById(id).children[0].innerHTML;
+    data.title = document.getElementById(id).children[0].children[0].innerHTML;
     data.description = document.getElementById(id + "text").value;
 
     console.log(data);

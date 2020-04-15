@@ -356,8 +356,6 @@ async function editar_photo(photoC) {
         Toast.fire({
           icon: 'success',
           title: 'Dados alterados com sucesso'
-        }).then(() => {
-          location.reload();
         })
 
 

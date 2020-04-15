@@ -48,6 +48,10 @@ $(window).on("load", function () {
         document.getElementById("last_login").innerHTML = "Último login: ";
       }
 
+      if(RoleLogado == "ROLE_NETWORKMAN"){
+        document.getElementById("paraNETMAN").style.display = "none";
+      }
+
 
       if (!(RoleLogado == "ROLE_NETWORKMAN" && perfil.roles[0].name !== "ROLE_NETWORKMAN" || RoleLogado == "ROLE_MANAGER" && perfil.roles[0].name == "ROLE_GUARD")) {
         document.getElementById("perfil_alterar_2").style.display = "none";

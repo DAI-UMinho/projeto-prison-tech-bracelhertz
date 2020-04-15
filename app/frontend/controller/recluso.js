@@ -110,8 +110,8 @@ $(window).on("load", function () {
                     var a, c;
                     var atual = new Date();
                     for (var registo of recluso.criminalRecord) {
-                        showRegisto += "<li><input class='testee' id='" + registo.criminalRecordId + "' type='checkbox' name='" + registo.criminalRecordId + "' disabled='true'>"
-                        showRegisto += "<div class='label'><label for='" + registo.criminalRecordId + "'>";
+                        showRegisto += "<li><input class='testee' id='" + registo.criminalRecordId + "cr' type='checkbox' name='" + registo.criminalRecordId + "cr' disabled='true'>"
+                        showRegisto += "<div class='label'><label for='" + registo.criminalRecordId + "cr'>";
                         showRegisto += "<span data-tooltip='Emissão " + getDate7(registo.emissionDate) + "' data-tooltip-position='bottom'>" + registo.description + "</span></label><br></div></li>";
                         showRegisto += "";
                         if (i == 0) {
@@ -128,7 +128,7 @@ $(window).on("load", function () {
                         i++;
                     }
                     showtolipRegisto += "Registo Criminal<span data-tooltip='" + getDate6(mrecente) + "'";
-                    showtolipRegisto += "data-tooltip-position='bottom' class='text-white font-small font-weight-normal solve'>(Editado)</span>";
+                    showtolipRegisto += "data-tooltip-position='bottom' class='text-white font-small font-weight-normal solve'>(Atualizado)</span>";
                     document.getElementById("tabCH").innerHTML = showtolipRegisto;
 
                 }
@@ -137,7 +137,6 @@ $(window).on("load", function () {
 
                 var showFicha = "";
                 var showtolipFicha = ""
-
                 if (recluso.medicalPrescription.length == 0) {
                     showFicha = "<li>Sem registo criminal</li>";
                 } else {
@@ -146,8 +145,8 @@ $(window).on("load", function () {
                     var b, w;
                     var atual = new Date();
                     for (var registo of recluso.medicalPrescription) {
-                        showFicha += "<li><input class='testee' id='" + registo.medicalPrescriptionId + "' type='checkbox' name='" + registo.medicalPrescriptionId + "' disabled='true'>"
-                        showFicha += "<div class='label'><label for='" + registo.medicalPrescriptionId + "'>" + registo.description + "</label><br></div></li>";
+                        showFicha += "<li><input class='testeee' id='" + registo.prescriptionId + "fm' type='checkbox' name='" + registo.prescriptionId + "fm' disabled='true'>"
+                        showFicha += "<div class='label'><label for='" + registo.prescriptionId + "fm'>" + registo.description + "</label><br></div></li>";
                         if (o == 0) {
                             mrecente2 = new Date(registo.lastUpdatedTimestamp);
                             w = atual.getTime() - mrecente2.getTime();
@@ -163,7 +162,7 @@ $(window).on("load", function () {
                     }
 
                     showtolipFicha += "Cuidados a ter com o recluso<span data-tooltip='" + getDate6(mrecente2) + "'";
-                    showtolipFicha += "data-tooltip-position='bottom' class='text-white font-small font-weight-normal solve'>(Editado)</span>";
+                    showtolipFicha += "data-tooltip-position='bottom' class='text-white font-small font-weight-normal solve'>(Atualizado)</span>";
                     document.getElementById("tabCH2").innerHTML = showtolipFicha;
 
                 }
@@ -739,8 +738,6 @@ async function editar_photo(photoC) {
                 Toast.fire({
                     icon: 'success',
                     title: 'Dados alterados com sucesso'
-                }).then(() => {
-                    location.reload();
                 })
 
 
@@ -780,7 +777,8 @@ function getIds() {
     const selecList = document.getElementById("listCrimes");
     for (let elem of selecList.children) {
         if (elem.firstChild.checked) {
-            ids.push(elem.firstChild.id);
+            var mete = elem.firstChild.id.replace('cr', '');
+            ids.push(mete.trim());
 
         }
     }
@@ -793,8 +791,8 @@ function getIds2() {
     const selecList = document.getElementById("listMedica");
     for (let elem of selecList.children) {
         if (elem.firstChild.checked) {
-            ids.push(elem.firstChild.id);
-
+            var mete = elem.firstChild.id.replace('fm', '');
+            ids.push(mete.trim());
         }
     }
     console.log(ids)
@@ -1049,7 +1047,6 @@ document.getElementById("postRegisto").addEventListener("click", async function 
 //---------------------------------------------Ficha Médica----------------------------------------------
 var clickteste2 = false;
 $('#editFicha').click(function () {
-
 
     $('.testeee').each(function () {
         if (!clickteste2) {

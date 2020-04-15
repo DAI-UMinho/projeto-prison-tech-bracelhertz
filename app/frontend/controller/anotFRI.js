@@ -88,14 +88,14 @@ async function displayAnot(avisos) {
 
 
             true_content += "<div class='card shadow'>";
-            true_content += "<div id='" + aviso[0] + "' class='py-3 d-flex flex-row align-items-center justify-content-between' style='padding:1.25rem;'>"
+            true_content += "<div id='" + aviso[0] + "' class='py-3 d-flex flex-row align-items-center justify-content-between' style='padding:1.25rem;'>";
 
             true_content += "<div style='margin-top:-12px;'class='text-primary full_tab'>";
             true_content += "<img class='img-profile rounded-circle picNotes tab_time' src=" + "data:image/png;base64," + photoD.picByte + "> ";
             true_content += "<table class='tab_nome'><tbody><tr><th style='font-weight: normal;'>" + aviso[1].name + " (" + aviso[1].username + ")<span class='text-xs'>" + getDate(aviso[5]) + "</span></th></tr>";
 
             if (aviso[6] !== null) {
-                true_content += "<tr><th><span data-tooltip='" + getDate2(aviso[6]) + "' data-tooltip-position='bottom' class='text-black font-small font-weight-normal solve'>(Editado)</span></th></tr>"
+                true_content += "<tr><th><span data-tooltip='" + getDate2(aviso[6]) + "' data-tooltip-position='bottom' class='text-black font-small font-weight-normal solve'>(Editado)</span></th></tr>";
             }
             true_content += "</tbody></table></div>";
 
@@ -147,7 +147,7 @@ async function displayAnot(avisos) {
 
 
                     true_content += "<div class='caixa-de-cometario-interior mt-1 mg-1 full_tab90' id='" + comentario[0] + "'><div class='comentario2 tab_nome'>";
-                    true_content += "<img class='img-profile rounded-circle picNotes mt-1 ml-1' src=" + "data:image/png;base64," + photoC.picByte + "> " + comentario[1].name + "";
+                    true_content += "<div class='w-100'><img class='img-profile rounded-circle picNotes mt-1 ml-1' src=" + "data:image/png;base64," + photoC.picByte + "> " + comentario[1].name + "</div>";
                     true_content += "<textarea id='" + comentario[0] + "coment' class='font-small text-gray-600 my-1 ml-3'";
                     true_content += "readonly='true' style='width: 90%; background-color: transparent; resize: none; border: none; height: 24px; overflow-y: hidden;'>";
                     true_content += "" + comentario[4] + "</textarea></div>";
