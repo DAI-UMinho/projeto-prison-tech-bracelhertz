@@ -11,7 +11,7 @@ $(window).on("load", function () {
     function display_instituicoes() {
         async function fetchAsync() {
 
-            const response = await fetch('http://127.0.0.1:8080/api/prisons', {
+            const response = await fetch('https://backend-bracelhertz.herokuapp.com/api/prisons', {
                 headers: {
                     'Content-Type': 'application/json'
                 },

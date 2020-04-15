@@ -15,7 +15,7 @@ function display_instituicao() {
 
 
 
-        const response = await fetch('http://127.0.0.1:8080/api/prisons/' + id_inst_clicked, {
+        const response = await fetch('https://backend-bracelhertz.herokuapp.com/api/prisons/' + id_inst_clicked, {
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -26,7 +26,7 @@ function display_instituicao() {
         const instituicao = await response.json();
         console.log(instituicao);
 
-        const response7 = await fetch('http://127.0.0.1:8080/api/photos/' + instituicao.photoId, {
+        const response7 = await fetch('https://backend-bracelhertz.herokuapp.com/api/photos/' + instituicao.photoId, {
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -63,7 +63,7 @@ async function editar() {
     data = {};
 
 
-    const response = await fetch('http://127.0.0.1:8080/api/prisons/' + id_inst_clicked, {
+    const response = await fetch('https://backend-bracelhertz.herokuapp.com/api/prisons/' + id_inst_clicked, {
         headers: {
             'Content-Type': 'application/json'
         },
@@ -103,7 +103,7 @@ async function editar() {
 
 
 
-            fetch('http://127.0.0.1:8080/api/prisons', {
+            fetch('https://backend-bracelhertz.herokuapp.com/api/prisons', {
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -306,7 +306,7 @@ var loadFile = function (event) {
 async function editar_photo(photoC) {
 
 
-    fetch('http://127.0.0.1:8080/api/prisons/upload-photos/' + id_inst_clicked, {
+    fetch('https://backend-bracelhertz.herokuapp.com/api/prisons/upload-photos/' + id_inst_clicked, {
         mode: 'cors',
         method: 'PUT',
         body: photoC,

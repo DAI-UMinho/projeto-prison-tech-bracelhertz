@@ -6,7 +6,7 @@ $(window).on("load", function () {
   function display_perfil() {
     async function fetchAsync() {
       let id_user_clicked = localStorage.getItem("id_user_clicked");
-      const response = await fetch('http://127.0.0.1:8080/api/users/' + id_user_clicked, {
+      const response = await fetch('https://backend-bracelhertz.herokuapp.com/api/users/' + id_user_clicked, {
         headers: {
           'Content-Type': 'application/json'
         },
@@ -18,7 +18,7 @@ $(window).on("load", function () {
       console.log(perfil);
 
 
-      const response7 = await fetch('http://127.0.0.1:8080/api/photos/' + perfil.photoId, {
+      const response7 = await fetch('https://backend-bracelhertz.herokuapp.com/api/photos/' + perfil.photoId, {
         headers: {
           'Content-Type': 'application/json'
         },
@@ -64,7 +64,7 @@ $(window).on("load", function () {
   function get_instituicoes() {
     async function fetchAsync() {
 
-      const response = await fetch('http://127.0.0.1:8080/api/prisons', {
+      const response = await fetch('https://backend-bracelhertz.herokuapp.com/api/prisons', {
         headers: {
           'Content-Type': 'application/json'
         },
@@ -194,7 +194,7 @@ document.getElementById("perfil_save_2").addEventListener("click", async functio
 
       console.log(data)
 
-      fetch('http://127.0.0.1:8080/api/users/managers', {
+      fetch('https://backend-bracelhertz.herokuapp.com/api/users/managers', {
         headers: {
           'Content-Type': 'application/json'
         },
@@ -367,7 +367,7 @@ document.getElementById("editPass").addEventListener("click", function () {
     data.newPassword = nPassword.value.trim();
     console.log(data)
 
-    fetch('http://127.0.0.1:8080/api/users/passwords', {
+    fetch('https://backend-bracelhertz.herokuapp.com/api/users/passwords', {
       headers: {
         'Content-Type': 'application/json'
       },

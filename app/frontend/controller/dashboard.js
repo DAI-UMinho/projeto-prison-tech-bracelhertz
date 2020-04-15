@@ -22,7 +22,7 @@ function display_logs() {
 
 
         if (RoleLogado == "ROLE_MANAGER") {
-            const response = await fetch('http://127.0.0.1:8080/api/user-logs/managers', {
+            const response = await fetch('https://backend-bracelhertz.herokuapp.com/api/user-logs/managers', {
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -34,7 +34,7 @@ function display_logs() {
             console.log(listaLogG);
 
 
-            const response1 = await fetch('http://127.0.0.1:8080/api/prisoner-logs/managers', {
+            const response1 = await fetch('https://backend-bracelhertz.herokuapp.com/api/prisoner-logs/managers', {
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -47,7 +47,7 @@ function display_logs() {
 
 
         } else if (RoleLogado == "ROLE_NETWORKMAN") {
-            const response = await fetch('http://127.0.0.1:8080/api/user-logs', {
+            const response = await fetch('https://backend-bracelhertz.herokuapp.com/api/user-logs', {
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -58,7 +58,7 @@ function display_logs() {
             listaLogG = await response.json();
             console.log(listaLogG);
 
-            const response1 = await fetch('http://127.0.0.1:8080/api/prisoner-logs', {
+            const response1 = await fetch('https://backend-bracelhertz.herokuapp.com/api/prisoner-logs', {
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -137,7 +137,7 @@ function dothat(id){
 function display_info() {
     async function fetchAsync() {
 
-        const response = await fetch('http://127.0.0.1:8080/api/dashboard', {
+        const response = await fetch('https://backend-bracelhertz.herokuapp.com/api/dashboard', {
             headers: {
                 'Content-Type': 'application/json'
             },

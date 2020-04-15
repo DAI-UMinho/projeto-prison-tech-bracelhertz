@@ -11,7 +11,7 @@ Agenda();
 
 async function Agenda() {
 
-    const response1 = await fetch('http://127.0.0.1:8080/api/schedules', {
+    const response1 = await fetch('https://backend-bracelhertz.herokuapp.com/api/schedules', {
         headers: {
             'Content-Type': 'application/json'
         },
@@ -235,7 +235,7 @@ async function Agenda() {
 
                 async function enviar() {
 
-                    await fetch('http://127.0.0.1:8080/api/schedules', {
+                    await fetch('https://backend-bracelhertz.herokuapp.com/api/schedules', {
                         headers: {
                             'Content-Type': 'application/json'
                         },
@@ -455,7 +455,7 @@ function getIds(){
 
 
 async function eliminar(id) {
-    fetch('http://127.0.0.1:8080/api/schedules/'+ id, {
+    fetch('https://backend-bracelhertz.herokuapp.com/api/schedules/'+ id, {
       headers: {
         'Content-Type': 'application/json'
       },

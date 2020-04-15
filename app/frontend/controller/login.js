@@ -16,7 +16,7 @@ window.onload = async function () {
         data.password = document.getElementById("password").value;
         console.log(data);
 
-        fetch('http://127.0.0.1:8080/api/auth/signin', {
+        fetch('https://backend-bracelhertz.herokuapp.com/api/auth/signin', {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
@@ -79,7 +79,7 @@ window.onload = async function () {
         data.password = "Aa123456";
         console.log(data);
 
-        fetch('http://127.0.0.1:8080/api/auth/signin', {
+        fetch('https://backend-bracelhertz.herokuapp.com/api/auth/signin', {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'

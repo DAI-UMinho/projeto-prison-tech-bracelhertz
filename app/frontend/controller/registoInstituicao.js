@@ -43,7 +43,7 @@ window.onload = async function () {
 
 
 
-          await fetch('http://127.0.0.1:8080/api/prisons', {
+          await fetch('https://backend-bracelhertz.herokuapp.com/api/prisons', {
             headers: {
               'Content-Type': 'application/json'
             },
@@ -116,7 +116,7 @@ var loadFile = function (event) {
 async function post_photo(photoC, idPrisao) {
 
 
-  fetch('http://127.0.0.1:8080/api/prisons/upload-photos/' + idPrisao, {
+  fetch('https://backend-bracelhertz.herokuapp.com/api/prisons/upload-photos/' + idPrisao, {
     mode: 'cors',
     method: 'PUT',
     body: photoC,

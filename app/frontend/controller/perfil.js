@@ -7,7 +7,7 @@ $(window).on("load", function () {
   function display_logado() {
     async function fetchAsync() {
 
-      const response = await fetch('http://127.0.0.1:8080/api/users/logged-profiles', {
+      const response = await fetch('https://backend-bracelhertz.herokuapp.com/api/users/logged-profiles', {
         headers: {
           'Content-Type': 'application/json'
         },
@@ -19,7 +19,7 @@ $(window).on("load", function () {
       console.log(logado);
 
 
-      const response7 = await fetch('http://127.0.0.1:8080/api/photos/' + logado.photoId, {
+      const response7 = await fetch('https://backend-bracelhertz.herokuapp.com/api/photos/' + logado.photoId, {
         headers: {
           'Content-Type': 'application/json'
         },
@@ -63,7 +63,7 @@ $(window).on("load", function () {
   function get_instituicoes() {
     async function fetchAsync() {
 
-      const response = await fetch('http://127.0.0.1:8080/api/prisons', {
+      const response = await fetch('https://backend-bracelhertz.herokuapp.com/api/prisons', {
         headers: {
           'Content-Type': 'application/json'
         },
@@ -100,7 +100,7 @@ async function editar() {
   event.preventDefault();
   data = {};
 
-  const response = await fetch('http://127.0.0.1:8080/api/users/logged-profiles', {
+  const response = await fetch('https://backend-bracelhertz.herokuapp.com/api/users/logged-profiles', {
     headers: {
       'Content-Type': 'application/json'
     },
@@ -168,7 +168,7 @@ async function editar() {
   async function editar_guarda(coisa) {
 
 
-    fetch('http://127.0.0.1:8080/api/users/by-guards', {
+    fetch('https://backend-bracelhertz.herokuapp.com/api/users/by-guards', {
       headers: {
         'Content-Type': 'application/json'
       },
@@ -235,7 +235,7 @@ async function editar() {
   async function editar_outro(coisa) {
 
 
-    fetch('http://127.0.0.1:8080/api/users/managers', {
+    fetch('https://backend-bracelhertz.herokuapp.com/api/users/managers', {
       headers: {
         'Content-Type': 'application/json'
       },
@@ -317,7 +317,7 @@ var loadFile = function (event) {
 async function editar_photo(photoC) {
 
 
-  fetch('http://127.0.0.1:8080/api/users/upload-photos/' + userLogado, {
+  fetch('https://backend-bracelhertz.herokuapp.com/api/users/upload-photos/' + userLogado, {
     mode: 'cors',
     method: 'PUT',
     body: photoC,
@@ -532,7 +532,7 @@ document.getElementById("editPass").addEventListener("click", function () {
       data.newPassword = nPassword.value.trim();
 
 
-      fetch('http://127.0.0.1:8080/api/users/logged-passwords', {
+      fetch('https://backend-bracelhertz.herokuapp.com/api/users/logged-passwords', {
         headers: {
           'Content-Type': 'application/json'
         },
