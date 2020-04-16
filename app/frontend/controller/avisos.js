@@ -510,6 +510,7 @@ document.getElementById("botaoConf").addEventListener("click", async function ()
                     title: 'Alterada com sucesso'
                 }).then(() => {
                     anotDelete = "";
+                    $('#confModal').modal('hide');
 
                     if (document.getElementById("filtro").value == 1) {
                         val = 1;

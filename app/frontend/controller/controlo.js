@@ -1,9 +1,27 @@
+let RoleLogado1 = localStorage.getItem("RoleLogado");
 $(window).on("load", function () {
 
     display_pulsacao();
     display_infoPerfil();
 
+if(RoleLogado1!=="ROLE_GUARD"){
+    document.getElementById("rec12").style.display="none";
+    trocaClasse(document.getElementById("ajustarDm"), "col-10");
+    var pi = document.getElementById("estenao");
 
+    if(pi !==null){
+        pi.style.marginTop="30px";
+    }
+}
+
+
+})
+
+
+function trocaClasse(elemento, nova1) {
+    elemento.className = "";
+    elemento.classList.add(nova1);
+}
 
 
     function display_pulsacao() {
@@ -135,7 +153,7 @@ $(window).on("load", function () {
     //-------------------------------------------------------------------------------------
 
 
-})
+
 
 //-----------------------------------LOGOUT-----------------------------------------
 
