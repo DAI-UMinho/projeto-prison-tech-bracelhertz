@@ -45,7 +45,7 @@ window.onload = async function () {
 
       var verificar = document.getElementById("Identification").value.trim();
 
-      const response = await fetch('http://127.0.0.1:8080/api/users/identifier-exists/' + verificar, {
+      const response = await fetch('http://127.0.0.1:8080/api/prisoners/identifier-exists/' + verificar, {
 
         headers: {
           'Content-Type': 'application/json'
@@ -272,7 +272,7 @@ existeRec.onblur = async function RecTaken() {
 
   var verificar = document.getElementById("Identification").value.trim();
 
-  const response = await fetch('http://127.0.0.1:8080/api/users/identifier-exists/' + verificar, {
+  const response = await fetch('http://127.0.0.1:8080/api/prisoners/identifier-exists/' + verificar, {
 
     headers: {
       'Content-Type': 'application/json'

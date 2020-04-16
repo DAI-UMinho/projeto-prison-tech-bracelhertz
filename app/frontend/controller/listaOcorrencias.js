@@ -44,15 +44,6 @@ $(window).on("load", function () {
 
     }
 
-
-
-    /*   $("#listaOcorrencias").on('click', 'tr', function () {
-           var cRow = $(this).index();
-           var clicked = document.getElementById("tabelaRecluso").rows[cRow].firstChild.firstChild.id;
-           location.href = "instituicoes.html";
-           localStorage.setItem("id_occor_clicked", clicked);
-       });*/
-
-
+       
 })
 //----------------------------------------------------------------------------------------------------------------

@@ -10,8 +10,12 @@ app.use("/js", express.static(__dirname + '/js'));
 app.use("/scss", express.static(__dirname + '/scss'));
 app.use("/vendor", express.static(__dirname + '/vendor'));
 
-app.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname + '/login.html'));
+app.get('/', function (req, res, next) {
+  res.status(200).sendFile(path.join(__dirname + '/login.html'));
 });
 
-app.listen(process.env.PORT || 8080);
+app.use(function (req, res, next){
+  res.status(404).sendFile(path.join(__dirname + '/404.html'));
+})
+
+app.listen(process.env.PORT || 5500);

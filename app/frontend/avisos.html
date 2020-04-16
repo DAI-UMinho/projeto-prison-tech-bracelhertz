@@ -8,6 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
+  <meta name="theme-color" content="#1b2c47" />
 
   <title>BracelHertZ - Avisos</title>
   <link rel="icon" type="image/png" href="img/bracelhertzv3.png" />
@@ -20,6 +21,8 @@
 
   <!-- Custom styles for this template-->
   <link href="css/sb-admin-2.css" rel="stylesheet">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="apple-touch-icon" href="/img/icons/icon-152x152.png">
 
 
   <!-- Include Jquery here in a script tag -->
@@ -858,6 +861,17 @@ Dropdown menus can be placed in the card header in order to extend the functiona
     });
 
   </script>
+
+<script>
+  if('serviceWorker' in navigator){
+      try {
+        navigator.serviceWorker.register('sw.js');
+        console.log('SW registered');
+      } catch(error) {
+        console.log('SW register failed');
+      }
+    }
+</script>
 
 </body>
 
