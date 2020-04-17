@@ -7,8 +7,9 @@ $(window).on("load", function () {
     if (RoleLogado1 == "ROLE_GUARD") {
         document.getElementById("rec12").style.display = "block";
         trocaClasse(document.getElementById("ajustarDm"), "col-10");
-        var pi = document.getElementById("estenao");
 
+    } else {
+        var pi = document.getElementById("estenao");
         if (pi !== null) {
             pi.style.marginTop = "30px";
         }
@@ -26,11 +27,7 @@ function trocaClasse(elemento, nova1) {
 
 function display_pulsacao() {
     async function fetchAsync() {
-        //id_user=localStorage.getItem("id_user");
-        //const response = await fetch('https://dd10afea8a444651a7975b97cdbc8a11.vfs.cloud9.us-east-2.amazonaws.com/users/' + id_user + '/friends-list');
-        //const friends = await response.json();
-        //console.log(friends);
-        //const show_friends = document.getElementById("show_friends");
+
         var tPulsacoes = document.getElementById("tPulsacoes");
 
         let see_puls = "";
