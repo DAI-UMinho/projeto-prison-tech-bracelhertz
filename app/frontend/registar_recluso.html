@@ -377,19 +377,14 @@
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
-                <span id="nomeUser" class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
-                <img id="avatarUser" class="img-profile rounded-circle"
-                  src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                <span id="nomeUser" class="mr-2 d-none d-lg-inline text-gray-600 small"></span>
+                <img id="avatarUser" class="img-profile rounded-circle">
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                 <a class="dropdown-item" href="perfil.html">
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                   Perfil
-                </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Definições
                 </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
@@ -406,7 +401,7 @@
 
         <!-- Begin Page Content -->
         <div class="row">
-          <div id="ajustarDm" class="col-10">
+          <div id="ajustarDm" class="col-12">
             <div id="content123" class="container-fluid w-75 h-100 pr-2" style="justify-content: center">
 
               <!-- Page Heading -->
@@ -478,16 +473,9 @@
                     </div>
                     <div id="whereithappens2" class="card mySlides fade2 mb-5 pb-3" style="display: block;">
 
-                      <!---<div class="txtb txtb  ml-auto mr-auto" style="width: 90%;">
-                      <input type="name" class="form-control form-control-user" id="nacionalidade" aria-describedby="emailHelp">
-                      <span data-placeholder="Nacionalidade"></span>
-                    </div>--->
                       <div style="display: flex;" class="ml-3 mt-5 mb-2">
                         <span for="local" class="text-secondary" style="padding-top: 8px;">Instituição:</span>
                         <select id="instituicao" class="select-css text-center ml-2 form-control" style="width: 40%;">
-                          <option value="1">Uminho Azurem</option>
-                          <option value="2">Uminho Gualtar</option>
-                          <option value="3">wtv</option>
                         </select>
                       </div>
 
@@ -524,8 +512,7 @@
                     </div>
 
                     <div id="whereithappens3" class="card mySlides fade2 mb-5 pb-3" style="display: block;">
-                      <h4 class="text-secondary text-center mt-4"> <strong> Pulseira</strong><br>
-                        <span style="color: red; font-size: 15px;"> Campos não obrigatórios</span></h4>
+                      <h4 class="text-secondary text-center mt-4"> <strong> Pulseira</strong><br></h4>
 
                       <div class="container mt-4 ml-2">
                         <form>
@@ -535,6 +522,9 @@
                               aria-describedby="emailHelp">
                             <span data-placeholder="ID pulseira"></span>
                           </div>
+                          <div id="existePul"
+                          style="display: none; margin-left: 30px; margin-top: -22px; font-size: small;color: red;">
+                          Esta pulseira já está em uso</div>
 
                           <div style="text-align: center; opacity: 0.3;" class="px-3" id="paraVer">
                             <label>Pulsação minima:</label>
@@ -565,17 +555,7 @@
 
 
                           <div>
-                            <!---<h5 class="text-success text-center mt-3"><strong> Dados Recluso:</strong></h5>
-                      <div class="txtb ml-auto mr-auto mt-3" style="width: 90%;">
-                        <input type="password" name="password" class="form-control form-control-user" id="password" aria-describedby="emailHelp">
-                        <span data-placeholder="Password"></span>
-                        <div class="eye slash" onclick="togglePW()" style="float: right;margin-top: -6%;margin-right: 4%;color:#1b2c47;">
-                          <div></div>
-                          <div></div>
-                          
-                      </div>
-                      
-                    </div>--->
+
                             <div class="w-100 text-center">
                               <input type="submit" class="mt-1 btn btn-secondary" id="botaoRegistar" value="Registar">
                             </div>
@@ -603,132 +583,13 @@
 
             </div>
           </div>
-          <div class="col-2 mt-n4 px-0" id="rec12">
+        </div>
+          <div class="col-2 mt-n4 px-0" id="rec12" style="display: none;">
             <div class="col pl-0">
               <input type="text" id="myFilter" placeholder="Pesquisar recluso" class="form-control py-2 mr-3 myFilter">
             </div>
             <div id="tPulsacoes">
-              <ul class="teste w-100 px-0" style="list-style-type: none;">
-
-                <!--Recluso-->
-                <div class="col py-2 mr-3 pl-0 pr-1 myfilter">
-                  <div class="card border-left-danger shadow h-100 py-2">
-                    <div class="card-body pl-3">
-                      <div class="row no-gutters align-items-center">
-                        <div class="col-auto pr-2">
-                          <img class="picNotes40 img-profile rounded-circle" src="img/perfil2.jpg">
-                        </div>
-                        <div class="col mr-2">
-                          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">João Teixeira</div>
-                          <div class="h5 mb-0 font-weight-bold text-gray-800">50 bpm</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!--Recluso-->
-                <div class="col py-2 mr-3 pl-0 pr-1 myfilter">
-                  <div class="card border-left-danger shadow h-100 py-2">
-                    <div class="card-body pl-3">
-                      <div class="row no-gutters align-items-center">
-                        <div class="col-auto pr-2">
-                          <img class="picNotes40 img-profile rounded-circle" src="img/perfil1.png">
-                        </div>
-                        <div class="col mr-2">
-                          <div class="text font-weight-bold text-primary text-uppercase mb-1">Rui Pires</div>
-                          <div class="h5 mb-0 font-weight-bold text-red">120 bpm</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!--Recluso-->
-                <div class="col py-2 mr-3 pl-0 pr-1 myfilter">
-                  <div class="card border-left-danger shadow h-100 py-2">
-                    <div class="card-body pl-3">
-                      <div class="row no-gutters align-items-center">
-                        <div class="col-auto pr-2">
-                          <img class="picNotes40 img-profile rounded-circle" src="img/perfil2.jpg">
-                        </div>
-                        <div class="col mr-2">
-                          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Luis Carvalho</div>
-                          <div class="h5 mb-0 font-weight-bold text-gray-800">50 bpm</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!--Recluso-->
-                <div class="col py-2 mr-3 pl-0 pr-1 myfilter">
-                  <div class="card border-left-danger shadow h-100 py-2">
-                    <div class="card-body pl-3">
-                      <div class="row no-gutters align-items-center">
-                        <div class="col-auto pr-2">
-                          <img class="picNotes40 img-profile rounded-circle" src="img/perfil2.jpg">
-                        </div>
-                        <div class="col mr-2">
-                          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Ana Alice</div>
-                          <div class="h5 mb-0 font-weight-bold text-gray-800">50 bpm</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!--Recluso-->
-                <div class="col py-2 mr-3 pl-0 pr-1 myfilter">
-                  <div class="card border-left-danger shadow h-100 py-2">
-                    <div class="card-body pl-3">
-                      <div class="row no-gutters align-items-center">
-                        <div class="col-auto pr-2">
-                          <img class="picNotes40 img-profile rounded-circle" src="img/perfil2.jpg">
-                        </div>
-                        <div class="col mr-2">
-                          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Jorge Pedro</div>
-                          <div class="h5 mb-0 font-weight-bold text-gray-800">50 bpm</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!--Recluso-->
-                <div class="col py-2 mr-3 pl-0 pr-1 myfilter">
-                  <div class="card border-left-danger shadow h-100 py-2">
-                    <div class="card-body pl-3">
-                      <div class="row no-gutters align-items-center">
-                        <div class="col-auto pr-2">
-                          <img class="picNotes40 img-profile rounded-circle" src="img/perfil2.jpg">
-                        </div>
-                        <div class="col mr-2">
-                          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Bruno Alves</div>
-                          <div class="h5 mb-0 font-weight-bold text-gray-800">50 bpm</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!--Recluso-->
-                <div class="col py-2 mr-3 pl-0 pr-1 myfilter">
-                  <div class="card border-left-danger shadow h-100 py-2">
-                    <div class="card-body pl-3">
-                      <div class="row no-gutters align-items-center">
-                        <div class="col-auto pr-2">
-                          <img class="picNotes40 img-profile rounded-circle" src="img/perfil2.jpg">
-                        </div>
-                        <div class="col mr-2">
-                          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Carlos Costa</div>
-                          <div class="h5 mb-0 font-weight-bold text-gray-800">50 bpm</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </ul>
+             
             </div>
           </div>
         </div>

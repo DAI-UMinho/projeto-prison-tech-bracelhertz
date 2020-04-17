@@ -1,6 +1,6 @@
 $(window).on("load", function () {
     let userLogado = localStorage.getItem("userLogado");
-    
+
     display_funcionarios();
 
 
@@ -23,11 +23,20 @@ $(window).on("load", function () {
 
             for (const funcionario of func) {
                 if (funcionario.userId !== parseInt(userLogado)) {
+                    var role = "";
+                    if (funcionario.roles[0].id == 0) {
+                        role = "Guarda prisional";
+                    } else if (funcionario.roles[0].id == 1) {
+                        role = "Gestor de Instituição";
+                    } else if (funcionario.roles[0].id == 2) {
+                        role = "Gestor da Rede Prisonal";
+                    }
+
                     conteudo.push(["<div id='" + funcionario.userId + "'>" + funcionario.username + "</div>",
                     funcionario.name,
                     funcionario.prison.name,
                     funcionario.email,
-                    funcionario.roles[0].name])
+                    role])
                 }
 
 
@@ -120,26 +129,26 @@ async function VerApagar() {
             ids.push(selec.firstChild.firstChild.id);
 
 
-                const response4 = await fetch('http://127.0.0.1:8080/api/users/' + selec.firstChild.firstChild.id, {
-                    headers: {
-                      'Content-Type': 'application/json'
-                    },
-                    mode: 'cors',
-                    method: 'GET',
-                    credentials: 'include'
-                  });
-                  const perfil = await response4.json();
-                  console.log(perfil);
+            const response4 = await fetch('http://127.0.0.1:8080/api/users/' + selec.firstChild.firstChild.id, {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                mode: 'cors',
+                method: 'GET',
+                credentials: 'include'
+            });
+            const perfil = await response4.json();
+            console.log(perfil);
 
             document.getElementById("displayList").innerHTML += "<li>Username: " + perfil.username + "; Nome: " + perfil.name + "</li>";
-            if(RoleLogado == "ROLE_MANAGER" && perfil.roles[0].name == "ROLE_MANAGER" || RoleLogado == "ROLE_MANAGER" && perfil.roles[0].name == "ROLE_NETWORKMAN"
-            || RoleLogado == "ROLE_NETWORKMAN" && perfil.roles[0].name == "ROLE_NETWORKMAN"){
+            if (RoleLogado == "ROLE_MANAGER" && perfil.roles[0].name == "ROLE_MANAGER" || RoleLogado == "ROLE_MANAGER" && perfil.roles[0].name == "ROLE_NETWORKMAN"
+                || RoleLogado == "ROLE_NETWORKMAN" && perfil.roles[0].name == "ROLE_NETWORKMAN") {
 
-            if (perfil.prison.prisonId !== logado.prison.prisonId){ 
-                
-                pode = false;
+                if (perfil.prison.prisonId !== logado.prison.prisonId) {
 
-            }
+                    pode = false;
+
+                }
             }
 
         }

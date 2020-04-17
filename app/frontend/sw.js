@@ -1,4 +1,4 @@
-const staticAssets = [
+/*const staticAssets = [
   './',
   './404.html',
   './avisos.html',
@@ -34,4 +34,4 @@ self.addEventListener('install', async event => {
     const cache = await caches.open('smth'); 
     const cachedResponse = await cache.match(req); 
     return cachedResponse || fetch(req); 
-  }
+  }*/

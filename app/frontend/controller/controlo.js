@@ -4,8 +4,8 @@ $(window).on("load", function () {
     display_pulsacao();
     display_infoPerfil();
 
-    if (RoleLogado1 !== "ROLE_GUARD") {
-        document.getElementById("rec12").style.display = "none";
+    if (RoleLogado1 == "ROLE_GUARD") {
+        document.getElementById("rec12").style.display = "block";
         trocaClasse(document.getElementById("ajustarDm"), "col-10");
         var pi = document.getElementById("estenao");
 
@@ -202,10 +202,3 @@ async function sair() {
         });
 
 };
-
-
-document.getElementById("fotoR").addEventListener("change", function () {
-
-    display_infoPerfil()
-
-})

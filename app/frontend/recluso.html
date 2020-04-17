@@ -177,19 +177,14 @@
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
-                <span id="nomeUser" class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
-                <img id="avatarUser" class="img-profile rounded-circle"
-                  src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                <span id="nomeUser" class="mr-2 d-none d-lg-inline text-gray-600 small"></span>
+                <img id="avatarUser" class="img-profile rounded-circle">
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                 <a class="dropdown-item" href="perfil.html">
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                   Perfil
-                </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Definições
                 </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
@@ -206,7 +201,7 @@
 
         <!-- Begin Page Content -->
         <div class="row">
-          <div id="ajustarDm" class="col-10">
+          <div id="ajustarDm" class="col-12">
             <div id="body" class="container-fluid">
 
 
@@ -238,7 +233,7 @@
                   <div class="row" style="justify-content: center;">
                     <div class="col-5 mr-4" style="z-index: 100;">
                       <div class="imagem">
-                        <img data-enlargable  style="cursor: zoom-in" id="fotoR" class="imagemlogo" src="img/rec2.jpg">
+                        <img data-enlargable style="cursor: zoom-in" id="fotoR" class="w-100 imagemlogo">
                         <p><input type="file" accept="image/*" name="image" id="file" onchange="loadFile(event)"
                             style="display: none; text-align: right;"></p>
                         <p style="text-align: right;"><label for="file" id="foto420"
@@ -250,7 +245,11 @@
 
                       <div class="form-control mt-4" style="height: 50px">
                         <h5 class="card-title form-control420" style="width: 110px;"><strong>ID Recluso</strong></h5>
-                        <div id="id_recluso" class="h6 ml-2 text-primary font-weight-600"><em>a89268</em></div>
+                        <input type="text" class="space1 h6 ml-2 text-primary font-weight-600" id="id_recluso"
+                           style="width: 94%; border: none; background-color: transparent;"
+                          readonly="true">
+                        <i id="icon_id_recluso" class="fas fa-pen text-primary bg-transparent pr-3"
+                          style="float:right; display: none"></i>
                       </div>
 
 
@@ -259,7 +258,8 @@
                       <div class="form-control" style="height: 50px">
                         <h5 class="card-title form-control420"><strong>Nome</strong></h5>
                         <input type="text" class="space1 h6 ml-2 text-primary font-weight-600" id="nome_recluso"
-                          value="outro pais" style="border: none; background-color: transparent;" readonly="true">
+                           style="width: 94%; border: none; background-color: transparent;"
+                          readonly="true">
                         <i id="icon_nome_recluso" class="fas fa-pen text-primary bg-transparent pr-3"
                           style="float:right; display: none"></i>
                       </div>
@@ -285,8 +285,8 @@
                       <div class="form-control" style="height: 50px">
                         <h4 class="card-title form-control420" style="width: 65px; margin-bottom: 5px;">
                           <strong>Cela</strong></h4>
-                        <input type="text" class="nspace h6 ml-2 text-primary font-weight-600" id="n_cela" value="45"
-                          style="border: none; background-color: transparent;" readonly="true">
+                        <input type="text" class="nspace h6 ml-2 text-primary font-weight-600" id="n_cela" 
+                          style="width: 94%; border: none; background-color: transparent;" readonly="true">
                         <i id="icon_n_cela" class="fas fa-pen text-primary bg-transparent pr-3"
                           style="float:right; display: none"></i>
                       </div>
@@ -299,7 +299,8 @@
                         <h4 class="card-title form-control420" style="width: 135px; margin-bottom: 5px;"><strong>ID
                             Pulseira</strong></h4>
                         <input type="text" class="nspace h6 ml-2 text-primary font-weight-600" id="id_pulseira"
-                          value="12345" style="border: none; background-color: transparent;" readonly="true">
+                           style="width: 94%; border: none; background-color: transparent;"
+                          readonly="true">
                         <i id="icon_id_pulseira" class="fas fa-pen text-primary bg-transparent pr-3"
                           style="float:right; display: none"></i>
                       </div>
@@ -318,7 +319,7 @@
                             <h3 class="text-primary font-weight-bold">Receber alerta</h3>
                           </div>
                           <div class="tab_time">
-                            <label class="switch">
+                            <label class="switch" id="switchAB">
                               <input id="notiR" type="checkbox" checked>
                               <span class="slider round"></span>
                             </label>
@@ -363,13 +364,13 @@
                         <table class="w-100" style="margin-top: 20px; margin-bottom: 20px;">
                           <tr>
                             <th class="text-secondary" style="text-align: center;">Pulsação Mínima: <span
-                                class="text-black" id="minValue">50</span></th>
+                                class="text-black" id="minValue"></span></th>
                             <th id="showMin" style="opacity: 0.3;"><input type="range" min="40" max="119" value="79"
                                 id="mminHB" class="sliderPul" disabled="true"></th>
                           </tr>
                           <tr>
                             <th class="text-secondary" style="text-align: center;">Pulsação Máxima: <span
-                                class="text-black" id="maxValue">120</span></th>
+                                class="text-black" id="maxValue"></span></th>
                             <th id="showMax" style="opacity: 0.3;"><input type="range" min="40" max="120" value="80"
                                 id="mmaxHB" class="sliderPul" disabled="true"></th>
                           </tr>
@@ -386,8 +387,8 @@
                       <div class="form-control" style="height: 50px; margin-top: 18px;">
                         <h5 class="card-title form-control420" style="width: 190px"><strong>Data de
                             Nascimento</strong></h5>
-                        <input type="date" class="nspace1 h6 ml-2 text-primary font-weight-600" id="dn_recluso" value=""
-                          style="border: none; background-color: transparent;" readonly="true">
+                        <input type="date" class="nspace1 h6 ml-2 text-primary font-weight-600" id="dn_recluso" 
+                          style="width: 94%; border: none; background-color: transparent;" readonly="true">
                         <i id="icon_dn_recluso" class="fas fa-pen text-primary bg-transparent pr-3"
                           style="float:right; display: none"></i>
                       </div>
@@ -400,8 +401,8 @@
                         <h5 class="card-title form-control420" style="width: 135px;"><strong>Nacionalidade</strong>
                         </h5>
                         <input type="text" class="nspace1 h6 ml-2 text-primary font-weight-600"
-                          id="nacionalidade_recluso" value="outro pais"
-                          style="border: none; background-color: transparent;" readonly="true">
+                          id="nacionalidade_recluso" 
+                          style="width: 94%; border: none; background-color: transparent;" readonly="true">
                         <i id="icon_nacionalidade_recluso" class="fas fa-pen text-primary bg-transparent pr-3"
                           style="float:right; display: none"></i>
                       </div>
@@ -412,8 +413,8 @@
                         <h5 class="card-title form-control420" style="width: 230px;"><strong>Contacto de
                             Emergência</strong></h5>
                         <input type="text" class="h6 ml-2 text-primary font-weight-600" id="contacto_recluso"
-                          value="123345321" style="border: none; background-color: transparent;" readonly="true"
-                          onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                           style="width: 94%; border: none; background-color: transparent;"
+                          readonly="true" onkeypress="return event.charCode >= 48 && event.charCode <= 57"
                           data-rule="required|minlength-9" maxlength="9">
                         <i id="icon_contacto_recluso" class="fas fa-pen text-primary bg-transparent pr-3"
                           style="float:right; display: none"></i>
@@ -426,8 +427,8 @@
                           <strong>Contacto de Emergência
                             Alternativo</strong></h4>
                         <input type="text" class="h6 ml-2 text-primary font-weight-600"
-                          id="contacto_recluso_alternativo" value="123345321"
-                          style="border: none; background-color: transparent;" readonly="true"
+                          id="contacto_recluso_alternativo" 
+                          style="width: 94%; border: none; background-color: transparent;" readonly="true"
                           onkeypress="return event.charCode >= 48 && event.charCode <= 57"
                           data-rule="required|minlength-9" maxlength="9">
                         <i id="icon_contacto_recluso_alternativo" class="fas fa-pen text-primary bg-transparent pr-3"
@@ -442,9 +443,7 @@
                         </h4>
                         <select id="id_instituicao" class=" h6 ml-2 text-primary font-weight-600"
                           style="border: none; width: 92%;" disabled="true">
-                          <option value="1">nível 1</option>
-                          <option value="2">nível 2</option>
-                          <option value="3">nível 3</option>
+
                         </select>
                         <i id="icon_id_instituicao" class="fas fa-pen text-primary bg-transparent pr-3"
                           style="float:right; display: none"></i>
@@ -461,18 +460,18 @@
 
 
               <div class="row">
- <!------------------------------------------------- Registo Criminal ---------------------------------------------->
+                <!------------------------------------------------- Registo Criminal ---------------------------------------------->
 
                 <div class="col-6">
 
-                 
+
                   <div class="w-100">
                     <div class="card shadow mb-4">
                       <!-- Card Header - Dropdown -->
                       <div class="card-header py-3 bg-secondary">
                         <div class="m-0 font-weight-bold text-white full_tab">
                           <div id="tabCH" class="tab_nome">Registo Criminal
-                            </div>
+                          </div>
                           <div class="tab_time">
                             <i id="trashRegisto" type="button" class="fas fa-trash mr-2" style="display: none;"></i>
                             <i id="editRegisto" type="button" class="fas fa-pen" style="display: inline;"></i>
@@ -482,20 +481,21 @@
                       <!-- Card Body -->
                       <div class="card-body">
                         <ul id="listCrimes" style="padding-left: 20px;">
-                          <li><input class="testee" id="11" type="checkbox" name="11" disabled="true"><div class="label"><label for="11"><span data-tooltip="Sexta-feira 11 Março 2020 14:24h" data-tooltip-position="bottom">Comprar ovos</span></label><br></div></li>
-                          <li><input class="testee" id="12" type="checkbox" name="12" disabled="true"><div class="label"><label for="12">Comprar ovos</label><br></div></li>
+
                         </ul>
                         <div id="addRegisto">
-                        <div class="w-100 row">
-                          <div class="col-3 mt-2">Data de emissão:</div>
-                          <input class="form-control col-4" type="date" id="dataEmissao">
+                          <div class="w-100 row">
+                            <div class="col-3 mt-2">Data de emissão:</div>
+                            <input class="form-control col-4" type="date" id="dataEmissao">
+                          </div>
+                          <div class="w-100 form-control full_tab">
+                            <input id="novoRegisto" type="text" placeholder="Escreva aqui" class="tab_nome"
+                              style="border: none;">
+                            <span id="postRegisto" class="fa fa-plus-circle cursor-pointer tab_time"
+                              style="text-align: right;"></span>
+                          </div>
                         </div>
-                        <div class="w-100 form-control full_tab">
-                          <input id="novoRegisto" type="text" placeholder="Escreva aqui" class="tab_nome" style="border: none;">
-                          <span id="postRegisto" class="fa fa-plus-circle cursor-pointer tab_time" style="text-align: right;"></span>
-                        </div>
-                      </div>
-                        
+
                       </div>
                     </div>
                   </div>
@@ -505,14 +505,14 @@
                 <!----------------------------------------- Receitas Médicas ---------------------------------------->
                 <div class="col-6">
 
-                 
+
                   <div class="w-100">
                     <div class="card shadow mb-4">
                       <!-- Card Header - Dropdown -->
                       <div class="card-header py-3 bg-secondary">
                         <div class="m-0 font-weight-bold text-white full_tab">
                           <div id="tabCH2" class="tab_nome">Cuidados a ter com o recluso
-                            </div>
+                          </div>
                           <div class="tab_time">
                             <i id="trashFicha" type="button" class="fas fa-trash mr-2" style="display: none;"></i>
                             <i id="editFicha" type="button" class="fas fa-pen" style="display: inline;"></i>
@@ -522,16 +522,17 @@
                       <!-- Card Body -->
                       <div class="card-body">
                         <ul id="listMedica" style="padding-left: 20px;">
-                          <li><input class="testeee" id="13" type="checkbox" name="13" disabled="true"><div class="label"><label for="13">Comprar ovos</label><br></div></li>
-                          <li><input class="testeee" id="14" type="checkbox" name="14" disabled="true"><div class="label"><label for="14">Comprar ovos</label><br></div></li>
+
                         </ul>
                         <div id="addFicha">
-                        <div class="w-100 form-control full_tab">
-                          <input id="novaFicha" type="text" placeholder="Escreva aqui" class="tab_nome" style="border: none;">
-                          <span id="postFicha" class="fa fa-plus-circle cursor-pointer tab_time" style="text-align: right;"></span>
+                          <div class="w-100 form-control full_tab">
+                            <input id="novaFicha" type="text" placeholder="Escreva aqui" class="tab_nome"
+                              style="border: none;">
+                            <span id="postFicha" class="fa fa-plus-circle cursor-pointer tab_time"
+                              style="text-align: right;"></span>
+                          </div>
                         </div>
-                      </div>
-                        
+
                       </div>
                     </div>
                   </div>
@@ -550,73 +551,18 @@
                   <div class="card-header py-3 bg-secondary">
                     <div class="m-0 font-weight-bold text-white full_tab">
                       <div class="tab_nome">Anotações refentes ao utilizador</div>
-                      <div class="d-flex" type="button">
-                        <div type="button" data-toggle="modal" data-target="#NotaModal"
-                          class="d-flex d-sm btn btn-sm btn-white font-weight-bold shadow-sm"><i
-                            class="mt-1 mr-1 fas fa-plus fa-xs tab_time text-secondary"></i> Adicionar</div>
+                      <div id="naoAnotar">
+                        <div class="d-flex" type="button">
+                          <div type="button" data-toggle="modal" data-target="#NotaModal"
+                            class="d-flex d-sm btn btn-sm btn-white font-weight-bold shadow-sm"><i
+                              class="mt-1 mr-1 fas fa-plus fa-xs tab_time text-secondary"></i> Adicionar</div>
+                        </div>
                       </div>
                     </div>
                   </div>
 
                   <!-- Card Body -->
                   <div id="dispAnotacoes" style="max-height: 370px; overflow-y: scroll;">
-                    <div class="card-body">
-                      <div style="margin-top:-12px;" class="text-primary">
-                        <img class="img-profile rounded-circle picNotes" src="img/perfil1.png"> Nelson Pereira
-                        <span class="text-xs"> 15:56</span>
-                      </div>
-                      <br>
-                      <div class="text-black">Limpezas</div>
-                      <div class="mt-3">
-                        Dropdown menus can be placed in the card header in order to extend the functionality of a
-                        basic
-                        card. In this dropdown card example, the Font Awesome vertical ellipsis icon in the card
-                        header
-                        can be clicked on in order to toggle a dropdown menu.
-                      </div>
-                    </div>
-
-                    <div class="card-body">
-                      <div style="margin-top:-12px;" class="text-primary">
-                        <img class="img-profile rounded-circle picNotes" src="img/perfil1.png"> Nelson Pereira
-                        <span class="text-xs"> 15:56</span>
-                      </div>
-                      <div class="mt-3">
-                        Dropdown menus can be placed in the card header in order to extend the functionality of a
-                        basic
-                        card. In this dropdown card example, the Font Awesome vertical ellipsis icon in the card
-                        header
-                        can be clicked on in order to toggle a dropdown menu.
-                      </div>
-                    </div>
-
-                    <div class="card-body">
-                      <div style="margin-top:-12px;" class="text-primary">
-                        <img class="img-profile rounded-circle picNotes" src="img/perfil1.png"> Nelson Pereira
-                        <span class="text-xs"> 15:56</span>
-                      </div>
-                      <div class="mt-3">
-                        Dropdown menus can be placed in the card header in order to extend the functionality of a
-                        basic
-                        card. In this dropdown card example, the Font Awesome vertical ellipsis icon in the card
-                        header
-                        can be clicked on in order to toggle a dropdown menu.
-                      </div>
-                    </div>
-
-                    <div class="card-body">
-                      <div style="margin-top:-12px;" class="text-primary">
-                        <img class="img-profile rounded-circle picNotes" src="img/perfil1.png"> Nelson Pereira
-                        <span class="text-xs"> 15:56</span>
-                      </div>
-                      <div class="mt-3">
-                        Dropdown menus can be placed in the card header in order to extend the functionality of a
-                        basic
-                        card. In this dropdown card example, the Font Awesome vertical ellipsis icon in the card
-                        header
-                        can be clicked on in order to toggle a dropdown menu.
-                      </div>
-                    </div>
 
                   </div>
 
@@ -636,132 +582,12 @@
             </div>
           </div>
 
-          <div class="col-2 mt-n4 px-0" id="rec12">
+          <div class="col-2 mt-n4 px-0" id="rec12" style="display: none;">
             <div class="col pl-0">
               <input type="text" id="myFilter" placeholder="Pesquisar recluso" class="form-control py-2 mr-3 myFilter">
             </div>
             <div id="tPulsacoes">
-              <ul class="teste w-100 px-0" style="list-style-type: none;">
-
-                <!--Recluso-->
-                <div class="col py-2 mr-3 pl-0 pr-1 myfilter">
-                  <div class="card border-left-danger shadow h-100 py-2">
-                    <div class="card-body pl-3">
-                      <div class="row no-gutters align-items-center">
-                        <div class="col-auto pr-2">
-                          <img class="picNotes40 img-profile rounded-circle" src="img/perfil2.jpg">
-                        </div>
-                        <div class="col mr-2">
-                          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">João Teixeira</div>
-                          <div class="h5 mb-0 font-weight-bold text-gray-800">50 bpm</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!--Recluso-->
-                <div class="col py-2 mr-3 pl-0 pr-1 myfilter">
-                  <div class="card border-left-danger shadow h-100 py-2">
-                    <div class="card-body pl-3">
-                      <div class="row no-gutters align-items-center">
-                        <div class="col-auto pr-2">
-                          <img class="picNotes40 img-profile rounded-circle" src="img/perfil1.png">
-                        </div>
-                        <div class="col mr-2">
-                          <div class="text font-weight-bold text-primary text-uppercase mb-1">Rui Pires</div>
-                          <div class="h5 mb-0 font-weight-bold text-red">120 bpm</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!--Recluso-->
-                <div class="col py-2 mr-3 pl-0 pr-1 myfilter">
-                  <div class="card border-left-danger shadow h-100 py-2">
-                    <div class="card-body pl-3">
-                      <div class="row no-gutters align-items-center">
-                        <div class="col-auto pr-2">
-                          <img class="picNotes40 img-profile rounded-circle" src="img/perfil2.jpg">
-                        </div>
-                        <div class="col mr-2">
-                          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Luis Carvalho</div>
-                          <div class="h5 mb-0 font-weight-bold text-gray-800">50 bpm</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!--Recluso-->
-                <div class="col py-2 mr-3 pl-0 pr-1 myfilter">
-                  <div class="card border-left-danger shadow h-100 py-2">
-                    <div class="card-body pl-3">
-                      <div class="row no-gutters align-items-center">
-                        <div class="col-auto pr-2">
-                          <img class="picNotes40 img-profile rounded-circle" src="img/perfil2.jpg">
-                        </div>
-                        <div class="col mr-2">
-                          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Ana Alice</div>
-                          <div class="h5 mb-0 font-weight-bold text-gray-800">50 bpm</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!--Recluso-->
-                <div class="col py-2 mr-3 pl-0 pr-1 myfilter">
-                  <div class="card border-left-danger shadow h-100 py-2">
-                    <div class="card-body pl-3">
-                      <div class="row no-gutters align-items-center">
-                        <div class="col-auto pr-2">
-                          <img class="picNotes40 img-profile rounded-circle" src="img/perfil2.jpg">
-                        </div>
-                        <div class="col mr-2">
-                          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Jorge Pedro</div>
-                          <div class="h5 mb-0 font-weight-bold text-gray-800">50 bpm</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!--Recluso-->
-                <div class="col py-2 mr-3 pl-0 pr-1 myfilter">
-                  <div class="card border-left-danger shadow h-100 py-2">
-                    <div class="card-body pl-3">
-                      <div class="row no-gutters align-items-center">
-                        <div class="col-auto pr-2">
-                          <img class="picNotes40 img-profile rounded-circle" src="img/perfil2.jpg">
-                        </div>
-                        <div class="col mr-2">
-                          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Bruno Alves</div>
-                          <div class="h5 mb-0 font-weight-bold text-gray-800">50 bpm</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!--Recluso-->
-                <div class="col py-2 mr-3 pl-0 pr-1 myfilter">
-                  <div class="card border-left-danger shadow h-100 py-2">
-                    <div class="card-body pl-3">
-                      <div class="row no-gutters align-items-center">
-                        <div class="col-auto pr-2">
-                          <img class="picNotes40 img-profile rounded-circle" src="img/perfil2.jpg">
-                        </div>
-                        <div class="col mr-2">
-                          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Carlos Costa</div>
-                          <div class="h5 mb-0 font-weight-bold text-gray-800">50 bpm</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </ul>
+           
             </div>
           </div>
 
@@ -812,13 +638,13 @@
     </div>
   </div>
 
-    <!-- Confimação apagar nota Modal-->
-    <div class="modal t-1 fade" id="confModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  <!-- Confimação apagar nota Modal-->
+  <div class="modal t-1 fade" id="confModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Terminar Sessão</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Apagar Anotação</h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
@@ -844,7 +670,8 @@
           </button>
         </div>
         <div class="modal-body">
-          <textarea id="titleN" class="form-control mb-1 textarea2" rows="1" cols="1" placeholder="Assunto (título)"></textarea>
+          <textarea id="titleN" class="form-control mb-1 textarea2" rows="1" cols="1"
+            placeholder="Assunto (título)"></textarea>
           <textarea id="descriptionN" class="form-control textarea1" rows="6" cols="60"
             placeholder="Escreva aqui a nota"></textarea>
         </div>
@@ -883,39 +710,39 @@
 
   <script>
 
-    $('img[data-enlargable]').addClass('img-enlargable').click(function(){
-        var src = $(this).attr('src');
-        var modal;
-        function removeModal(){ modal.remove(); $('body').off('keyup.modal-close'); }
-        modal = $('<div>').css({
-            background: 'RGBA(0,0,0,.5) url('+src+') no-repeat center',
-            backgroundSize: 'contain',
-            width:'100%', height:'100%',
-            position:'fixed',
-            zIndex:'10000',
-            top:'0', left:'0',
-            cursor: 'zoom-out'
-        }).click(function(){
-            removeModal();
-        }).appendTo('body');
-        //handling ESC
-        $('body').on('keyup.modal-close', function(e){
-          if(e.key==='Escape'){ removeModal(); } 
-        });
+    $('img[data-enlargable]').addClass('img-enlargable').click(function () {
+      var src = $(this).attr('src');
+      var modal;
+      function removeModal() { modal.remove(); $('body').off('keyup.modal-close'); }
+      modal = $('<div>').css({
+        background: 'RGBA(0,0,0,.5) url(' + src + ') no-repeat center',
+        backgroundSize: 'contain',
+        width: '100%', height: '100%',
+        position: 'fixed',
+        zIndex: '10000',
+        top: '0', left: '0',
+        cursor: 'zoom-out'
+      }).click(function () {
+        removeModal();
+      }).appendTo('body');
+      //handling ESC
+      $('body').on('keyup.modal-close', function (e) {
+        if (e.key === 'Escape') { removeModal(); }
+      });
     });
-    
-    </script>
 
-<script>
-  if('serviceWorker' in navigator){
+  </script>
+
+  <script>
+    if ('serviceWorker' in navigator) {
       try {
         navigator.serviceWorker.register('sw.js');
         console.log('SW registered');
-      } catch(error) {
+      } catch (error) {
         console.log('SW register failed');
       }
     }
-</script>
+  </script>
 
 
 </body>

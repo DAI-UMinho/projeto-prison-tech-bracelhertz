@@ -173,19 +173,14 @@
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
-                <span id="nomeUser" class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
-                <img id="avatarUser" class="img-profile rounded-circle"
-                  src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                <span id="nomeUser" class="mr-2 d-none d-lg-inline text-gray-600 small"></span>
+                <img id="avatarUser" class="img-profile rounded-circle">
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                 <a class="dropdown-item" href="perfil.html">
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                   Perfil
-                </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Definições
                 </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
@@ -202,7 +197,7 @@
 
         <!-- Begin Page Content -->
         <div class="row">
-          <div id="ajustarDm" class="col-10">
+          <div id="ajustarDm" class="col-12">
             <div id="body" class="container-fluid">
 
 
@@ -224,7 +219,7 @@
                     <!-- Card Body -->
                     <div class="card-body">
                       <div class="w-100" style="text-align: center; height: 440px;">
-                        <img data-enlargable width="100" style="cursor: zoom-in; height: 444px; width: auto;" id="fotoinst" src="img/evora3.jpeg" style="height: 600px; border-radius: 20px;">
+                        <img data-enlargable width="100" style="cursor: zoom-in; height: 444px; width: auto;" id="fotoinst"  style="height: 600px; border-radius: 20px;">
                       </div>
                     </div>
                   </div>
@@ -258,7 +253,7 @@
                           </h4>
                           <div style="display: unset;">
                             <input type="text" class="space1 h6 ml-2 text-primary font-weight-600" id="nome_inst"
-                              value="Carlos" style="border: none; background-color: transparent;" readonly="true">
+                               style="width: 95%; border: none; background-color: transparent;" readonly="true">
                             <i id="icon_nome_inst" class="fas fa-pen text-primary bg-transparent pr-3"
                               style="float:right; display: none"></i>
                           </div>
@@ -271,7 +266,7 @@
                           </h4>
                           <div style="display: unset;">
                             <input type="text" class="space1 h6 ml-2 text-primary font-weight-600" id="morada_inst"
-                              value="Rua" style="border: none; background-color: transparent;" readonly="true">
+                               style="width: 95%; border: none; background-color: transparent;" readonly="true">
                             <i id="icon_morada_inst" class="fas fa-pen text-primary bg-transparent pr-3"
                               style="float:right; display: none"></i>
                           </div>
@@ -284,7 +279,7 @@
                           </h4>
                           <div style="display: unset;">
                             <input type="text" class="nspace1 h6 ml-2 text-primary font-weight-600" id="local_inst"
-                              value="fafe" style="border: none; background-color: transparent;" readonly="true">
+                               style="width: 95%; border: none; background-color: transparent;" readonly="true">
                             <i id="icon_local_inst" class="fas fa-pen text-primary bg-transparent pr-3"
                               style="float:right; display: none"></i>
                           </div>
@@ -299,7 +294,7 @@
                           </h5>
                           <div style="display: unset;">
                             <input type="email" class=" h6 ml-2 text-primary font-weight-600" id="email_inst"
-                              value="asd@asd.com" style="border: none; background-color: transparent;" readonly="true">
+                               style="width: 95%; border: none; background-color: transparent;" readonly="true">
                             <i id="icon_email_inst" class="fas fa-pen text-primary bg-transparent pr-3"
                               style="float:right; display: none"></i>
                           </div>
@@ -312,7 +307,7 @@
                           </h5>
                           <div style="display: unset;">
                             <input type="text" class="h6 ml-2 text-primary font-weight-600" id="contacto_inst"
-                              value="917364829" readonly="true" style="border: none; background-color: transparent;"
+                               readonly="true" style="width: 95%; border: none; background-color: transparent;"
                               onkeypress="return event.charCode >= 48 && event.charCode <= 57"
                               data-rule="required|minlength-9" maxlength="9">
                             <i id="icon_contacto_inst" class="fas fa-pen text-primary bg-transparent pr-3"
@@ -327,7 +322,7 @@
                           </h4>
                           <div style="display: unset;">
                             <input type="text" class="space1 h6 ml-2 text-primary font-weight-600" id="prisonDescrip"
-                              value="muita coisa" style="border: none; background-color: transparent;" readonly="true">
+                               style="width: 95%; border: none; background-color: transparent;" readonly="true">
                             <i id="icon_prisonDescrip" class="fas fa-pen text-primary bg-transparent pr-3"
                               style="float:right; display: none"></i>
                           </div>
@@ -362,64 +357,7 @@
 
                   <!-- Card Body -->
                   <div id="dispAnotacoes" style="max-height: 370px; overflow-y: scroll;">
-                    <div class="card-body">
-                      <div style="margin-top:-12px;" class="text-primary">
-                        <img class="img-profile rounded-circle picNotes" src="img/perfil1.png"> Nelson Pereira
-                        <span class="text-xs"> 15:56</span>
-                      </div>
-                      <br>
-                      <div class="text-black">Limpezas</div>
-                      <div class="mt-3">
-                        Dropdown menus can be placed in the card header in order to extend the functionality of a
-                        basic
-                        card. In this dropdown card example, the Font Awesome vertical ellipsis icon in the card
-                        header
-                        can be clicked on in order to toggle a dropdown menu.
-                      </div>
-                    </div>
-
-                    <div class="card-body">
-                      <div style="margin-top:-12px;" class="text-primary">
-                        <img class="img-profile rounded-circle picNotes" src="img/perfil1.png"> Nelson Pereira
-                        <span class="text-xs"> 15:56</span>
-                      </div>
-                      <div class="mt-3">
-                        Dropdown menus can be placed in the card header in order to extend the functionality of a
-                        basic
-                        card. In this dropdown card example, the Font Awesome vertical ellipsis icon in the card
-                        header
-                        can be clicked on in order to toggle a dropdown menu.
-                      </div>
-                    </div>
-
-                    <div class="card-body">
-                      <div style="margin-top:-12px;" class="text-primary">
-                        <img class="img-profile rounded-circle picNotes" src="img/perfil1.png"> Nelson Pereira
-                        <span class="text-xs"> 15:56</span>
-                      </div>
-                      <div class="mt-3">
-                        Dropdown menus can be placed in the card header in order to extend the functionality of a
-                        basic
-                        card. In this dropdown card example, the Font Awesome vertical ellipsis icon in the card
-                        header
-                        can be clicked on in order to toggle a dropdown menu.
-                      </div>
-                    </div>
-
-                    <div class="card-body">
-                      <div style="margin-top:-12px;" class="text-primary">
-                        <img class="img-profile rounded-circle picNotes" src="img/perfil1.png"> Nelson Pereira
-                        <span class="text-xs"> 15:56</span>
-                      </div>
-                      <div class="mt-3">
-                        Dropdown menus can be placed in the card header in order to extend the functionality of a
-                        basic
-                        card. In this dropdown card example, the Font Awesome vertical ellipsis icon in the card
-                        header
-                        can be clicked on in order to toggle a dropdown menu.
-                      </div>
-                    </div>
-
+ 
                   </div>
 
                 </div>
@@ -434,132 +372,12 @@
             </div>
           </div>
 
-          <div class="col-2 mt-n4 px-0" id="rec12">
+          <div class="col-2 mt-n4 px-0" id="rec12" style="display: none;">
             <div class="col pl-0">
               <input type="text" id="myFilter" placeholder="Pesquisar recluso" class="form-control py-2 mr-3 myFilter">
             </div>
             <div id="tPulsacoes">
-              <ul class="teste w-100 px-0" style="list-style-type: none;">
 
-                <!--Recluso-->
-                <div class="col py-2 mr-3 pl-0 pr-1 myfilter">
-                  <div class="card border-left-danger shadow h-100 py-2">
-                    <div class="card-body pl-3">
-                      <div class="row no-gutters align-items-center">
-                        <div class="col-auto pr-2">
-                          <img class="picNotes40 img-profile rounded-circle" src="img/perfil2.jpg">
-                        </div>
-                        <div class="col mr-2">
-                          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">João Teixeira</div>
-                          <div class="h5 mb-0 font-weight-bold text-gray-800">50 bpm</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!--Recluso-->
-                <div class="col py-2 mr-3 pl-0 pr-1 myfilter">
-                  <div class="card border-left-danger shadow h-100 py-2">
-                    <div class="card-body pl-3">
-                      <div class="row no-gutters align-items-center">
-                        <div class="col-auto pr-2">
-                          <img class="picNotes40 img-profile rounded-circle" src="img/perfil1.png">
-                        </div>
-                        <div class="col mr-2">
-                          <div class="text font-weight-bold text-primary text-uppercase mb-1">Rui Pires</div>
-                          <div class="h5 mb-0 font-weight-bold text-red">120 bpm</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!--Recluso-->
-                <div class="col py-2 mr-3 pl-0 pr-1 myfilter">
-                  <div class="card border-left-danger shadow h-100 py-2">
-                    <div class="card-body pl-3">
-                      <div class="row no-gutters align-items-center">
-                        <div class="col-auto pr-2">
-                          <img class="picNotes40 img-profile rounded-circle" src="img/perfil2.jpg">
-                        </div>
-                        <div class="col mr-2">
-                          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Luis Carvalho</div>
-                          <div class="h5 mb-0 font-weight-bold text-gray-800">50 bpm</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!--Recluso-->
-                <div class="col py-2 mr-3 pl-0 pr-1 myfilter">
-                  <div class="card border-left-danger shadow h-100 py-2">
-                    <div class="card-body pl-3">
-                      <div class="row no-gutters align-items-center">
-                        <div class="col-auto pr-2">
-                          <img class="picNotes40 img-profile rounded-circle" src="img/perfil2.jpg">
-                        </div>
-                        <div class="col mr-2">
-                          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Ana Alice</div>
-                          <div class="h5 mb-0 font-weight-bold text-gray-800">50 bpm</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!--Recluso-->
-                <div class="col py-2 mr-3 pl-0 pr-1 myfilter">
-                  <div class="card border-left-danger shadow h-100 py-2">
-                    <div class="card-body pl-3">
-                      <div class="row no-gutters align-items-center">
-                        <div class="col-auto pr-2">
-                          <img class="picNotes40 img-profile rounded-circle" src="img/perfil2.jpg">
-                        </div>
-                        <div class="col mr-2">
-                          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Jorge Pedro</div>
-                          <div class="h5 mb-0 font-weight-bold text-gray-800">50 bpm</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!--Recluso-->
-                <div class="col py-2 mr-3 pl-0 pr-1 myfilter">
-                  <div class="card border-left-danger shadow h-100 py-2">
-                    <div class="card-body pl-3">
-                      <div class="row no-gutters align-items-center">
-                        <div class="col-auto pr-2">
-                          <img class="picNotes40 img-profile rounded-circle" src="img/perfil2.jpg">
-                        </div>
-                        <div class="col mr-2">
-                          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Bruno Alves</div>
-                          <div class="h5 mb-0 font-weight-bold text-gray-800">50 bpm</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!--Recluso-->
-                <div class="col py-2 mr-3 pl-0 pr-1 myfilter">
-                  <div class="card border-left-danger shadow h-100 py-2">
-                    <div class="card-body pl-3">
-                      <div class="row no-gutters align-items-center">
-                        <div class="col-auto pr-2">
-                          <img class="picNotes40 img-profile rounded-circle" src="img/perfil2.jpg">
-                        </div>
-                        <div class="col mr-2">
-                          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Carlos Costa</div>
-                          <div class="h5 mb-0 font-weight-bold text-gray-800">50 bpm</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </ul>
             </div>
           </div>
 
@@ -616,7 +434,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Terminar Sessão</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Apagar Anotação</h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>

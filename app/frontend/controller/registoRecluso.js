@@ -44,7 +44,6 @@ window.onload = async function () {
 
 
       var verificar = document.getElementById("Identification").value.trim();
-
       const response = await fetch('http://127.0.0.1:8080/api/prisoners/identifier-exists/' + verificar, {
 
         headers: {
@@ -55,7 +54,22 @@ window.onload = async function () {
         credentials: 'include'
       });
       const existe = await response.json();
-      console.log(existe);
+
+
+      var verificarB = document.getElementById("idpulseira").value.trim();
+      const responseB = await fetch('http://127.0.0.1:8080/api/prisoners/bracelet-exists/' + verificarB, {
+
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        mode: 'cors',
+        method: 'GET',
+        credentials: 'include'
+      });
+      const existeB = await responseB.json();
+
+
+
 
       if (existe) {
         Swal.fire(
@@ -64,58 +78,66 @@ window.onload = async function () {
           'warning'
         )
       } else {
-
-
-        if (pic == "") {
+        if (existeB) {
           Swal.fire(
-            'É obrigatória uma fotografia!',
+            'Esta pulseira já está em uso!',
             '',
             'warning'
           )
         } else {
-          if (idpulseira.value !== "") {
 
-            data.braceletId = document.getElementById("idpulseira").value.trim();
-            data.minHB = document.getElementById("mminHB").value.trim();
-            data.maxHB = document.getElementById("mmaxHB").value.trim();
+
+          if (pic == "") {
+            Swal.fire(
+              'É obrigatória uma fotografia!',
+              '',
+              'warning'
+            )
           } else {
-            data.minHB = 40;
-            data.maxHB = 120;
+            if (idpulseira.value !== "") {
+
+              data.braceletId = document.getElementById("idpulseira").value.trim();
+              data.minHB = document.getElementById("mminHB").value.trim();
+              data.maxHB = document.getElementById("mmaxHB").value.trim();
+            } else {
+              data.minHB = 40;
+              data.maxHB = 120;
+            }
+
+            console.log(data);
+
+            await fetch('http://127.0.0.1:8080/api/prisoners', {
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              mode: 'cors',
+              method: 'POST',
+              credentials: 'include',
+              body: JSON.stringify(data)
+
+            }).then(function (response) {
+              if (!response.ok) {
+                alert(response);
+                throw new Error("ERRO");
+              }
+              console.log(response);
+              return response.json();
+            }).then(async function (result) {
+              console.log(result);
+              if (result) {
+
+                post_photo(formData, result.objectId);
+
+              }
+            }).catch(function (err) {
+              swal("Erro!", "Erro!", "error");
+            })
+
+
           }
-
-          console.log(data);
-
-          await fetch('http://127.0.0.1:8080/api/prisoners', {
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            mode: 'cors',
-            method: 'POST',
-            credentials: 'include',
-            body: JSON.stringify(data)
-
-          }).then(function (response) {
-            if (!response.ok) {
-              alert(response);
-              throw new Error("ERRO");
-            }
-            console.log(response);
-            return response.json();
-          }).then(async function (result) {
-            console.log(result);
-            if (result) {
-
-              post_photo(formData, result.objectId);
-
-            }
-          }).catch(function (err) {
-            swal("Erro!", "Erro!", "error");
-          })
 
 
         }
-
-
       }
 
 
@@ -251,6 +273,7 @@ function showSlides(n) {
 var continf = document.getElementById("contact");
 var contalinf = document.getElementById("contactAlt");
 var existeRec = document.getElementById("Identification");
+var existePul = document.getElementById("idpulseira");
 
 continf.onkeyup = function () {
   if (document.getElementById("contact").value.length == 9 || document.getElementById("contact").value.length == 0) {
@@ -282,12 +305,35 @@ existeRec.onblur = async function RecTaken() {
     credentials: 'include'
   });
   const existe = await response.json();
-  console.log(existe);
 
   if (existe) {
     document.getElementById("existeRec").style.display = "block";
   } else {
     document.getElementById("existeRec").style.display = "none";
+  }
+
+}
+
+
+existePul.onblur = async function PulTaken() {
+
+  var verificarB = document.getElementById("idpulseira").value.trim();
+
+  const responseB = await fetch('http://127.0.0.1:8080/api/prisoners/bracelet-exists/' + verificarB, {
+
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    mode: 'cors',
+    method: 'GET',
+    credentials: 'include'
+  });
+  const existeB = await responseB.json();
+
+  if (existeB) {
+    document.getElementById("existePul").style.display = "block";
+  } else {
+    document.getElementById("existePul").style.display = "none";
   }
 
 }

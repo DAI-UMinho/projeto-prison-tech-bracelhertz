@@ -24,9 +24,9 @@ $(window).on("load", function () {
                 } else {
                     t = ocorrencia.title;
                 }
-                conteudo.push(["<div id='" + ocorrencia.alertLogId + "'>" + ocorrencia.prisonerId.identifierId + "</div>",
-                ocorrencia.prisonerId.name,
-                ocorrencia.prisonerId.prison.name,
+                conteudo.push([ocorrencia.prisoner.identifierId,
+                ocorrencia.prisoner.name,
+                ocorrencia.prisoner.prison.name,
                 ocorrencia.createdTimestamp,
                     t])
 

@@ -60,6 +60,8 @@ $(window).on("load", function () {
                         document.getElementById("editFicha").style.display = "none";
                         document.getElementById("addRegisto").style.display = "none";
                         document.getElementById("addFicha").style.display = "none";
+                        document.getElementById("naoAnotar").style.display = "none";
+                        document.getElementById("switchAB").style.display = "none";
                     }
                 } else {
                     if (RoleLogado !== "ROLE_NETWORKMAN") {
@@ -84,7 +86,7 @@ $(window).on("load", function () {
 
 
                 document.getElementById("fotoR").src = "data:image/png;base64," + photoD.picByte;
-                document.getElementById("id_recluso").innerHTML = recluso.identifierId;
+                document.getElementById("id_recluso").value = recluso.identifierId;
                 document.getElementById("nome_recluso").value = recluso.name;
                 document.getElementById("dn_recluso").value = recluso.birthDate;
                 document.getElementById("nacionalidade_recluso").value = recluso.nationality;
@@ -138,7 +140,7 @@ $(window).on("load", function () {
                 var showFicha = "";
                 var showtolipFicha = ""
                 if (recluso.medicalPrescription.length == 0) {
-                    showFicha = "<li>Sem registo criminal</li>";
+                    showFicha = "<li>Nenhum cuidado médico necessário</li>";
                 } else {
                     var mrecente2 = "";
                     var o = 0;
@@ -266,7 +268,7 @@ async function editar() {
 
 
         data.prisonerId = recluso.prisonerId;
-        data.identifierId = document.getElementById("id_recluso").innerHTML;
+        data.identifierId = document.getElementById("id_recluso").value.trim();
         data.name = document.getElementById("nome_recluso").value.trim();
         data.birthDate = document.getElementById("dn_recluso").value;
         data.nationality = document.getElementById("nacionalidade_recluso").value.trim();
@@ -620,6 +622,8 @@ function Myfunction424() {
     document.getElementById("icon_dn_recluso").style.display = "block";
     document.getElementById("nome_recluso").readOnly = false;
     document.getElementById("icon_nome_recluso").style.display = "block";
+    document.getElementById("id_recluso").readOnly = false;
+    document.getElementById("icon_id_recluso").style.display = "block";
 
 
 }
@@ -658,6 +662,8 @@ function Myfunction425() {
     document.getElementById("icon_dn_recluso").style.display = "none";
     document.getElementById("nome_recluso").readOnly = true;
     document.getElementById("icon_nome_recluso").style.display = "none";
+    document.getElementById("id_recluso").readOnly = true;
+    document.getElementById("icon_id_recluso").style.display = "none";
 
     document.getElementById("showMin").style.opacity = 0.3;
     document.getElementById("showMax").style.opacity = 0.3;

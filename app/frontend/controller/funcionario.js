@@ -29,8 +29,18 @@ $(window).on("load", function () {
       const photoD = await response7.json();
 
 
+      var role = "";
+      if (perfil.roles[0].id == 0) {
+        role = "Guarda prisional";
+      } else if (perfil.roles[0].id == 1) {
+        role = "Gestor de Instituição";
+      } else if (perfil.roles[0].id == 2) {
+        role = "Gestor da Rede Prisonal";
+      }
+
+
       //envia a para a pagina
-      document.getElementById("funcaoF").value = perfil.roles[0].name;
+      document.getElementById("funcaoF").innerHTML = role;
       document.getElementById("nFuncionario").innerHTML = perfil.username;
       document.getElementById("id_instituicao").value = perfil.prison.prisonId;
       document.getElementById("dn_funcionario").value = perfil.birthDate;
@@ -44,16 +54,33 @@ $(window).on("load", function () {
 
       if (perfil.lastLogin !== null) {
         document.getElementById("last_login").innerHTML = "Último login: " + getDate7(perfil.lastLogin);
-      }else{
+      } else {
         document.getElementById("last_login").innerHTML = "Último login: ";
       }
 
-      if(RoleLogado == "ROLE_NETWORKMAN"){
+      if (perfil.roles[0].name == "ROLE_NETWORKMAN") {
         document.getElementById("paraNETMAN").style.display = "none";
       }
 
 
-      if (!(RoleLogado == "ROLE_NETWORKMAN" && perfil.roles[0].name !== "ROLE_NETWORKMAN" || RoleLogado == "ROLE_MANAGER" && perfil.roles[0].name == "ROLE_GUARD")) {
+
+      const response5 = await fetch('http://127.0.0.1:8080/api/users/logged-profiles', {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        mode: 'cors',
+        method: 'GET',
+        credentials: 'include'
+      });
+      const logado = await response5.json();
+      console.log(logado);
+
+
+
+
+
+      if (!(RoleLogado == "ROLE_NETWORKMAN" && perfil.roles[0].name !== "ROLE_NETWORKMAN" || RoleLogado == "ROLE_MANAGER" && perfil.roles[0].name == "ROLE_GUARD")
+        || logado.prison.prisonId !== perfil.prison.prisonId && RoleLogado !== "ROLE_NETWORKMAN") {
         document.getElementById("perfil_alterar_2").style.display = "none";
         document.getElementById("editPassoutro").style.display = "none";
         document.getElementById("naoAnotar").style.display = "none";
@@ -343,7 +370,7 @@ function Myfunction425() {
   document.getElementById("icon_contactoF").style.display = "none";
   document.getElementById("nacF").readOnly = true;
   document.getElementById("icon_nacF").style.display = "none";
-  document.getElementById("morada").readOnly = true;
+  document.getElementById("moradaF").readOnly = true;
   document.getElementById("icon_moradaF").style.display = "none";
   document.getElementById("localF").readOnly = true;
   document.getElementById("icon_localF").style.display = "none";

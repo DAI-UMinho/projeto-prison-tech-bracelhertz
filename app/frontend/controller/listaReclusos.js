@@ -45,7 +45,8 @@ $(window).on("load", function () {
                     recluso.contact,
                     recluso.prison.name,
                     recluso.threatLevel,
-                    recluso.cell])
+                    recluso.cell,
+                    recluso.braceletId])
 
                 }
 
