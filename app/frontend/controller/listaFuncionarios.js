@@ -4,53 +4,49 @@ $(window).on("load", function () {
     display_funcionarios();
 
 
-    function display_funcionarios() {
-        async function fetchAsync() {
-
-            var conteudo = [];
-
-            const response = await fetch('http://127.0.0.1:8080/api/users', {
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                mode: 'cors',
-                method: 'GET',
-                credentials: 'include'
-            });
-            const func = await response.json();
-            console.log(func);
+    async function display_funcionarios() {
 
 
-            for (const funcionario of func) {
-                if (funcionario.userId !== parseInt(userLogado)) {
-                    var role = "";
-                    if (funcionario.roles[0].id == 0) {
-                        role = "Guarda prisional";
-                    } else if (funcionario.roles[0].id == 1) {
-                        role = "Gestor de Instituição";
-                    } else if (funcionario.roles[0].id == 2) {
-                        role = "Gestor da Rede Prisonal";
-                    }
+        var conteudo = [];
 
-                    conteudo.push(["<div id='" + funcionario.userId + "'>" + funcionario.username + "</div>",
-                    funcionario.name,
-                    funcionario.prison.name,
-                    funcionario.email,
-                    role])
+        const response = await fetch('http://127.0.0.1:8080/api/users', {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            mode: 'cors',
+            method: 'GET',
+            credentials: 'include'
+        });
+        const func = await response.json();
+
+
+
+        for (const funcionario of func) {
+            if (funcionario.userId !== parseInt(userLogado)) {
+                var role = "";
+                if (funcionario.roles[0].id == 0) {
+                    role = "Guarda Prisional";
+                } else if (funcionario.roles[0].id == 1) {
+                    role = "Gestor de Instituição";
+                } else if (funcionario.roles[0].id == 2) {
+                    role = "Gestor da Rede Prisonal";
                 }
 
-
+                conteudo.push(["<div id='" + funcionario.userId + "'>" + funcionario.username + "</div>",
+                funcionario.name,
+                funcionario.prison.name,
+                funcionario.email,
+                    role])
             }
 
-            $(document).ready(function () {
-                $('#dataTable').DataTable({
-                    data: conteudo
-                });
-            });
 
         }
-        //chama a função fetchAsync()
-        fetchAsync().then(data => console.log("done")).catch(reason => console.log(reason.message));
+
+        $(document).ready(function () {
+            $('#dataTable').DataTable({
+                data: conteudo
+            });
+        });
 
     }
 
@@ -120,7 +116,7 @@ async function VerApagar() {
             credentials: 'include'
         });
         const logado = await response.json();
-        console.log(logado);
+
 
 
 
@@ -138,7 +134,7 @@ async function VerApagar() {
                 credentials: 'include'
             });
             const perfil = await response4.json();
-            console.log(perfil);
+
 
             document.getElementById("displayList").innerHTML += "<li>Username: " + perfil.username + "; Nome: " + perfil.name + "</li>";
             if (RoleLogado == "ROLE_MANAGER" && perfil.roles[0].name == "ROLE_MANAGER" || RoleLogado == "ROLE_MANAGER" && perfil.roles[0].name == "ROLE_NETWORKMAN"
@@ -153,8 +149,7 @@ async function VerApagar() {
 
         }
     }
-    console.log(ids)
-    console.log(ids.length)
+
 }
 
 
@@ -175,7 +170,7 @@ async function ListaApagar() {
             )
         } else {
 
-            console.log(ids)
+
             for (var rec of ids) {
                 var count = 0;
 
@@ -249,7 +244,7 @@ async function ListaApagar() {
 function apaga_selecionados() {
     var tabela = document.getElementById("tabelaFuncionarios");
     var selecionados = tabela.getElementsByClassName("selecionado");
-    console.log(selecionados)
+
     var apagar = [];
     for (selec of selecionados) {
         apagar.push(selec)

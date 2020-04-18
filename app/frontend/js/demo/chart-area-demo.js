@@ -28,11 +28,6 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 }
 
 
-paraTeste = [0, 20 ,35];
-
-
-
-
 // Area Chart Example
 var ctx = document.getElementById("myAreaChart");
 var myLineChart = new Chart(ctx, {
@@ -52,8 +47,7 @@ var myLineChart = new Chart(ctx, {
       pointHoverBorderColor: "#d57201",
       pointHitRadius: 10,
       pointBorderWidth: 2,
-      //data: [0, 46, 80, 35, 50, 65, 80, 100, 80, 60, 40, 20],
-      data: paraTeste,
+      data: [0, 46, 80, 35, 50, 65, 80, 100, 80, 60, 40, 20],
     }],
   },
   options: {

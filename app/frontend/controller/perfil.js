@@ -4,89 +4,81 @@ $(window).on("load", function () {
   display_logado();
   get_instituicoes();
 
-  function display_logado() {
-    async function fetchAsync() {
-
-      const response = await fetch('http://127.0.0.1:8080/api/users/logged-profiles', {
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        mode: 'cors',
-        method: 'GET',
-        credentials: 'include'
-      });
-      const logado = await response.json();
-      console.log(logado);
+  async function display_logado() {
 
 
-      const response7 = await fetch('http://127.0.0.1:8080/api/photos/' + logado.photoId, {
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        mode: 'cors',
-        method: 'GET',
-        credentials: 'include'
-      });
-      const photoD = await response7.json();
+    const response = await fetch('http://127.0.0.1:8080/api/users/logged-profiles', {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      mode: 'cors',
+      method: 'GET',
+      credentials: 'include'
+    });
+    const logado = await response.json();
 
 
-      if (logado.roles[0].name == "ROLE_NETWORKMAN") {
-        document.getElementById("role_perfil").innerHTML = "Gestor da Rede Prisonal";
-      } else if (logado.roles[0].name == "ROLE_GUARD") {
-        document.getElementById("role_perfil").innerHTML = "Gestor de Instituição";
-      } else {
-        document.getElementById("role_perfil").innerHTML = "Guarda Prisional";
-      }
+
+    const response7 = await fetch('http://127.0.0.1:8080/api/photos/' + logado.photoId, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      mode: 'cors',
+      method: 'GET',
+      credentials: 'include'
+    });
+    const photoD = await response7.json();
 
 
-      document.getElementById("username_perfil").innerHTML = logado.username;
-      document.getElementById("contacto_perfil").value = logado.contact;
-      document.getElementById("nacionalidade_perfil").value = logado.nationality;
-      document.getElementById("morada_perfil").value = logado.address;
-      document.getElementById("id_instituicao").value = logado.prison.prisonId;
-      document.getElementById("nome_perfil").value = logado.name;
-      document.getElementById("dataNascimento_perfil").value = logado.birthDate;
-      document.getElementById("email_perfil").value = logado.email;
-      document.getElementById("localidade_perfil").value = logado.location;
-      //document.getElementById("role_perfil").innerHTML = logado.roles[0].name;
-      document.getElementById("fotoR").src = "data:image/png;base64," + photoD.picByte;
-
+    if (logado.roles[0].name == "ROLE_NETWORKMAN") {
+      document.getElementById("role_perfil").innerHTML = "Gestor da Rede Prisonal";
+    } else if (logado.roles[0].name == "ROLE_GUARD") {
+      document.getElementById("role_perfil").innerHTML = "Guarda Prisional";
+    } else {
+      document.getElementById("role_perfil").innerHTML = "Gestor de Instituição";
     }
-    //chama a função fetchAsync()
-    fetchAsync().then(data => console.log("done")).catch(reason => console.log(reason.message));
 
 
+    document.getElementById("username_perfil").innerHTML = logado.username;
+    document.getElementById("contacto_perfil").value = logado.contact;
+    document.getElementById("nacionalidade_perfil").value = logado.nationality;
+    document.getElementById("morada_perfil").value = logado.address;
+    document.getElementById("id_instituicao").value = logado.prison.prisonId;
+    document.getElementById("nome_perfil").value = logado.name;
+    document.getElementById("dataNascimento_perfil").value = logado.birthDate;
+    document.getElementById("email_perfil").value = logado.email;
+    document.getElementById("localidade_perfil").value = logado.location;
+    //document.getElementById("role_perfil").innerHTML = logado.roles[0].name;
+    document.getElementById("fotoR").src = "data:image/png;base64," + photoD.picByte;
 
   }
 
 
-  function get_instituicoes() {
-    async function fetchAsync() {
 
-      const response = await fetch('http://127.0.0.1:8080/api/prisons', {
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        mode: 'cors',
-        method: 'GET',
-        credentials: 'include'
-      });
-      const instituicoes = await response.json();
-      var show_inst = "";
-      console.log(instituicoes);
+  async function get_instituicoes() {
 
 
-      for (var inst of instituicoes) {
-        show_inst += "<option value='" + inst.prisonId + "'>" + inst.name + "</option>";
-      }
+    const response = await fetch('http://127.0.0.1:8080/api/prisons', {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      mode: 'cors',
+      method: 'GET',
+      credentials: 'include'
+    });
+    const instituicoes = await response.json();
+    var show_inst = "";
 
-      document.getElementById("id_instituicao").innerHTML = show_inst;
 
+
+    for (var inst of instituicoes) {
+      show_inst += "<option value='" + inst.prisonId + "'>" + inst.name + "</option>";
     }
-    //chama a função fetchAsync()
-    fetchAsync().then(data => console.log("done")).catch(reason => console.log(reason.message));
+
+    document.getElementById("id_instituicao").innerHTML = show_inst;
 
   }
+
 
 
 })
@@ -133,7 +125,7 @@ async function editar() {
         data.contact = document.getElementById("contacto_perfil").value.trim();
         data.email = document.getElementById("email_perfil").value.trim();
 
-        console.log(data);
+
 
         editar_guarda(data)
       } else {
@@ -148,7 +140,7 @@ async function editar() {
         data.email = document.getElementById("email_perfil").value.trim();
         data.location = document.getElementById("localidade_perfil").value.trim();
 
-        console.log(data);
+
 
 
         editar_outro(data)

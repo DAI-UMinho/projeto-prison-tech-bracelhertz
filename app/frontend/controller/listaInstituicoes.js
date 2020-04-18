@@ -4,42 +4,38 @@ $(window).on("load", function () {
 
 
 
-    if(RoleLogado == "ROLE_NETWORKMAN"){
-        document.getElementById("esconder").style.display="inline";
+    if (RoleLogado == "ROLE_NETWORKMAN") {
+        document.getElementById("esconder").style.display = "inline";
     }
 
-    function display_instituicoes() {
-        async function fetchAsync() {
-
-            const response = await fetch('http://127.0.0.1:8080/api/prisons', {
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                mode: 'cors',
-                method: 'GET',
-                credentials: 'include'
-            });
-            const func = await response.json();
-
-            var conteudo = [];
+    async function display_instituicoes() {
 
 
-            for (const instituicao of func) {
-                conteudo.push(["<div id='" + instituicao.prisonId + "'>" + instituicao.name + "</div>",
-                instituicao.location,
-                instituicao.email,
-                instituicao.contact])
-            }
+        const response = await fetch('http://127.0.0.1:8080/api/prisons', {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            mode: 'cors',
+            method: 'GET',
+            credentials: 'include'
+        });
+        const func = await response.json();
 
-            $(document).ready(function () {
-                $('#dataTable').DataTable({
-                    data: conteudo
-                });
-            });
+        var conteudo = [];
 
+
+        for (const instituicao of func) {
+            conteudo.push(["<div id='" + instituicao.prisonId + "'>" + instituicao.name + "</div>",
+            instituicao.location,
+            instituicao.email,
+            instituicao.contact])
         }
-        //chama a função fetchAsync()
-        fetchAsync().then(data => console.log("done")).catch(reason => console.log(reason.message));
+
+        $(document).ready(function () {
+            $('#dataTable').DataTable({
+                data: conteudo
+            });
+        });
 
     }
 

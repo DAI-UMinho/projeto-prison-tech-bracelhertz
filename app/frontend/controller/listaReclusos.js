@@ -4,66 +4,62 @@ $(window).on("load", function () {
 
 
 
-    function display_reclusos() {
-        async function fetchAsync() {
+    async function display_reclusos() {
 
-            var conteudo = [];
 
-            if (RoleLogado == "ROLE_GUARD") {
-                const response = await fetch('http://127.0.0.1:8080/api/prisoners/by-guards', {
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    mode: 'cors',
-                    method: 'GET',
-                    credentials: 'include'
-                });
-                const func = await response.json();
-                display(func);
+        var conteudo = [];
 
-            } else {
-                const response = await fetch('http://127.0.0.1:8080/api/prisoners', {
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    mode: 'cors',
-                    method: 'GET',
-                    credentials: 'include'
-                });
-                const func = await response.json();
-                display(func);
+        if (RoleLogado == "ROLE_GUARD") {
+            const response = await fetch('http://127.0.0.1:8080/api/prisoners/by-guards', {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                mode: 'cors',
+                method: 'GET',
+                credentials: 'include'
+            });
+            const func = await response.json();
+            display(func);
 
-                document.getElementById("esconder").style.display = "flex";
-            }
+        } else {
+            const response = await fetch('http://127.0.0.1:8080/api/prisoners', {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                mode: 'cors',
+                method: 'GET',
+                credentials: 'include'
+            });
+            const func = await response.json();
+            display(func);
 
-            function display(func) {
-                console.log(func)
-                for (const recluso of func) {
+            document.getElementById("esconder").style.display = "flex";
+        }
 
-                    conteudo.push(["<div id='" + recluso.prisonerId + "'>" + recluso.identifierId + "</div>",
-                    recluso.name,
-                    recluso.contact,
-                    recluso.prison.name,
-                    recluso.threatLevel,
-                    recluso.cell,
-                    recluso.braceletId])
+        function display(func) {
 
-                }
+            for (const recluso of func) {
 
-                $(document).ready(function () {
-                    $('#dataTable').DataTable({
-                        data: conteudo
-                    });
-                });
+                conteudo.push(["<div id='" + recluso.prisonerId + "'>" + recluso.identifierId + "</div>",
+                recluso.name,
+                recluso.contact,
+                recluso.prison.name,
+                recluso.threatLevel,
+                recluso.cell,
+                recluso.braceletId])
 
             }
 
-
-
+            $(document).ready(function () {
+                $('#dataTable').DataTable({
+                    data: conteudo
+                });
+            });
 
         }
-        //chama a função fetchAsync()
-        fetchAsync().then(data => console.log("done")).catch(reason => console.log(reason.message));
+
+
+
 
     }
 
@@ -134,7 +130,7 @@ async function VerApagar() {
             credentials: 'include'
         });
         const logado = await response.json();
-        console.log(logado);
+
 
 
 
@@ -151,7 +147,7 @@ async function VerApagar() {
                 credentials: 'include'
             });
             const recluso = await response4.json();
-            console.log(recluso);
+
 
             document.getElementById("displayList").innerHTML += "<li>Id Recluso: " + recluso.identifierId + "; Nome: " + recluso.name + "</li>";
             if (recluso.prison.prisonId !== logado.prison.prisonId && RoleLogado !== "ROLE_NETWORKMAN") {
@@ -160,8 +156,7 @@ async function VerApagar() {
 
         }
     }
-    console.log(ids)
-    console.log(ids.length)
+
 }
 
 
@@ -182,7 +177,7 @@ async function ListaApagar() {
             )
         } else {
 
-            console.log(ids)
+
             for (var rec of ids) {
                 var count = 0;
 
@@ -256,7 +251,7 @@ async function ListaApagar() {
 function apaga_selecionados() {
     var tabela = document.getElementById("tabelaRecluso");
     var selecionados = tabela.getElementsByClassName("selecionado");
-    console.log(selecionados)
+
     var apagar = [];
     for (selec of selecionados) {
         apagar.push(selec)

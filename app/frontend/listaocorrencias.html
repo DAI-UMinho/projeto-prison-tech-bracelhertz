@@ -190,6 +190,10 @@
                 </a>
               </div>
             </li>
+            <li class="my-auto">
+              <input type="checkbox" id="opendoor" name="opendoor">
+              <div id="opendoor2" class="label"><label  style="cursor:pointer;" for="opendoor"><img id="openPuls" class="img-profile rounded-circle picNotes" src="img/pul.png" style="filter: none"> </label></div>            
+            </li>
 
           </ul>
 
@@ -198,7 +202,7 @@
 
         <!-- Begin Page Content -->
         <div class="row">
-          <div id="ajustarDm" class="col-12">
+          <div id="ajustarDm" class="col-12" style="max-width: 100%; transition: none;">
             <div class="container-fluid">
 
               <!-- DataTales Example -->
@@ -237,7 +241,7 @@
 
             </div>
           </div>
-          <div class="col-2 mt-n4 px-0" id="rec12" style="display: none;">
+          <div class="col-2 mt-n4 px-0 sidenav" id="rec12" style="transition: 0.5s;">
             <div class="col pl-0">
               <input type="text" id="myFilter" placeholder="Pesquisar recluso" class="form-control py-2 mr-3 myFilter">
             </div>
@@ -291,6 +295,34 @@
     </div>
   </div>
 
+    <!-- Alert Modal-->
+    <div class="modal fade" id="AlertModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-center" id="exampleModalLabel" style="color:red;">ATENÇÃO</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <audio loop id="myAudio">
+              <source src="./sounds/alert  sound.mp3" type="audio/ogg">
+              <source src="./sounds/alert  sound.mp3" type="audio/mpeg">
+            </audio>
+
+            <div id="infoDanger">
+
+            </div>
+
+
+          </div>
+          <div class="modal-footer" style="justify-content: center;">
+            <button class="btn btn-danger" id="StopSound" data-dismiss="modal">Terminar Sessão</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
   <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog">

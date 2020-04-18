@@ -12031,7 +12031,6 @@ input:checked + div:before {
     width: 90% !important;
     border-spacing: 0px !important;
 }
-/*----------------------------------------------------------Novo Codigo---------------------------------------------------------*/
 
 table.scroll thead {
   width: 100%;
@@ -12063,3 +12062,30 @@ table.scroll tbody tr td {
   text-align: left;
   border-bottom: 1px solid rgba(0,0,0,0.3);
 }
+
+/*----------------------------------------------------------Novo Codigo---------------------------------------------------------*/
+
+.sidenav {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  right: 0;
+  overflow-x: hidden;
+  padding-top: 25px;
+  max-width: 14.66667%;
+}
+
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+/*
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}*/

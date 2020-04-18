@@ -8,199 +8,12 @@ $(window).on("load", function () {
     get_instituicoes();
 
 
-    function display_recluso() {
-        async function fetchAsync() {
-
-
-            if (RoleLogado == "ROLE_GUARD") {
-                const response = await fetch('http://127.0.0.1:8080/api/prisoners/by-guards/' + id_user_clicked, {
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    mode: 'cors',
-                    method: 'GET',
-                    credentials: 'include'
-                });
-                const recluso = await response.json();
-                console.log(recluso);
-                display(recluso);
-            } else {
-                const response = await fetch('http://127.0.0.1:8080/api/prisoners/' + id_user_clicked, {
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    mode: 'cors',
-                    method: 'GET',
-                    credentials: 'include'
-                });
-                const recluso = await response.json();
-                console.log(recluso);
-                display(recluso);
-            }
-
-            //criação da demonstração de resultados recebidos
-            async function display(recluso) {
-
-                const response = await fetch('http://127.0.0.1:8080/api/users/logged-profiles', {
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    mode: 'cors',
-                    method: 'GET',
-                    credentials: 'include'
-                });
-                const logado = await response.json();
-                console.log(logado);
-
-
-                if (RoleLogado == "ROLE_MANAGER") {
-                    if (recluso.prison.prisonId !== logado.prison.prisonId) {
-                        document.getElementById("perfil_alterar_2").style.display = "none";
-                        document.getElementById("editRegisto").style.display = "none";
-                        document.getElementById("editFicha").style.display = "none";
-                        document.getElementById("addRegisto").style.display = "none";
-                        document.getElementById("addFicha").style.display = "none";
-                        document.getElementById("naoAnotar").style.display = "none";
-                        document.getElementById("switchAB").style.display = "none";
-                    }
-                } else {
-                    if (RoleLogado !== "ROLE_NETWORKMAN") {
-                        document.getElementById("editRegisto").style.display = "none";
-                        document.getElementById("editFicha").style.display = "none";
-                        document.getElementById("addRegisto").style.display = "none";
-                        document.getElementById("addFicha").style.display = "none";
-                    }
-                }
-
-                //envia a para a pagina
-
-                const response7 = await fetch('http://127.0.0.1:8080/api/photos/' + recluso.photoId, {
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    mode: 'cors',
-                    method: 'GET',
-                    credentials: 'include'
-                });
-                const photoD = await response7.json();
-
-
-                document.getElementById("fotoR").src = "data:image/png;base64," + photoD.picByte;
-                document.getElementById("id_recluso").value = recluso.identifierId;
-                document.getElementById("nome_recluso").value = recluso.name;
-                document.getElementById("dn_recluso").value = recluso.birthDate;
-                document.getElementById("nacionalidade_recluso").value = recluso.nationality;
-                document.getElementById("contacto_recluso").value = recluso.contact;
-                document.getElementById("contacto_recluso_alternativo").value = recluso.alternativeContact;
-                document.getElementById("n_cela").value = recluso.cell;
-                document.getElementById("n_ameaca").value = recluso.threatLevel;
-                document.getElementById("id_instituicao").value = recluso.prison.prisonId;
-                document.getElementById("id_pulseira").value = recluso.braceletId;
-                document.getElementById("mmaxHB").value = recluso.maxHB;
-                document.getElementById("mminHB").value = recluso.minHB;
-                document.getElementById("maxValue").innerHTML = recluso.maxHB;
-                document.getElementById("minValue").innerHTML = recluso.minHB;
-
-                var showRegisto = "";
-                var showtolipRegisto = ""
-
-                if (recluso.criminalRecord.length == 0) {
-                    showRegisto = "<li>Sem registo criminal</li>";
-                } else {
-                    var mrecente = "";
-                    var i = 0;
-                    var a, c;
-                    var atual = new Date();
-                    for (var registo of recluso.criminalRecord) {
-                        showRegisto += "<li><input class='testee' id='" + registo.criminalRecordId + "cr' type='checkbox' name='" + registo.criminalRecordId + "cr' disabled='true'>"
-                        showRegisto += "<div class='label'><label for='" + registo.criminalRecordId + "cr'>";
-                        showRegisto += "<span data-tooltip='Emissão " + getDate7(registo.emissionDate) + "' data-tooltip-position='bottom'>" + registo.description + "</span></label><br></div></li>";
-                        showRegisto += "";
-                        if (i == 0) {
-                            mrecente = new Date(registo.lastUpdatedTimestamp);
-                            c = atual.getTime() - mrecente.getTime();
-                        } else {
-                            a = new Date(registo.lastUpdatedTimestamp);
-                            if ((atual.getTime() - a.getTime()) < c) {
-                                mrecente = new Date(registo.lastUpdatedTimestamp);
-                                c = mrecente.getTime();
-                            }
-                        }
-
-                        i++;
-                    }
-                    showtolipRegisto += "Registo Criminal<span data-tooltip='" + getDate6(mrecente) + "'";
-                    showtolipRegisto += "data-tooltip-position='bottom' class='text-white font-small font-weight-normal solve'>(Atualizado)</span>";
-                    document.getElementById("tabCH").innerHTML = showtolipRegisto;
-
-                }
-                document.getElementById("listCrimes").innerHTML = showRegisto;
-
-
-                var showFicha = "";
-                var showtolipFicha = ""
-                if (recluso.medicalPrescription.length == 0) {
-                    showFicha = "<li>Nenhum cuidado médico necessário</li>";
-                } else {
-                    var mrecente2 = "";
-                    var o = 0;
-                    var b, w;
-                    var atual = new Date();
-                    for (var registo of recluso.medicalPrescription) {
-                        showFicha += "<li><input class='testeee' id='" + registo.prescriptionId + "fm' type='checkbox' name='" + registo.prescriptionId + "fm' disabled='true'>"
-                        showFicha += "<div class='label'><label for='" + registo.prescriptionId + "fm'>" + registo.description + "</label><br></div></li>";
-                        if (o == 0) {
-                            mrecente2 = new Date(registo.lastUpdatedTimestamp);
-                            w = atual.getTime() - mrecente2.getTime();
-                        } else {
-                            b = new Date(registo.lastUpdatedTimestamp);
-                            if ((atual.getTime() - b.getTime()) < w) {
-                                mrecente2 = new Date(registo.lastUpdatedTimestamp);
-                                w = mrecente2.getTime();
-                            }
-                        }
-
-                        o++;
-                    }
-
-                    showtolipFicha += "Cuidados a ter com o recluso<span data-tooltip='" + getDate6(mrecente2) + "'";
-                    showtolipFicha += "data-tooltip-position='bottom' class='text-white font-small font-weight-normal solve'>(Atualizado)</span>";
-                    document.getElementById("tabCH2").innerHTML = showtolipFicha;
-
-                }
-                document.getElementById("listMedica").innerHTML = showFicha;
-
-
-                if (recluso.alertOff) {
-                    document.getElementById("notiR").checked = false;
-                } else {
-                    document.getElementById("notiR").checked = true;
-                }
-
-                if (recluso.braceletId == null || recluso.braceletId == "") {
-
-                } else {
-                    temPulseira = true;
-                }
-
-
-            }
-
-
-        }
-        //chama a função fetchAsync()
-        fetchAsync().then(data => console.log("done")).catch(reason => console.log(reason.message));
-
-
-    }
+    async function display_recluso() {
 
 
 
-
-    function get_instituicoes() {
-        async function fetchAsync() {
-
-            const response = await fetch('http://127.0.0.1:8080/api/prisons', {
+        if (RoleLogado == "ROLE_GUARD") {
+            const response = await fetch('http://127.0.0.1:8080/api/prisoners/by-guards/' + id_user_clicked, {
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -208,20 +21,200 @@ $(window).on("load", function () {
                 method: 'GET',
                 credentials: 'include'
             });
-            const instituicoes = await response.json();
-            var show_inst = "";
+            const recluso = await response.json();
 
-            for (var inst of instituicoes) {
-                show_inst += "<option value='" + inst.prisonId + "'>" + inst.name + "</option>";
+            display(recluso);
+        } else {
+            const response = await fetch('http://127.0.0.1:8080/api/prisoners/' + id_user_clicked, {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                mode: 'cors',
+                method: 'GET',
+                credentials: 'include'
+            });
+            const recluso = await response.json();
+
+            display(recluso);
+        }
+
+        //criação da demonstração de resultados recebidos
+        async function display(recluso) {
+
+            const response = await fetch('http://127.0.0.1:8080/api/users/logged-profiles', {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                mode: 'cors',
+                method: 'GET',
+                credentials: 'include'
+            });
+            const logado = await response.json();
+
+
+
+            if (RoleLogado == "ROLE_MANAGER") {
+                if (recluso.prison.prisonId !== logado.prison.prisonId) {
+                    document.getElementById("perfil_alterar_2").style.display = "none";
+                    document.getElementById("editRegisto").style.display = "none";
+                    document.getElementById("editFicha").style.display = "none";
+                    document.getElementById("addRegisto").style.display = "none";
+                    document.getElementById("addFicha").style.display = "none";
+                    document.getElementById("naoAnotar").style.display = "none";
+                    document.getElementById("switchAB").style.display = "none";
+                }
+            } else {
+                if (RoleLogado !== "ROLE_NETWORKMAN") {
+                    document.getElementById("editRegisto").style.display = "none";
+                    document.getElementById("editFicha").style.display = "none";
+                    document.getElementById("addRegisto").style.display = "none";
+                    document.getElementById("addFicha").style.display = "none";
+                }
             }
 
-            document.getElementById("id_instituicao").innerHTML = show_inst;
+            //envia a para a pagina
+
+            const response7 = await fetch('http://127.0.0.1:8080/api/photos/' + recluso.photoId, {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                mode: 'cors',
+                method: 'GET',
+                credentials: 'include'
+            });
+            const photoD = await response7.json();
+
+
+            document.getElementById("fotoR").src = "data:image/png;base64," + photoD.picByte;
+            document.getElementById("id_recluso").value = recluso.identifierId;
+            document.getElementById("nome_recluso").value = recluso.name;
+            document.getElementById("dn_recluso").value = recluso.birthDate;
+            document.getElementById("nacionalidade_recluso").value = recluso.nationality;
+            document.getElementById("contacto_recluso").value = recluso.contact;
+            document.getElementById("contacto_recluso_alternativo").value = recluso.alternativeContact;
+            document.getElementById("n_cela").value = recluso.cell;
+            document.getElementById("n_ameaca").value = recluso.threatLevel;
+            document.getElementById("id_instituicao").value = recluso.prison.prisonId;
+            document.getElementById("id_pulseira").value = recluso.braceletId;
+            document.getElementById("mmaxHB").value = recluso.maxHB;
+            document.getElementById("mminHB").value = recluso.minHB;
+            document.getElementById("maxValue").innerHTML = recluso.maxHB;
+            document.getElementById("minValue").innerHTML = recluso.minHB;
+
+            var showRegisto = "";
+            var showtolipRegisto = ""
+
+            if (recluso.criminalRecord.length == 0) {
+                showRegisto = "<li>Sem registo criminal</li>";
+            } else {
+                var mrecente = "";
+                var i = 0;
+                var a, c;
+                var atual = new Date();
+                for (var registo of recluso.criminalRecord) {
+                    showRegisto += "<li><input class='testee' id='" + registo.criminalRecordId + "cr' type='checkbox' name='" + registo.criminalRecordId + "cr' disabled='true'>"
+                    showRegisto += "<div class='label'><label for='" + registo.criminalRecordId + "cr'>";
+                    showRegisto += "<span data-tooltip='Emissão " + getDate7(registo.emissionDate) + "' data-tooltip-position='bottom'>" + registo.description + "</span></label><br></div></li>";
+                    showRegisto += "";
+                    if (i == 0) {
+                        mrecente = new Date(registo.lastUpdatedTimestamp);
+                        c = atual.getTime() - mrecente.getTime();
+                    } else {
+                        a = new Date(registo.lastUpdatedTimestamp);
+                        if ((atual.getTime() - a.getTime()) < c) {
+                            mrecente = new Date(registo.lastUpdatedTimestamp);
+                            c = mrecente.getTime();
+                        }
+                    }
+
+                    i++;
+                }
+                showtolipRegisto += "Registo Criminal<span data-tooltip='" + getDate6(mrecente) + "'";
+                showtolipRegisto += "data-tooltip-position='bottom' class='text-white font-small font-weight-normal solve'>(Atualizado)</span>";
+                document.getElementById("tabCH").innerHTML = showtolipRegisto;
+
+            }
+            document.getElementById("listCrimes").innerHTML = showRegisto;
+
+
+            var showFicha = "";
+            var showtolipFicha = ""
+            if (recluso.medicalPrescription.length == 0) {
+                showFicha = "<li>Nenhum cuidado médico necessário</li>";
+            } else {
+                var mrecente2 = "";
+                var o = 0;
+                var b, w;
+                var atual = new Date();
+                for (var registo of recluso.medicalPrescription) {
+                    showFicha += "<li><input class='testeee' id='" + registo.prescriptionId + "fm' type='checkbox' name='" + registo.prescriptionId + "fm' disabled='true'>"
+                    showFicha += "<div class='label'><label for='" + registo.prescriptionId + "fm'>" + registo.description + "</label><br></div></li>";
+                    if (o == 0) {
+                        mrecente2 = new Date(registo.lastUpdatedTimestamp);
+                        w = atual.getTime() - mrecente2.getTime();
+                    } else {
+                        b = new Date(registo.lastUpdatedTimestamp);
+                        if ((atual.getTime() - b.getTime()) < w) {
+                            mrecente2 = new Date(registo.lastUpdatedTimestamp);
+                            w = mrecente2.getTime();
+                        }
+                    }
+
+                    o++;
+                }
+
+                showtolipFicha += "Cuidados a ter com o recluso<span data-tooltip='" + getDate6(mrecente2) + "'";
+                showtolipFicha += "data-tooltip-position='bottom' class='text-white font-small font-weight-normal solve'>(Atualizado)</span>";
+                document.getElementById("tabCH2").innerHTML = showtolipFicha;
+
+            }
+            document.getElementById("listMedica").innerHTML = showFicha;
+
+
+            if (recluso.alertOff) {
+                document.getElementById("notiR").checked = false;
+            } else {
+                document.getElementById("notiR").checked = true;
+            }
+
+            if (recluso.braceletId == null || recluso.braceletId == "") {
+
+            } else {
+                temPulseira = true;
+            }
+
 
         }
-        //chama a função fetchAsync()
-        fetchAsync().then(data => console.log("done")).catch(reason => console.log(reason.message));
+
 
     }
+
+
+
+
+
+    async function get_instituicoes() {
+
+
+        const response = await fetch('http://127.0.0.1:8080/api/prisons', {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            mode: 'cors',
+            method: 'GET',
+            credentials: 'include'
+        });
+        const instituicoes = await response.json();
+        var show_inst = "";
+
+        for (var inst of instituicoes) {
+            show_inst += "<option value='" + inst.prisonId + "'>" + inst.name + "</option>";
+        }
+
+        document.getElementById("id_instituicao").innerHTML = show_inst;
+
+    }
+
 
 })
 
@@ -264,7 +257,7 @@ async function editar() {
         verificaOutro(recluso);
     }
 
-    function verificaOutro(recluso) {
+    async function verificaOutro(recluso) {
 
 
         data.prisonerId = recluso.prisonerId;
@@ -300,21 +293,90 @@ async function editar() {
                 'warning'
             )
         } else {
-            if (document.getElementById("contacto_recluso").value.length != 9 ||
-                document.getElementById("contacto_recluso_alternativo").value.length != 9) {
+
+            const response9 = await fetch('http://127.0.0.1:8080/api/prisoners/' + id_user_clicked, {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                mode: 'cors',
+                method: 'GET',
+                credentials: 'include'
+            });
+            const recluso1 = await response9.json();
+
+
+
+
+
+            var verificar = document.getElementById("id_recluso").value.trim();
+            const response = await fetch('http://127.0.0.1:8080/api/prisoners/identifier-exists/' + verificar, {
+
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                mode: 'cors',
+                method: 'GET',
+                credentials: 'include'
+            });
+            const existe = await response.json();
+
+
+            if (existe && recluso1.identifierId !== verificar) {
                 Swal.fire(
-                    'Contacto tem de conter 9 números!',
+                    'Este identificador já existe!',
                     '',
                     'warning'
                 )
             } else {
-                if (document.getElementById("id_pulseira").value == "") {
-                    data.minHB = 40;
-                    data.maxHB = 120;
+
+
+                var verificarB = document.getElementById("id_pulseira").value.trim();
+                const responseB = await fetch('http://127.0.0.1:8080/api/prisoners/bracelet-exists/' + verificarB, {
+
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    mode: 'cors',
+                    method: 'GET',
+                    credentials: 'include'
+                });
+                const existeB = await responseB.json();
+
+
+
+                if (existeB && recluso1.braceletId !== verificarB) {
+                    Swal.fire(
+                        'Esta pulseira já está em uso!',
+                        '',
+                        'warning'
+                    )
+                } else {
+                    if (document.getElementById("contacto_recluso").value.length != 9 ||
+                        document.getElementById("contacto_recluso_alternativo").value.length != 9) {
+                        Swal.fire(
+                            'Contacto tem de conter 9 números!',
+                            '',
+                            'warning'
+                        )
+                    } else {
+                        if (document.getElementById("id_pulseira").value == "") {
+                            data.minHB = 40;
+                            data.maxHB = 120;
+                        }
+
+                        editarOutro(data);
+                    }
                 }
 
-                editarOutro(data);
+
             }
+
+
+
+
+
+
+
         }
 
     }
@@ -365,7 +427,7 @@ async function editar() {
 async function editarGuarda(gajo) {
 
 
-    console.log(gajo);
+
 
 
     fetch('http://127.0.0.1:8080/api/prisoners/by-guards', {
@@ -438,7 +500,7 @@ async function editarGuarda(gajo) {
 async function editarOutro(gajo) {
 
 
-    console.log(gajo);
+
 
 
     fetch('http://127.0.0.1:8080/api/prisoners', {
@@ -788,7 +850,7 @@ function getIds() {
 
         }
     }
-    console.log(ids)
+
     return ids
 }
 
@@ -801,7 +863,7 @@ function getIds2() {
             ids.push(mete.trim());
         }
     }
-    console.log(ids)
+
     return ids
 }
 
@@ -989,7 +1051,7 @@ document.getElementById("postRegisto").addEventListener("click", async function 
 
             data.emissionDate = document.getElementById("dataEmissao").value;
 
-            console.log(data);
+
 
 
 
@@ -1182,7 +1244,7 @@ document.getElementById("postFicha").addEventListener("click", async function ()
         data.name = "Medical";
         data.description = document.getElementById("novaFicha").value.trim();
 
-        console.log(data);
+
 
 
 

@@ -15,7 +15,7 @@ async function getAnot() {
             credentials: 'include'
         });
         const avisos = await response.json();
-        console.log(avisos);
+
         displayAnot(avisos);
     } else if (Anot == "inst") {
         const response = await fetch('http://127.0.0.1:8080/api/prison-annotations/' + id_inst_clicked, {
@@ -27,7 +27,7 @@ async function getAnot() {
             credentials: 'include'
         });
         const avisos = await response.json();
-        console.log(avisos);
+
         displayAnot(avisos);
     } else if (Anot == "rec") {
         const response = await fetch('http://127.0.0.1:8080/api/prisoner-annotations/' + id_user_clicked, {
@@ -39,7 +39,7 @@ async function getAnot() {
             credentials: 'include'
         });
         const avisos = await response.json();
-        console.log(avisos);
+
         displayAnot(avisos);
     }
 
@@ -71,7 +71,7 @@ async function displayAnot(avisos) {
     if (avisos == null) {
         true_content += "<div class='w-100 text-center'>Não há anotações</div>";
     } else {
-        console.log(avisos)
+
         for (const aviso of avisos) {
 
 
@@ -127,7 +127,7 @@ async function displayAnot(avisos) {
                 credentials: 'include'
             });
             const comentarios = await response1.json();
-            console.log(comentarios);
+
 
 
             if (comentarios !== null) {
@@ -226,7 +226,7 @@ function checkTime(i) {
 //-----------------------------------------------GET ID PARA APAGAR OU EDITAR ANOTAÇÃO------------------------------------
 var anotDelete = "";
 function teste(este) {
-    console.log(este.closest('[id]').id)
+
     if (este.innerHTML == "Apagar") {
         $("#confModal").modal();
         anotDelete = parseInt(este.closest('[id]').id);
@@ -259,7 +259,6 @@ async function editarAnotacao(id) {
     data.title = ((document.getElementById(id).parentElement.children[1].children[0].innerHTML).replace('Titulo:', '')).trim();
     data.description = document.getElementById(id + "text").value;
 
-    console.log(data);
 
     fetch('http://127.0.0.1:8080/api/annotations', {
         headers: {
@@ -271,7 +270,7 @@ async function editarAnotacao(id) {
         credentials: 'include'
     })
         .then(function (response) {
-            //console.log(response.headers.get('Set-Cookie'));
+
             console.log(response);
             if (!response.ok) {
                 throw new Error(response.statusText);
@@ -521,7 +520,7 @@ document.getElementById("botaoConf").addEventListener("click", async function ()
 
 //-----------------------------------------------GET ID PARA APAGAR OU EDITAR ANOTAÇÃO COMENTÁRIO------------------------------------
 function teste2(este) {
-    console.log(este.closest('[id]').id)
+
     if (este.innerHTML == "Apagar") {
         eliminarComentario(parseInt(este.closest('[id]').id));
     } else {
@@ -553,7 +552,7 @@ async function editarComentario(id) {
     data.title = "comentario";
     data.description = document.getElementById(id + "coment").value;
 
-    console.log(data);
+
 
     fetch('http://127.0.0.1:8080/api/annotations', {
         headers: {
@@ -614,7 +613,7 @@ async function subComent(idbtn) {
     dat.description = descrip;
 
     if (descrip !== "") {
-        console.log(dat)
+
 
         if (Anot == "rec") {
 

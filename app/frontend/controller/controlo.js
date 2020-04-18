@@ -1,14 +1,16 @@
 let RoleLogado1 = localStorage.getItem("RoleLogado");
+
+var listaRec = "";
 $(window).on("load", function () {
 
-    display_pulsacao();
+    if (RoleLogado1 == "ROLE_GUARD") {
+        display_pulsacao();
+    }
     display_infoPerfil();
 
-    if (RoleLogado1 == "ROLE_GUARD") {
-        document.getElementById("rec12").style.display = "block";
-        trocaClasse(document.getElementById("ajustarDm"), "col-10");
-
-    } else {
+    if (RoleLogado1 !== "ROLE_GUARD") {
+        document.getElementById("openPuls").style.display = "none";
+        document.getElementById("rec12").style.display = "none"
         var pi = document.getElementById("estenao");
         if (pi !== null) {
             pi.style.marginTop = "30px";
@@ -25,93 +27,34 @@ function trocaClasse(elemento, nova1) {
 }
 
 
-function display_pulsacao() {
-    async function fetchAsync() {
-
-        var tPulsacoes = document.getElementById("tPulsacoes");
-
-        let see_puls = "";
-
-        var listaPuls = [
-            {
-                avatar: "img/perfil2.jpg",
-                nome: "Jose Pires",
-                pulsacao: "60"
-            },
-            {
-                avatar: "img/perfil2.jpg",
-                nome: "Jose Pires",
-                pulsacao: "60"
-            },
-            {
-                avatar: "img/perfil2.jpg",
-                nome: "Jose Pires",
-                pulsacao: "60"
-            },
-            {
-                avatar: "img/perfil2.jpg",
-                nome: "Jose Pires",
-                pulsacao: "60"
-            },
-            {
-                avatar: "img/perfil2.jpg",
-                nome: "Jose Pires",
-                pulsacao: "60"
-            },
-            {
-                avatar: "img/perfil2.jpg",
-                nome: "Jose Pires",
-                pulsacao: "60"
-            }
-        ];
+async function display_pulsacao() {
 
 
-        //criação da demonstração de resultados recebidos
-        see_puls += "<ul class='teste w-100 px-0' style='list-style-type: none;'>";
+
+    const response = await fetch('http://127.0.0.1:8080/api/alert-prisoners', {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        mode: 'cors',
+        method: 'GET',
+        credentials: 'include'
+    });
+    listaRec = await response.json();
 
 
-        for (const puls of listaPuls) {
-            see_puls += "<div class='col py-2 mr-3 pl-0 pr-1 myfilter'>";
-            see_puls += "<div class='card border-left-danger shadow h-100 py-2'><div class='card-body pl-3'>";
-            see_puls += "<div class='row no-gutters align-items-center'><div class='col-auto pr-2'>";
-            see_puls += "<img class='picNotes40 img-profile rounded-circle' src=" + puls.avatar + ">";
-            see_puls += "</div><div class='col mr-2'>";
-            see_puls += "<div class='text-xs font-weight-bold text-primary text-uppercase mb-1'>" + puls.nome + "</div>";
-            see_puls += "<div class='h5 mb-0 font-weight-bold text-gray-800'>" + puls.pulsacao + " bpm</div>";
-            see_puls += "</div></div></div></div></div>";
-        }
-        see_puls += "</ul>";
 
-        //envia a para a pagina
-        tPulsacoes.innerHTML = see_puls;
+    var tPulsacoes = document.getElementById("tPulsacoes");
+
+    let see_puls = "";
 
 
-    }
-    //chama a função fetchAsync()
-    fetchAsync().then(data => console.log("done")).catch(reason => console.log(reason.message));
-    //var t = setTimeout(display_pulsacao, 1000);
-}
+    //criação da demonstração de resultados recebidos
+    see_puls += "<ul class='teste w-100 px-0' style='list-style-type: none;'>";
 
 
-//------------------------------------------------INFO PERFIL-----------------------------------------
+    for (const rec of listaRec) {
 
-
-function display_infoPerfil() {
-    async function fetchAsync() {
-        let RoleLogado = localStorage.getItem("RoleLogado");
-        const response = await fetch('http://127.0.0.1:8080/api/users/logged-profiles', {
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            mode: 'cors',
-            method: 'GET',
-            credentials: 'include'
-        });
-        const logado = await response.json();
-        console.log(logado);
-
-
-        const response7 = await fetch('http://127.0.0.1:8080/api/photos/' + logado.photoId, {
+        const response7 = await fetch('http://127.0.0.1:8080/api/photos/' + rec.photoId, {
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -122,26 +65,69 @@ function display_infoPerfil() {
         const photoD = await response7.json();
 
 
-        var nomeUser = document.getElementById("nomeUser");
-        var avatarUser = document.getElementById("avatarUser");
 
-
-        if (RoleLogado == "ROLE_GUARD") {
-            document.getElementById("showInst").style.display = "none";
-            document.getElementById("dashBoard").href = "#";
-        }
-
-
-
-        //envia a para a pagina
-        nomeUser.innerHTML = logado.name;
-        avatarUser.src = "data:image/png;base64," + photoD.picByte;
-
-
+        see_puls += "<div class='col py-2 mr-3 pl-0 pr-1 myfilter'>";
+        see_puls += "<div class='card border-left-danger shadow h-100 py-2'><div class='card-body pl-3'>";
+        see_puls += "<div class='row no-gutters align-items-center'><div class='col-auto pr-2'>";
+        see_puls += "<img class='picNotes40 img-profile rounded-circle' src=" + "data:image/png;base64," + photoD.picByte + ">";
+        see_puls += "</div><div class='col mr-2'>";
+        see_puls += "<div class='text-xs font-weight-bold text-primary text-uppercase mb-1'>" + rec.name + "</div>";
+        see_puls += "<div id='" + rec.prisonerId + "puls' class='h5 mb-0 font-weight-bold' style='color: #5a5c69;'></div>";
+        see_puls += "</div></div></div></div></div>";
     }
-    //chama a função fetchAsync()
-    fetchAsync().then(data => console.log("done")).catch(reason => console.log(reason.message));
+    see_puls += "</ul>";
 
+    //envia a para a pagina
+    tPulsacoes.innerHTML = see_puls;
+    procurarPul();
+
+}
+
+
+
+//------------------------------------------------INFO PERFIL-----------------------------------------
+
+
+async function display_infoPerfil() {
+
+    let RoleLogado = localStorage.getItem("RoleLogado");
+    const response = await fetch('http://127.0.0.1:8080/api/users/logged-profiles', {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        mode: 'cors',
+        method: 'GET',
+        credentials: 'include'
+    });
+    const logado = await response.json();
+
+
+
+    const response7 = await fetch('http://127.0.0.1:8080/api/photos/' + logado.photoId, {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        mode: 'cors',
+        method: 'GET',
+        credentials: 'include'
+    });
+    const photoD = await response7.json();
+
+
+    var nomeUser = document.getElementById("nomeUser");
+    var avatarUser = document.getElementById("avatarUser");
+
+
+    if (RoleLogado == "ROLE_GUARD") {
+        document.getElementById("showInst").style.display = "none";
+        document.getElementById("dashBoard").href = "#";
+    }
+
+
+
+    //envia a para a pagina
+    nomeUser.innerHTML = logado.name;
+    avatarUser.src = "data:image/png;base64," + photoD.picByte;
 
 
 }
@@ -199,3 +185,69 @@ async function sair() {
         });
 
 };
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------
+var bracel1 = 123;
+var bracel2 = 1;
+var bracelt = [bracel1, bracel2];
+var reclusos = [];
+function procurarPul() {
+
+    for (const f of listaRec) {
+
+        for (var i = 0; i < bracelt.length; i++) {
+
+            if (f.braceletId == bracelt[i]) {
+                reclusos[i] = f;
+            }
+        }
+    }
+
+    //verPul();
+}
+
+
+
+function verPul() {
+    for (var i = 0; i < reclusos.length; i++) {
+        console.log(reclusos)
+
+        var pulse = Math.floor(Math.random() * reclusos[i].maxHB) + reclusos[i].minHB
+        document.getElementById(reclusos[i].prisonerId + "puls").innerHTML = pulse + " bpm";
+        console.log(reclusos[i].name + " " + pulse)
+
+
+        if (pulse >= reclusos[i].maxHB || pulse <= reclusos[i].minHB) {
+            document.getElementById(reclusos[i].prisonerId + "puls").style.color = "#e74a3b";
+            $("#AlertModal").modal();
+
+
+            playAudio();
+            document.getElementById("infoDanger").innerHTML = "O recluso " + reclusos[i].name + " está em perigo"
+
+        } else {
+            document.getElementById(reclusos[i].prisonerId + "puls").style.color = "#5a5c69";
+        }
+        var t = setTimeout(verPul, 5000);
+
+
+    }
+
+
+}
+
+
+$('#AlertModal').on('hidden.bs.modal', function () {
+    pauseAudio();
+});
+
+
+var x = document.getElementById("myAudio");
+function playAudio() {
+    x.play();
+}
+
+function pauseAudio() {
+    x.pause();
+}

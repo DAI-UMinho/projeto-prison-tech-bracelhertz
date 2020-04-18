@@ -104,7 +104,7 @@ window.onload = async function () {
               data.maxHB = 120;
             }
 
-            console.log(data);
+
 
             await fetch('http://127.0.0.1:8080/api/prisoners', {
               headers: {
@@ -152,50 +152,47 @@ window.onload = async function () {
 
 
 
-  function get_instituicoes() {
-    async function fetchAsync() {
-      let RoleLogado = localStorage.getItem("RoleLogado");
-      const response1 = await fetch('http://127.0.0.1:8080/api/users/logged-profiles', {
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        mode: 'cors',
-        method: 'GET',
-        credentials: 'include'
-      });
-      const logado = await response1.json();
-      console.log(logado);
+  async function get_instituicoes() {
+
+    let RoleLogado = localStorage.getItem("RoleLogado");
+    const response1 = await fetch('http://127.0.0.1:8080/api/users/logged-profiles', {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      mode: 'cors',
+      method: 'GET',
+      credentials: 'include'
+    });
+    const logado = await response1.json();
 
 
 
-      const response = await fetch('http://127.0.0.1:8080/api/prisons', {
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        mode: 'cors',
-        method: 'GET',
-        credentials: 'include'
-      });
-      const instituicoes = await response.json();
-      var show_inst = "";
 
-      if (RoleLogado == "ROLE_MANAGER") {
-        show_inst += "<option value='" + logado.prison.prisonId + "'>" + logado.prison.name + "</option>";
-      } else {
-        for (var inst of instituicoes) {
-          show_inst += "<option value='" + inst.prisonId + "'>" + inst.name + "</option>";
-        }
+    const response = await fetch('http://127.0.0.1:8080/api/prisons', {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      mode: 'cors',
+      method: 'GET',
+      credentials: 'include'
+    });
+    const instituicoes = await response.json();
+    var show_inst = "";
 
+    if (RoleLogado == "ROLE_MANAGER") {
+      show_inst += "<option value='" + logado.prison.prisonId + "'>" + logado.prison.name + "</option>";
+    } else {
+      for (var inst of instituicoes) {
+        show_inst += "<option value='" + inst.prisonId + "'>" + inst.name + "</option>";
       }
 
-
-      document.getElementById("instituicao").innerHTML = show_inst;
-
     }
-    //chama a função fetchAsync()
-    fetchAsync().then(data => console.log("done")).catch(reason => console.log(reason.message));
+
+
+    document.getElementById("instituicao").innerHTML = show_inst;
 
   }
+
 
 
 };

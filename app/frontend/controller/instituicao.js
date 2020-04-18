@@ -6,49 +6,44 @@ $(window).on("load", function () {
 })
 
 
-function display_instituicao() {
-    async function fetchAsync() {
-
-        if (RoleLogado == "ROLE_NETWORKMAN") {
-            document.getElementById("perfil_alterar_2").style.display = "block";
-        }
+async function display_instituicao() {
 
 
-
-        const response = await fetch('http://127.0.0.1:8080/api/prisons/' + id_inst_clicked, {
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            mode: 'cors',
-            method: 'GET',
-            credentials: 'include'
-        });
-        const instituicao = await response.json();
-        console.log(instituicao);
-
-        const response7 = await fetch('http://127.0.0.1:8080/api/photos/' + instituicao.photoId, {
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            mode: 'cors',
-            method: 'GET',
-            credentials: 'include'
-        });
-        const photoD = await response7.json();
-
-        //envia a para a pagina
-        document.getElementById("fotoinst").src = "data:image/png;base64," + photoD.picByte;
-        document.getElementById("nome_inst").value = instituicao.name;
-        document.getElementById("morada_inst").value = instituicao.address;
-        document.getElementById("local_inst").value = instituicao.location;
-        document.getElementById("email_inst").value = instituicao.email;
-        document.getElementById("contacto_inst").value = instituicao.contact;
-        document.getElementById("prisonDescrip").value = instituicao.description;
+    if (RoleLogado == "ROLE_NETWORKMAN") {
+        document.getElementById("perfil_alterar_2").style.display = "block";
     }
-    //chama a função fetchAsync()
-    fetchAsync().then(data => console.log("done")).catch(reason => console.log(reason.message));
 
 
+
+    const response = await fetch('http://127.0.0.1:8080/api/prisons/' + id_inst_clicked, {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        mode: 'cors',
+        method: 'GET',
+        credentials: 'include'
+    });
+    const instituicao = await response.json();
+
+
+    const response7 = await fetch('http://127.0.0.1:8080/api/photos/' + instituicao.photoId, {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        mode: 'cors',
+        method: 'GET',
+        credentials: 'include'
+    });
+    const photoD = await response7.json();
+
+    //envia a para a pagina
+    document.getElementById("fotoinst").src = "data:image/png;base64," + photoD.picByte;
+    document.getElementById("nome_inst").value = instituicao.name;
+    document.getElementById("morada_inst").value = instituicao.address;
+    document.getElementById("local_inst").value = instituicao.location;
+    document.getElementById("email_inst").value = instituicao.email;
+    document.getElementById("contacto_inst").value = instituicao.contact;
+    document.getElementById("prisonDescrip").value = instituicao.description;
 }
 
 
@@ -72,7 +67,7 @@ async function editar() {
         credentials: 'include'
     });
     const instituicao = await response.json();
-    console.log(instituicao);
+
 
 
     data.prisonId = instituicao.prisonId;
@@ -83,7 +78,7 @@ async function editar() {
     data.email = document.getElementById("email_inst").value.trim();
     data.description = document.getElementById("prisonDescrip").value.trim();
 
-    console.log(data);
+
 
 
     if (document.getElementById("nome_inst").value.trim() == "" || document.getElementById("local_inst").value.trim() == "" ||

@@ -3,118 +3,112 @@ $(window).on("load", function () {
   display_perfil();
   get_instituicoes();
 
-  function display_perfil() {
-    async function fetchAsync() {
-      let id_user_clicked = localStorage.getItem("id_user_clicked");
-      const response = await fetch('http://127.0.0.1:8080/api/users/' + id_user_clicked, {
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        mode: 'cors',
-        method: 'GET',
-        credentials: 'include'
-      });
-      const perfil = await response.json();
-      console.log(perfil);
+  async function display_perfil() {
 
-
-      const response7 = await fetch('http://127.0.0.1:8080/api/photos/' + perfil.photoId, {
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        mode: 'cors',
-        method: 'GET',
-        credentials: 'include'
-      });
-      const photoD = await response7.json();
-
-
-      var role = "";
-      if (perfil.roles[0].id == 0) {
-        role = "Guarda prisional";
-      } else if (perfil.roles[0].id == 1) {
-        role = "Gestor de Instituição";
-      } else if (perfil.roles[0].id == 2) {
-        role = "Gestor da Rede Prisonal";
-      }
-
-
-      //envia a para a pagina
-      document.getElementById("funcaoF").innerHTML = role;
-      document.getElementById("nFuncionario").innerHTML = perfil.username;
-      document.getElementById("id_instituicao").value = perfil.prison.prisonId;
-      document.getElementById("dn_funcionario").value = perfil.birthDate;
-      document.getElementById("nacF").value = perfil.nationality;
-      document.getElementById("moradaF").value = perfil.address;
-      document.getElementById("localF").value = perfil.location;
-      document.getElementById("nomeF").value = perfil.name;
-      document.getElementById("imagemPerfil").src = "data:image/png;base64," + photoD.picByte;
-      document.getElementById("contactoF").value = perfil.contact;
-      document.getElementById("emailF").value = perfil.email;
-
-      if (perfil.lastLogin !== null) {
-        document.getElementById("last_login").innerHTML = "Último login: " + getDate7(perfil.lastLogin);
-      } else {
-        document.getElementById("last_login").innerHTML = "Último login: ";
-      }
-
-      if (perfil.roles[0].name == "ROLE_NETWORKMAN") {
-        document.getElementById("paraNETMAN").style.display = "none";
-      }
+    let id_user_clicked = localStorage.getItem("id_user_clicked");
+    const response = await fetch('http://127.0.0.1:8080/api/users/' + id_user_clicked, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      mode: 'cors',
+      method: 'GET',
+      credentials: 'include'
+    });
+    const perfil = await response.json();
 
 
 
-      const response5 = await fetch('http://127.0.0.1:8080/api/users/logged-profiles', {
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        mode: 'cors',
-        method: 'GET',
-        credentials: 'include'
-      });
-      const logado = await response5.json();
-      console.log(logado);
+    const response7 = await fetch('http://127.0.0.1:8080/api/photos/' + perfil.photoId, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      mode: 'cors',
+      method: 'GET',
+      credentials: 'include'
+    });
+    const photoD = await response7.json();
 
 
-
-
-
-      if (!(RoleLogado == "ROLE_NETWORKMAN" && perfil.roles[0].name !== "ROLE_NETWORKMAN" || RoleLogado == "ROLE_MANAGER" && perfil.roles[0].name == "ROLE_GUARD")
-        || logado.prison.prisonId !== perfil.prison.prisonId && RoleLogado !== "ROLE_NETWORKMAN") {
-        document.getElementById("perfil_alterar_2").style.display = "none";
-        document.getElementById("editPassoutro").style.display = "none";
-        document.getElementById("naoAnotar").style.display = "none";
-      }
-
+    var role = "";
+    if (perfil.roles[0].id == 0) {
+      role = "Guarda Prisional";
+    } else if (perfil.roles[0].id == 1) {
+      role = "Gestor de Instituição";
+    } else if (perfil.roles[0].id == 2) {
+      role = "Gestor da Rede Prisonal";
     }
-    //chama a função fetchAsync()
-    fetchAsync().then(data => console.log("done")).catch(reason => console.log(reason.message));
+
+
+    //envia a para a pagina
+    document.getElementById("funcaoF").innerHTML = role;
+    document.getElementById("nFuncionario").innerHTML = perfil.username;
+    document.getElementById("id_instituicao").value = perfil.prison.prisonId;
+    document.getElementById("dn_funcionario").value = perfil.birthDate;
+    document.getElementById("nacF").value = perfil.nationality;
+    document.getElementById("moradaF").value = perfil.address;
+    document.getElementById("localF").value = perfil.location;
+    document.getElementById("nomeF").value = perfil.name;
+    document.getElementById("imagemPerfil").src = "data:image/png;base64," + photoD.picByte;
+    document.getElementById("contactoF").value = perfil.contact;
+    document.getElementById("emailF").value = perfil.email;
+
+    if (perfil.lastLogin !== null) {
+      document.getElementById("last_login").innerHTML = "Último login: " + getDate7(perfil.lastLogin);
+    } else {
+      document.getElementById("last_login").innerHTML = "Último login: ";
+    }
+
+    if (perfil.roles[0].name == "ROLE_NETWORKMAN") {
+      document.getElementById("paraNETMAN").style.display = "none";
+    }
+
+
+
+    const response5 = await fetch('http://127.0.0.1:8080/api/users/logged-profiles', {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      mode: 'cors',
+      method: 'GET',
+      credentials: 'include'
+    });
+    const logado = await response5.json();
+
+
+
+
+
+
+    if (!(RoleLogado == "ROLE_NETWORKMAN" && perfil.roles[0].name !== "ROLE_NETWORKMAN" || RoleLogado == "ROLE_MANAGER" && perfil.roles[0].name == "ROLE_GUARD")
+      || logado.prison.prisonId !== perfil.prison.prisonId && RoleLogado !== "ROLE_NETWORKMAN") {
+      document.getElementById("perfil_alterar_2").style.display = "none";
+      document.getElementById("editPassoutro").style.display = "none";
+      document.getElementById("naoAnotar").style.display = "none";
+    }
+
   }
 
 
-  function get_instituicoes() {
-    async function fetchAsync() {
 
-      const response = await fetch('http://127.0.0.1:8080/api/prisons', {
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        mode: 'cors',
-        method: 'GET',
-        credentials: 'include'
-      });
-      const instituicoes = await response.json();
-      var show_inst = "";
+  async function get_instituicoes() {
 
-      for (var inst of instituicoes) {
-        show_inst += "<option value='" + inst.prisonId + "'>" + inst.name + "</option>";
-      }
 
-      document.getElementById("id_instituicao").innerHTML = show_inst;
+    const response = await fetch('http://127.0.0.1:8080/api/prisons', {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      mode: 'cors',
+      method: 'GET',
+      credentials: 'include'
+    });
+    const instituicoes = await response.json();
+    var show_inst = "";
 
+    for (var inst of instituicoes) {
+      show_inst += "<option value='" + inst.prisonId + "'>" + inst.name + "</option>";
     }
-    //chama a função fetchAsync()
-    fetchAsync().then(data => console.log("done")).catch(reason => console.log(reason.message));
+
+    document.getElementById("id_instituicao").innerHTML = show_inst;
 
   }
 
@@ -223,7 +217,7 @@ document.getElementById("perfil_save_2").addEventListener("click", async functio
 
 
 
-      console.log(data)
+
 
       fetch('http://127.0.0.1:8080/api/users/managers', {
         headers: {
@@ -396,7 +390,7 @@ document.getElementById("editPass").addEventListener("click", function () {
 
     data.userId = id_user_clicked;
     data.newPassword = nPassword.value.trim();
-    console.log(data)
+
 
     fetch('http://127.0.0.1:8080/api/users/passwords', {
       headers: {

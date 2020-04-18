@@ -20,7 +20,7 @@ async function Agenda() {
         credentials: 'include'
     });
     const agendas = await response1.json();
-    console.log(agendas)
+
     var pi = ""
     for (var agenda of agendas) {
         pi = "";
@@ -34,7 +34,7 @@ async function Agenda() {
 
 
     }
-    console.log(listaa)
+
 
 
 
@@ -227,10 +227,19 @@ async function Agenda() {
 
                 data.description = fieldValue;
                 data.date = getDate2(dateFormatted);
-                console.log(data)
+
 
                 //localStorage.setItem(localStorageName, JSON.stringify(this.eventList));
-                enviar();
+                if(new Date(data.date).getTime()-new Date(getDate2(new Date())) >= 0){
+                    enviar();
+                }else{
+                    Swal.fire(
+                        'Data não pode ser anterior à atual!',
+                        '',
+                        'warning'
+                      )
+                }
+                
 
 
                 async function enviar() {
@@ -268,7 +277,6 @@ async function Agenda() {
 
                 this.elements.eventField.value = '';
                 this.drawAll()
-                console.log("3");
 
 
             });
@@ -449,7 +457,7 @@ function getIds(){
             
         }
     }
-    console.log(ids)
+
     return ids
 }
 
@@ -465,7 +473,7 @@ async function eliminar(id) {
       credentials: 'include'
     })
       .then(function (response) {
-        //console.log(response.headers.get('Set-Cookie'));
+
         console.log(response);
         if (!response.ok) {
           throw new Error(response.statusText);

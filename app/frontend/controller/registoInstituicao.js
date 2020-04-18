@@ -38,7 +38,7 @@ window.onload = async function () {
         if (validacaoEmail(document.getElementById("email"))) {
 
 
-          console.log(data);
+
 
 
 

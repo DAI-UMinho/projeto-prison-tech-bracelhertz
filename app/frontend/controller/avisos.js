@@ -20,7 +20,7 @@ async function avisos() {
             credentials: 'include'
         });
         const avisos = await response.json();
-        console.log(avisos);
+
         display(avisos);
     } else {
         document.getElementById("filtro").value = 2;
@@ -34,7 +34,7 @@ async function avisos() {
             credentials: 'include'
         });
         const avisos = await response.json();
-        console.log(avisos);
+
         display(avisos);
     }
     //var t = setTimeout(avisos, 30000);
@@ -57,7 +57,7 @@ async function display(avisos) {
         credentials: 'include'
     });
     const logado = await response1.json();
-    console.log(logado);
+
 
 
 
@@ -124,7 +124,7 @@ async function display(avisos) {
                 credentials: 'include'
             });
             const comentarios = await response1.json();
-            console.log(comentarios);
+
 
 
 
@@ -210,7 +210,7 @@ document.getElementById("filtro").addEventListener("change", async function () {
             credentials: 'include'
         });
         const avisos = await response4.json();
-        console.log(avisos);
+
         display(avisos);
     } else {
         val = 2;
@@ -223,7 +223,7 @@ document.getElementById("filtro").addEventListener("change", async function () {
             credentials: 'include'
         });
         const avisos = await response5.json();
-        console.log(avisos);
+
         display(avisos);
     }
 
@@ -239,10 +239,40 @@ document.getElementById("filtro").addEventListener("change", async function () {
 
 //---------------------------------------------------DISPLAY POST INSTITUIÇÕES------------------------------------------------
 
-function get_instituicoes() {
-    async function fetchAsync() {
+async function get_instituicoes() {
 
-        const response = await fetch('http://127.0.0.1:8080/api/prisons', {
+
+    const response = await fetch('http://127.0.0.1:8080/api/prisons', {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        mode: 'cors',
+        method: 'GET',
+        credentials: 'include'
+    });
+    const instituicoes = await response.json();
+    var show_inst = "";
+
+    for (var inst of instituicoes) {
+        show_inst += "<option value='" + inst.prisonId + "'>" + inst.name + "</option>";
+    }
+
+    document.getElementById("Dest").innerHTML = show_inst;
+
+}
+
+
+
+
+//---------------------------------------------------DISPLAY POST PRISIONEIROS------------------------------------------------
+
+async function get_reclusos() {
+
+    let RoleLogado = localStorage.getItem("RoleLogado");
+    var func = "";
+    var show_rec = "";
+    if (RoleLogado == "ROLE_GUARD") {
+        const response = await fetch('http://127.0.0.1:8080/api/prisoners/by-guards', {
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -250,65 +280,29 @@ function get_instituicoes() {
             method: 'GET',
             credentials: 'include'
         });
-        const instituicoes = await response.json();
-        var show_inst = "";
+        func = await response.json();
 
-        for (var inst of instituicoes) {
-            show_inst += "<option value='" + inst.prisonId + "'>" + inst.name + "</option>";
-        }
-
-        document.getElementById("Dest").innerHTML = show_inst;
+    } else {
+        const response = await fetch('http://127.0.0.1:8080/api/prisoners', {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            mode: 'cors',
+            method: 'GET',
+            credentials: 'include'
+        });
+        func = await response.json();
 
     }
-    //chama a função fetchAsync()
-    fetchAsync().then(data => console.log("done")).catch(reason => console.log(reason.message));
+
+    for (var inst of func) {
+        show_rec += "<option value='" + inst.prisonerId + "'>" + inst.name + " (" + inst.identifierId + ")" + "</option>";
+    }
+
+    document.getElementById("Dest").innerHTML = show_rec;
 
 }
 
-
-
-//---------------------------------------------------DISPLAY POST PRISIONEIROS------------------------------------------------
-
-function get_reclusos() {
-    async function fetchAsync() {
-        let RoleLogado = localStorage.getItem("RoleLogado");
-        var func = "";
-        var show_rec = "";
-        if (RoleLogado == "ROLE_GUARD") {
-            const response = await fetch('http://127.0.0.1:8080/api/prisoners/by-guards', {
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                mode: 'cors',
-                method: 'GET',
-                credentials: 'include'
-            });
-            func = await response.json();
-
-        } else {
-            const response = await fetch('http://127.0.0.1:8080/api/prisoners', {
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                mode: 'cors',
-                method: 'GET',
-                credentials: 'include'
-            });
-            func = await response.json();
-
-        }
-
-        for (var inst of func) {
-            show_rec += "<option value='" + inst.prisonerId + "'>" + inst.name + " (" + inst.identifierId + ")" + "</option>";
-        }
-
-        document.getElementById("Dest").innerHTML = show_rec;
-
-    }
-    //chama a função fetchAsync()
-    fetchAsync().then(data => console.log("done")).catch(reason => console.log(reason.message));
-
-}
 //------------------------------------------------POST ANOTAÇÃO---------------------------------------------------
 
 const enviar_novo = document.getElementById("enviar_novo");
@@ -544,7 +538,7 @@ document.getElementById("botaoConf").addEventListener("click", async function ()
 //-----------------------------------------------GET ID PARA APAGAR OU EDITAR ANOTAÇÃO------------------------------------
 var anotDelete = "";
 function teste(este) {
-    console.log(este.closest('[id]').id)
+
     if (este.innerHTML == "Apagar") {
         $("#confModal").modal();
         anotDelete = parseInt(este.closest('[id]').id);
@@ -578,7 +572,7 @@ async function editarAnotacao(id) {
     data.title = document.getElementById(id).children[0].children[0].innerHTML;
     data.description = document.getElementById(id + "text").value;
 
-    console.log(data);
+
 
     fetch('http://127.0.0.1:8080/api/annotations', {
         headers: {
@@ -651,7 +645,7 @@ async function editarAnotacao(id) {
 
 //-----------------------------------------------GET ID PARA APAGAR OU EDITAR ANOTAÇÃO COMENTÁRIO------------------------------------
 function teste2(este) {
-    console.log(este.closest('[id]').id)
+
     if (este.innerHTML == "Apagar") {
         eliminarComentario(parseInt(este.closest('[id]').id));
     } else {
@@ -683,7 +677,7 @@ async function editarComentario(id) {
     data.title = "comentario";
     data.description = document.getElementById(id + "coment").value;
 
-    console.log(data);
+
 
     fetch('http://127.0.0.1:8080/api/annotations', {
         headers: {
@@ -808,7 +802,7 @@ async function subComent(idbtn) {
     dat.description = descrip;
 
     if (descrip !== "") {
-        console.log(dat)
+
 
         if (document.getElementById("filtro").value == 1) {
 

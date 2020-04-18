@@ -79,7 +79,7 @@ window.onload = async function () {
                   'warning'
                 )
               } else {
-                console.log(data);
+
 
 
 
@@ -150,49 +150,46 @@ window.onload = async function () {
 
 
 
-  function get_instituicoes() {
-    async function fetchAsync() {
+  async function get_instituicoes() {
 
-      const response = await fetch('http://127.0.0.1:8080/api/prisons', {
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        mode: 'cors',
-        method: 'GET',
-        credentials: 'include'
-      });
 
-      const response1 = await fetch('http://127.0.0.1:8080/api/users/logged-profiles', {
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        mode: 'cors',
-        method: 'GET',
-        credentials: 'include'
-      });
-      const instituicoes = await response.json();
-      const logado = await response1.json();
-      var show_inst = "";
+    const response = await fetch('http://127.0.0.1:8080/api/prisons', {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      mode: 'cors',
+      method: 'GET',
+      credentials: 'include'
+    });
 
-      let RoleLogado = localStorage.getItem("RoleLogado");
+    const response1 = await fetch('http://127.0.0.1:8080/api/users/logged-profiles', {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      mode: 'cors',
+      method: 'GET',
+      credentials: 'include'
+    });
+    const instituicoes = await response.json();
+    const logado = await response1.json();
+    var show_inst = "";
 
-      if (RoleLogado == "ROLE_MANAGER") {
-        show_inst += "<option value='" + logado.prison.prisonId + "'>" + logado.prison.name + "</option>";
-        document.getElementById("instt").remove(1);
-        document.getElementById("instt").remove(1);
-      } else {
-        for (var inst of instituicoes) {
-          show_inst += "<option value='" + inst.prisonId + "'>" + inst.name + "</option>";
-        }
+    let RoleLogado = localStorage.getItem("RoleLogado");
+
+    if (RoleLogado == "ROLE_MANAGER") {
+      show_inst += "<option value='" + logado.prison.prisonId + "'>" + logado.prison.name + "</option>";
+      document.getElementById("instt").remove(1);
+      document.getElementById("instt").remove(1);
+    } else {
+      for (var inst of instituicoes) {
+        show_inst += "<option value='" + inst.prisonId + "'>" + inst.name + "</option>";
       }
-
-      document.getElementById("local").innerHTML = show_inst;
-
     }
-    //chama a função fetchAsync()
-    fetchAsync().then(data => console.log("done")).catch(reason => console.log(reason.message));
+
+    document.getElementById("local").innerHTML = show_inst;
 
   }
+
 
 
 };
