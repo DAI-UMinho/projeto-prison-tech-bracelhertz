@@ -48,7 +48,6 @@ $(window).on("load", function () {
     document.getElementById("dataNascimento_perfil").value = logado.birthDate;
     document.getElementById("email_perfil").value = logado.email;
     document.getElementById("localidade_perfil").value = logado.location;
-    //document.getElementById("role_perfil").innerHTML = logado.roles[0].name;
     document.getElementById("fotoR").src = "data:image/png;base64," + photoD.picByte;
 
   }
@@ -201,7 +200,7 @@ async function editar() {
             icon: 'success',
             title: 'Dados alterados com sucesso'
           }).then(() => {
-            location.reload();
+            Myfunction425();
           })
 
 
@@ -213,7 +212,7 @@ async function editar() {
             '',
             'error'
           ).then(() => {
-            Myfunction425()
+            location.reload();
           })
           console.log(result);
           //swal({ title: `${result.value.userMessage.message.pt}` });
@@ -270,6 +269,8 @@ async function editar() {
             title: 'Dados alterados com sucesso'
           }).then(() => {
             Myfunction425()
+            document.getElementById("id_instituicao").disabled = true;
+            document.getElementById("icon_id_instituicao").style.display = "none";
           })
 
 

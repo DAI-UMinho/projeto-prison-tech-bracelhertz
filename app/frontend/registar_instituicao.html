@@ -263,46 +263,8 @@
             <i class="fa fa-bars"></i>
           </button>
 
-          <!-- Topbar Search -->
-          <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-            <div class="input-group">
-              <input type="text" class="form-control bg-light border-0 small" placeholder="Pesquisa aqui"
-                aria-label="Search" aria-describedby="basic-addon2">
-              <div class="input-group-append">
-                <button class="btn btn-primary" type="button">
-                  <i class="fas fa-search fa-sm"></i>
-                </button>
-              </div>
-            </div>
-          </form>
-
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
-
-            <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-            <li class="nav-item dropdown no-arrow d-sm-none">
-              <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-search fa-fw"></i>
-              </a>
-              <!-- Dropdown - Messages -->
-              <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                aria-labelledby="searchDropdown">
-                <form class="form-inline mr-auto w-100 navbar-search">
-                  <div class="input-group">
-                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                      aria-label="Search" aria-describedby="basic-addon2">
-                    <div class="input-group-append">
-                      <button class="btn btn-primary" type="button">
-                        <i class="fas fa-search fa-sm"></i>
-                      </button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </li>
-
-         
 
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
@@ -326,7 +288,12 @@
             </li>
             <li class="my-auto">
               <input type="checkbox" id="opendoor" name="opendoor">
-              <div id="opendoor2" class="label"><label  style="cursor:pointer;" for="opendoor"><img id="openPuls" class="img-profile rounded-circle picNotes" src="img/pul.png" style="filter: none"> </label></div>            
+              <div id="opendoor2" class="label">
+                <label style="cursor:pointer;" for="opendoor">
+                  <img id="openPuls" class="img-profile rounded-circle picNotes" src="img/pul.png"
+                    style="filter: none; display: none;">
+                </label>
+              </div>
             </li>
 
           </ul>
@@ -350,10 +317,11 @@
                   </div>
                   <div id="whereithappens" class="slideshow-container h-100"
                     style="min-inline-size: -webkit-fill-available;">
-                    <div id="whereithappens1" class="card mySlides fade2 mb-5 pb-3" style="display: block; height: 90%">
+                    <div id="whereithappens1" class="card mySlides fade2 mb-5 pb-3" style="display: block; height: 65%">
 
                       <form>
-                        <h6 class="text-secondary text-center mt-4"> Bem Vindo! Pronto para adicionar uma nova instituição?
+                        <h6 class="text-secondary text-center mt-4"> Bem Vindo! Pronto para adicionar uma nova
+                          instituição?
                         </h6>
                         <div class="txtb txtb  ml-auto mr-auto" style="width: 90%;">
                           <input type="name" class="space1 form-control form-control-user" id="name"
@@ -373,9 +341,9 @@
                           style="display: none; margin-left: 30px; margin-top: -22px; font-size: small; color: red;">
                           Email inválido</div>
 
-                          
 
-                        
+
+
                         <div class="txtb txtb  ml-auto mr-auto" style="width: 90%;">
                           <input type="text" class="form-control form-control-user" id="contact"
                             aria-describedby="emailHelp" required
@@ -387,11 +355,11 @@
                           style="display: none; margin-left: 30px; margin-top: -22px; font-size: small;color: red;">
                           Contacto tem de conter 9 números</div>
 
-                          <div class="txtb txtb  ml-auto mr-auto" style="width: 90%;">
-                            <input type="descricao" class="space1 form-control form-control-user" id="descricao"
-                              aria-describedby="emailHelp" required>
-                            <span data-placeholder="Breve descrição"></span>
-                          </div>
+                        <div class="txtb txtb  ml-auto mr-auto" style="width: 90%;">
+                          <input type="descricao" class="space1 form-control form-control-user" id="descricao"
+                            aria-describedby="emailHelp" required>
+                          <span data-placeholder="Breve descrição"></span>
+                        </div>
 
 
                       </form>
@@ -399,7 +367,7 @@
                     </div>
                     <div id="whereithappens2" class="card mySlides fade2 mb-5 pb-3" style="display: block;">
 
-                     
+
 
                       <div class="txtb txtb  ml-auto mr-auto" style="width: 90%;">
                         <input type="name" class="nspace1 form-control form-control-user" id="localidade"
@@ -407,8 +375,8 @@
                         <span data-placeholder="Localidade"></span>
                       </div>
                       <div id="locinf"
-                      style="display: none; margin-left: 30px; margin-top: -22px; font-size: small;color: red;">
-                      Localidade apenas pode conter letra</div>
+                        style="display: none; margin-left: 30px; margin-top: -22px; font-size: small;color: red;">
+                        Localidade apenas pode conter letra</div>
 
                       <div class="txtb txtb  ml-auto mr-auto" style="width: 90%;">
                         <input type="name" class=" form-control form-control-user" id="morada"
@@ -450,11 +418,11 @@
             </div>
           </div>
           <div class="col-2 mt-n4 px-0 sidenav" id="rec12" style="transition: 0.5s;">
-            <div class="col pl-0">
+            <div class="col px-1">
               <input type="text" id="myFilter" placeholder="Pesquisar recluso" class="form-control py-2 mr-3 myFilter">
             </div>
             <div id="tPulsacoes">
-             
+
             </div>
           </div>
         </div>
@@ -485,7 +453,8 @@
   </a>
 
   <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -506,7 +475,7 @@
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  
+
 
 
   <!-- Script that i added -->
@@ -557,7 +526,7 @@
           image.hspace = 17;
           image.title = file.name;
           image.src = this.result;
-          if(preview.firstChild !== null){
+          if (preview.firstChild !== null) {
             preview.removeChild(preview.childNodes[0])
           }
           preview.appendChild(image);
@@ -589,16 +558,16 @@
     }
   </script>
 
-<script>
-  if('serviceWorker' in navigator){
+  <script>
+    if ('serviceWorker' in navigator) {
       try {
         navigator.serviceWorker.register('sw.js');
         console.log('SW registered');
-      } catch(error) {
+      } catch (error) {
         console.log('SW register failed');
       }
     }
-</script>
+  </script>
 
 
 </body>

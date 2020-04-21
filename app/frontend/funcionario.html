@@ -132,46 +132,9 @@
             <i class="fa fa-bars"></i>
           </button>
 
-          <!-- Topbar Search -->
-          <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-            <div class="input-group">
-              <input type="text" class="form-control bg-light border-0 small" placeholder="Pesquisa aqui"
-                aria-label="Search" aria-describedby="basic-addon2">
-              <div class="input-group-append">
-                <button class="btn btn-primary" type="button">
-                  <i class="fas fa-search fa-sm"></i>
-                </button>
-              </div>
-            </div>
-          </form>
 
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
-
-            <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-            <li class="nav-item dropdown no-arrow d-sm-none">
-              <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-search fa-fw"></i>
-              </a>
-              <!-- Dropdown - Messages -->
-              <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                aria-labelledby="searchDropdown">
-                <form class="form-inline mr-auto w-100 navbar-search">
-                  <div class="input-group">
-                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                      aria-label="Search" aria-describedby="basic-addon2">
-                    <div class="input-group-append">
-                      <button class="btn btn-primary" type="button">
-                        <i class="fas fa-search fa-sm"></i>
-                      </button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </li>
-
-
 
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
@@ -199,7 +162,12 @@
             </li>
             <li class="my-auto">
               <input type="checkbox" id="opendoor" name="opendoor">
-              <div id="opendoor2" class="label"><label  style="cursor:pointer;" for="opendoor"><img id="openPuls" class="img-profile rounded-circle picNotes" src="img/pul.png" style="filter: none"> </label></div>            
+              <div id="opendoor2" class="label">
+                <label style="cursor:pointer;" for="opendoor">
+                  <img id="openPuls" class="img-profile rounded-circle picNotes" src="img/pul.png"
+                    style="filter: none; display: none;">
+                </label>
+              </div>
             </li>
 
           </ul>
@@ -220,7 +188,7 @@
                   <!-- Card Header - Dropdown -->
                   <div class="card-header py-3 bg-secondary">
                     <div class="m-0 font-weight-bold text-white full_tab d-inline">
-                      <div class="tab_nome80">Perfil</div>                      
+                      <div class="tab_nome80">Perfil</div>
                       <div class="d-flex" type="button tab_time" style="float: right;">
                         <div style="text-align: right; margin-right: 10px;" id="last_login"></div>
                         <button class="bg-transparent" id="perfil_save_2" style="border: none; display:none"><i
@@ -235,8 +203,9 @@
                     <div class="row" style="justify-content: center">
                       <div class="col-5 mr-4">
                         <div class="w-100 text-center">
-                        <img data-enlargable  style="cursor: zoom-in; max-width: 100%;" id="imagemPerfil" class="imagemlogo" >
-                      </div>
+                          <img data-enlargable style="cursor: zoom-in; max-width: 100%;" id="imagemPerfil"
+                            class="imagemlogo">
+                        </div>
                         <br>
                         <div style="padding-top: 4px;"></div>
                         <div class="form-control mt-4" style="height: 50px">
@@ -251,11 +220,11 @@
                         <div class="form-control mt-4" style="height: 50px">
                           <h5 class="card-title form-control420" style="width: 105px;"><strong>Instituição</strong></h5>
                           <select id="id_instituicao" class=" h6 ml-2 text-primary font-weight-600"
-                          style="border: none; width: 92%;" disabled="true">
+                            style="border: none; width: 92%;" disabled="true">
 
-                        </select>
-                        <i id="icon_id_instituicao" class="fas fa-pen text-primary bg-transparent pr-3"
-                          style="float:right; display: none"></i>
+                          </select>
+                          <i id="icon_id_instituicao" class="fas fa-pen text-primary bg-transparent pr-3"
+                            style="float:right; display: none"></i>
                         </div>
 
                         <br>
@@ -274,76 +243,83 @@
                         <form class="mt-4">
 
                           <div class="form-control" style="height: 50px">
-                            <h5 class="card-title form-control420" style="margin-bottom: 8px;"><strong>Nome</strong></h5>
+                            <h5 class="card-title form-control420" style="margin-bottom: 8px;"><strong>Nome</strong>
+                            </h5>
                             <input type="text" class="space1 h6 ml-2 text-primary font-weight-600" id="nomeF"
-                             style="width: 95%; border: none; background-color: transparent;" readonly="true">
-                          <i id="icon_nomeF" class="fas fa-pen text-primary bg-transparent pr-3"
-                            style="float:right; display: none"></i>
+                              style="width: 95%; border: none; background-color: transparent;" readonly="true">
+                            <i id="icon_nomeF" class="fas fa-pen text-primary bg-transparent pr-3"
+                              style="float:right; display: none"></i>
                           </div>
 
                           <br><br>
 
                           <div class="form-control" style="height: 50px">
-                            <h5 class="card-title form-control420" style="width: 190px; margin-bottom: 8px;"><strong>Data de
+                            <h5 class="card-title form-control420" style="width: 190px; margin-bottom: 8px;">
+                              <strong>Data de
                                 Nascimento</strong></h5>
-                                <input type="date" class="h6 ml-2 text-primary font-weight-600" id="dn_funcionario" 
-                                style="width: 95%; border: none; background-color: transparent;" readonly="true">
-                              <i id="icon_dn_funcionario" class="fas fa-pen text-primary bg-transparent pr-3"
-                                style="float:right; display: none"></i>
+                            <input type="date" class="h6 ml-2 text-primary font-weight-600" id="dn_funcionario"
+                              style="width: 95%; border: none; background-color: transparent;" readonly="true">
+                            <i id="icon_dn_funcionario" class="fas fa-pen text-primary bg-transparent pr-3"
+                              style="float:right; display: none"></i>
                           </div>
 
                           <br><br>
 
                           <div class="form-control" style="height: 50px">
-                            <h5 class="card-title form-control420" style="margin-bottom: 8px;"><strong>Email</strong></h5>
+                            <h5 class="card-title form-control420" style="margin-bottom: 8px;"><strong>Email</strong>
+                            </h5>
                             <input type="email" class="h6 ml-2 text-primary font-weight-600" id="emailF"
-                             style="width: 95%; border: none; background-color: transparent;" readonly="true">
-                          <i id="icon_emailF" class="fas fa-pen text-primary bg-transparent pr-3"
-                            style="float:right; display: none"></i>
+                              style="width: 95%; border: none; background-color: transparent;" readonly="true">
+                            <i id="icon_emailF" class="fas fa-pen text-primary bg-transparent pr-3"
+                              style="float:right; display: none"></i>
 
                           </div>
 
                           <br><br>
 
                           <div class="form-control" style="height: 50px">
-                            <h5 class="card-title form-control420" style="width: 100px; margin-bottom: 8px;"><strong>Contacto</strong></h5>
+                            <h5 class="card-title form-control420" style="width: 100px; margin-bottom: 8px;">
+                              <strong>Contacto</strong></h5>
                             <input type="text" class="h6 ml-2 text-primary font-weight-600" id="contactoF"
-                             style="width: 95%; border: none; background-color: transparent;" readonly="true"
-                            onkeypress="return event.charCode >= 48 && event.charCode <= 57"
-                            data-rule="required|minlength-9" maxlength="9">
-                          <i id="icon_contactoF" class="fas fa-pen text-primary bg-transparent pr-3"
-                            style="float:right; display: none"></i>
+                              style="width: 95%; border: none; background-color: transparent;" readonly="true"
+                              onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                              data-rule="required|minlength-9" maxlength="9">
+                            <i id="icon_contactoF" class="fas fa-pen text-primary bg-transparent pr-3"
+                              style="float:right; display: none"></i>
                           </div>
 
                           <br><br>
 
                           <div class="form-control" style="height: 50px">
-                            <h5 class="card-title form-control420" style="width: 145px; margin-bottom: 8px;"><strong>Nascionalidade</strong>
+                            <h5 class="card-title form-control420" style="width: 145px; margin-bottom: 8px;">
+                              <strong>Nascionalidade</strong>
                             </h5>
                             <input type="text" class="nspace1 h6 ml-2 text-primary font-weight-600" id="nacF"
-                             style="width: 95%; border: none; background-color: transparent;" readonly="true">
-                          <i id="icon_nacF" class="fas fa-pen text-primary bg-transparent pr-3"
-                            style="float:right; display: none"></i>
+                              style="width: 95%; border: none; background-color: transparent;" readonly="true">
+                            <i id="icon_nacF" class="fas fa-pen text-primary bg-transparent pr-3"
+                              style="float:right; display: none"></i>
                           </div>
 
                           <br><br>
 
                           <div class="form-control" style="height: 50px">
-                            <h5 class="card-title form-control420" style="width: 80px; margin-bottom: 8px;"><strong>Morada</strong></h5>
+                            <h5 class="card-title form-control420" style="width: 80px; margin-bottom: 8px;">
+                              <strong>Morada</strong></h5>
                             <input type="text" class="h6 ml-2 text-primary font-weight-600" id="moradaF"
-                             style="width: 95%; border: none; background-color: transparent;" readonly="true">
-                          <i id="icon_moradaF" class="fas fa-pen text-primary bg-transparent pr-3"
-                            style="float:right; display: none"></i>
+                              style="width: 95%; border: none; background-color: transparent;" readonly="true">
+                            <i id="icon_moradaF" class="fas fa-pen text-primary bg-transparent pr-3"
+                              style="float:right; display: none"></i>
                           </div>
 
                           <br><br>
 
                           <div class="form-control" style="height: 50px">
-                            <h5 class="card-title form-control420" style="width: 110px; margin-bottom: 8px;"><strong>Localidade</strong></h5>
+                            <h5 class="card-title form-control420" style="width: 110px; margin-bottom: 8px;">
+                              <strong>Localidade</strong></h5>
                             <input type="text" class="nspace1 h6 ml-2 text-primary font-weight-600" id="localF"
-                            style="width: 95%; border: none; background-color: transparent;" readonly="true">
-                          <i id="icon_localF" class="fas fa-pen text-primary bg-transparent pr-3"
-                            style="float:right; display: none"></i>
+                              style="width: 95%; border: none; background-color: transparent;" readonly="true">
+                            <i id="icon_localF" class="fas fa-pen text-primary bg-transparent pr-3"
+                              style="float:right; display: none"></i>
                           </div>
 
 
@@ -368,14 +344,14 @@
                     <div class="m-0 font-weight-bold text-white full_tab">
                       <div class="tab_nome">Anotações refentes ao utilizador</div>
                       <div id="naoAnotar">
-                      <div class="d-flex" type="button">
-                        <div type="button" data-toggle="modal" data-target="#NotaModal"
-                          class="d-flex d-sm btn btn-sm btn-white font-weight-bold shadow-sm"><i
-                            class="mt-1 mr-1 fas fa-plus fa-xs tab_time text-secondary"></i> Adicionar</div>
+                        <div class="d-flex" type="button">
+                          <div type="button" data-toggle="modal" data-target="#NotaModal"
+                            class="d-flex d-sm btn btn-sm btn-white font-weight-bold shadow-sm"><i
+                              class="mt-1 mr-1 fas fa-plus fa-xs tab_time text-secondary"></i> Adicionar</div>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
 
                   <!-- Card Body -->
                   <div id="dispAnotacoes" style="max-height: 370px; overflow-y: scroll;">
@@ -392,7 +368,7 @@
           </div>
 
           <div class="col-2 mt-n4 px-0 sidenav" id="rec12" style="transition: 0.5s;">
-            <div class="col pl-0">
+            <div class="col px-1">
               <input type="text" id="myFilter" placeholder="Pesquisar recluso" class="form-control py-2 mr-3 myFilter">
             </div>
             <div id="tPulsacoes">
@@ -428,7 +404,8 @@
   </a>
 
   <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -446,8 +423,8 @@
     </div>
   </div>
 
-    <!-- Confimação apagar nota Modal-->
-    <div class="modal t-1 fade" id="confModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  <!-- Confimação apagar nota Modal-->
+  <div class="modal t-1 fade" id="confModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -466,27 +443,30 @@
     </div>
   </div>
 
-    <!-- Nota Modal-->
-    <div class="modal fade" id="NotaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <form class="modal-content">
-          <div class="modal-header bg-gradient-primary text-white" style="margin-right:-0.5px;">
-            <h5 class="modal-title text-white" id="exampleModalLabel">Nova Anotação</h5>
-            <button class="close text-white" type="button" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <textarea id="titleN" class="form-control mb-1 textarea2" rows="1" cols="1" placeholder="Assunto (título)"></textarea>
-            <textarea id="descriptionN" class="form-control textarea1" rows="6" cols="60" placeholder="Escreva aqui a nota"></textarea>
-          </div>
-          <div class="modal-footer">
-            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-            <input type="submit" class="btn btn-primary" id="enviar_novo" value="Criar">
-          </div>
-        </form>
-      </div>
+  <!-- Nota Modal-->
+  <div class="modal fade" id="NotaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <form class="modal-content">
+        <div class="modal-header bg-gradient-primary text-white" style="margin-right:-0.5px;">
+          <h5 class="modal-title text-white" id="exampleModalLabel">Nova Anotação</h5>
+          <button class="close text-white" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <textarea id="titleN" class="form-control mb-1 textarea2" rows="1" cols="1"
+            placeholder="Assunto (título)"></textarea>
+          <textarea id="descriptionN" class="form-control textarea1" rows="6" cols="60"
+            placeholder="Escreva aqui a nota"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+          <input type="submit" class="btn btn-primary" id="enviar_novo" value="Criar">
+        </div>
+      </form>
     </div>
+  </div>
 
 
   <!-- Editar password-->
@@ -610,41 +590,41 @@
   </script>
 
 
-<script>
+  <script>
 
-  $('img[data-enlargable]').addClass('img-enlargable').click(function(){
+    $('img[data-enlargable]').addClass('img-enlargable').click(function () {
       var src = $(this).attr('src');
       var modal;
-      function removeModal(){ modal.remove(); $('body').off('keyup.modal-close'); }
+      function removeModal() { modal.remove(); $('body').off('keyup.modal-close'); }
       modal = $('<div>').css({
-          background: 'RGBA(0,0,0,.5) url('+src+') no-repeat center',
-          backgroundSize: 'contain',
-          width:'100%', height:'100%',
-          position:'fixed',
-          zIndex:'10000',
-          top:'0', left:'0',
-          cursor: 'zoom-out'
-      }).click(function(){
-          removeModal();
+        background: 'RGBA(0,0,0,.5) url(' + src + ') no-repeat center',
+        backgroundSize: 'contain',
+        width: '100%', height: '100%',
+        position: 'fixed',
+        zIndex: '10000',
+        top: '0', left: '0',
+        cursor: 'zoom-out'
+      }).click(function () {
+        removeModal();
       }).appendTo('body');
       //handling ESC
-      $('body').on('keyup.modal-close', function(e){
-        if(e.key==='Escape'){ removeModal(); } 
+      $('body').on('keyup.modal-close', function (e) {
+        if (e.key === 'Escape') { removeModal(); }
       });
-  });
-  
+    });
+
   </script>
 
-<script>
-  if('serviceWorker' in navigator){
+  <script>
+    if ('serviceWorker' in navigator) {
       try {
         navigator.serviceWorker.register('sw.js');
         console.log('SW registered');
-      } catch(error) {
+      } catch (error) {
         console.log('SW register failed');
       }
     }
-</script>
+  </script>
 
 </body>
 

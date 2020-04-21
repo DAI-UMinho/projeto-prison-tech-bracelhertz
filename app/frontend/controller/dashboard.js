@@ -69,7 +69,6 @@ async function display_logs() {
 
 
         }
-        console.log("ols")
         //criação da demonstração de resultados recebidos
         if (document.getElementById("tipoDest").value == 1) {
 

@@ -209,7 +209,7 @@ async function ListaApagar() {
 
                             if (ids.length == count) {
                                 Swal.fire(
-                                    'Reclusos eliminados com sucesso!',
+                                    'Recluso(os) eliminado(os) com sucesso!',
                                     '',
                                     'success'
                                 ).then(() => {

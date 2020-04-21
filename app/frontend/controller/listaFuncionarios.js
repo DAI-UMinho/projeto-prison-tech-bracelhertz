@@ -137,8 +137,14 @@ async function VerApagar() {
 
 
             document.getElementById("displayList").innerHTML += "<li>Username: " + perfil.username + "; Nome: " + perfil.name + "</li>";
+
             if (RoleLogado == "ROLE_MANAGER" && perfil.roles[0].name == "ROLE_MANAGER" || RoleLogado == "ROLE_MANAGER" && perfil.roles[0].name == "ROLE_NETWORKMAN"
                 || RoleLogado == "ROLE_NETWORKMAN" && perfil.roles[0].name == "ROLE_NETWORKMAN") {
+
+                    pode = false;
+
+              
+            } else if (RoleLogado == "ROLE_MANAGER" && perfil.roles[0].name == "ROLE_GUARD") {
 
                 if (perfil.prison.prisonId !== logado.prison.prisonId) {
 
@@ -202,7 +208,7 @@ async function ListaApagar() {
 
                             if (ids.length == count) {
                                 Swal.fire(
-                                    'Funcionários eliminados com sucesso!',
+                                    'Funcionário(os) eliminado(os) com sucesso!',
                                     '',
                                     'success'
                                 ).then(() => {

@@ -409,7 +409,7 @@ locinf.onkeyup = function () {
   }
 }
 
-existeUser.onblur = async function UsernameTaken() {
+existeUser.oninput = async function UsernameTaken() {
 
   var verificar = document.getElementById("username").value.trim();
 
@@ -424,7 +424,7 @@ existeUser.onblur = async function UsernameTaken() {
   const existe = await response.json();
 
 
-  if (existe) {
+  if (existe && verificar !== "") {
     document.getElementById("existeUser").style.display = "block";
   } else {
     document.getElementById("existeUser").style.display = "none";

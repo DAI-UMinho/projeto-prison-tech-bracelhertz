@@ -129,46 +129,9 @@
             <i class="fa fa-bars"></i>
           </button>
 
-          <!-- Topbar Search -->
-          <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-            <div class="input-group">
-              <input type="text" class="form-control bg-light border-0 small" placeholder="Pesquisa aqui"
-                aria-label="Search" aria-describedby="basic-addon2">
-              <div class="input-group-append">
-                <button class="btn btn-primary" type="button">
-                  <i class="fas fa-search fa-sm"></i>
-                </button>
-              </div>
-            </div>
-          </form>
 
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
-
-            <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-            <li class="nav-item dropdown no-arrow d-sm-none">
-              <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-search fa-fw"></i>
-              </a>
-              <!-- Dropdown - Messages -->
-              <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                aria-labelledby="searchDropdown">
-                <form class="form-inline mr-auto w-100 navbar-search">
-                  <div class="input-group">
-                    <input type="text" class="form-control bg-light border-0 small" placeholder="Pesquisa aqui"
-                      aria-label="Search" aria-describedby="basic-addon2">
-                    <div class="input-group-append">
-                      <button class="btn btn-primary" type="button">
-                        <i class="fas fa-search fa-sm"></i>
-                      </button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </li>
-
-       
 
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
@@ -192,7 +155,12 @@
             </li>
             <li class="my-auto">
               <input type="checkbox" id="opendoor" name="opendoor">
-              <div id="opendoor2" class="label"><label  style="cursor:pointer;" for="opendoor"><img id="openPuls" class="img-profile rounded-circle picNotes" src="img/pul.png" style="filter: none"> </label></div>            
+              <div id="opendoor2" class="label">
+                <label style="cursor:pointer;" for="opendoor">
+                  <img id="openPuls" class="img-profile rounded-circle picNotes" src="img/pul.png"
+                    style="filter: none; display: none;">
+                </label>
+              </div>
             </li>
 
           </ul>
@@ -242,14 +210,19 @@
             </div>
           </div>
           <div class="col-2 mt-n4 px-0 sidenav" id="rec12" style="transition: 0.5s;">
-            <div class="col pl-0">
+            <div class="col px-1">
               <input type="text" id="myFilter" placeholder="Pesquisar recluso" class="form-control py-2 mr-3 myFilter">
             </div>
             <div id="tPulsacoes">
-             
+
             </div>
           </div>
         </div>
+        <div id="seeAlert">
+          <div class="snackbar">Some text some message..</div>
+          <div class="snackbar" style="top:20vh;">Uma outra mensagem..</div>
+        </div>
+        
         <!-- /.container-fluid -->
 
       </div>
@@ -277,7 +250,8 @@
   </a>
 
   <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -295,34 +269,35 @@
     </div>
   </div>
 
-    <!-- Alert Modal-->
-    <div class="modal fade" id="AlertModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title text-center" id="exampleModalLabel" style="color:red;">ATENÇÃO</h5>
-            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <audio loop id="myAudio">
-              <source src="./sounds/alert  sound.mp3" type="audio/ogg">
-              <source src="./sounds/alert  sound.mp3" type="audio/mpeg">
-            </audio>
+  <!-- Alert Modal-->
+  <div class="modal fade" id="AlertModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-center" id="exampleModalLabel" style="color:red;">ATENÇÃO</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <audio loop id="myAudio">
+            <source src="./sounds/alert  sound.mp3" type="audio/ogg">
+            <source src="./sounds/alert  sound.mp3" type="audio/mpeg">
+          </audio>
 
-            <div id="infoDanger">
-
-            </div>
-
+          <div id="infoDanger">
 
           </div>
-          <div class="modal-footer" style="justify-content: center;">
-            <button class="btn btn-danger" id="StopSound" data-dismiss="modal">Terminar Sessão</button>
-          </div>
+
+
+        </div>
+        <div class="modal-footer" style="justify-content: center;">
+          <button class="btn btn-danger" id="StopSound" data-dismiss="modal">Terminar Sessão</button>
         </div>
       </div>
     </div>
+  </div>
 
   <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -367,14 +342,14 @@
 
 
   <script>
-    if('serviceWorker' in navigator){
-        try {
-          navigator.serviceWorker.register('sw.js');
-          console.log('SW registered');
-        } catch(error) {
-          console.log('SW register failed');
-        }
+    if ('serviceWorker' in navigator) {
+      try {
+        navigator.serviceWorker.register('sw.js');
+        console.log('SW registered');
+      } catch (error) {
+        console.log('SW register failed');
       }
+    }
   </script>
 </body>
 

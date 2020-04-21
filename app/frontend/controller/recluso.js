@@ -62,6 +62,7 @@ $(window).on("load", function () {
                     document.getElementById("addFicha").style.display = "none";
                     document.getElementById("naoAnotar").style.display = "none";
                     document.getElementById("switchAB").style.display = "none";
+                    document.getElementById("podeMudar").style.display = "none";
                 }
             } else {
                 if (RoleLogado !== "ROLE_NETWORKMAN") {
@@ -69,6 +70,8 @@ $(window).on("load", function () {
                     document.getElementById("editFicha").style.display = "none";
                     document.getElementById("addRegisto").style.display = "none";
                     document.getElementById("addFicha").style.display = "none";
+                    document.getElementById("switchAB").style.display = "none";
+                    document.getElementById("podeMudar").style.display = "none";
                 }
             }
 
@@ -1240,12 +1243,12 @@ document.getElementById("postFicha").addEventListener("click", async function ()
 
         var data = {}
 
-        data.prisoner = { prisonerId: id_user_clicked };
-        data.name = "Medical";
+        data.prisoner = { prisonerId: parseInt(id_user_clicked) };
+        data.title = "Medical";
         data.description = document.getElementById("novaFicha").value.trim();
 
 
-
+        console.log(data)
 
 
 

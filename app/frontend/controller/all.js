@@ -75,7 +75,7 @@ async function Agenda() {
             this.drawYearAndCurrentDay();
             this.drawEvents();
 
-            if(!clicked){
+            if (!clicked) {
                 document.getElementById("trashSche").style.display = "none";
                 trocaClasse(document.getElementById("tab_nomeCH"), "tab_nome");
                 trocaClasse(document.getElementById("editSche"), "fas", "fa-pen");
@@ -214,7 +214,7 @@ async function Agenda() {
                 let strDate = `${Number(month) + 1}/${day}/${year}`;
                 this.updateTime(strDate);
                 this.drawAll()
-                
+
             });
 
 
@@ -230,16 +230,16 @@ async function Agenda() {
 
 
                 //localStorage.setItem(localStorageName, JSON.stringify(this.eventList));
-                if(new Date(data.date).getTime()-new Date(getDate2(new Date())) >= 0){
+                if (new Date(data.date).getTime() - new Date(getDate2(new Date())) >= 0) {
                     enviar();
-                }else{
+                } else {
                     Swal.fire(
                         'Data não pode ser anterior à atual!',
                         '',
                         'warning'
-                      )
+                    )
                 }
-                
+
 
 
                 async function enviar() {
@@ -429,32 +429,32 @@ function trocaClasse1(elemento, nova1, nova2) {
 }
 
 
-document.getElementById("trashSche").addEventListener("click", function(){
+document.getElementById("trashSche").addEventListener("click", function () {
     getIds();
 
-    if(ids==""){
+    if (ids == "") {
         Swal.fire(
-            'Seleciona pelo menos um atividade!',
+            'Seleciona pelo menos um evento!',
             '',
             'warning'
-          )
-    }else{
-        for(let id of ids){
+        )
+    } else {
+        for (let id of ids) {
             eliminar(id);
         }
-        
+
     }
 
 })
 
 let ids = [];
-function getIds(){
-    ids=[];
+function getIds() {
+    ids = [];
     const selecList = document.getElementById("listaSche");
-    for(let elem of selecList.children){
-        if (elem.firstChild.checked){
+    for (let elem of selecList.children) {
+        if (elem.firstChild.checked) {
             ids.push(elem.firstChild.id);
-            
+
         }
     }
 
@@ -463,67 +463,42 @@ function getIds(){
 
 
 async function eliminar(id) {
-    fetch('http://127.0.0.1:8080/api/schedules/'+ id, {
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      mode: 'cors',
-      method: 'DELETE',
-      body: JSON.stringify(id),
-      credentials: 'include'
+    fetch('http://127.0.0.1:8080/api/schedules/' + id, {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        mode: 'cors',
+        method: 'DELETE',
+        body: JSON.stringify(id),
+        credentials: 'include'
     })
-      .then(function (response) {
+        .then(function (response) {
 
-        console.log(response);
-        if (!response.ok) {
-          throw new Error(response.statusText);
-        }
-        return response.json();
-      })
-      .catch(function (err) {
-        //swal.showValidationError('Pedido falhado: ' + err);
-        console.log(err); // estava alert(err); coloquei console log para não estar sempre a aparecer pop-up ao utilizador
-      })
-      .then(async function (result) {
-        console.log(result);
-        if (result) {
-
-
-            const Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 1000,
-                timerProgressBar: true,
-                onOpen: (toast) => {
-                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                }
-            })
-
-            Toast.fire({
-                icon: 'success',
-                title: 'Alterada com sucesso'
-            }).then(() => {
+            console.log(response);
+            if (!response.ok) {
+                throw new Error(response.statusText);
+            }
+            return response.json();
+        })
+        .catch(function (err) {
+            //swal.showValidationError('Pedido falhado: ' + err);
+            console.log(err); // estava alert(err); coloquei console log para não estar sempre a aparecer pop-up ao utilizador
+        })
+        .then(async function (result) {
+            console.log(result);
+            if (result) {
                 location.reload();
-            })
-
-
-
-        }
-
-
-
-        else {
-          Swal.fire(
-            'Ocorreu um erro!',
-            '',
-            'error'
-          ).then(() => {
-            location.reload();
-          })
-          console.log(result);
-          //swal({ title: `${result.value.userMessage.message.pt}` });
-        }
-      });
+            }
+            else {
+                Swal.fire(
+                    'Ocorreu um erro!',
+                    '',
+                    'error'
+                ).then(() => {
+                    location.reload();
+                })
+                console.log(result);
+                //swal({ title: `${result.value.userMessage.message.pt}` });
+            }
+        });
 }

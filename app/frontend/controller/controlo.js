@@ -9,12 +9,14 @@ $(window).on("load", function () {
     display_infoPerfil();
 
     if (RoleLogado1 !== "ROLE_GUARD") {
-        document.getElementById("openPuls").style.display = "none";
+
         document.getElementById("rec12").style.display = "none"
         var pi = document.getElementById("estenao");
         if (pi !== null) {
             pi.style.marginTop = "30px";
         }
+    } else {
+        document.getElementById("openPuls").style.display = "inline";
     }
 
 
@@ -66,7 +68,7 @@ async function display_pulsacao() {
 
 
 
-        see_puls += "<div class='col py-2 mr-3 pl-0 pr-1 myfilter'>";
+        see_puls += "<div class='col py-2 myfilter px-1'>";
         see_puls += "<div class='card border-left-danger shadow h-100 py-2'><div class='card-body pl-3'>";
         see_puls += "<div class='row no-gutters align-items-center'><div class='col-auto pr-2'>";
         see_puls += "<img class='picNotes40 img-profile rounded-circle' src=" + "data:image/png;base64," + photoD.picByte + ">";
@@ -188,9 +190,8 @@ async function sair() {
 
 
 //-------------------------------------------------------------------------------------------------------------------------------------
-var bracel1 = 123;
-var bracel2 = 1;
-var bracelt = [bracel1, bracel2];
+
+var bracelt = [1, 123, 12, 12345];
 var reclusos = [];
 function procurarPul() {
 
@@ -211,15 +212,21 @@ function procurarPul() {
 
 function verPul() {
     for (var i = 0; i < reclusos.length; i++) {
-        console.log(reclusos)
 
         var pulse = Math.floor(Math.random() * reclusos[i].maxHB) + reclusos[i].minHB
         document.getElementById(reclusos[i].prisonerId + "puls").innerHTML = pulse + " bpm";
         console.log(reclusos[i].name + " " + pulse)
-
+        var x = document.getElementById("seeAlert");
 
         if (pulse >= reclusos[i].maxHB || pulse <= reclusos[i].minHB) {
             document.getElementById(reclusos[i].prisonerId + "puls").style.color = "#e74a3b";
+
+           /*  let constAlert = "";
+             constAlert += "<div class='snackbar show'>O recluso " + reclusos[i].name + " está em perigo</div>"
+             x.innerHTML += constAlert;
+
+            for (y of x) { y.classList.add("show") }*/
+
             $("#AlertModal").modal();
 
 

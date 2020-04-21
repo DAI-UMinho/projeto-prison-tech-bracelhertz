@@ -269,7 +269,7 @@ function showSlides(n) {
 
 var continf = document.getElementById("contact");
 var contalinf = document.getElementById("contactAlt");
-var existeRec = document.getElementById("Identification");
+var existeRec = document.getElementById("Identificacao");
 var existePul = document.getElementById("idpulseira");
 
 continf.onkeyup = function () {
@@ -288,9 +288,9 @@ contalinf.onkeyup = function () {
   }
 }
 
-existeRec.onblur = async function RecTaken() {
+existeRec.oninput = async function RecTaken() {
 
-  var verificar = document.getElementById("Identification").value.trim();
+  var verificar = document.getElementById("Identificacao").value.trim();
 
   const response = await fetch('http://127.0.0.1:8080/api/prisoners/identifier-exists/' + verificar, {
 
@@ -302,8 +302,9 @@ existeRec.onblur = async function RecTaken() {
     credentials: 'include'
   });
   const existe = await response.json();
+  console.log(existe)
 
-  if (existe) {
+  if (existe && verificar !== "") {
     document.getElementById("existeRec").style.display = "block";
   } else {
     document.getElementById("existeRec").style.display = "none";
@@ -312,7 +313,7 @@ existeRec.onblur = async function RecTaken() {
 }
 
 
-existePul.onblur = async function PulTaken() {
+existePul.oninput = async function PulTaken() {
 
   var verificarB = document.getElementById("idpulseira").value.trim();
 
@@ -327,7 +328,7 @@ existePul.onblur = async function PulTaken() {
   });
   const existeB = await responseB.json();
 
-  if (existeB) {
+  if (existeB && verificarB !== "") {
     document.getElementById("existePul").style.display = "block";
   } else {
     document.getElementById("existePul").style.display = "none";
