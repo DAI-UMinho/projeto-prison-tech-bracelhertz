@@ -155,8 +155,8 @@
               <input type="checkbox" id="opendoor" name="opendoor">
               <div id="opendoor2" class="label">
                 <label style="cursor:pointer;" for="opendoor">
-                  <img id="openPuls" class="img-profile rounded-circle picNotes" src="img/pul.png"
-                    style="filter: none; display: none;">
+                  <img id="openPuls" class="img-profile rounded-circle picNotes" src="img/bracelhertzv3.png"
+                    style="filter: none; display: none; border: solid gray 0.1rem;">
                 </label>
               </div>
             </li>
@@ -182,7 +182,7 @@
                         <div class="tab_nome" style="width:70%">Fotografia</div>
                         <p><input type="file" accept="image/*" name="image" id="file" onchange="loadFile(event)"
                             style="display: none;"></p>
-                        <p><label for="file" id="foto420" class="mb-0 text-uppercase"
+                        <p id="EditFoto" style="display: none;"><label for="file" id="foto420" class="mb-0 text-uppercase"
                             style="cursor: pointer;">Editar</label></p>
                       </div>
                     </div>
@@ -223,7 +223,7 @@
                           </h4>
                           <div style="display: unset;">
                             <input type="text" class="space1 h6 ml-2 text-primary font-weight-600" id="nome_inst"
-                              style="width: 95%; border: none; background-color: transparent;" readonly="true">
+                              style="width: 80%; border: none; background-color: transparent;" readonly="true">
                             <i id="icon_nome_inst" class="fas fa-pen text-primary bg-transparent pr-3"
                               style="float:right; display: none"></i>
                           </div>
@@ -236,7 +236,7 @@
                           </h4>
                           <div style="display: unset;">
                             <input type="text" class="space1 h6 ml-2 text-primary font-weight-600" id="morada_inst"
-                              style="width: 95%; border: none; background-color: transparent;" readonly="true">
+                              style="width: 80%; border: none; background-color: transparent;" readonly="true">
                             <i id="icon_morada_inst" class="fas fa-pen text-primary bg-transparent pr-3"
                               style="float:right; display: none"></i>
                           </div>
@@ -249,7 +249,7 @@
                           </h4>
                           <div style="display: unset;">
                             <input type="text" class="nspace1 h6 ml-2 text-primary font-weight-600" id="local_inst"
-                              style="width: 95%; border: none; background-color: transparent;" readonly="true">
+                              style="width: 80%; border: none; background-color: transparent;" readonly="true">
                             <i id="icon_local_inst" class="fas fa-pen text-primary bg-transparent pr-3"
                               style="float:right; display: none"></i>
                           </div>
@@ -264,7 +264,7 @@
                           </h5>
                           <div style="display: unset;">
                             <input type="email" class=" h6 ml-2 text-primary font-weight-600" id="email_inst"
-                              style="width: 95%; border: none; background-color: transparent;" readonly="true">
+                              style="width: 80%; border: none; background-color: transparent;" readonly="true">
                             <i id="icon_email_inst" class="fas fa-pen text-primary bg-transparent pr-3"
                               style="float:right; display: none"></i>
                           </div>
@@ -277,7 +277,7 @@
                           </h5>
                           <div style="display: unset;">
                             <input type="text" class="h6 ml-2 text-primary font-weight-600" id="contacto_inst"
-                              readonly="true" style="width: 95%; border: none; background-color: transparent;"
+                              readonly="true" style="width: 80%; border: none; background-color: transparent;"
                               onkeypress="return event.charCode >= 48 && event.charCode <= 57"
                               data-rule="required|minlength-9" maxlength="9">
                             <i id="icon_contacto_inst" class="fas fa-pen text-primary bg-transparent pr-3"
@@ -286,13 +286,13 @@
                         </div>
                         <br>
 
-                        <div class="form-control" style="height: 50px">
+                        <div class="form-control" style="height: 80px">
                           <h4 class="card-title form-control420" style="width: 120px; margin-bottom: 4px;">
                             <strong>Descrição</strong>
                           </h4>
                           <div style="display: unset;">
-                            <input type="text" class="space1 h6 ml-2 text-primary font-weight-600" id="prisonDescrip"
-                              style="width: 95%; border: none; background-color: transparent;" readonly="true">
+                            <textarea type="text" class="space1 h6 ml-2 text-primary font-weight-600" id="prisonDescrip"
+                              style="width: 80%; border: none; background-color: transparent; resize: none; height: 100%;" readonly="true"></textarea>
                             <i id="icon_prisonDescrip" class="fas fa-pen text-primary bg-transparent pr-3"
                               style="float:right; display: none"></i>
                           </div>
@@ -353,6 +353,13 @@
 
         </div>
         <!-- /.container-fluid -->
+        <audio loop id="myAudio">
+          <source src="./sounds/alert  sound.mp3" type="audio/ogg">
+          <source src="./sounds/alert  sound.mp3" type="audio/mpeg">
+        </audio>
+        
+        <div id="seeAlert">
+        </div>
 
       </div>
       <!-- End of Main Content -->

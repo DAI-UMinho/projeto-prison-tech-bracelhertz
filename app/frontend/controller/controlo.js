@@ -1,12 +1,15 @@
 let RoleLogado1 = localStorage.getItem("RoleLogado");
-
+let fechado = localStorage.getItem("fechado");
 var listaRec = "";
 $(window).on("load", function () {
+
+    fazIsto();
+    display_infoPerfil();
+
 
     if (RoleLogado1 == "ROLE_GUARD") {
         display_pulsacao();
     }
-    display_infoPerfil();
 
     if (RoleLogado1 !== "ROLE_GUARD") {
 
@@ -135,10 +138,6 @@ async function display_infoPerfil() {
 }
 
 
-//-------------------------------------------------------------------------------------
-
-
-
 
 //-----------------------------------LOGOUT-----------------------------------------
 
@@ -191,70 +190,201 @@ async function sair() {
 
 //-------------------------------------------------------------------------------------------------------------------------------------
 
-var bracelt = [1, 123, 12, 12345];
+
+var bracelt = [1, 123, 12, 12345, 987654];
 var reclusos = [];
 function procurarPul() {
-
     for (const f of listaRec) {
 
         for (var i = 0; i < bracelt.length; i++) {
 
             if (f.braceletId == bracelt[i]) {
-                reclusos[i] = f;
+                reclusos.push(f);
             }
         }
     }
-
-    //verPul();
+    verPul();
 }
 
 
 
 function verPul() {
+    var ha = false;
+    let cnt = 16;
+    var x = document.getElementById("seeAlert");
+    x.innerHTML = "";
     for (var i = 0; i < reclusos.length; i++) {
 
         var pulse = Math.floor(Math.random() * reclusos[i].maxHB) + reclusos[i].minHB
         document.getElementById(reclusos[i].prisonerId + "puls").innerHTML = pulse + " bpm";
-        console.log(reclusos[i].name + " " + pulse)
-        var x = document.getElementById("seeAlert");
 
-        if (pulse >= reclusos[i].maxHB || pulse <= reclusos[i].minHB) {
+        let arrayAlert = [];
+        //if (pulse >= reclusos[i].maxHB || pulse <= reclusos[i].minHB) {
+        if (pulse >= 150) {
+            ha = true;
             document.getElementById(reclusos[i].prisonerId + "puls").style.color = "#e74a3b";
 
-           /*  let constAlert = "";
-             constAlert += "<div class='snackbar show'>O recluso " + reclusos[i].name + " está em perigo</div>"
-             x.innerHTML += constAlert;
+            let constAlert = "";
 
-            for (y of x) { y.classList.add("show") }*/
+            arrayAlert.push(reclusos[i])
+            for (const rec of arrayAlert) {
 
-            $("#AlertModal").modal();
+                constAlert += "<div style='top:" + cnt + "vh' class='snackbar show'>O recluso " + rec.name + " está em perigo</div>";
+                cnt = cnt + 8;
+            }
+            
+            x.innerHTML += constAlert;
 
 
-            playAudio();
-            document.getElementById("infoDanger").innerHTML = "O recluso " + reclusos[i].name + " está em perigo"
+            //postAlert(reclusos[i].prisonerId);
+
 
         } else {
             document.getElementById(reclusos[i].prisonerId + "puls").style.color = "#5a5c69";
         }
-        var t = setTimeout(verPul, 5000);
 
 
+    } var t = setTimeout(verPul, 5000);
+
+
+
+    if (x.innerHTML !== "") {
+        x.innerHTML += "<button onclick='AlertaSom()' class='snackbar1 show btn btn-danger' id='StopSound' data-dismiss='modal'>Parar Alerta</button>";
     }
 
+    if (ha) {
+        //playAudio();
+    } else {
+        pauseAudio();
+    }
 
 }
 
-
-$('#AlertModal').on('hidden.bs.modal', function () {
+function AlertaSom() {
     pauseAudio();
-});
+    ha = false;
+    var pi = document.getElementsByClassName("snackbar");
+    var x = document.getElementById("seeAlert");
+
+    for (let teste of pi) {
+
+        teste.classList.replace("show", "hide");
+    }
+    var pi2 = document.getElementById("StopSound");
+    pi2.classList.replace("show", "hide");
+    x.innerHTML = "";
+}
 
 
-var x = document.getElementById("myAudio");
+var z = document.getElementById("myAudio");
 function playAudio() {
-    x.play();
+    z.play();
 }
 
 function pauseAudio() {
-    x.pause();
+    z.pause();
+}
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------
+
+function fazIsto() {
+    var windowWidth = window.innerWidth;
+    if (document.getElementById("rec12") !== null && document.getElementById("ajustarDm") !== null) {
+        if (fechado == 0 || fechado == null) {
+
+            document.getElementById("opendoor").checked = true;
+            document.getElementById("opendoor2").style.backgroundColor = "transparent";
+            document.getElementById("ajustarDm").style.transition = "0.5s";
+            document.getElementById("rec12").style.transition = "none";
+            document.getElementById("rec12").style.width = "0%";
+            document.getElementById("ajustarDm").style.maxWidth = "100%";
+            document.getElementById("openPuls").style.filter = "grayscale(100%)";
+
+        } else {
+
+            document.getElementById("opendoor2").style.backgroundColor = "transparent";
+            document.getElementById("rec12").style.transition = "0.5s";
+            document.getElementById("ajustarDm").style.transition = "none";
+            document.getElementById("rec12").style.width = "100%";
+            document.getElementById("openPuls").style.filter = "none";
+
+            if (windowWidth < 450) {
+                document.getElementById("ajustarDm").style.maxWidth = "100%";
+            } else {
+                document.getElementById("ajustarDm").style.maxWidth = "83.33333%";
+            }
+
+
+        }
+    }
+
+}
+
+
+document.getElementById("opendoor").addEventListener("change", testar)
+
+function testar() {
+    var windowWidth = window.innerWidth;
+    if (document.getElementById("opendoor").checked) {
+        document.getElementById("opendoor2").style.backgroundColor = "transparent";
+        document.getElementById("ajustarDm").style.transition = "0.5s";
+        document.getElementById("rec12").style.transition = "none";
+        document.getElementById("rec12").style.width = "0%";
+        document.getElementById("ajustarDm").style.maxWidth = "100%";
+        document.getElementById("openPuls").style.filter = "grayscale(100%)";
+        localStorage.setItem("fechado", 0);
+    } else {
+
+        document.getElementById("opendoor2").style.backgroundColor = "transparent";
+        document.getElementById("rec12").style.transition = "0.5s";
+        document.getElementById("ajustarDm").style.transition = "none";
+        document.getElementById("rec12").style.width = "100%";
+        document.getElementById("openPuls").style.filter = "none";
+        if (windowWidth < 450) {
+            document.getElementById("ajustarDm").style.maxWidth = "100%";
+        } else {
+            document.getElementById("ajustarDm").style.maxWidth = "83.33333%";
+        }
+
+        localStorage.setItem("fechado", 1);
+
+    }
+}
+
+//-------------------------------------------------------------POST LOG---------------------------------------------------------------------
+
+async function postAlert(recId) {
+
+    var data = {};
+    data.prisoner = { prisonerId: recId }
+
+    await fetch('http://127.0.0.1:8080/api/alert-logs', {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        mode: 'cors',
+        method: 'POST',
+        credentials: 'include',
+        body: JSON.stringify(data)
+
+    }).then(function (response) {
+        if (!response.ok) {
+            alert(response);
+            throw new Error("ERRO");
+        }
+
+        return response.json();
+    }).then(async function (result) {
+
+        if (result) {
+            //console.log("Log Criado");
+            display_ocorrencias();
+        }
+    }).catch(function (err) {
+        swal("Erro!", err, "error");
+    })
+
+
+
+
 }

@@ -1,47 +1,76 @@
 $(window).on("load", function () {
 
-    display_instituicoes();
+    display_ocorrencias();
+})
 
-    async function display_instituicoes() {
+async function display_ocorrencias() {
+
+    var datas = [];
+
+    var conteudo = [];
+
+    const response = await fetch('http://127.0.0.1:8080/api/alert-logs', {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        mode: 'cors',
+        method: 'GET',
+        credentials: 'include'
+    });
+    const func = await response.json();
 
 
-        var conteudo = [];
+    var today = new Date().getTime();
 
-        const response = await fetch('http://127.0.0.1:8080/api/alert-logs', {
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            mode: 'cors',
-            method: 'GET',
-            credentials: 'include'
-        });
-        const func = await response.json();
+    for (var i = 0; i < func.length; i++) {
+        var ver = new Date(func[i].createdTimestamp).getTime();
 
 
-        for (const ocorrencia of func) {
-            if (ocorrencia.title == null) {
-                t = "";
-            } else {
-                t = ocorrencia.title;
-            }
-            conteudo.push([ocorrencia.prisoner.identifierId,
-            ocorrencia.prisoner.name,
-            ocorrencia.prisoner.prison.name,
-            getDate6(ocorrencia.createdTimestamp)])
+        conteudo.push([func[i].prisoner.identifierId,
+        func[i].prisoner.name,
+        func[i].prisoner.prison.name,
+        getDate6(func[i].createdTimestamp)])
 
-        }
+        /*
+        if (today - ver <= 1200000) {
+            datas.push(i);
+            //document.getElementById("listaOcorrencias").rows[i].style.color = "red";
+        }*/
 
-        $(document).ready(function () {
-            $('#dataTable').DataTable({
-                data: conteudo
-            });
-        });
 
     }
 
+    $(document).ready(function () {
+        $('#dataTable').DataTable({
+            data: conteudo
+        });
+    });
 
 
-})
+    /*var t = setTimeout(function () {
+        mudarCores(datas);
+    }, 1000);*/
+
+}
+
+/*
+function mudarCores(linhas) {
+
+    var table = document.getElementById("listaOcorrencias");
+
+
+    for (var index of linhas) {
+
+        var row = table.rows[index];
+        row.style.color = "red";
+    }
+}*/
+
+
+
+
+
+
 //----------------------------------------------------------------------------------------------------------------
 function getDate6(date) {
     var today = new Date(date);

@@ -7,131 +7,131 @@ $(window).on("load", function () {
     display_logs();
     display_info();
     renderOcorrencias();
-    //renderOcorrencias_recluso();
+    renderOcorrencias_recluso();
 
 })
 
 async function display_logs() {
 
-        var tabelBody = document.getElementById("tabelBody");
+    var tabelBody = document.getElementById("tabelBody");
 
-        let see_logs = "";
-        let listaLogG = "";
-        let listaLogR = "";
-
-
-        if (RoleLogado == "ROLE_MANAGER") {
-            const response = await fetch('http://127.0.0.1:8080/api/user-logs/managers', {
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                mode: 'cors',
-                method: 'GET',
-                credentials: 'include'
-            });
-            listaLogG = await response.json();
+    let see_logs = "";
+    let listaLogG = "";
+    let listaLogR = "";
 
 
-
-            const response1 = await fetch('http://127.0.0.1:8080/api/prisoner-logs/managers', {
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                mode: 'cors',
-                method: 'GET',
-                credentials: 'include'
-            });
-            listaLogR = await response1.json();
+    if (RoleLogado == "ROLE_MANAGER") {
+        const response = await fetch('http://127.0.0.1:8080/api/user-logs/managers', {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            mode: 'cors',
+            method: 'GET',
+            credentials: 'include'
+        });
+        listaLogG = await response.json();
 
 
 
-        } else if (RoleLogado == "ROLE_NETWORKMAN") {
-            const response = await fetch('http://127.0.0.1:8080/api/user-logs', {
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                mode: 'cors',
-                method: 'GET',
-                credentials: 'include'
-            });
-            listaLogG = await response.json();
+        const response1 = await fetch('http://127.0.0.1:8080/api/prisoner-logs/managers', {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            mode: 'cors',
+            method: 'GET',
+            credentials: 'include'
+        });
+        listaLogR = await response1.json();
 
 
-            const response1 = await fetch('http://127.0.0.1:8080/api/prisoner-logs', {
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                mode: 'cors',
-                method: 'GET',
-                credentials: 'include'
-            });
-            listaLogR = await response1.json();
+
+    } else if (RoleLogado == "ROLE_NETWORKMAN") {
+        const response = await fetch('http://127.0.0.1:8080/api/user-logs', {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            mode: 'cors',
+            method: 'GET',
+            credentials: 'include'
+        });
+        listaLogG = await response.json();
 
 
-        }
-        //criação da demonstração de resultados recebidos
-        if (document.getElementById("tipoDest").value == 1) {
+        const response1 = await fetch('http://127.0.0.1:8080/api/prisoner-logs', {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            mode: 'cors',
+            method: 'GET',
+            credentials: 'include'
+        });
+        listaLogR = await response1.json();
 
-            for (const logG of listaLogG) {
 
-                see_logs += "<td>" + getDate(logG.logTimestamp) + "</td>";
+    }
+    //criação da demonstração de resultados recebidos
+    if (document.getElementById("tipoDest").value == 1) {
 
-                if (logG.byUser !== null) {
-                    see_logs += "<td id='" + logG.byUser.userId + "' type='button' onclick='dothis(this.id)'>" + logG.byUser.name + " (" + logG.byUser.username + ")</td>";
-                } else {
-                    see_logs += "<td>Utilizador apagado</td>";
-                }
+        for (const logG of listaLogG) {
 
-                see_logs += "<td>" + logG.description + "</td>";
+            see_logs += "<td>" + getDate(logG.logTimestamp) + "</td>";
 
-                if (logG.user == null) {
-                    see_logs += "<td>Utilizador apagada</td>";
-                } else {
-                    see_logs += "<td id='" + logG.user.userId + "' type='button' onclick='dothis(this.id)'>" + logG.user.name + " (" + logG.user.username + ")</td>";
-                }
-
-                if (logG.user == null) {
-                    see_logs += "<td></td>";
-                } else {
-                    see_logs += "<td id='" + logG.user.prison.prisonId + "' type='button' onclick='dothis2(this.id)'>" + logG.user.prison.name + "</td>";
-                }
-
-                see_logs += "</tr>";
+            if (logG.byUser !== null) {
+                see_logs += "<td id='" + logG.byUser.userId + "' type='button' onclick='dothis(this.id)'>" + logG.byUser.name + " (" + logG.byUser.username + ")</td>";
+            } else {
+                see_logs += "<td>Utilizador apagado</td>";
             }
 
-        } else {
+            see_logs += "<td>" + logG.description + "</td>";
 
-            for (const logR of listaLogR) {
-
-                see_logs += "<td>" + getDate(logR.logTimestamp) + "</td>";
-
-                if (logR.byUser !== null) {
-                    see_logs += "<td id='" + logR.byUser.userId + "' type='button' onclick='dothis(this.id)'>" + logR.byUser.name + " (" + logR.byUser.username + ")</td>";
-                } else {
-                    see_logs += "<td>Utilizador apagado</td>";
-                }
-
-                see_logs += "<td>" + logR.description + "</td>";
-
-                if (logR.prisoner !== null) {
-                    see_logs += "<td id='" + logR.prisoner.prisonerId + "' type='button' onclick='dothat(this.id)'>" + logR.prisoner.name + " (" + logR.prisoner.identifierId + ")</td>";
-                } else {
-                    see_logs += "<td>Reclusos apagado</td>";
-                }
-
-                if (logR.prisoner !== null) {
-                    see_logs += "<td id='" + logR.prisoner.prison.prisonId + "' type='button' onclick='dothis2(this.id)'>" + logR.prisoner.prison.name + "</td>";
-                } else {
-                    see_logs += "<td></td>";
-                }
-
-                see_logs += "</tr>";
-
+            if (logG.user == null) {
+                see_logs += "<td>Utilizador apagada</td>";
+            } else {
+                see_logs += "<td id='" + logG.user.userId + "' type='button' onclick='dothis(this.id)'>" + logG.user.name + " (" + logG.user.username + ")</td>";
             }
 
+            if (logG.user == null) {
+                see_logs += "<td></td>";
+            } else {
+                see_logs += "<td id='" + logG.user.prison.prisonId + "' type='button' onclick='dothis2(this.id)'>" + logG.user.prison.name + "</td>";
+            }
+
+            see_logs += "</tr>";
         }
-        //envia a para a pagina
-        tabelBody.innerHTML = see_logs;
+
+    } else {
+
+        for (const logR of listaLogR) {
+
+            see_logs += "<td>" + getDate(logR.logTimestamp) + "</td>";
+
+            if (logR.byUser !== null) {
+                see_logs += "<td id='" + logR.byUser.userId + "' type='button' onclick='dothis(this.id)'>" + logR.byUser.name + " (" + logR.byUser.username + ")</td>";
+            } else {
+                see_logs += "<td>Utilizador apagado</td>";
+            }
+
+            see_logs += "<td>" + logR.description + "</td>";
+
+            if (logR.prisoner !== null) {
+                see_logs += "<td id='" + logR.prisoner.prisonerId + "' type='button' onclick='dothat(this.id)'>" + logR.prisoner.name + " (" + logR.prisoner.identifierId + ")</td>";
+            } else {
+                see_logs += "<td>Reclusos apagado</td>";
+            }
+
+            if (logR.prisoner !== null) {
+                see_logs += "<td id='" + logR.prisoner.prison.prisonId + "' type='button' onclick='dothis2(this.id)'>" + logR.prisoner.prison.name + "</td>";
+            } else {
+                see_logs += "<td></td>";
+            }
+
+            see_logs += "</tr>";
+
+        }
+
+    }
+    //envia a para a pagina
+    tabelBody.innerHTML = see_logs;
 
 
 
@@ -451,41 +451,36 @@ function poe(dados) {
 //-------------------------------------------------------------------------------------
 
 async function renderOcorrencias_recluso() {
-    try {
-        const response4 = await fetch(/*--------ROTA DA Tabela Recluso --------*/);
-        const reclusos = await response4.json();
-        const date = new Date();
-        var ocorrencias = 0;
-        var nao_ocorrencias = 0;
-
-        for (recluso of reclusos) {
-
-            const response5 = await fetch(/*--------ROTA DA TABELA REGISTO_ALERTA-------- + recluso.id_recluso */);
-            const n_ocorencias = await response5.json();
 
 
-            if (isIterable(n_ocorencias)) {
+    const response = await fetch('http://127.0.0.1:8080/api/dashboard-circle', {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        mode: 'cors',
+        method: 'GET',
+        credentials: 'include'
+    });
 
-                ocorrencias++;
+    const gr2 = await response.json();
 
-            }
-            else {
-                nao_ocorrencias++;
-            }
+    const valores = [gr2.totalPrisonersWithNoAlerts, gr2.totalPrisonersWithAlerts]
+    poeGrafico(valores);
+}
 
-        }
-    }
-    catch (err) {
-        throw err
-    }
+function poeGrafico(valores) {
+    // Set new default font family and font color to mimic Bootstrap's default styling
+    Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+    Chart.defaults.global.defaultFontColor = '#858796';
 
+    // Pie Chart Example
     var ctx = document.getElementById("myPieChart");
     var myPieChart = new Chart(ctx, {
         type: 'doughnut',
         data: {
-            labels: ["Reclusos com ocorrências", "Reclusos sem ocorrências"],
+            labels: ["Sem Ocorrências", "Com Ocorrências"],
             datasets: [{
-                data: [ocorrencias, nao_ocorrencias],
+                data: valores,
                 backgroundColor: ['#1b2c47', '#ff8800'],
                 hoverBackgroundColor: ['#0e1e37', '#e57a00'],
                 hoverBorderColor: "rgba(234, 236, 244, 1)",
@@ -509,6 +504,7 @@ async function renderOcorrencias_recluso() {
             cutoutPercentage: 80,
         },
     });
+
 
 }
 

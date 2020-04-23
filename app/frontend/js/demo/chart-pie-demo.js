@@ -7,7 +7,7 @@ var ctx = document.getElementById("myPieChart");
 var myPieChart = new Chart(ctx, {
   type: 'doughnut',
   data: {
-    labels: ["Ocorrências", "Normal"],
+    labels: ["Com Ocorrências", "Sem Ocorrências"],
     datasets: [{
       data: [55, 30],
       backgroundColor: ['#1b2c47', '#ff8800'],

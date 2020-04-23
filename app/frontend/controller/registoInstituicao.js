@@ -37,45 +37,51 @@ window.onload = async function () {
 
         if (validacaoEmail(document.getElementById("email"))) {
 
+          if (parseInt(size) >= 1000) {
+            Swal.fire(
+              'Ocorreu um erro!',
+              'Foto apenas pode ter até 1 MB inclusive',
+              'warning'
+            )
+          } else {
+
+
+            await fetch('http://127.0.0.1:8080/api/prisons', {
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              mode: 'cors',
+              method: 'POST',
+              credentials: 'include',
+              body: JSON.stringify(data)
+
+            }).then(function (response) {
+              if (!response.ok) {
+                alert(response);
+                throw new Error("ERRO");
+              }
+              console.log(response);
+              return response.json();
+            }).then(async function (result) {
+              console.log(result);
+              if (result) {
+
+
+                post_photo(formData, result.objectId);
+
+
+              }
 
 
 
 
-
-
-          await fetch('http://127.0.0.1:8080/api/prisons', {
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            mode: 'cors',
-            method: 'POST',
-            credentials: 'include',
-            body: JSON.stringify(data)
-
-          }).then(function (response) {
-            if (!response.ok) {
-              alert(response);
-              throw new Error("ERRO");
-            }
-            console.log(response);
-            return response.json();
-          }).then(async function (result) {
-            console.log(result);
-            if (result) {
-
-
-              post_photo(formData, result.objectId);
-
-
-            }
+            }).catch(function (err) {
+              swal("Erro!", "Erro!", "error");
+            })
 
 
 
-
-          }).catch(function (err) {
-            swal("Erro!", "Erro!", "error");
-          })
-
+          }
 
         } else {
           Swal.fire(
@@ -109,6 +115,7 @@ var loadFile = function (event) {
 
   formData = new FormData();
   formData.append("file", event.target.files[0]);
+  size = ~~(event.target.files[0].size / 1024);
   pic = "a";
 
 };
@@ -152,11 +159,7 @@ async function post_photo(photoC, idPrisao) {
 
       }
       else {
-        Swal.fire(
-          'Ocorreu um erro!',
-          'Foto apenas pode ter até 1 MB inclusive',
-          'error'
-        )
+        swal("Erro!", "Erro!", "error");
         console.log(result);
         //swal({ title: `${result.value.userMessage.message.pt}` });
       }

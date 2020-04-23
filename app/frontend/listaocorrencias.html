@@ -157,8 +157,8 @@
               <input type="checkbox" id="opendoor" name="opendoor">
               <div id="opendoor2" class="label">
                 <label style="cursor:pointer;" for="opendoor">
-                  <img id="openPuls" class="img-profile rounded-circle picNotes" src="img/pul.png"
-                    style="filter: none; display: none;">
+                  <img id="openPuls" class="img-profile rounded-circle picNotes" src="img/bracelhertzv3.png"
+                    style="filter: none; display: none; border: solid gray 0.1rem;">
                 </label>
               </div>
             </li>
@@ -218,10 +218,14 @@
             </div>
           </div>
         </div>
+        <audio loop id="myAudio">
+          <source src="./sounds/alert  sound.mp3" type="audio/ogg">
+          <source src="./sounds/alert  sound.mp3" type="audio/mpeg">
+        </audio>
+        
         <div id="seeAlert">
-          <div class="snackbar">Some text some message..</div>
-          <div class="snackbar" style="top:20vh;">Uma outra mensagem..</div>
         </div>
+
         
         <!-- /.container-fluid -->
 
@@ -269,7 +273,7 @@
     </div>
   </div>
 
-  <!-- Alert Modal-->
+  <!-- Alert Modal
   <div class="modal fade" id="AlertModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -293,11 +297,11 @@
 
         </div>
         <div class="modal-footer" style="justify-content: center;">
-          <button class="btn btn-danger" id="StopSound" data-dismiss="modal">Terminar Sessão</button>
+          <button class="btn btn-danger" id="StopSound" data-dismiss="modal">Parar Alerta</button>
         </div>
       </div>
     </div>
-  </div>
+  </div>-->
 
   <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog">

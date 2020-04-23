@@ -5,7 +5,7 @@ window.onload = async function () {
 
 
     botaoLogin.addEventListener("click", entrar);
-    vid_take.addEventListener("click", entrar2);
+    //vid_take.addEventListener("click", entrar2);
 
 
     async function entrar() {
@@ -71,7 +71,7 @@ window.onload = async function () {
 
 
     //----------------------Just for fun-------------------------------------------
-    async function entrar2() {
+ /*   async function entrar2() {
         event.preventDefault();
         var data = {};
 
@@ -144,7 +144,7 @@ window.onload = async function () {
 
             });
 
-    };
+    };*/
 
 
 

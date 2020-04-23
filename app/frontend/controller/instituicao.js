@@ -11,6 +11,7 @@ async function display_instituicao() {
 
     if (RoleLogado == "ROLE_NETWORKMAN") {
         document.getElementById("perfil_alterar_2").style.display = "block";
+        document.getElementById("EditFoto").style.display = "block";
     }
 
 
@@ -77,6 +78,8 @@ async function editar() {
     data.contact = document.getElementById("contacto_inst").value.trim();
     data.email = document.getElementById("email_inst").value.trim();
     data.description = document.getElementById("prisonDescrip").value.trim();
+    data.photoId = instituicao.photoId;
+
 
 
 

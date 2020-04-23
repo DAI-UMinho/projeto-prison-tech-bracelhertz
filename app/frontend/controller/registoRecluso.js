@@ -15,7 +15,7 @@ window.onload = async function () {
     data.name = document.getElementById("Rname").value.trim();
     data.nationality = document.getElementById("nacionalidade").value.trim();
     data.birthDate = document.getElementById("dataNascimento").value.trim();
-    data.identifierId = document.getElementById("Identification").value.trim();
+    data.identifierId = document.getElementById("Identificacao").value.trim();
     data.contact = document.getElementById("contact").value.trim();
     data.alternativeContact = document.getElementById("contactAlt").value.trim();
     data.photo = "";
@@ -32,7 +32,7 @@ window.onload = async function () {
 
 
     if (Rname.value == "" || nacionalidade.value == "" || dataNascimento.value == "" ||
-      Identification.value == "" || contact.value == "" || contactAlt.value == "" ||
+      Identificacao.value == "" || contact.value == "" || contactAlt.value == "" ||
       cela.value == "" || contact.value.length != 9 || contactAlt.value.length != 9 ||
       idpulseira.value == "") {
       Swal.fire(
@@ -43,7 +43,7 @@ window.onload = async function () {
     } else {
 
 
-      var verificar = document.getElementById("Identification").value.trim();
+      var verificar = document.getElementById("Identificacao").value.trim();
       const response = await fetch('http://127.0.0.1:8080/api/prisoners/identifier-exists/' + verificar, {
 
         headers: {
@@ -94,44 +94,56 @@ window.onload = async function () {
               'warning'
             )
           } else {
-            if (idpulseira.value !== "") {
 
-              data.braceletId = document.getElementById("idpulseira").value.trim();
-              data.minHB = document.getElementById("mminHB").value.trim();
-              data.maxHB = document.getElementById("mmaxHB").value.trim();
+            if (parseInt(size) >= 1000) {
+              Swal.fire(
+                'Ocorreu um erro!',
+                'Foto apenas pode ter até 1 MB inclusive',
+                'warning'
+              )
             } else {
-              data.minHB = 40;
-              data.maxHB = 120;
+
+              if (idpulseira.value !== "") {
+
+                data.braceletId = document.getElementById("idpulseira").value.trim();
+                data.minHB = document.getElementById("mminHB").value.trim();
+                data.maxHB = document.getElementById("mmaxHB").value.trim();
+              } else {
+                data.minHB = 40;
+                data.maxHB = 120;
+              }
+
+
+
+              await fetch('http://127.0.0.1:8080/api/prisoners', {
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                mode: 'cors',
+                method: 'POST',
+                credentials: 'include',
+                body: JSON.stringify(data)
+
+              }).then(function (response) {
+                if (!response.ok) {
+                  alert(response);
+                  throw new Error("ERRO");
+                }
+                console.log(response);
+                return response.json();
+              }).then(async function (result) {
+                console.log(result);
+                if (result) {
+
+                  post_photo(formData, result.objectId);
+
+                }
+              }).catch(function (err) {
+                swal("Erro!", "Erro!", "error");
+              })
+
+
             }
-
-
-
-            await fetch('http://127.0.0.1:8080/api/prisoners', {
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              mode: 'cors',
-              method: 'POST',
-              credentials: 'include',
-              body: JSON.stringify(data)
-
-            }).then(function (response) {
-              if (!response.ok) {
-                alert(response);
-                throw new Error("ERRO");
-              }
-              console.log(response);
-              return response.json();
-            }).then(async function (result) {
-              console.log(result);
-              if (result) {
-
-                post_photo(formData, result.objectId);
-
-              }
-            }).catch(function (err) {
-              swal("Erro!", "Erro!", "error");
-            })
 
 
           }
@@ -302,7 +314,6 @@ existeRec.oninput = async function RecTaken() {
     credentials: 'include'
   });
   const existe = await response.json();
-  console.log(existe)
 
   if (existe && verificar !== "") {
     document.getElementById("existeRec").style.display = "block";
@@ -345,6 +356,7 @@ var loadFile = function (event) {
 
   formData = new FormData();
   formData.append("file", event.target.files[0]);
+  size = ~~(event.target.files[0].size / 1024);
   pic = "a";
 
 };
@@ -388,11 +400,7 @@ async function post_photo(photoC, idGajo) {
 
       }
       else {
-        Swal.fire(
-          'Ocorreu um erro!',
-          'Foto apenas pode ter até 1 MB inclusive',
-          'error'
-        )
+        swal("Erro!", "Erro!", "error");
         console.log(result);
         //swal({ title: `${result.value.userMessage.message.pt}` });
       }

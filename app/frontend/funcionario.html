@@ -164,8 +164,8 @@
               <input type="checkbox" id="opendoor" name="opendoor">
               <div id="opendoor2" class="label">
                 <label style="cursor:pointer;" for="opendoor">
-                  <img id="openPuls" class="img-profile rounded-circle picNotes" src="img/pul.png"
-                    style="filter: none; display: none;">
+                  <img id="openPuls" class="img-profile rounded-circle picNotes" src="img/bracelhertzv3.png"
+                    style="filter: none; display: none; border: solid gray 0.1rem;">
                 </label>
               </div>
             </li>
@@ -220,7 +220,7 @@
                         <div class="form-control mt-4" style="height: 50px">
                           <h5 class="card-title form-control420" style="width: 105px;"><strong>Instituição</strong></h5>
                           <select id="id_instituicao" class=" h6 ml-2 text-primary font-weight-600"
-                            style="border: none; width: 92%;" disabled="true">
+                            style="border: none; width: 80%;" disabled="true">
 
                           </select>
                           <i id="icon_id_instituicao" class="fas fa-pen text-primary bg-transparent pr-3"
@@ -246,7 +246,7 @@
                             <h5 class="card-title form-control420" style="margin-bottom: 8px;"><strong>Nome</strong>
                             </h5>
                             <input type="text" class="space1 h6 ml-2 text-primary font-weight-600" id="nomeF"
-                              style="width: 95%; border: none; background-color: transparent;" readonly="true">
+                              style="width: 80%; border: none; background-color: transparent;" readonly="true">
                             <i id="icon_nomeF" class="fas fa-pen text-primary bg-transparent pr-3"
                               style="float:right; display: none"></i>
                           </div>
@@ -258,7 +258,7 @@
                               <strong>Data de
                                 Nascimento</strong></h5>
                             <input type="date" class="h6 ml-2 text-primary font-weight-600" id="dn_funcionario"
-                              style="width: 95%; border: none; background-color: transparent;" readonly="true">
+                              style="width: 80%; border: none; background-color: transparent;" readonly="true">
                             <i id="icon_dn_funcionario" class="fas fa-pen text-primary bg-transparent pr-3"
                               style="float:right; display: none"></i>
                           </div>
@@ -269,7 +269,7 @@
                             <h5 class="card-title form-control420" style="margin-bottom: 8px;"><strong>Email</strong>
                             </h5>
                             <input type="email" class="h6 ml-2 text-primary font-weight-600" id="emailF"
-                              style="width: 95%; border: none; background-color: transparent;" readonly="true">
+                              style="width: 80%; border: none; background-color: transparent;" readonly="true">
                             <i id="icon_emailF" class="fas fa-pen text-primary bg-transparent pr-3"
                               style="float:right; display: none"></i>
 
@@ -281,7 +281,7 @@
                             <h5 class="card-title form-control420" style="width: 100px; margin-bottom: 8px;">
                               <strong>Contacto</strong></h5>
                             <input type="text" class="h6 ml-2 text-primary font-weight-600" id="contactoF"
-                              style="width: 95%; border: none; background-color: transparent;" readonly="true"
+                              style="width: 80%; border: none; background-color: transparent;" readonly="true"
                               onkeypress="return event.charCode >= 48 && event.charCode <= 57"
                               data-rule="required|minlength-9" maxlength="9">
                             <i id="icon_contactoF" class="fas fa-pen text-primary bg-transparent pr-3"
@@ -295,7 +295,7 @@
                               <strong>Nascionalidade</strong>
                             </h5>
                             <input type="text" class="nspace1 h6 ml-2 text-primary font-weight-600" id="nacF"
-                              style="width: 95%; border: none; background-color: transparent;" readonly="true">
+                              style="width: 80%; border: none; background-color: transparent;" readonly="true">
                             <i id="icon_nacF" class="fas fa-pen text-primary bg-transparent pr-3"
                               style="float:right; display: none"></i>
                           </div>
@@ -306,7 +306,7 @@
                             <h5 class="card-title form-control420" style="width: 80px; margin-bottom: 8px;">
                               <strong>Morada</strong></h5>
                             <input type="text" class="h6 ml-2 text-primary font-weight-600" id="moradaF"
-                              style="width: 95%; border: none; background-color: transparent;" readonly="true">
+                              style="width: 80%; border: none; background-color: transparent;" readonly="true">
                             <i id="icon_moradaF" class="fas fa-pen text-primary bg-transparent pr-3"
                               style="float:right; display: none"></i>
                           </div>
@@ -317,7 +317,7 @@
                             <h5 class="card-title form-control420" style="width: 110px; margin-bottom: 8px;">
                               <strong>Localidade</strong></h5>
                             <input type="text" class="nspace1 h6 ml-2 text-primary font-weight-600" id="localF"
-                              style="width: 95%; border: none; background-color: transparent;" readonly="true">
+                              style="width: 80%; border: none; background-color: transparent;" readonly="true">
                             <i id="icon_localF" class="fas fa-pen text-primary bg-transparent pr-3"
                               style="float:right; display: none"></i>
                           </div>
@@ -378,6 +378,13 @@
 
         </div>
         <!-- /.container-fluid -->
+        <audio loop id="myAudio">
+          <source src="./sounds/alert  sound.mp3" type="audio/ogg">
+          <source src="./sounds/alert  sound.mp3" type="audio/mpeg">
+        </audio>
+        
+        <div id="seeAlert">
+        </div>
 
       </div>
       <!-- End of Main Content -->

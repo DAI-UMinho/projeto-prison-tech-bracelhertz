@@ -201,6 +201,7 @@ async function editar() {
             title: 'Dados alterados com sucesso'
           }).then(() => {
             Myfunction425();
+            display_infoPerfil();
           })
 
 
@@ -269,6 +270,7 @@ async function editar() {
             title: 'Dados alterados com sucesso'
           }).then(() => {
             Myfunction425()
+            display_infoPerfil();
             document.getElementById("id_instituicao").disabled = true;
             document.getElementById("icon_id_instituicao").style.display = "none";
           })
@@ -301,6 +303,7 @@ var loadFile = function (event) {
 
   const formData = new FormData();
   formData.append("file", event.target.files[0]);
+  size = ~~(event.target.files[0].size / 1024);
 
   editar_photo(formData);
 
@@ -309,65 +312,73 @@ var loadFile = function (event) {
 
 async function editar_photo(photoC) {
 
+  if (parseInt(size) >= 1000) {
+    Swal.fire(
+      'Ocorreu um erro!',
+      'Foto apenas pode ter até 1 MB inclusive',
+      'warning'
+    )
+  } else {
 
-  fetch('http://127.0.0.1:8080/api/users/upload-photos/' + userLogado, {
-    mode: 'cors',
-    method: 'PUT',
-    body: photoC,
-    credentials: 'include'
-  })
-    .then(function (response) {
-      //console.log(response.headers.get('Set-Cookie'));
-      console.log(response);
-      if (!response.ok) {
-        throw new Error(response.statusText);
-      }
-      return response.json();
+
+    fetch('http://127.0.0.1:8080/api/users/upload-photos/' + userLogado, {
+      mode: 'cors',
+      method: 'PUT',
+      body: photoC,
+      credentials: 'include'
     })
-    .catch(function (err) {
-      //swal.showValidationError('Pedido falhado: ' + err);
-      console.log(err); // estava alert(err); coloquei console log para não estar sempre a aparecer pop-up ao utilizador
-    })
-    .then(async function (result) {
-      console.log(result);
-      if (result) {
-
-
-
-        const Toast = Swal.mixin({
-          toast: true,
-          position: 'top-end',
-          showConfirmButton: false,
-          timer: 1000,
-          timerProgressBar: true,
-          onOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-          }
-        })
-
-        Toast.fire({
-          icon: 'success',
-          title: 'Dados alterados com sucesso'
-        }).then(() => {
-          location.reload();
-        })
-
-
-
-      }
-      else {
-        Swal.fire(
-          'Ocorreu um erro!',
-          'Foto apenas pode ter até 1 MB inclusive',
-          'error'
-        ).then(() => {
-          location.reload();
-        })
+      .then(function (response) {
+        //console.log(response.headers.get('Set-Cookie'));
+        console.log(response);
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+        return response.json();
+      })
+      .catch(function (err) {
+        //swal.showValidationError('Pedido falhado: ' + err);
+        console.log(err); // estava alert(err); coloquei console log para não estar sempre a aparecer pop-up ao utilizador
+      })
+      .then(async function (result) {
         console.log(result);
-        //swal({ title: `${result.value.userMessage.message.pt}` });
-      }
-    });
+        if (result) {
+
+
+
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 1000,
+            timerProgressBar: true,
+            onOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+          })
+
+          Toast.fire({
+            icon: 'success',
+            title: 'Dados alterados com sucesso'
+          }).then(() => {
+            display_infoPerfil();
+          })
+
+
+
+        }
+        else {
+          swal("Erro!", "Erro!", "error")
+          .then(() => {
+            location.reload();
+          })
+          console.log(result);
+          //swal({ title: `${result.value.userMessage.message.pt}` });
+        }
+      });
+
+
+  }
 
 
 }

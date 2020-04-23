@@ -290,8 +290,8 @@
               <input type="checkbox" id="opendoor" name="opendoor">
               <div id="opendoor2" class="label">
                 <label style="cursor:pointer;" for="opendoor">
-                  <img id="openPuls" class="img-profile rounded-circle picNotes" src="img/pul.png"
-                    style="filter: none; display: none;">
+                  <img id="openPuls" class="img-profile rounded-circle picNotes" src="img/bracelhertzv3.png"
+                    style="filter: none; display: none; border: solid gray 0.1rem;">
                 </label>
               </div>
             </li>
@@ -440,7 +440,7 @@
                                 pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,24}" required>
                               <span data-placeholder="Password"></span>
                               <div class="eye slash" onclick="togglePW()"
-                                style="float: right;margin-top: -6%;margin-right: 4%;color:#1b2c47;">
+                                style="float: right;margin-top: -2%;margin-right: 2%;color:#1b2c47;">
                                 <div></div>
                                 <div></div>
 
@@ -509,6 +509,13 @@
           </div>
         </div>
         <!-- /.container-fluid -->
+        <audio loop id="myAudio">
+          <source src="./sounds/alert  sound.mp3" type="audio/ogg">
+          <source src="./sounds/alert  sound.mp3" type="audio/mpeg">
+        </audio>
+        
+        <div id="seeAlert">
+        </div>
 
       </div>
       <!-- End of Main Content -->
@@ -603,7 +610,7 @@
         reader.addEventListener("load", function () {
           var image = new Image();
           image.height = 150;
-          image.width = 150;
+          image.style.width = "auto";
           image.hspace = 17;
           image.title = file.name;
           image.src = this.result;

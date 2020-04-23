@@ -12090,9 +12090,6 @@ table.scroll tbody tr td {
   }
 }
 
-
-/*----------------------------------------------------------Novo Codigo---------------------------------------------------------*/
-
 .snackbar {
   visibility: hidden;
   min-width: 250px;
@@ -12104,30 +12101,127 @@ table.scroll tbody tr td {
   position: fixed;
   z-index: 1;
   top:10vh;
+  width: 270px;
 }
 
 .snackbar.show {
   visibility: visible;
-  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  -webkit-animation: fadein 0.5s/*, fadeout 0.5s 2.5s*/;
+  animation: fadein 0.5s/*, fadeout 0.5s 2.5s*/;
+}
+
+.snackbar.hide {
+  visibility: hidden;
+  -webkit-animation: fadeout 0.5s/*, fadeout 0.5s 2.5s*/;
+  animation: fadeout 0.5s/*, fadeout 0.5s 2.5s*/;
 }
 
 @-webkit-keyframes fadein {
-  from {bottom: 0; opacity: 0;} 
-  to {bottom: 30px; opacity: 1;}
+  from {left: 0; opacity: 0;} 
+  to {left: 300px; opacity: 1;}
 }
 
 @keyframes fadein {
-  from {bottom: 0; opacity: 0;}
-  to {bottom: 30px; opacity: 1;}
+  from {left: 0; opacity: 0;}
+  to {left: 300px; opacity: 1;}
 }
 
 @-webkit-keyframes fadeout {
-  from {bottom: 30px; opacity: 1;} 
-  to {bottom: 0; opacity: 0;}
+  from {left: 300px; opacity: 1;} 
+  to {left: 0; opacity: 0;}
 }
 
 @keyframes fadeout {
-  from {bottom: 30px; opacity: 1;}
-  to {bottom: 0; opacity: 0;}
+  from {left: 300px; opacity: 1;}
+  to {left: 0; opacity: 0;}
 }
+
+.snackbar1 {
+  visibility: hidden;
+  min-width: 150px;
+  border-radius: 2px;
+  color: #fff;
+  text-align: center;
+  border-radius: 0.35rem;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  top:8vh;
+  width: 150px;
+}
+
+.snackbar1.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s/*, fadeout 0.5s 2.5s*/;
+  animation: fadein 0.5s/*, fadeout 0.5s 2.5s*/;
+}
+
+.snackbar1.hide {
+  visibility: hidden;
+  -webkit-animation: fadeout 0.5s/*, fadeout 0.5s 2.5s*/;
+  animation: fadeout 0.5s/*, fadeout 0.5s 2.5s*/;
+}
+
+@-webkit-keyframes fadein1 {
+  from {left: 0; opacity: 0;} 
+  to {left: 0px; opacity: 1;}
+}
+
+@keyframes fadein1 {
+  from {left: 0; opacity: 0;}
+  to {left: 0px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout1 {
+  from {left: 0px; opacity: 1;} 
+  to {left: 0; opacity: 0;}
+}
+
+@keyframes fadeout1 {
+  from {left: 0px; opacity: 1;}
+  to {left: 0; opacity: 0;}
+}
+
+
+@media (max-width: 450px) {
+
+
+  .snackbar.show {
+    visibility: visible;
+    -webkit-animation: fadein1 0.5s/*, fadeout 0.5s 2.5s*/;
+    animation: fadein1 0.5s/*, fadeout 0.5s 2.5s*/;
+  }
+  
+  .snackbar.hide {
+    visibility: hidden;
+    -webkit-animation: fadeout1 0.5s/*, fadeout 0.5s 2.5s*/;
+    animation: fadeout1 0.5s/*, fadeout 0.5s 2.5s*/;
+  }
+
+
+  .snackbar1.show {
+    visibility: visible;
+    -webkit-animation: fadein1 0.5s/*, fadeout 0.5s 2.5s*/;
+    animation: fadein1 0.5s/*, fadeout 0.5s 2.5s*/;
+  }
+  
+  .snackbar1.hide {
+    visibility: hidden;
+    -webkit-animation: fadeout1 0.5s/*, fadeout 0.5s 2.5s*/;
+    animation: fadeout1 0.5s/*, fadeout 0.5s 2.5s*/;
+  }
+
+
+}
+
+
+
+
+
+.btnToken {
+  font-size: 0.8rem;
+  border-radius: 10rem;
+  padding: 0.75rem 1rem;
+}
+
+/*----------------------------------------------------------Novo Código---------------------------------------------------------*/

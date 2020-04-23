@@ -302,8 +302,8 @@
               <input type="checkbox" id="opendoor" name="opendoor">
               <div id="opendoor2" class="label">
                 <label style="cursor:pointer;" for="opendoor">
-                  <img id="openPuls" class="img-profile rounded-circle picNotes" src="img/pul.png"
-                    style="filter: none; display: none;">
+                  <img id="openPuls" class="img-profile rounded-circle picNotes" src="img/bracelhertzv3.png"
+                    style="filter: none; display: none; border: solid gray 0.1rem;">
                 </label>
               </div>
             </li>
@@ -447,7 +447,7 @@
                   <h5 class="card-title form-control420"><strong>Nome</strong></h5>
                   <div style="display: unset;">
                     <input type="text" class="space1 h6 ml-2 text-primary font-weight-600" id="nome_perfil" value=""
-                      style="width: 95%; border: none; background-color: transparent;" readonly="true">
+                      style="width: 80%; border: none; background-color: transparent;" readonly="true">
                     <i id="icon_nome_perfil" class="fas fa-pen text-primary bg-transparent pr-3"
                       style="float:right; display: none"></i>
                   </div>
@@ -459,7 +459,7 @@
                   <h5 class="card-title form-control420" style="width:95px;"><strong>Contacto</strong></h5>
                   <div style="display: unset;">
                     <input type="text" class="h6 ml-2 text-primary font-weight-600" id="contacto_perfil" value=""
-                      readonly="true" style="width: 95%; border: none; background-color: transparent;"
+                      readonly="true" style="width: 80%; border: none; background-color: transparent;"
                       onkeypress="return event.charCode >= 48 && event.charCode <= 57" data-rule="required|minlength-9"
                       maxlength="9">
                     <i id="icon_contacto_perfil" class="fas fa-pen text-primary bg-transparent pr-3"
@@ -473,7 +473,7 @@
                   <h5 class="card-title form-control420"><strong>Email</strong></h5>
                   <div style="display: unset;">
                     <input type="email" class="h6 ml-2 text-primary font-weight-600" id="email_perfil" value=""
-                      style="width: 95%; border: none; background-color: transparent;" readonly="true">
+                    style="width: 80%; border: none; background-color: transparent;" readonly="true">
                     <i id="icon_email_perfil" class="fas fa-pen text-primary bg-transparent pr-3"
                       style="float:right; display: none"></i>
                   </div>
@@ -508,7 +508,7 @@
                   <h5 class="card-title form-control420" style="width:190px;"><strong>Data de Nascimento</strong></h5>
                   <div style="display: unset;">
                     <input type="date" id="dataNascimento_perfil" class="h6 ml-2 text-primary font-weight-600"
-                      style="width: 95%; border: none; background-color: transparent;" disabled="true">
+                    style="width: 80%; border: none; background-color: transparent;" disabled="true">
                     <i id="icon_dataNascimento_perfil" class="fas fa-pen text-primary bg-transparent pr-3"
                       style="float:right;  display: none"></i>
                   </div>
@@ -521,7 +521,7 @@
                   <h5 class="card-title form-control420" style="width:135px;"><strong>Nacionalidade</strong></h5>
                   <div style="display: unset;">
                     <input type="text" class="nspace1 h6 ml-2 text-primary font-weight-600" id="nacionalidade_perfil"
-                      style="width: 95%; border: none; background-color: transparent;" readonly="true">
+                    style="width: 80%; border: none; background-color: transparent;" readonly="true">
                     <i id="icon_nacionalidade_perfil" class="fas fa-pen text-primary bg-transparent pr-3"
                       style="float:right; display: none"></i>
                   </div>
@@ -537,7 +537,7 @@
                   <h5 class="card-title form-control420" style="width:105px;"><strong>Localidade</strong></h5>
                   <div style="display: unset;">
                     <input type="text" class="nspace1 h6 ml-2 text-primary font-weight-600" id="localidade_perfil"
-                      style="width: 95%; border: none; background-color: transparent;" readonly="true">
+                    style="width: 80%; border: none; background-color: transparent;" readonly="true">
                     <i id="icon_localidade_perfil" class="fas fa-pen text-primary bg-transparent pr-3"
                       style="float:right; display: none"></i>
                   </div>
@@ -550,7 +550,7 @@
                   <h5 class="card-title form-control420" style="width:85px;"><strong>Morada</strong></h5>
                   <div style="display: unset;">
                     <input type="text" class="h6 ml-2 text-primary font-weight-600" id="morada_perfil"
-                      style="width: 95%; border: none; background-color: transparent;" readonly="true">
+                    style="width: 80%; border: none; background-color: transparent;" readonly="true">
                     <i id="icon_morada_perfil" class="fas fa-pen text-primary bg-transparent pr-3"
                       style="float:right; display: none"></i>
                   </div>
@@ -562,7 +562,7 @@
                   <h5 class="card-title form-control420" style="width:100px;"><strong>Instituição</strong></h5>
                   <div style="display: unset;">
                     <select id="id_instituicao" class=" h6 ml-2 text-primary font-weight-600"
-                      style="border: none; width: 92%;" disabled="true">
+                      style="border: none; width: 80%;" disabled="true">
 
                     </select>
                     <i id="icon_id_instituicao" class="fas fa-pen text-primary bg-transparent pr-3"
@@ -580,6 +580,15 @@
 
           </div>
           <!-- /.container-fluid -->
+          <audio loop id="myAudio">
+            <source src="./sounds/alert  sound.mp3" type="audio/ogg">
+            <source src="./sounds/alert  sound.mp3" type="audio/mpeg">
+          </audio>
+          
+          <div id="seeAlert">
+          </div>
+
+
         </div>
         <br>
       </div>

@@ -78,77 +78,7 @@ $(function () {
 
 });
 
-let fechado = localStorage.getItem("fechado");
-console.log(fechado)
-$(window).on("load", fazIsto)
 
-
-
-function fazIsto() {
-  var windowWidth = window.innerWidth;
-  if (document.getElementById("rec12") !== null && document.getElementById("ajustarDm") !== null) {
-    if (fechado == 0 || fechado == null) {
-
-      document.getElementById("opendoor").checked = true;
-      document.getElementById("opendoor2").style.backgroundColor = "transparent";
-      document.getElementById("ajustarDm").style.transition = "0.5s";
-      document.getElementById("rec12").style.transition = "none";
-      document.getElementById("rec12").style.width = "0%";
-      document.getElementById("ajustarDm").style.maxWidth = "100%";
-      document.getElementById("openPuls").style.filter = "grayscale(100%)";
-
-    } else {
-
-      document.getElementById("opendoor2").style.backgroundColor = "transparent";
-      document.getElementById("rec12").style.transition = "0.5s";
-      document.getElementById("ajustarDm").style.transition = "none";
-      document.getElementById("rec12").style.width = "100%";
-      document.getElementById("openPuls").style.filter = "none";
-
-      if(windowWidth < 450){
-        document.getElementById("ajustarDm").style.maxWidth = "100%";
-      }else{
-        document.getElementById("ajustarDm").style.maxWidth = "83.33333%";
-      }
-
-
-    }
-  }
-
-}
-
-
-
-
-document.getElementById("opendoor").addEventListener("change", testar)
-
-function testar() {
-  var windowWidth = window.innerWidth;
-  if (document.getElementById("opendoor").checked) {
-    document.getElementById("opendoor2").style.backgroundColor = "transparent";
-    document.getElementById("ajustarDm").style.transition = "0.5s";
-    document.getElementById("rec12").style.transition = "none";
-    document.getElementById("rec12").style.width = "0%";
-    document.getElementById("ajustarDm").style.maxWidth = "100%";
-    document.getElementById("openPuls").style.filter = "grayscale(100%)";
-    localStorage.setItem("fechado", 0);
-  } else {
-
-    document.getElementById("opendoor2").style.backgroundColor = "transparent";
-    document.getElementById("rec12").style.transition = "0.5s";
-    document.getElementById("ajustarDm").style.transition = "none";
-    document.getElementById("rec12").style.width = "100%";
-    document.getElementById("openPuls").style.filter = "none";
-    if(windowWidth < 450){
-      document.getElementById("ajustarDm").style.maxWidth = "100%";
-    }else{
-      document.getElementById("ajustarDm").style.maxWidth = "83.33333%";
-    }
-
-    localStorage.setItem("fechado", 1);
-
-  }
-}
 
 //------------------------------------------------------Novo Codigo ---------------------------------------------------------------
 

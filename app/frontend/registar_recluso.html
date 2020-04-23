@@ -10,7 +10,7 @@
   <meta name="author" content="">
   <meta name="theme-color" content="#1b2c47" />
 
-  <title>BracelHertZ - Registar Funcionário</title>
+  <title>BracelHertZ - Registar Recluso</title>
   <link rel="icon" type="image/png" href="img/bracelhertzv3.png" />
 
   <!-- Custom fonts for this template-->
@@ -290,8 +290,8 @@
               <input type="checkbox" id="opendoor" name="opendoor">
               <div id="opendoor2" class="label">
                 <label style="cursor:pointer;" for="opendoor">
-                  <img id="openPuls" class="img-profile rounded-circle picNotes" src="img/pul.png"
-                    style="filter: none; display: none;">
+                  <img id="openPuls" class="img-profile rounded-circle picNotes" src="img/bracelhertzv3.png"
+                    style="filter: none; display: none; border: solid gray 0.1rem;">
                 </label>
               </div>
             </li>
@@ -309,13 +309,13 @@
             <div id="content123" class="container-fluid w-75 h-100 pr-2" style="justify-content: center">
 
               <!-- Page Heading -->
-              <h1 class="h3 mb-4 text-secondary">Adicionar Funcionário</h1>
+              <h1 class="h3 mb-4 text-secondary">Adicionar Recluso</h1>
 
               <!-- Page Container -->
               <div id="test123" class="row bg-primary">
                 <div id="test1234" class="col-lg-6 pr-0 pl-0" style="display: -webkit-inline-box;">
                   <div>
-                    <img src="img/4.jpg" id="foto123">
+                    <img style="filter: grayscale(100%);" src="img/4.jpg" id="foto123">
                   </div>
                   <div id="whereithappens" class="slideshow-container h-100"
                     style="min-inline-size: -webkit-fill-available;">
@@ -325,13 +325,13 @@
                         <h6 class="text-secondary text-center mt-4"> Bem Vindo! Pronto para criar um novo funcionário?
                         </h6>
                         <div class="txtb txtb  ml-auto mr-auto" style="width: 90%;">
-                          <input type="name" class="space1 form-control form-control-user" id="Fname"
+                          <input type="name" class="space1 form-control form-control-user" id="Rname"
                             aria-describedby="emailHelp" required>
                           <span data-placeholder="Nome"></span>
                         </div>
 
                         <div class="txtb txtb  ml-auto mr-auto" style="width: 90%;">
-                          <input type="text" class=" form-control form-control-user" id="nacionalidade"
+                          <input type="text" class="nspace1 form-control form-control-user" id="nacionalidade"
                             aria-describedby="emailHelp" required>
                           <span data-placeholder="Nacionalidade"></span>
                         </div>
@@ -505,6 +505,14 @@
           </div>
         </div>
         <!-- /.container-fluid -->
+        <audio loop id="myAudio">
+          <source src="./sounds/alert  sound.mp3" type="audio/ogg">
+          <source src="./sounds/alert  sound.mp3" type="audio/mpeg">
+        </audio>
+        
+        <div id="seeAlert">
+        </div>
+
 
       </div>
       <!-- End of Main Content -->
@@ -601,7 +609,7 @@
         reader.addEventListener("load", function () {
           var image = new Image();
           image.height = 150;
-          image.width = 150;
+          image.style.width = "auto";
           image.hspace = 17;
           image.title = file.name;
           image.src = this.result;

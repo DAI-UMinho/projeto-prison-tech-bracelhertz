@@ -234,7 +234,7 @@ async function Agenda() {
                     enviar();
                 } else {
                     Swal.fire(
-                        'Data não pode ser anterior à atual!',
+                        'Data não pode ser inferior à atual!',
                         '',
                         'warning'
                     )
