@@ -12547,7 +12547,7 @@ height: 188px; }
 
 }
 
-@media (min-width: 768px) and (max-width: 1024px){
+@media (min-width: 768px) and (max-width: 1023px){
 
   .colFfP{
     flex: 0 0 50%;
