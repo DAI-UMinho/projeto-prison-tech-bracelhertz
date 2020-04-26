@@ -232,12 +232,10 @@ function verPul() {
                 constAlert += "<div style='top:" + cnt + "vh' class='snackbar show'>O recluso " + rec.name + " está em perigo</div>";
                 cnt = cnt + 8;
             }
-            
+
             x.innerHTML += constAlert;
 
-
             //postAlert(reclusos[i].prisonerId);
-
 
         } else {
             document.getElementById(reclusos[i].prisonerId + "puls").style.color = "#5a5c69";
@@ -260,6 +258,7 @@ function verPul() {
 
 }
 
+//--------------------------------------------------------Close Alertas--------------------------------------------------------
 function AlertaSom() {
     pauseAudio();
     ha = false;
@@ -377,8 +376,8 @@ async function postAlert(recId) {
     }).then(async function (result) {
 
         if (result) {
-            //console.log("Log Criado");
-            display_ocorrencias();
+            console.log("Log Criado");
+            //dar reload
         }
     }).catch(function (err) {
         swal("Erro!", err, "error");

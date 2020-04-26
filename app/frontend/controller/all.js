@@ -77,8 +77,9 @@ async function Agenda() {
 
             if (!clicked) {
                 document.getElementById("trashSche").style.display = "none";
-                trocaClasse(document.getElementById("tab_nomeCH"), "tab_nome");
-                trocaClasse(document.getElementById("editSche"), "fas", "fa-pen");
+                trocaClasse1(document.getElementById("tab_nomeCH"), "tab_nome");
+                var neww = document.getElementById("editSche").className.replace("fa-times", "fa-pen");
+                document.getElementById("editSche").className = neww;
             }
         }
 
@@ -393,16 +394,21 @@ $('#editSche').click(function () {
     $('.testee').each(function () {
         if (!clicked) {
             this.disabled = false;
-            trocaClasse(document.getElementById("editSche"), "fas", "fa-times");
-            trocaClasse(document.getElementById("tab_nomeCH"), "tab_nome85");
+
+            var neww = document.getElementById("editSche").className.replace("fa-pen", "fa-times");
+            document.getElementById("editSche").className = neww;
+
+            trocaClasse1(document.getElementById("tab_nomeCH"), "tab_nome85");
             document.getElementById("trashSche").style.display = "inline";
 
         } else {
             this.checked = false;
             this.disabled = true;
             document.getElementById("trashSche").style.display = "none";
-            trocaClasse(document.getElementById("tab_nomeCH"), "tab_nome");
-            trocaClasse(document.getElementById("editSche"), "fas", "fa-pen");
+            trocaClasse1(document.getElementById("tab_nomeCH"), "tab_nome");
+
+            var neww = document.getElementById("editSche").className.replace("fa-times", "fa-pen");
+            document.getElementById("editSche").className = neww;
         }
     });
 
@@ -425,7 +431,6 @@ function trocaClasse(elemento, nova1, nova2) {
 function trocaClasse1(elemento, nova1, nova2) {
     elemento.className = "";
     elemento.classList.add(nova1);
-    elemento.classList.add(nova2);
 }
 
 

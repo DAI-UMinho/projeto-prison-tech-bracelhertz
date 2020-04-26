@@ -779,6 +779,9 @@ async function editar_photo(photoC) {
             'Foto apenas pode ter até 1 MB inclusive',
             'warning'
         )
+        .then(() => {
+            location.reload();
+          })
     } else {
 
 

@@ -10,9 +10,6 @@ document.getElementById("botaoEnvSMS").addEventListener("click", function () {
         )
     } else {
 
-        document.getElementById("NewPass").style.display = "block";
-        document.getElementById("username").disabled = true;
-
         const data = {};
 
         data.username = username;
@@ -41,7 +38,17 @@ document.getElementById("botaoEnvSMS").addEventListener("click", function () {
             })
             .then(async function (result) {
                 if (result) {
-                    //console.log("Sucesso");
+                    
+                    swal("Sucesso!",
+                        "Mensagem enviada!",
+                        "success")
+                        .then(() => {
+
+                            document.getElementById("NewPass").style.display = "block";
+                            document.getElementById("username").disabled = true;
+
+                        })
+
                 } else {
                     swal("Erro!", "Erro!", "error");
                     console.log(result);

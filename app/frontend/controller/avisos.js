@@ -153,7 +153,7 @@ async function display(avisos) {
 
 
                     if (comentario[1].userId == logado.userId) {
-                        true_content += "<div onclick='permiteEditarComent()' id='" + comentario[0] + "podeAlterarC'  style='display:none; padding: 26px 5px; padding-right:10px; background-color: #fed8b1; cursor: pointer;'><i class='fas fa-check text-white'></i></div>";
+                        true_content += "<div onclick='permiteEditarComent()' id='" + comentario[0] + "podeAlterarC'  style='display:none; padding-left: 5px; padding-right:10px; background-color: #fed8b1; cursor: pointer;'><i class='fas fa-check text-white'></i></div>";
                         true_content += "<div class='dropdown no-arrow tab_time' style='background-color: #fed8b1; cursor: pointer;'";
                         true_content += "<a class='dropdown-toggle' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>";
                         true_content += "<i class='fas fa-ellipsis-v fa-sm fa-fw text-white'></i></a>";
@@ -365,6 +365,10 @@ async function postInst(data) {
                     document.getElementById("descriptionN").value = "";
                     $('#NotaModal').modal('hide');
                 })
+                .then(() => {
+                    avisos();
+                })
+
         }
     }).catch(function (err) {
         swal("Erro!", "Erro!", "error");
@@ -401,6 +405,9 @@ async function postRec(data) {
                     document.getElementById("descriptionN").value = "";
                     $('#NotaModal').modal('hide');
                 })
+                .then(() => {
+                    avisos();
+                })
         }
     }).catch(function (err) {
         swal("Erro!", "Erro!", "error");
@@ -414,13 +421,29 @@ async function postRec(data) {
 
 //-----------------------------------------SELEÇÃO DE TIPO DE DESTINO DAS ANOTAÇÕES-------------------------------
 
-document.getElementById("tipoDest").addEventListener("change", function () {
+document.getElementById("tipoDest").addEventListener("change", mudarDestino);
+
+function mudarDestino() {
 
     if (document.getElementById("tipoDest").value == 1) {
         get_reclusos();
     } else {
         get_instituicoes()
     }
+
+}
+
+
+document.getElementById("filtro").addEventListener("change", function () {
+
+    if (document.getElementById("filtro").value == 1) {
+        document.getElementById("tipoDest").value = 1;
+        mudarDestino();
+    } else {
+        document.getElementById("tipoDest").value = 2;
+        mudarDestino();
+    }
+
 
 
 })
@@ -658,7 +681,8 @@ function teste2(este) {
 var comentEdit = "";
 function ativEditComent(id) {
     comentEdit = id;
-    document.getElementById(id + "podeAlterarC").style.display = "block";
+    document.getElementById(id + "podeAlterarC").style.display = "table-cell";
+    document.getElementById(id + "podeAlterarC").style.verticalAlign = "middle";
     document.getElementById(id + "coment").readOnly = false;
     document.getElementById(id + "coment").style.border = "1px solid #c0c0c0";
 }

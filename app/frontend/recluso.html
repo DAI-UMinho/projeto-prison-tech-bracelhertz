@@ -201,8 +201,8 @@
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                  <div class="row" style="justify-content: center;">
-                    <div class="col-5 mr-4" style="z-index: 100;">
+                  <div id="justRec" class="row">
+                    <div class="colr1">
                       <div class="imagem">
                         <img data-enlargable style="cursor: zoom-in; max-width: 100%;" id="fotoR" class="imagemlogo">
                         <p><input type="file" accept="image/*" name="image" id="file" onchange="loadFile(event)"
@@ -281,7 +281,7 @@
 
 
 
-                    <div class="col-5">
+                    <div class="colr2">
 
                       <div class="w-100" style="margin-top: 8px;">
                         <div class="full_tab">
@@ -300,7 +300,7 @@
                       <hr>
 
                       <!--Heart Rate-->
-                      <table class="w-100">
+                      <table class="tabelaPuls">
                         <tbody>
                           <tr>
                             <th>
@@ -331,7 +331,7 @@
 
 
 
-                        <table class="w-100" style="margin-top: 20px; margin-bottom: 20px;">
+                        <table class="tabelaPuls" style="margin-top: 20px; margin-bottom: 20px;">
                           <tr>
                             <th class="text-secondary" style="text-align: center;">Pulsação Mínima: <span
                                 class="text-black" id="minValue"></span></th>
@@ -432,7 +432,7 @@
               <div class="row">
                 <!------------------------------------------------- Registo Criminal ---------------------------------------------->
 
-                <div class="col-6">
+                <div class="colr11">
 
 
                   <div class="w-100">
@@ -456,7 +456,7 @@
                         <div id="addRegisto">
                           <div class="w-100 row">
                             <div class="col-3 mt-2">Data de emissão:</div>
-                            <input class="form-control col-4" type="date" id="dataEmissao">
+                            <input class="form-control col-5" type="date" id="dataEmissao">
                           </div>
                           <div class="w-100 form-control full_tab">
                             <input id="novoRegisto" type="text" placeholder="Escreva aqui" class="tab_nome"
@@ -473,7 +473,7 @@
                 </div>
 
                 <!----------------------------------------- Receitas Médicas ---------------------------------------->
-                <div class="col-6">
+                <div class="colr11">
 
 
                   <div class="w-100">

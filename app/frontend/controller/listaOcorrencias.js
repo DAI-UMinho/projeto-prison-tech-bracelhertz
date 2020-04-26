@@ -2,10 +2,8 @@ $(window).on("load", function () {
 
     display_ocorrencias();
 })
-
+var last10 = [];
 async function display_ocorrencias() {
-
-    var datas = [];
 
     var conteudo = [];
 
@@ -31,40 +29,40 @@ async function display_ocorrencias() {
         func[i].prisoner.prison.name,
         getDate6(func[i].createdTimestamp)])
 
-        /*
-        if (today - ver <= 1200000) {
-            datas.push(i);
-            //document.getElementById("listaOcorrencias").rows[i].style.color = "red";
-        }*/
+
+        if (today - ver <= 600000) {
+            last10.push(i);
+        }
 
 
     }
 
     $(document).ready(function () {
         $('#dataTable').DataTable({
-            data: conteudo
+            data: conteudo,
+            "order": [[3, "desc"]]
         });
     });
 
 
-    /*var t = setTimeout(function () {
-        mudarCores(datas);
-    }, 1000);*/
+
+
+    var t = setTimeout(mudarCores, 1);
 
 }
 
-/*
-function mudarCores(linhas) {
+
+function mudarCores() {
 
     var table = document.getElementById("listaOcorrencias");
 
 
-    for (var index of linhas) {
+    for (var index of last10) {
 
         var row = table.rows[index];
         row.style.color = "red";
     }
-}*/
+}
 
 
 
