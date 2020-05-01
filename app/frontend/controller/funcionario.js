@@ -82,7 +82,7 @@ $(window).on("load", function () {
     if (!(RoleLogado == "ROLE_NETWORKMAN" && perfil.roles[0].name !== "ROLE_NETWORKMAN" || RoleLogado == "ROLE_MANAGER" && perfil.roles[0].name == "ROLE_GUARD")
       || logado.prison.prisonId !== perfil.prison.prisonId && RoleLogado !== "ROLE_NETWORKMAN") {
       document.getElementById("perfil_alterar_2").style.display = "none";
-      document.getElementById("editPassoutro").style.display = "none";
+      document.getElementById("altPass").style.display = "none";
       document.getElementById("naoAnotar").style.display = "none";
     }
 

@@ -4,7 +4,6 @@ let userLogado = localStorage.getItem("userLogado");
 var listaa = {};
 var data = {};
 var clicked = false;
-var faz;
 
 Agenda();
 

@@ -388,7 +388,7 @@ async function editar_photo(photoC) {
 
 
 
-//-------------------------------------------------------------------------------------------------------
+//----------------------------------------VALIDAÇÕES----------------------------------------------------
 function validacaoEmail(field) {
   usuario = field.value.substring(0, field.value.indexOf("@"));
   dominio = field.value.substring(field.value.indexOf("@") + 1, field.value.length);
@@ -461,7 +461,7 @@ document.getElementById("perfil_alterar_2").addEventListener("click", function (
   }
 });
 
-//------------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------ATIVAR EDIÇÃO------------------------------------------------------------
 function Myfunction424() {
 
   document.getElementById("nacionalidade_perfil").readOnly = false;

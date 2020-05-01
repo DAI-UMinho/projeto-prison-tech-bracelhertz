@@ -49,7 +49,7 @@ async function display_instituicao() {
 
 
 
-//--------------------------------------EDITAR PERFIL-----------------------------------------------------
+//------------------------------------------------EDITAR INSTITUIÇÃO-----------------------------------------------------
 
 document.getElementById("perfil_save_2").addEventListener("click", editar);
 
