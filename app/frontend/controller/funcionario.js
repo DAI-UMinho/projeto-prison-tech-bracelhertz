@@ -78,12 +78,21 @@ $(window).on("load", function () {
 
 
 
-
+/*
     if (!(RoleLogado == "ROLE_NETWORKMAN" && perfil.roles[0].name !== "ROLE_NETWORKMAN" || RoleLogado == "ROLE_MANAGER" && perfil.roles[0].name == "ROLE_GUARD")
       || logado.prison.prisonId !== perfil.prison.prisonId && RoleLogado !== "ROLE_NETWORKMAN") {
       document.getElementById("perfil_alterar_2").style.display = "none";
       document.getElementById("altPass").style.display = "none";
       document.getElementById("naoAnotar").style.display = "none";
+    }*/
+
+    if(RoleLogado == "ROLE_NETWORKMAN" && perfil.roles[0].name !== "ROLE_NETWORKMAN" || 
+    RoleLogado == "ROLE_MANAGER" && perfil.roles[0].name == "ROLE_GUARD" && logado.prison.prisonId == perfil.prison.prisonId
+    || logado.prison.prisonId == perfil.prison.prisonId && RoleLogado !== "ROLE_NETWORKMAN" && perfil.roles[0].name !== "ROLE_NETWORKMAN"){
+      document.getElementById("perfil_alterar_2").style.display = "inline";
+      document.getElementById("altPass").style.display = "inline";
+      document.getElementById("naoAnotar").style.display = "block";
+      document.getElementById("podeMudar").style.display = "block";
     }
 
   }
@@ -178,7 +187,12 @@ $('.snum').keyup(function () {
   $th.val($th.val().replace(/(\s{2,})|[^\d']/g, ' '));
   $th.val($th.val().replace(/[' ']/g, ''));
 })
-
+//----------Só aceita letras e um espaço e pontos, virgulas----- regex-----------
+$('.1spaceand').keyup(function () {
+  var $th = $(this);
+  $th.val($th.val().replace(/(\s{2,})|[^a-zA-Zà-úÀ-Ú\d.,!?()$€ªº']/g, ' '));
+  $th.val($th.val().replace(/^\s*/, ''));
+})
 
 
 
@@ -446,3 +460,175 @@ document.getElementById("editPass").addEventListener("click", function () {
 })
 
 
+
+//------------------------------------------UPLOAD PHOTO------------------------------------------------------
+
+var loadFile = function (event) {
+    var image = document.getElementById('imagemPerfil');
+    image.src = URL.createObjectURL(event.target.files[0]);
+
+    const formData = new FormData();
+    formData.append("file", event.target.files[0]);
+    size = ~~(event.target.files[0].size / 1024);
+
+    editar_photo(formData);
+
+
+};
+
+
+//------------------------------------------------PUT da foto----------------------------------------------------
+async function editar_photo(photoC) {
+
+  if (parseInt(size) >= 1000) {
+      Swal.fire(
+          'Ocorreu um erro!',
+          'Foto apenas pode ter até 1 MB inclusive',
+          'warning'
+      )
+      .then(() => {
+          location.reload();
+        })
+  } else {
+
+
+      fetch('http://127.0.0.1:8080/api/prisoners/upload-photos/' + id_user_clicked, {
+          mode: 'cors',
+          method: 'PUT',
+          body: photoC,
+          credentials: 'include'
+      })
+          .then(function (response) {
+              //console.log(response.headers.get('Set-Cookie'));
+              console.log(response);
+              if (!response.ok) {
+                  throw new Error(response.statusText);
+              }
+              return response.json();
+          })
+          .catch(function (err) {
+              //swal.showValidationError('Pedido falhado: ' + err);
+              console.log(err); // estava alert(err); coloquei console log para não estar sempre a aparecer pop-up ao utilizador
+          })
+          .then(async function (result) {
+              console.log(result);
+              if (result) {
+
+
+
+                  const Toast = Swal.mixin({
+                      toast: true,
+                      position: 'top-end',
+                      showConfirmButton: false,
+                      timer: 1000,
+                      timerProgressBar: true,
+                      onOpen: (toast) => {
+                          toast.addEventListener('mouseenter', Swal.stopTimer)
+                          toast.addEventListener('mouseleave', Swal.resumeTimer)
+                      }
+                  })
+
+                  Toast.fire({
+                      icon: 'success',
+                      title: 'Dados alterados com sucesso'
+                  })
+
+
+
+              }
+              else {
+                  swal("Erro!", "Erro!", "error")
+                  .then(() => {
+                      location.reload();
+                  })
+                  console.log(result);
+                  //swal({ title: `${result.value.userMessage.message.pt}` });
+              }
+          });
+
+
+  }
+
+}
+
+
+
+//------------------------------------VALIDAR PASSWORD----------------------------------------
+function valida() {
+  if (document.getElementById("nPassword").validity.patternMismatch) {
+
+    return true;
+  } else {
+
+    return false;
+  }
+
+}
+
+
+var myInput420 = document.getElementById("nPassword");
+var letter420 = document.getElementById("letter420");
+var capital420 = document.getElementById("capital420");
+var number420 = document.getElementById("number420");
+var length420 = document.getElementById("length420");
+var lengt420 = document.getElementById("lengt420");
+
+
+myInput420.onfocus = function () {
+  document.getElementById("message").style.display = "block";
+}
+
+
+myInput420.onblur = function () {
+  document.getElementById("message").style.display = "none";
+}
+
+myInput420.onkeyup = function () {
+
+  var lowerCaseLetters = /[a-z]/g;
+  if (myInput420.value.match(lowerCaseLetters)) {
+    letter420.classList.remove("invalid420");
+    letter420.classList.add("valid420");
+  } else {
+    letter420.classList.remove("valid420");
+    letter420.classList.add("invalid420");
+  }
+
+  var upperCaseLetters = /[A-Z]/g;
+  if (myInput420.value.match(upperCaseLetters)) {
+    capital420.classList.remove("invalid420");
+    capital420.classList.add("valid420");
+  } else {
+    capital420.classList.remove("valid420");
+    capital420.classList.add("invalid420");
+  }
+
+  var numbers = /[0-9]/g;
+  if (myInput420.value.match(numbers)) {
+    number420.classList.remove("invalid420");
+    number420.classList.add("valid420");
+  } else {
+    number420.classList.remove("valid420");
+    number420.classList.add("invalid420");
+  }
+
+  if (myInput420.value.length >= 6) {
+    length420.classList.remove("invalid420");
+    length420.classList.add("valid420");
+    lengt420.classList.remove("invalid420");
+    lengt420.classList.add("valid420");
+  } else {
+    length420.classList.remove("valid420");
+    length420.classList.add("invalid420");
+    lengt420.classList.remove("valid420");
+    lengt420.classList.add("invalid420");
+  }
+
+  if (myInput420.value.length <= 24 && myInput420.value.length >= 6) {
+    lengt420.classList.remove("invalid420");
+    lengt420.classList.add("valid420");
+  } else {
+    lengt420.classList.remove("valid420");
+    lengt420.classList.add("invalid420");
+  }
+}

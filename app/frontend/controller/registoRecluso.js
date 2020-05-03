@@ -437,3 +437,74 @@ inPul.onkeyup = function () {
     document.getElementById("mmaxHB").disabled = true;
   }
 }
+
+//--------------------------------------Adicionar crime ao registo criminal----------------------------------------------
+document.getElementById("addCrime").addEventListener("click", function () {
+
+  var texto = document.getElementById("newCrime").value.trim();
+
+  if (texto !== "") {
+    var list = document.getElementById('listCrimes');
+
+    var newElement = document.createElement('LI');
+    var element = "";
+
+    element += "<div class='full_tab'><div class='tab_nome'>" + texto + "</div>";
+    element += "<button onclick=removeCrime(this) style='background-color: transparent; border: none;' class='tab_time'><i class='fas fa-trash'></i></button>";
+    element += "<br></div>";
+
+    list.appendChild(newElement);
+    newElement.innerHTML = element;
+
+    document.getElementById("newCrime").value = "";
+  }
+
+})
+
+//---------------------------------------------Remover crime do registo criminal----------------------------------------------
+
+function removeCrime(element) {
+  var apagar = element.parentNode.parentNode
+  var list = document.getElementById('listCrimes');
+  list.removeChild(apagar)
+}
+
+
+//--------------------------------------Adicionar cuidados médicos----------------------------------------------
+document.getElementById("addCuidado").addEventListener("click", function () {
+
+  var texto = document.getElementById("newCuidado").value.trim();
+
+  if (texto !== "") {
+    var list = document.getElementById('listCuidados');
+
+    var newElement = document.createElement('LI');
+    var element = "";
+
+    element += "<div class='full_tab'><div class='tab_nome'>" + texto + "</div>";
+    element += "<button onclick=removeCuidado(this) style='background-color: transparent; border: none;' class='tab_time'><i class='fas fa-trash'></i></button>";
+    element += "<br></div>";
+
+    list.appendChild(newElement);
+    newElement.innerHTML = element;
+
+    document.getElementById("newCuidado").value = "";
+  }
+
+})
+
+//---------------------------------------------Remover cuidados médicos----------------------------------------------
+
+function removeCuidado(element) {
+  var apagar = element.parentNode.parentNode
+  var list = document.getElementById('listCuidados');
+  list.removeChild(apagar)
+}
+
+
+//----------Só aceita letras e um espaço e pontos, virgulas----------------
+$('.1spaceand').keyup(function () {
+  var $th = $(this);
+  $th.val($th.val().replace(/(\s{2,})|[^a-zA-Zà-úÀ-Ú\d.,!?()$€ªº']/g, ' '));
+  $th.val($th.val().replace(/^\s*/, ''));
+})

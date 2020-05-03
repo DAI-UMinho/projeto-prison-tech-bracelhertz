@@ -422,6 +422,39 @@
                     </div>
 
                     <div id="whereithappens3" class="card mySlides fade2 mb-5 pb-3" style="display: block;">
+                      <h4 class="text-secondary text-center mt-4"><strong>Registo Criminal</strong><br></h4>
+                      <div class="card-body mx-auto form-control"
+                        style="width: 90%; height: 315px; overflow-y: scroll;">
+                        <div>Listagem dos crimes</div>
+                        <ul id="listCrimes">
+
+                        </ul>
+                      </div>
+                      <br>
+                      <div class="w-100 form-control full_tab90 mx-auto" style="width: 90%;">
+                        <input id="newCrime" type="text" placeholder="Escreva aqui o crime..." class="1spaceand tab_nome" style="border: none;">
+                        <span id="addCrime" class="fa fa-plus-circle cursor-pointer tab_time" style="text-align: right;"></span>
+                      </div>
+
+                    </div>
+
+                    <div id="whereithappens3" class="card mySlides fade2 mb-5 pb-3" style="display: block;">
+                      <h4 class="text-secondary text-center mt-4"><strong>Cuidados médicos</strong><br></h4>
+                      <div class="card-body mx-auto form-control"
+                        style="width: 90%; height: 315px; overflow-y: scroll;">
+                        <div>Listagem dos cuidados necessários</div>
+                        <ul id="listCuidados">
+
+                        </ul>
+                      </div>
+                      <br>
+                      <div class="w-100 form-control full_tab90 mx-auto" style="width: 90%;">
+                        <input id="newCuidado" type="text" placeholder="Escreva aqui os cuidados a ter..." class="1spaceand tab_nome" style="border: none;">
+                        <span id="addCuidado" class="fa fa-plus-circle cursor-pointer tab_time" style="text-align: right;"></span>
+                      </div>
+
+                    </div>
+                    <div id="whereithappens3" class="card mySlides fade2 mb-5 pb-3" style="display: block;">
                       <h4 class="text-secondary text-center mt-4"> <strong> Pulseira</strong><br></h4>
 
                       <div class="container mt-4 ml-2">
@@ -486,6 +519,8 @@
                   <span class="dot dot2" onclick="currentSlide(1)">Passo 1</span>
                   <span class="dot dot2" onclick="currentSlide(2)">Passo 2</span>
                   <span class="dot dot2" onclick="currentSlide(3)">Passo 3</span>
+                  <span class="dot dot2" onclick="currentSlide(4)">Passo 4</span>
+                  <span class="dot dot2" onclick="currentSlide(5)">Passo 5</span>
                 </div>
               </div>
 
@@ -509,7 +544,7 @@
           <source src="./sounds/alert  sound.mp3" type="audio/ogg">
           <source src="./sounds/alert  sound.mp3" type="audio/mpeg">
         </audio>
-        
+
         <div id="seeAlert">
         </div>
 
@@ -651,6 +686,15 @@
         console.log('SW register failed');
       }
     }
+  </script>
+
+  <script type="text/javascript">
+    $('.adjustAuto').on('input', function () {
+      this.style.height = 'auto';
+
+      this.style.height =
+        (this.scrollHeight) + 'px';
+    }); 
   </script>
 
 

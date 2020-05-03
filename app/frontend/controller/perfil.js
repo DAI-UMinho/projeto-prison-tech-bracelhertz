@@ -318,9 +318,9 @@ async function editar_photo(photoC) {
       'Foto apenas pode ter até 1 MB inclusive',
       'warning'
     )
-    .then(() => {
-      location.reload();
-    })
+      .then(() => {
+        location.reload();
+      })
   } else {
 
 
@@ -372,9 +372,9 @@ async function editar_photo(photoC) {
         }
         else {
           swal("Erro!", "Erro!", "error")
-          .then(() => {
-            location.reload();
-          })
+            .then(() => {
+              location.reload();
+            })
           console.log(result);
           //swal({ title: `${result.value.userMessage.message.pt}` });
         }
@@ -444,7 +444,12 @@ $('.snum').keyup(function () {
   $th.val($th.val().replace(/(\s{2,})|[^\d']/g, ' '));
   $th.val($th.val().replace(/[' ']/g, ''));
 })
-
+//----------Só aceita letras e um espaço e pontos, virgulas----------------
+$('.1spaceand').keyup(function () {
+  var $th = $(this);
+  $th.val($th.val().replace(/(\s{2,})|[^a-zA-Zà-úÀ-Ú\d.,!?()$€ªº']/g, ' '));
+  $th.val($th.val().replace(/^\s*/, ''));
+})
 
 
 
@@ -535,59 +540,147 @@ document.getElementById("editPass").addEventListener("click", function () {
       )
     } else {
 
-      data.oldPassword = aPassword.value.trim();
-      data.newPassword = nPassword.value.trim();
+      if (valida()) {
+        Swal.fire(
+          'Palavra-passe não cumpre os requisitos!',
+          '',
+          'warning'
+        )
+      } else {
+
+        data.oldPassword = aPassword.value.trim();
+        data.newPassword = nPassword.value.trim();
 
 
-      fetch('http://127.0.0.1:8080/api/users/logged-passwords', {
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        mode: 'cors',
-        method: 'PUT',
-        body: JSON.stringify(data),
-        credentials: 'include'
-      })
-        .then(function (response) {
-          //console.log(response.headers.get('Set-Cookie'));
-          console.log(response);
-          if (!response.ok) {
-            throw new Error(response.statusText);
-          }
-          return response.json();
+        fetch('http://127.0.0.1:8080/api/users/logged-passwords', {
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          mode: 'cors',
+          method: 'PUT',
+          body: JSON.stringify(data),
+          credentials: 'include'
         })
-        .catch(function (err) {
-          //swal.showValidationError('Pedido falhado: ' + err);
-          console.log(err); // estava alert(err); coloquei console log para não estar sempre a aparecer pop-up ao utilizador
-        })
-        .then(async function (result) {
-          console.log(result);
-          if (result) {
-
-            Swal.fire(
-              'Password alterada com sucesso!',
-              '',
-              'success'
-            ).then(() => {
-              location.reload();
-            })
-
-
-          }
-          else {
-            Swal.fire(
-              'Ocorreu um erro!',
-              '',
-              'error'
-            )
+          .then(function (response) {
+            //console.log(response.headers.get('Set-Cookie'));
+            console.log(response);
+            if (!response.ok) {
+              throw new Error(response.statusText);
+            }
+            return response.json();
+          })
+          .catch(function (err) {
+            //swal.showValidationError('Pedido falhado: ' + err);
+            console.log(err); // estava alert(err); coloquei console log para não estar sempre a aparecer pop-up ao utilizador
+          })
+          .then(async function (result) {
             console.log(result);
-            //swal({ title: `${result.value.userMessage.message.pt}` });
-          }
-        });
+            if (result) {
+
+              Swal.fire(
+                'Password alterada com sucesso!',
+                '',
+                'success'
+              ).then(() => {
+                location.reload();
+              })
 
 
+            }
+            else {
+              Swal.fire(
+                'Ocorreu um erro!',
+                '',
+                'error'
+              )
+              console.log(result);
+              //swal({ title: `${result.value.userMessage.message.pt}` });
+            }
+          });
+
+      }
 
     }
   }
 
 })
+
+//------------------------------------VALIDAR PASSWORD----------------------------------------
+function valida() {
+  if (document.getElementById("nPassword").validity.patternMismatch) {
+
+    return true;
+  } else {
+
+    return false;
+  }
+
+}
+
+
+var myInput420 = document.getElementById("nPassword");
+var letter420 = document.getElementById("letter420");
+var capital420 = document.getElementById("capital420");
+var number420 = document.getElementById("number420");
+var length420 = document.getElementById("length420");
+var lengt420 = document.getElementById("lengt420");
+
+
+myInput420.onfocus = function () {
+  document.getElementById("message").style.display = "block";
+}
+
+
+myInput420.onblur = function () {
+  document.getElementById("message").style.display = "none";
+}
+
+myInput420.onkeyup = function () {
+
+  var lowerCaseLetters = /[a-z]/g;
+  if (myInput420.value.match(lowerCaseLetters)) {
+    letter420.classList.remove("invalid420");
+    letter420.classList.add("valid420");
+  } else {
+    letter420.classList.remove("valid420");
+    letter420.classList.add("invalid420");
+  }
+
+  var upperCaseLetters = /[A-Z]/g;
+  if (myInput420.value.match(upperCaseLetters)) {
+    capital420.classList.remove("invalid420");
+    capital420.classList.add("valid420");
+  } else {
+    capital420.classList.remove("valid420");
+    capital420.classList.add("invalid420");
+  }
+
+  var numbers = /[0-9]/g;
+  if (myInput420.value.match(numbers)) {
+    number420.classList.remove("invalid420");
+    number420.classList.add("valid420");
+  } else {
+    number420.classList.remove("valid420");
+    number420.classList.add("invalid420");
+  }
+
+  if (myInput420.value.length >= 6) {
+    length420.classList.remove("invalid420");
+    length420.classList.add("valid420");
+    lengt420.classList.remove("invalid420");
+    lengt420.classList.add("valid420");
+  } else {
+    length420.classList.remove("valid420");
+    length420.classList.add("invalid420");
+    lengt420.classList.remove("valid420");
+    lengt420.classList.add("invalid420");
+  }
+
+  if (myInput420.value.length <= 24 && myInput420.value.length >= 6) {
+    lengt420.classList.remove("invalid420");
+    lengt420.classList.add("valid420");
+  } else {
+    lengt420.classList.remove("valid420");
+    lengt420.classList.add("invalid420");
+  }
+}

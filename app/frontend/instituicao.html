@@ -37,7 +37,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a id="dashBoard" class="sidebar-brand d-flex align-items-center justify-content-center" href="dashboard.html">
+      <a id="dashBoard" class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
         <div class="sidebar-brand-icon ">
           <img class="fas fa-laugh-wink logo1" src="img/pul.png">
         </div>
@@ -92,7 +92,7 @@
       </li>
 
       <!-- Nav Item - Tables -->
-      <li class="nav-item" id="showInst">
+      <li class="nav-item" id="showInst" style="display: none;">
         <a class="nav-link" href="listafuncionarios.html">
           <img src="img/policeG.png" class="imgSide">
           <span>Funcionários</span></a>
@@ -182,8 +182,8 @@
                         <div class="tab_nome" style="width:70%">Fotografia</div>
                         <p><input type="file" accept="image/*" name="image" id="file" onchange="loadFile(event)"
                             style="display: none;"></p>
-                        <p id="EditFoto" style="display: none;"><label for="file" id="foto420" class="mb-0 text-uppercase"
-                            style="cursor: pointer;">Editar</label></p>
+                            <p id="podeMudar" style="display: none;"><label for="file" id="EditFoto" class="mb-0 text-uppercase"
+                              style="cursor: pointer;"><img class="sizeEditImg" src="img/editIMG1.png"></label></p>
                       </div>
                     </div>
                     <!-- Card Body -->
@@ -316,13 +316,15 @@
                   <!-- Card Header - Dropdown -->
                   <div class="card-header py-3 bg-secondary">
                     <div class="m-0 font-weight-bold text-white full_tab">
-                      <div class="tab_nome">Anotações refentes ao utilizador</div>
+                      <div class="tab_nome">Anotações refentes à instituição</div>
+                      <div id="naoAnotar" style="display: none;">
                       <div class="d-flex" type="button">
                         <div type="button" data-toggle="modal" data-target="#NotaModal"
                           class="d-flex d-sm btn btn-sm btn-white font-weight-bold shadow-sm"><i
                             class="mt-1 mr-1 fas fa-plus fa-xs tab_time text-secondary"></i> Adicionar</div>
                       </div>
                     </div>
+                  </div>
                   </div>
 
                   <!-- Card Body -->
@@ -437,9 +439,9 @@
           </button>
         </div>
         <div class="modal-body">
-          <textarea id="titleN" class="form-control mb-1 textarea2" rows="1" cols="1"
+          <textarea id="titleN" class="1spaceand form-control mb-1 textarea2" rows="1" cols="1"
             placeholder="Assunto (título)"></textarea>
-          <textarea id="descriptionN" class="form-control textarea1" rows="6" cols="60"
+          <textarea id="descriptionN" class="1spaceand form-control textarea1" rows="6" cols="60"
             placeholder="Escreva aqui a nota"></textarea>
         </div>
         <div class="modal-footer">

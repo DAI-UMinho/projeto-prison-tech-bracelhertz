@@ -43,7 +43,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a id="dashBoard" class="sidebar-brand d-flex align-items-center justify-content-center" href="dashboard.html">
+      <a id="dashBoard" class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
         <div class="sidebar-brand-icon ">
           <img class="fas fa-laugh-wink logo1" src="img/pul.png">
         </div>
@@ -98,7 +98,7 @@
       </li>
 
       <!-- Nav Item - Tables -->
-      <li class="nav-item" id="showInst">
+      <li class="nav-item" id="showInst" style="display: none;">
         <a class="nav-link" href="listafuncionarios.html">
           <img src="img/policeG.png" class="imgSide">
           <span>Funcionários</span></a>
@@ -194,7 +194,7 @@
                           <p><input type="file" accept="image/*" name="image" id="file" onchange="loadFile(event)"
                               style="display: none;"></p>
                           <p><label for="file" id="foto420" class="mb-0 text-uppercase"
-                              style="cursor: pointer;">Editar</label></p>
+                              style="cursor: pointer;"><img class="sizeEditImg" src="img/editIMG1.png"></label></p>
                         </div>
                       </div>
                       <!--Card Body -->
@@ -433,7 +433,7 @@
                           <div class="form-control" style="height: 50px">
                             <h5 class="card-title form-control420" style="width:85px;"><strong>Morada</strong></h5>
                             <div style="display: unset;">
-                              <input type="text" class="h6 ml-2 text-primary font-weight-600" id="morada_perfil"
+                              <input type="text" class="1spaceand h6 ml-2 text-primary font-weight-600" id="morada_perfil"
                                 style="width: 80%; border: none; background-color: transparent;" readonly="true">
                               <i id="icon_morada_perfil" class="fas fa-pen text-primary bg-transparent pr-3"
                                 style="float:right; display: none"></i>
@@ -555,13 +555,40 @@
 
 
           <div class="txtb" id="paraPass">
-            <input type="password" id="nPassword" name="nPassword" class="form-control form-control-user">
+            <input type="password" id="nPassword" name="nPassword" class="form-control form-control-user"
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,24}" required>
             <span data-placeholder="Nova Password"></span>
             <div class="eye slash" onclick="togglePW()"
               style="float: right;margin-top: -6%;margin-right: 4%;color:#1b2c47;">
               <div></div>
               <div></div>
             </div>
+          </div>
+
+
+          <div id="message" style="display: none;">
+            <h6 class="mb-2 font-weight-bold">Password deve conter:</h6>
+            <div class="row">
+              <div class="col-6">
+                <p id="letter420" class="invalid420">Uma <b>letra minúscula</b></p>
+
+              </div>
+              <div class="col-6">
+                <p id="capital420" class="invalid420">Uma <b>letra maiúscula</b></p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <p id="length420" class="invalid420">Mínimo <b>6 caracteres</b></p>
+
+              </div>
+              <div class="col-6">
+                <p id="lengt420" class="invalid420">Máximo <b>24 caracteres</b></p>
+              </div>
+            </div>
+            <p id="number420" class="invalid420">Um <b>número</b></p>
+
+
           </div>
 
 

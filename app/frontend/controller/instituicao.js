@@ -26,7 +26,6 @@ async function display_instituicao() {
     });
     const instituicao = await response.json();
 
-
     const response7 = await fetch('http://127.0.0.1:8080/api/photos/' + instituicao.photoId, {
         headers: {
             'Content-Type': 'application/json'
@@ -45,6 +44,26 @@ async function display_instituicao() {
     document.getElementById("email_inst").value = instituicao.email;
     document.getElementById("contacto_inst").value = instituicao.contact;
     document.getElementById("prisonDescrip").value = instituicao.description;
+
+
+    const response5 = await fetch('http://127.0.0.1:8080/api/users/logged-profiles', {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        mode: 'cors',
+        method: 'GET',
+        credentials: 'include'
+    });
+    const logado = await response5.json();
+
+    if (logado.prison.prisonId == instituicao.prisonId && RoleLogado !== "ROLE_NETWORKMAN") {
+        document.getElementById("naoAnotar").style.display = "block";
+    }
+    if(RoleLogado == "ROLE_NETWORKMAN"){
+        document.getElementById("podeMudar").style.display="block";
+    }
+
+
 }
 
 
@@ -232,7 +251,12 @@ $('.snum').keyup(function () {
     $th.val($th.val().replace(/(\s{2,})|[^\d']/g, ' '));
     $th.val($th.val().replace(/[' ']/g, ''));
 })
-
+//----------Só aceita letras e um espaço e pontos, virgulas----- regex-----------
+$('.1spaceand').keyup(function () {
+    var $th = $(this);
+    $th.val($th.val().replace(/(\s{2,})|[^a-zA-Zà-úÀ-Ú\d.,!?()$€ªº']/g, ' '));
+    $th.val($th.val().replace(/^\s*/, ''));
+})
 
 //------------------------------------------------------------------------------------------------------------
 
@@ -307,14 +331,14 @@ async function editar_photo(photoC) {
 
     if (parseInt(size) >= 1000) {
         Swal.fire(
-          'Ocorreu um erro!',
-          'Foto apenas pode ter até 1 MB inclusive',
-          'warning'
+            'Ocorreu um erro!',
+            'Foto apenas pode ter até 1 MB inclusive',
+            'warning'
         )
-        .then(() => {
-          location.reload();
-        })
-      }else{
+            .then(() => {
+                location.reload();
+            })
+    } else {
 
         fetch('http://127.0.0.1:8080/api/prisons/upload-photos/' + id_inst_clicked, {
             mode: 'cors',
@@ -337,9 +361,9 @@ async function editar_photo(photoC) {
             .then(async function (result) {
                 console.log(result);
                 if (result) {
-    
-    
-    
+
+
+
                     const Toast = Swal.mixin({
                         toast: true,
                         position: 'top-end',
@@ -351,14 +375,14 @@ async function editar_photo(photoC) {
                             toast.addEventListener('mouseleave', Swal.resumeTimer)
                         }
                     })
-    
+
                     Toast.fire({
                         icon: 'success',
                         title: 'Dados alterados com sucesso'
                     })
-    
-    
-    
+
+
+
                 }
                 else {
                     Swal.fire(
@@ -372,10 +396,10 @@ async function editar_photo(photoC) {
                     //swal({ title: `${result.value.userMessage.message.pt}` });
                 }
             });
-    
 
 
-      }
+
+    }
 
 
 

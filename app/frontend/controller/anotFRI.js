@@ -114,7 +114,7 @@ async function displayAnot(avisos) {
             true_content += "</div>";
             true_content += "<div class='card-body'>";
 
-            true_content += "<div>Titulo: " + aviso[3] + "</div><textarea id='" + aviso[0] + "text' class='alterar form-control' style='resize: none; border: none; background-color:transparent;' readonly='true'>" + aviso[4] + "</textarea>";
+            true_content += "<div>Titulo: " + aviso[3] + "</div><textarea id='" + aviso[0] + "text' class='1spaceand alterar form-control' style='resize: none; border: none; background-color:transparent;' readonly='true'>" + aviso[4] + "</textarea>";
 
 
 
@@ -148,7 +148,7 @@ async function displayAnot(avisos) {
 
                     true_content += "<div class='caixa-de-cometario-interior mt-1 mg-1 full_tab90' id='" + comentario[0] + "'><div class='comentario2 tab_nome'>";
                     true_content += "<div class='w-100'><img class='img-profile rounded-circle picNotes mt-1 ml-1' src=" + "data:image/png;base64," + photoC.picByte + "> " + comentario[1].name + "</div>";
-                    true_content += "<textarea id='" + comentario[0] + "coment' class='font-small text-gray-600 my-1 ml-3'";
+                    true_content += "<textarea id='" + comentario[0] + "coment' class='1spaceand font-small text-gray-600 my-1 ml-3'";
                     true_content += "readonly='true' style='width: 90%; background-color: transparent; resize: none; border: none; height: 24px; overflow-y: hidden;'>";
                     true_content += "" + comentario[4] + "</textarea></div>";
 
@@ -174,7 +174,7 @@ async function displayAnot(avisos) {
 
 
 
-            true_content += "<div class='input-group'><input id='" + aviso[0] + "Input' type='text' class='form-control bg-light border-0 small mt-2' placeholder='Comente aqui...' aria-label='Add' aria-describedby='basic-addon2'>"
+            true_content += "<div class='input-group'><input id='" + aviso[0] + "Input' type='text' class='1spaceand form-control bg-light border-0 small mt-2' placeholder='Comente aqui...' aria-label='Add' aria-describedby='basic-addon2'>"
             true_content += "<div class='input-group-append'><button onclick='subComent(this.id)' id='" + aviso[0] + "Submit' class='btn btn-secondary mt-2' type='button'>"
             true_content += "<i class='fas fa-envelope fa-sm'></i></button></div></div></div></div></div>"
 
@@ -185,6 +185,17 @@ async function displayAnot(avisos) {
 
     //envia a para a pagina
     real_content.innerHTML = true_content;
+
+
+
+//----------Só aceita letras e um espaço e pontos, virgulas---regex-------------
+$('.1spaceand').keyup(function () {
+    var $th = $(this);
+    $th.val($th.val().replace(/(\s{2,})|[^a-zA-Zà-úÀ-Ú\d.,!?()$€ªº']/g, ' '));
+    $th.val($th.val().replace(/^\s*/, ''));
+  })
+
+
 }
 
 
@@ -349,6 +360,7 @@ async function novaNota() {
 
         if (Anot == "inst") {
             data.prisonDestId = id_inst_clicked;
+            console.log(data)
             await fetch('http://127.0.0.1:8080/api/prison-annotations', {
                 headers: {
                     'Content-Type': 'application/json'
@@ -760,3 +772,11 @@ async function eliminarComentario(anotDelete) {
 
 
 }
+
+
+//----------Só aceita letras e um espaço e pontos, virgulas---regex-------------
+$('.1spaceand').keyup(function () {
+    var $th = $(this);
+    $th.val($th.val().replace(/(\s{2,})|[^a-zA-Zà-úÀ-Ú\d.,!?()$€ªº']/g, ' '));
+    $th.val($th.val().replace(/^\s*/, ''));
+  })

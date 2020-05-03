@@ -52,26 +52,55 @@ $(window).on("load", function () {
             const logado = await response.json();
 
 
+            /*
+                        if (RoleLogado == "ROLE_MANAGER") {
+                            if (recluso.prison.prisonId !== logado.prison.prisonId) {
+                                document.getElementById("perfil_alterar_2").style.display = "none";
+                                document.getElementById("editRegisto").style.display = "none";
+                                document.getElementById("editFicha").style.display = "none";
+                                document.getElementById("addRegisto").style.display = "none";
+                                document.getElementById("addFicha").style.display = "none";
+                                document.getElementById("naoAnotar").style.display = "none";
+                                document.getElementById("switchAB").style.display = "none";
+                                document.getElementById("podeMudar").style.display = "none";
+                            }
+                        } else {
+                            if (RoleLogado !== "ROLE_NETWORKMAN") {
+                                document.getElementById("editRegisto").style.display = "none";
+                                document.getElementById("editFicha").style.display = "none";
+                                document.getElementById("addRegisto").style.display = "none";
+                                document.getElementById("addFicha").style.display = "none";
+                                //document.getElementById("switchAB").style.display = "none";
+                                document.getElementById("podeMudar").style.display = "none";
+                            }
+                        }
+                        */
 
-            if (RoleLogado == "ROLE_MANAGER") {
-                if (recluso.prison.prisonId !== logado.prison.prisonId) {
-                    document.getElementById("perfil_alterar_2").style.display = "none";
-                    document.getElementById("editRegisto").style.display = "none";
-                    document.getElementById("editFicha").style.display = "none";
-                    document.getElementById("addRegisto").style.display = "none";
-                    document.getElementById("addFicha").style.display = "none";
-                    document.getElementById("naoAnotar").style.display = "none";
-                    document.getElementById("switchAB").style.display = "none";
-                    document.getElementById("podeMudar").style.display = "none";
+            if (RoleLogado == "ROLE_MANAGER" || RoleLogado == "ROLE_NETWORKMAN") {
+                if (recluso.prison.prisonId == logado.prison.prisonId || RoleLogado == "ROLE_NETWORKMAN") {
+                    document.getElementById("perfil_alterar_2").style.display = "inline";
+                    document.getElementById("editRegisto").style.display = "inline";
+                    document.getElementById("editFicha").style.display = "inline";
+                    document.getElementById("addRegisto").style.display = "inline";
+                    document.getElementById("addFicha").style.display = "block";
+                    document.getElementById("naoAnotar").style.display = "block";
+                    document.getElementById("switchAB").style.display = "block";
+                    document.getElementById("podeMudar").style.display = "block";
                 }
             } else {
-                if (RoleLogado !== "ROLE_NETWORKMAN") {
-                    document.getElementById("editRegisto").style.display = "none";
-                    document.getElementById("editFicha").style.display = "none";
-                    document.getElementById("addRegisto").style.display = "none";
-                    document.getElementById("addFicha").style.display = "none";
-                    //document.getElementById("switchAB").style.display = "none";
-                    document.getElementById("podeMudar").style.display = "none";
+                if (RoleLogado == "ROLE_GUARD") {
+                    if (recluso.prison.prisonId == logado.prison.prisonId) {
+                        document.getElementById("perfil_alterar_2").style.display = "inline";
+                        document.getElementById("naoAnotar").style.display = "block";
+                        document.getElementById("switchAB").style.display = "block";
+                        /*
+                        document.getElementById("editRegisto").style.display = "inline";
+                        document.getElementById("editFicha").style.display = "inline";
+                        document.getElementById("addRegisto").style.display = "inline";
+                        document.getElementById("addFicha").style.display = "block";
+                        //document.getElementById("switchAB").style.display = "none";
+                        document.getElementById("podeMudar").style.display = "block";*/
+                    }
                 }
             }
 
@@ -635,6 +664,12 @@ $('.snum').keyup(function () {
     $th.val($th.val().replace(/(\s{2,})|[^\d']/g, ' '));
     $th.val($th.val().replace(/[' ']/g, ''));
 })
+//----------Só aceita letras e um espaço e pontos, virgulas----- regex-----------
+$('.1spaceand').keyup(function () {
+    var $th = $(this);
+    $th.val($th.val().replace(/(\s{2,})|[^a-zA-Zà-úÀ-Ú\d.,!?()$€ªº']/g, ' '));
+    $th.val($th.val().replace(/^\s*/, ''));
+})
 
 
 
@@ -779,9 +814,9 @@ async function editar_photo(photoC) {
             'Foto apenas pode ter até 1 MB inclusive',
             'warning'
         )
-        .then(() => {
-            location.reload();
-          })
+            .then(() => {
+                location.reload();
+            })
     } else {
 
 
@@ -831,9 +866,9 @@ async function editar_photo(photoC) {
                 }
                 else {
                     swal("Erro!", "Erro!", "error")
-                    .then(() => {
-                        location.reload();
-                    })
+                        .then(() => {
+                            location.reload();
+                        })
                     console.log(result);
                     //swal({ title: `${result.value.userMessage.message.pt}` });
                 }

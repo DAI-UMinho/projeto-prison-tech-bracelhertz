@@ -9,6 +9,8 @@ $(window).on("load", function () {
 
     if (RoleLogado1 == "ROLE_GUARD") {
         display_pulsacao();
+    } else {
+        var t = setTimeout(puls1Rec, 1);
     }
 
     if (RoleLogado1 !== "ROLE_GUARD") {
@@ -25,15 +27,27 @@ $(window).on("load", function () {
 
 })
 
+//-------------------------------------------------------------AJUSTAR A BARRA DOS BATIMENTOS---------------------------------------------------------
+$(document).on('scroll', function () {
+    var scrollDistance = $(this).scrollTop();
+    if (scrollDistance < 52) {
+        var def = 95 - scrollDistance - 7;
+        document.getElementById("rec12").style.top = def + "px";
+    } else {
+        document.getElementById("rec12").style.top = "0";
+    }
+});
 
+//---------------------------------------------------------------TROCAR CLASSES DOS ELEMENTOS---------------------------------------------------------
 function trocaClasse(elemento, nova1) {
     elemento.className = "";
     elemento.classList.add(nova1);
 }
 
 
-async function display_pulsacao() {
 
+//----------------------------------------------FUNÇÃO DE DISPLAY DAS PULSAÇÕES NA BARA DOS BATIMENTOS--------------------------------------
+async function display_pulsacao() {
 
 
     const response = await fetch('http://127.0.0.1:8080/api/alert-prisoners', {
@@ -84,6 +98,7 @@ async function display_pulsacao() {
 
     //envia a para a pagina
     tPulsacoes.innerHTML = see_puls;
+
     procurarPul();
 
 }
@@ -123,9 +138,9 @@ async function display_infoPerfil() {
     var avatarUser = document.getElementById("avatarUser");
 
 
-    if (RoleLogado == "ROLE_GUARD") {
-        document.getElementById("showInst").style.display = "none";
-        document.getElementById("dashBoard").href = "#";
+    if (RoleLogado !== "ROLE_GUARD") {
+        document.getElementById("showInst").style.display = "block";
+        document.getElementById("dashBoard").href = "dashboard.html";
     }
 
 
@@ -206,8 +221,22 @@ function procurarPul() {
     verPul();
 }
 
+//--------------------------------Pulsação na pagina de recluso se não for guarda----------------------------------------------
+
+function puls1Rec() {
+    if (document.getElementById("pulsRec") !== null) {
+        for (var br of bracelt) {
+            if (br == parseInt(document.getElementById("id_pulseira").value.trim())) {
+                var pulse = Math.floor(Math.random() * parseInt(document.getElementById("maxValue").innerHTML)) + parseInt(document.getElementById("minValue").innerHTML)
+                document.getElementById("pulsRec").innerHTML = pulse;
+            }
+        }
+    }
+    var t = setTimeout(puls1Rec, 3000);
+}
 
 
+//--------------------------------Pulsação na pagina de recluso e na barra lateral-------------------------------------------------
 function verPul() {
     var ha = false;
     let cnt = 16;
@@ -217,6 +246,14 @@ function verPul() {
 
         var pulse = Math.floor(Math.random() * reclusos[i].maxHB) + reclusos[i].minHB
         document.getElementById(reclusos[i].prisonerId + "puls").innerHTML = pulse + " bpm";
+
+        if (document.getElementById("pulsRec") !== null) {
+
+            if (reclusos[i].braceletId == document.getElementById("id_pulseira").value.trim()) {
+                document.getElementById("pulsRec").innerHTML = pulse;
+            }
+
+        }
 
         let arrayAlert = [];
         //if (pulse >= reclusos[i].maxHB || pulse <= reclusos[i].minHB) {
@@ -231,9 +268,11 @@ function verPul() {
 
                 constAlert += "<div style='top:" + cnt + "vh' class='snackbar show'>O recluso " + rec.name + " está em perigo</div>";
                 cnt = cnt + 8;
+
             }
 
             x.innerHTML += constAlert;
+
 
             //postAlert(reclusos[i].prisonerId);
 
@@ -242,7 +281,7 @@ function verPul() {
         }
 
 
-    } var t = setTimeout(verPul, 5000);
+    } var t = setTimeout(verPul, 3000);
 
 
 
@@ -307,7 +346,7 @@ function fazIsto() {
             document.getElementById("rec12").style.width = "100%";
             document.getElementById("openPuls").style.filter = "none";
 
-            if (windowWidth < 450) {
+            if (windowWidth <= 620) {
                 document.getElementById("ajustarDm").style.maxWidth = "100%";
             } else {
                 document.getElementById("ajustarDm").style.maxWidth = "83.33333%";

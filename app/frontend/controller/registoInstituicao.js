@@ -246,6 +246,12 @@ $('.snum').keyup(function () {
   $th.val($th.val().replace(/(\s{2,})|[^\d']/g, ' '));
   $th.val($th.val().replace(/[' ']/g, ''));
 })
+//----------Só aceita letras e um espaço e pontos, virgulas----- regex-----------
+$('.1spaceand').keyup(function () {
+  var $th = $(this);
+  $th.val($th.val().replace(/(\s{2,})|[^a-zA-Zà-úÀ-Ú\d.,!?()$€ªº']/g, ' '));
+  $th.val($th.val().replace(/^\s*/, ''));
+})
 
 //-------------------------------------------------------------------------------------------
 
