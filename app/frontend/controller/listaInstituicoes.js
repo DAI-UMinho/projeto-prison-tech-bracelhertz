@@ -43,7 +43,6 @@ $(window).on("load", function () {
 
     $("#tabelaInstituicoes").on('click', 'tr', function () {
         var cRow = $(this).index();
-        console.log(cRow)
         var clicked = document.getElementById("tabelaInstituicoes").rows[cRow].firstChild.firstChild.id;
         if (typeof clicked !== 'undefined') {
             location.href = "instituicao.html";

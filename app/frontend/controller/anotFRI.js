@@ -360,7 +360,6 @@ async function novaNota() {
 
         if (Anot == "inst") {
             data.prisonDestId = id_inst_clicked;
-            console.log(data)
             await fetch('http://127.0.0.1:8080/api/prison-annotations', {
                 headers: {
                     'Content-Type': 'application/json'
