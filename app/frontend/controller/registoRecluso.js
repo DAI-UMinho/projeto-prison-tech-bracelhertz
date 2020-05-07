@@ -7,26 +7,23 @@ window.onload = async function () {
   botaoRegistar.addEventListener("click", registar);
 
 
+
+  //------------------------------------------------Função que faz o registo do recluso-----------------------------------------
   async function registar() {
     event.preventDefault();
     var data = {};
+var rec = {};
 
-
-    data.name = document.getElementById("Rname").value.trim();
-    data.nationality = document.getElementById("nacionalidade").value.trim();
-    data.birthDate = document.getElementById("dataNascimento").value.trim();
-    data.identifierId = document.getElementById("Identificacao").value.trim();
-    data.contact = document.getElementById("contact").value.trim();
-    data.alternativeContact = document.getElementById("contactAlt").value.trim();
-    data.photo = "";
-    data.prison = { prisonId: document.getElementById("instituicao").value };
-    data.threatLevel = document.getElementById("nivel").value.trim();
-    data.cell = document.getElementById("cela").value.trim();
-
-
-
-
-
+    rec.name = document.getElementById("Rname").value.trim();
+    rec.nationality = document.getElementById("nacionalidade").value.trim();
+    rec.birthDate = document.getElementById("dataNascimento").value.trim();
+    rec.identifierId = document.getElementById("Identificacao").value.trim();
+    rec.contact = document.getElementById("contact").value.trim();
+    rec.alternativeContact = document.getElementById("contactAlt").value.trim();
+    rec.photo = "";
+    rec.prison = { prisonId: document.getElementById("instituicao").value };
+    rec.threatLevel = document.getElementById("nivel").value.trim();
+    rec.cell = document.getElementById("cela").value.trim();
 
 
 
@@ -86,7 +83,6 @@ window.onload = async function () {
           )
         } else {
 
-
           if (pic == "") {
             Swal.fire(
               'É obrigatória uma fotografia!',
@@ -103,45 +99,80 @@ window.onload = async function () {
               )
             } else {
 
-              if (idpulseira.value !== "") {
-
-                data.braceletId = document.getElementById("idpulseira").value.trim();
-                data.minHB = document.getElementById("mminHB").value.trim();
-                data.maxHB = document.getElementById("mmaxHB").value.trim();
+              if (document.getElementById("listCrimes").children.length == 0) {
+                Swal.fire(
+                  'Registo criminal é obrigatório!',
+                  '',
+                  'warning'
+                )
               } else {
-                data.minHB = 40;
-                data.maxHB = 120;
+
+                if (idpulseira.value !== "") {
+
+                  rec.braceletId = document.getElementById("idpulseira").value.trim();
+                  rec.minHB = document.getElementById("mminHB").value.trim();
+                  rec.maxHB = document.getElementById("mmaxHB").value.trim();
+                } else {
+                  rec.minHB = 40;
+                  rec.maxHB = 120;
+                }
+
+                var criminal = [];
+                var lista = document.getElementById("listCrimes").children;
+                for (crime of lista) {
+                  var elem = {}
+                  elem.name = "Registo Criminal";
+                  elem.description = crime.firstChild.firstChild.firstChild.innerText;
+                  elem.emissionDate = crime.firstChild.firstChild.lastChild.innerText;
+
+                  criminal.push(elem);
+                }
+                data.prisoner = rec;
+                data.criminalRecord = criminal;
+
+                var cuidados = [];
+                if (document.getElementById("listCuidados").children.length != 0) {           
+                  var listac = document.getElementById("listCuidados").children;
+                  for (cuidado of listac) {
+                    var elemc = {}
+                    elemc.name = "Medical";
+                    elemc.description = cuidado.firstChild.firstChild.innerText;
+                    cuidados.push(elemc);
+                  }                  
+                }
+                data.medicalPrescription = cuidados;
+
+
+                await fetch('http://127.0.0.1:8080/api/prisoners', {
+                  headers: {
+                    'Content-Type': 'application/json'
+                  },
+                  mode: 'cors',
+                  method: 'POST',
+                  credentials: 'include',
+                  body: JSON.stringify(data)
+
+                }).then(function (response) {
+                  if (!response.ok) {
+                    alert(response);
+                    throw new Error("ERRO");
+                  }
+                  console.log(response);
+                  return response.json();
+                }).then(async function (result) {
+                  console.log(result);
+                  if (result) {
+
+                    post_photo(formData, result.objectId);
+
+                  }
+                }).catch(function (err) {
+                  swal("Erro!", "Erro!", "error");
+                })
+
+
+
               }
-
-
-
-              await fetch('http://127.0.0.1:8080/api/prisoners', {
-                headers: {
-                  'Content-Type': 'application/json'
-                },
-                mode: 'cors',
-                method: 'POST',
-                credentials: 'include',
-                body: JSON.stringify(data)
-
-              }).then(function (response) {
-                if (!response.ok) {
-                  alert(response);
-                  throw new Error("ERRO");
-                }
-                console.log(response);
-                return response.json();
-              }).then(async function (result) {
-                console.log(result);
-                if (result) {
-
-                  post_photo(formData, result.objectId);
-
-                }
-              }).catch(function (err) {
-                swal("Erro!", "Erro!", "error");
-              })
-
 
             }
 
@@ -162,7 +193,7 @@ window.onload = async function () {
 
 
 
-
+  // ---------------------------------------------Display daas instituições na ComboBox------------------------------------------------
 
   async function get_instituicoes() {
 
@@ -191,6 +222,8 @@ window.onload = async function () {
     const instituicoes = await response.json();
     var show_inst = "";
 
+
+    //-----------Verificação da Role para limitar as instituições-----------
     if (RoleLogado == "ROLE_MANAGER") {
       show_inst += "<option value='" + logado.prison.prisonId + "'>" + logado.prison.name + "</option>";
     } else {
@@ -209,7 +242,7 @@ window.onload = async function () {
 
 };
 
-//-------------------------------------------------------------------------------------------------------
+//--------------------------------------------------VALIDAÇÕES E REGEX-----------------------------------------------------
 
 
 function valida_nome(elemento) {
@@ -245,8 +278,14 @@ $('.snum').keyup(function () {
   $th.val($th.val().replace(/(\s{2,})|[^\d']/g, ' '));
   $th.val($th.val().replace(/[' ']/g, ''));
 })
+//----------Só aceita letras e um espaço e pontos, virgulas----------------
+$('.1spaceand').keyup(function () {
+  var $th = $(this);
+  $th.val($th.val().replace(/(\s{2,})|[^a-zA-Zà-úÀ-Ú\d.,!?()$€ªº:']/g, ' '));
+  $th.val($th.val().replace(/^\s*/, ''));
+})
 
-//--------------------------------------------------------------------------------------------------------
+//----------------------------------------Slide das páginas-------------------------------------------------
 var slideIndex = 1;
 showSlides(slideIndex);
 
@@ -277,13 +316,14 @@ function showSlides(n) {
 
 
 
-//---------------------------------------------------------------------------------------------------
+//----------------------------------------Funções de estética que controlam as verificações--------------------------------------------
 
 var continf = document.getElementById("contact");
 var contalinf = document.getElementById("contactAlt");
 var existeRec = document.getElementById("Identificacao");
 var existePul = document.getElementById("idpulseira");
 
+//-------------Informa à medida que se escreve 
 continf.onkeyup = function () {
   if (document.getElementById("contact").value.length == 9 || document.getElementById("contact").value.length == 0) {
     document.getElementById("continf").style.display = "none";
@@ -361,6 +401,8 @@ var loadFile = function (event) {
 
 };
 
+
+//-----------------------------------POST DA FOTOGRAFICA---------------------------------
 async function post_photo(photoC, idGajo) {
 
 
@@ -409,7 +451,8 @@ async function post_photo(photoC, idGajo) {
 
 }
 
-//------------------------------------------------------------------------------------------------------
+//--------------------------------------------SECÇÃO DAS PULSAÇÕES--------------------------------------------
+//Bloquear até inserir pulseira
 document.getElementById("mminHB").addEventListener("input", function () {
   document.getElementById("minValue").innerHTML = document.getElementById("mminHB").value;
   var valor = parseInt(document.getElementById("mminHB").value);
@@ -442,14 +485,15 @@ inPul.onkeyup = function () {
 document.getElementById("addCrime").addEventListener("click", function () {
 
   var texto = document.getElementById("newCrime").value.trim();
+  var dataE = document.getElementById("dataEmi").value;
 
-  if (texto !== "") {
+  if (texto !== "" && dataE != "") {
     var list = document.getElementById('listCrimes');
 
     var newElement = document.createElement('LI');
     var element = "";
 
-    element += "<div class='full_tab'><div class='tab_nome'>" + texto + "</div>";
+    element += "<div class='full_tab'><div class='tab_nome'><label>" + texto + "</label><label> - </label><label>" + dataE + "</label></div>";
     element += "<button onclick=removeCrime(this) style='background-color: transparent; border: none;' class='tab_time'><i class='fas fa-trash'></i></button>";
     element += "<br></div>";
 
@@ -457,6 +501,7 @@ document.getElementById("addCrime").addEventListener("click", function () {
     newElement.innerHTML = element;
 
     document.getElementById("newCrime").value = "";
+    document.getElementById("dataEmi").value = "";
   }
 
 })
@@ -502,9 +547,3 @@ function removeCuidado(element) {
 }
 
 
-//----------Só aceita letras e um espaço e pontos, virgulas----------------
-$('.1spaceand').keyup(function () {
-  var $th = $(this);
-  $th.val($th.val().replace(/(\s{2,})|[^a-zA-Zà-úÀ-Ú\d.,!?()$€ªº']/g, ' '));
-  $th.val($th.val().replace(/^\s*/, ''));
-})

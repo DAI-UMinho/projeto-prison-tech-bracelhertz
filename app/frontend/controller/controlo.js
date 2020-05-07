@@ -34,7 +34,7 @@ $(document).on('scroll', function () {
         var def = 95 - scrollDistance - 7;
         document.getElementById("rec12").style.top = def + "px";
     } else {
-        document.getElementById("rec12").style.top = "0";
+        document.getElementById("rec12").style.top = "25px";
     }
 });
 
@@ -105,7 +105,7 @@ async function display_pulsacao() {
 
 
 
-//------------------------------------------------INFO PERFIL-----------------------------------------
+//------------------------------------------------INFO PERFIL NA BARRA DE NAVEGAÇÃO-----------------------------------------
 
 
 async function display_infoPerfil() {
@@ -203,10 +203,11 @@ async function sair() {
 };
 
 
-//-------------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------ASSOCIAR PULSEIRAS AOS RECLUSOS-----------------------------------------------------------------
 
 
 var bracelt = [1, 123, 12, 12345, 987654];
+//var bracelt = [201, 123456, 125, 1212, 134121, 123];
 var reclusos = [];
 function procurarPul() {
     for (const f of listaRec) {
@@ -218,10 +219,10 @@ function procurarPul() {
             }
         }
     }
-    verPul();
+    VerificarPulsacao();
 }
 
-//--------------------------------Pulsação na pagina de recluso se não for guarda----------------------------------------------
+//-------------------------------------Pulsação na pagina de recluso se não for guarda----------------------------------------------
 
 function puls1Rec() {
     if (document.getElementById("pulsRec") !== null) {
@@ -236,8 +237,8 @@ function puls1Rec() {
 }
 
 
-//--------------------------------Pulsação na pagina de recluso e na barra lateral-------------------------------------------------
-function verPul() {
+//--------------------------------------Pulsação na pagina de recluso e na barra lateral-------------------------------------------------
+function VerificarPulsacao() {
     var ha = false;
     let cnt = 16;
     var x = document.getElementById("seeAlert");
@@ -281,7 +282,7 @@ function verPul() {
         }
 
 
-    } var t = setTimeout(verPul, 3000);
+    } var t = setTimeout(VerificarPulsacao, 3000);
 
 
 

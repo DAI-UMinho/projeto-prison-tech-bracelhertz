@@ -56,7 +56,7 @@ async function display_instituicao() {
     });
     const logado = await response5.json();
 
-    if (logado.prison.prisonId == instituicao.prisonId && RoleLogado !== "ROLE_NETWORKMAN") {
+    if (logado.prison.prisonId == instituicao.prisonId && RoleLogado !== "ROLE_NETWORKMAN" || RoleLogado == "ROLE_NETWORKMAN") {
         document.getElementById("naoAnotar").style.display = "block";
     }
     if(RoleLogado == "ROLE_NETWORKMAN"){

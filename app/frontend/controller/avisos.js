@@ -186,12 +186,12 @@ async function display(avisos) {
     real_content.innerHTML = true_content;
 
 
-//----------Só aceita letras e um espaço e pontos, virgulas----- regex-----------
-$('.1spaceand').keyup(function () {
-    var $th = $(this);
-    $th.val($th.val().replace(/(\s{2,})|[^a-zA-Zà-úÀ-Ú\d.,!?()$€ªº']/g, ' '));
-    $th.val($th.val().replace(/^\s*/, ''));
-  })
+    //----------Só aceita letras e um espaço e pontos, virgulas----- regex-----------
+    $('.1spaceand').keyup(function () {
+        var $th = $(this);
+        $th.val($th.val().replace(/(\s{2,})|[^a-zA-Zà-úÀ-Ú\d.,!?()$€ªº']/g, ' '));
+        $th.val($th.val().replace(/^\s*/, ''));
+    })
 
 
 
@@ -826,7 +826,7 @@ async function subComent(idbtn) {
     var id = idbtn.replace('Submit', '');
 
     var descrip = document.getElementById(id + "Input").value.trim();
-    var tit = document.getElementById(id).children[0].innerHTML;
+    var tit = document.getElementById(id).children[0].children[0].innerHTML;
 
     var dat = {};
 
@@ -838,7 +838,6 @@ async function subComent(idbtn) {
 
 
         if (document.getElementById("filtro").value == 1) {
-
             await fetch('http://127.0.0.1:8080/api/comments/prisoner-annotations', {
                 headers: {
                     'Content-Type': 'application/json'
@@ -924,4 +923,4 @@ $('.1spaceand').keyup(function () {
     var $th = $(this);
     $th.val($th.val().replace(/(\s{2,})|[^a-zA-Zà-úÀ-Ú\d.,!?()$€ªº']/g, ' '));
     $th.val($th.val().replace(/^\s*/, ''));
-  })
+})
