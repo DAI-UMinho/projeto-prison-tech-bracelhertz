@@ -206,14 +206,23 @@ async function sair() {
 //-------------------------------------------------------ASSOCIAR PULSEIRAS AOS RECLUSOS-----------------------------------------------------------------
 
 
-var bracelt = [1, 123, 12, 12345, 987654];
-//var bracelt = ["p01", "p02", "p03", "p04", "p05", "p06"];
+var socket = io.connect("http://localhost:3005");
+var idPul;
+socket.on('map', function (dados) {
+    socket.emit('map', dados);
+    //document.getElementById('hello').innerHTML = data;
+    idPul = dados.split(" ");
+});
+
+
+
+
+//var bracelt = [1, 123, 12, 12345, 987654];
+var bracelt = ["p01", "p02", "p03", "p04", "p05", "p06", idPul[0]];
 var reclusos = [];
 function procurarPul() {
     for (const f of listaRec) {
-
         for (var i = 0; i < bracelt.length; i++) {
-
             if (f.braceletId == bracelt[i]) {
                 reclusos.push(f);
             }
@@ -228,7 +237,11 @@ function puls1Rec() {
     if (document.getElementById("pulsRec") !== null) {
         for (var br of bracelt) {
             if (br == parseInt(document.getElementById("id_pulseira").value.trim())) {
-                var pulse = Math.floor(Math.random() * parseInt(document.getElementById("maxValue").innerHTML)) + parseInt(document.getElementById("minValue").innerHTML)
+                if (br == bracelt[6]) {
+                    var pulse = idPul[1];
+                } else {
+                    var pulse = Math.floor(Math.random() * parseInt(document.getElementById("maxValue").innerHTML)) + parseInt(document.getElementById("minValue").innerHTML)
+                }
                 document.getElementById("pulsRec").innerHTML = pulse;
             }
         }
@@ -245,7 +258,12 @@ function VerificarPulsacao() {
     x.innerHTML = "";
     for (var i = 0; i < reclusos.length; i++) {
 
-        var pulse = Math.floor(Math.random() * reclusos[i].maxHB) + reclusos[i].minHB
+        if(i==6){
+            var pulse = idPul[1];
+        }else{
+            var pulse = Math.floor(Math.random() * reclusos[i].maxHB) + reclusos[i].minHB
+        }
+        
         document.getElementById(reclusos[i].prisonerId + "puls").innerHTML = pulse + " bpm";
 
         if (document.getElementById("pulsRec") !== null) {
@@ -261,21 +279,17 @@ function VerificarPulsacao() {
         if (pulse >= 150) {
             ha = true;
             document.getElementById(reclusos[i].prisonerId + "puls").style.color = "#e74a3b";
-
             let constAlert = "";
 
-            arrayAlert.push(reclusos[i])
-            for (const rec of arrayAlert) {
+            arrayAlert.push(reclusos[i]);
 
+            for (const rec of arrayAlert) {
                 constAlert += "<div style='top:" + cnt + "vh' class='snackbar show'>O recluso " + rec.name + " está em perigo</div>";
                 cnt = cnt + 8;
-
             }
-
             x.innerHTML += constAlert;
-
-
-            //postAlert(reclusos[i].prisonerId);
+            //
+            postAlert(reclusos[i].prisonerId);
 
         } else {
             document.getElementById(reclusos[i].prisonerId + "puls").style.color = "#5a5c69";
