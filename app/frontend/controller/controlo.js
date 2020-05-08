@@ -207,7 +207,7 @@ async function sair() {
 
 
 var bracelt = [1, 123, 12, 12345, 987654];
-//var bracelt = [201, 123456, 125, 1212, 134121, 123];
+//var bracelt = ["p01", "p02", "p03", "p04", "p05", "p06"];
 var reclusos = [];
 function procurarPul() {
     for (const f of listaRec) {
