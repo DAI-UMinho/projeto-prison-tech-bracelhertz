@@ -190,10 +190,15 @@ $('.snum').keyup(function () {
 //----------Só aceita letras e um espaço e pontos, virgulas----- regex-----------
 $('.1spaceand').keyup(function () {
   var $th = $(this);
-  $th.val($th.val().replace(/(\s{2,})|[^a-zA-Zà-úÀ-Ú\d.,!?()$€ªº']/g, ' '));
+  $th.val($th.val().replace(/(\s{2,})|[^a-zA-Zà-úÀ-Ú\d.,!?()$€ªº:-@']/g, ' '));
   $th.val($th.val().replace(/^\s*/, ''));
 })
-
+//--------------------------Morada--regex--------------------
+$('.regMorada').keyup(function () {
+  var $th = $(this);
+  $th.val($th.val().replace(/(\s{2,})|[^a-zA-Zà-úÀ-Ú\d.,ªº-']/g, ' '));
+  $th.val($th.val().replace(/^\s*/, ''));
+})
 
 
 
@@ -227,9 +232,6 @@ document.getElementById("perfil_save_2").addEventListener("click", async functio
 
   } else {
     if (validacaoEmail(document.getElementById("emailF"))) {
-
-
-
 
 
 
@@ -492,7 +494,7 @@ async function editar_photo(photoC) {
   } else {
 
 
-      fetch('http://127.0.0.1:8080/api/prisoners/upload-photos/' + id_user_clicked, {
+      fetch('http://127.0.0.1:8080/api/users/upload-photos/' + id_user_clicked, {
           mode: 'cors',
           method: 'PUT',
           body: photoC,

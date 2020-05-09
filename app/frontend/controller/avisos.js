@@ -189,7 +189,7 @@ async function display(avisos) {
     //----------Só aceita letras e um espaço e pontos, virgulas----- regex-----------
     $('.1spaceand').keyup(function () {
         var $th = $(this);
-        $th.val($th.val().replace(/(\s{2,})|[^a-zA-Zà-úÀ-Ú\d.,!?()$€ªº']/g, ' '));
+        $th.val($th.val().replace(/(\s{2,})|[^a-zA-Zà-úÀ-Ú\d.,!?()$€ªº:-@']/g, ' '));
         $th.val($th.val().replace(/^\s*/, ''));
     })
 
@@ -921,6 +921,6 @@ async function subComent(idbtn) {
 //----------Só aceita letras e um espaço e pontos, virgulas----- regex-----------
 $('.1spaceand').keyup(function () {
     var $th = $(this);
-    $th.val($th.val().replace(/(\s{2,})|[^a-zA-Zà-úÀ-Ú\d.,!?()$€ªº']/g, ' '));
+    $th.val($th.val().replace(/(\s{2,})|[^a-zA-Zà-úÀ-Ú\d.,!?()$€ªº:-@']/g, ' '));
     $th.val($th.val().replace(/^\s*/, ''));
 })
