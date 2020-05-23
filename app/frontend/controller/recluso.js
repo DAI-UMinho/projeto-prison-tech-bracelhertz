@@ -6,6 +6,7 @@ $(window).on("load", function () {
 
     display_recluso();
     get_instituicoes();
+    
 
 
     async function display_recluso() {
@@ -86,6 +87,9 @@ $(window).on("load", function () {
                     document.getElementById("naoAnotar").style.display = "block";
                     document.getElementById("switchAB").style.display = "block";
                     document.getElementById("podeMudar").style.display = "block";
+
+                    document.getElementById("TabLogs").style.display = "block";
+                    getLogs();
                 }
             } else {
                 if (RoleLogado == "ROLE_GUARD") {
@@ -249,6 +253,37 @@ $(window).on("load", function () {
 
 
 })
+
+async function getLogs() {
+    const response = await fetch('http://127.0.0.1:8080/api/prisoner-logs/' + id_user_clicked, {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        mode: 'cors',
+        method: 'GET',
+        credentials: 'include'
+    });
+    const logsRec = await response.json();
+    var see_logs = "";
+    var tableLog = document.getElementById("LogsRec");
+
+    for (const logRec of logsRec) {
+        see_logs += "<td>" + getnDate(logRec.logTimestamp) + "</td>";
+
+        see_logs += "<td>" + logRec.description + "</td>";
+
+        if (logRec.byUser !== null) {
+            see_logs += "<td id='" + logRec.byUser.userId + "' type='button' onclick='dothis(this.id)'>" + logRec.byUser.name + " (" + logRec.byUser.username + ")</td>";
+        } else {
+            see_logs += "<td>Utilizador apagado</td>";
+        }
+
+        see_logs += "</tr>";
+    }
+    tableLog.innerHTML = see_logs;
+
+    var t = setTimeout(getLogs, 10000);
+}
 
 
 //--------------------------------------EDITAR PERFIL-----------------------------------------------------
@@ -667,7 +702,7 @@ $('.snum').keyup(function () {
 //----------Só aceita letras e um espaço e pontos, virgulas----- regex-----------
 $('.1spaceand').keyup(function () {
     var $th = $(this);
-    $th.val($th.val().replace(/(\s{2,})|[^a-zA-Zà-úÀ-Ú\d.,!?()$€ªº:-@']/g, ' '));
+    $th.val($th.val().replace(/(\s{2,})|[^a-zA-Zà-úÀ-Ú\d.,!?()$€ªº:@_\-']/g, ' '));
     $th.val($th.val().replace(/^\s*/, ''));
 })
 
@@ -722,7 +757,6 @@ function Myfunction424() {
     document.getElementById("perfil_alterar_2").style.display = "none";
     document.getElementById("perfil_save_2").style.display = "block";
     document.getElementById("dn_recluso").readOnly = false;
-    document.getElementById("icon_dn_recluso").style.display = "block";
     document.getElementById("nome_recluso").readOnly = false;
     document.getElementById("icon_nome_recluso").style.display = "block";
     document.getElementById("id_recluso").readOnly = false;
@@ -762,7 +796,6 @@ function Myfunction425() {
     document.getElementById("perfil_save_2").style.display = "none";
     document.getElementById("perfil_alterar_2").style.display = "block";
     document.getElementById("dn_recluso").readOnly = true;
-    document.getElementById("icon_dn_recluso").style.display = "none";
     document.getElementById("nome_recluso").readOnly = true;
     document.getElementById("icon_nome_recluso").style.display = "none";
     document.getElementById("id_recluso").readOnly = true;
@@ -958,6 +991,20 @@ function getDate7(date) {
     d = checkTime(d);
     mo = checkTime(mo + 1);
     return d + "/" + mo + "/" + a;
+}
+
+function getnDate(date) {
+    var today = new Date(date);
+    var d = today.getDate();
+    var mo = today.getMonth();
+    var a = today.getFullYear();
+    var h = today.getHours();
+    var m = today.getMinutes();
+    h = checkTime(h);
+    m = checkTime(m);
+    d = checkTime(d);
+    mo = checkTime(mo + 1);
+    return d + "/" + mo + "/" + a + " " + h + ":" + m;
 }
 
 //---------------------------------------------REGISTO CRIMINAL----------------------------------------------

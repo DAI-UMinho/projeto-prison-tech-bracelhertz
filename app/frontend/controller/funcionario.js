@@ -3,6 +3,7 @@ $(window).on("load", function () {
   display_perfil();
   get_instituicoes();
 
+
   async function display_perfil() {
 
     let id_user_clicked = localStorage.getItem("id_user_clicked");
@@ -78,21 +79,24 @@ $(window).on("load", function () {
 
 
 
-/*
-    if (!(RoleLogado == "ROLE_NETWORKMAN" && perfil.roles[0].name !== "ROLE_NETWORKMAN" || RoleLogado == "ROLE_MANAGER" && perfil.roles[0].name == "ROLE_GUARD")
-      || logado.prison.prisonId !== perfil.prison.prisonId && RoleLogado !== "ROLE_NETWORKMAN") {
-      document.getElementById("perfil_alterar_2").style.display = "none";
-      document.getElementById("altPass").style.display = "none";
-      document.getElementById("naoAnotar").style.display = "none";
-    }*/
+    /*
+        if (!(RoleLogado == "ROLE_NETWORKMAN" && perfil.roles[0].name !== "ROLE_NETWORKMAN" || RoleLogado == "ROLE_MANAGER" && perfil.roles[0].name == "ROLE_GUARD")
+          || logado.prison.prisonId !== perfil.prison.prisonId && RoleLogado !== "ROLE_NETWORKMAN") {
+          document.getElementById("perfil_alterar_2").style.display = "none";
+          document.getElementById("altPass").style.display = "none";
+          document.getElementById("naoAnotar").style.display = "none";
+        }*/
 
-    if(RoleLogado == "ROLE_NETWORKMAN" && perfil.roles[0].name !== "ROLE_NETWORKMAN" || 
-    RoleLogado == "ROLE_MANAGER" && perfil.roles[0].name == "ROLE_GUARD" && logado.prison.prisonId == perfil.prison.prisonId
-    || logado.prison.prisonId == perfil.prison.prisonId && RoleLogado !== "ROLE_NETWORKMAN" && perfil.roles[0].name !== "ROLE_NETWORKMAN"){
+    if (RoleLogado == "ROLE_NETWORKMAN" && perfil.roles[0].name !== "ROLE_NETWORKMAN" ||
+      RoleLogado == "ROLE_MANAGER" && perfil.roles[0].name == "ROLE_GUARD" && logado.prison.prisonId == perfil.prison.prisonId
+      || logado.prison.prisonId == perfil.prison.prisonId && RoleLogado !== "ROLE_NETWORKMAN" && perfil.roles[0].name !== "ROLE_NETWORKMAN") {
       document.getElementById("perfil_alterar_2").style.display = "inline";
       document.getElementById("altPass").style.display = "inline";
       document.getElementById("naoAnotar").style.display = "block";
       document.getElementById("podeMudar").style.display = "block";
+
+      document.getElementById("TabLogs").style.display = "block";
+      getLogs();
     }
 
   }
@@ -123,6 +127,37 @@ $(window).on("load", function () {
 
 
 })
+
+async function getLogs() {
+  const response = await fetch('http://127.0.0.1:8080/api/user-logs/' + id_user_clicked, {
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    mode: 'cors',
+    method: 'GET',
+    credentials: 'include'
+  });
+  const logsFun = await response.json();
+  var see_logs = "";
+  var tableLog = document.getElementById("LogsFun");
+
+  for (const logFun of logsFun) {
+    see_logs += "<td>" + getnDate(logFun.logTimestamp) + "</td>";
+
+    see_logs += "<td>" + logFun.description + "</td>";
+
+    if (logFun.byUser !== null) {
+      see_logs += "<td id='" + logFun.byUser.userId + "' type='button' onclick='dothis(this.id)'>" + logFun.byUser.name + " (" + logFun.byUser.username + ")</td>";
+    } else {
+      see_logs += "<td>Utilizador apagado</td>";
+    }
+
+    see_logs += "</tr>";
+  }
+  tableLog.innerHTML = see_logs;
+
+  var t = setTimeout(getLogs, 10000);
+}
 
 
 //-------------------------------------------------------------------------------------------------------
@@ -190,13 +225,13 @@ $('.snum').keyup(function () {
 //----------Só aceita letras e um espaço e pontos, virgulas----- regex-----------
 $('.1spaceand').keyup(function () {
   var $th = $(this);
-  $th.val($th.val().replace(/(\s{2,})|[^a-zA-Zà-úÀ-Ú\d.,!?()$€ªº:-@']/g, ' '));
+  $th.val($th.val().replace(/(\s{2,})|[^a-zA-Zà-úÀ-Ú\d.,!?()$€ªº:@_\-']/g, ' '));
   $th.val($th.val().replace(/^\s*/, ''));
 })
 //--------------------------Morada--regex--------------------
 $('.regMorada').keyup(function () {
   var $th = $(this);
-  $th.val($th.val().replace(/(\s{2,})|[^a-zA-Zà-úÀ-Ú\d.,ªº-']/g, ' '));
+  $th.val($th.val().replace(/(\s{2,})|[^a-zA-Zà-úÀ-Ú\d.,ªº\-']/g, ' '));
   $th.val($th.val().replace(/^\s*/, ''));
 })
 
@@ -331,7 +366,19 @@ function checkTime(i) {
   if (i < 10) { i = "0" + i };  // add zero in front of numbers < 10
   return i;
 }
-
+function getnDate(date) {
+  var today = new Date(date);
+  var d = today.getDate();
+  var mo = today.getMonth();
+  var a = today.getFullYear();
+  var h = today.getHours();
+  var m = today.getMinutes();
+  h = checkTime(h);
+  m = checkTime(m);
+  d = checkTime(d);
+  mo = checkTime(mo + 1);
+  return d + "/" + mo + "/" + a + " " + h + ":" + m;
+}
 //-----------------------------------------------------------------------------------------------------
 
 document.getElementById("perfil_alterar_2").addEventListener("click", function () {
@@ -351,7 +398,6 @@ function Myfunction424() {
   document.getElementById("nomeF").readOnly = false;
   document.getElementById("icon_nomeF").style.display = "block";
   document.getElementById("dn_funcionario").readOnly = false;
-  document.getElementById("icon_dn_funcionario").style.display = "block";
   document.getElementById("emailF").readOnly = false;
   document.getElementById("icon_emailF").style.display = "block";
   document.getElementById("contactoF").readOnly = false;
@@ -373,7 +419,6 @@ function Myfunction425() {
   document.getElementById("nomeF").readOnly = true;
   document.getElementById("icon_nomeF").style.display = "none";
   document.getElementById("dn_funcionario").readOnly = true;
-  document.getElementById("icon_dn_funcionario").style.display = "none";
   document.getElementById("emailF").readOnly = true;
   document.getElementById("icon_emailF").style.display = "none";
   document.getElementById("contactoF").readOnly = true;
@@ -466,14 +511,14 @@ document.getElementById("editPass").addEventListener("click", function () {
 //------------------------------------------UPLOAD PHOTO------------------------------------------------------
 
 var loadFile = function (event) {
-    var image = document.getElementById('imagemPerfil');
-    image.src = URL.createObjectURL(event.target.files[0]);
+  var image = document.getElementById('imagemPerfil');
+  image.src = URL.createObjectURL(event.target.files[0]);
 
-    const formData = new FormData();
-    formData.append("file", event.target.files[0]);
-    size = ~~(event.target.files[0].size / 1024);
+  const formData = new FormData();
+  formData.append("file", event.target.files[0]);
+  size = ~~(event.target.files[0].size / 1024);
 
-    editar_photo(formData);
+  editar_photo(formData);
 
 
 };
@@ -483,70 +528,70 @@ var loadFile = function (event) {
 async function editar_photo(photoC) {
 
   if (parseInt(size) >= 1000) {
-      Swal.fire(
-          'Ocorreu um erro!',
-          'Foto apenas pode ter até 1 MB inclusive',
-          'warning'
-      )
+    Swal.fire(
+      'Ocorreu um erro!',
+      'Foto apenas pode ter até 1 MB inclusive',
+      'warning'
+    )
       .then(() => {
-          location.reload();
-        })
+        location.reload();
+      })
   } else {
 
 
-      fetch('http://127.0.0.1:8080/api/users/upload-photos/' + id_user_clicked, {
-          mode: 'cors',
-          method: 'PUT',
-          body: photoC,
-          credentials: 'include'
+    fetch('http://127.0.0.1:8080/api/users/upload-photos/' + id_user_clicked, {
+      mode: 'cors',
+      method: 'PUT',
+      body: photoC,
+      credentials: 'include'
+    })
+      .then(function (response) {
+        //console.log(response.headers.get('Set-Cookie'));
+        console.log(response);
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+        return response.json();
       })
-          .then(function (response) {
-              //console.log(response.headers.get('Set-Cookie'));
-              console.log(response);
-              if (!response.ok) {
-                  throw new Error(response.statusText);
-              }
-              return response.json();
+      .catch(function (err) {
+        //swal.showValidationError('Pedido falhado: ' + err);
+        console.log(err); // estava alert(err); coloquei console log para não estar sempre a aparecer pop-up ao utilizador
+      })
+      .then(async function (result) {
+        console.log(result);
+        if (result) {
+
+
+
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 1000,
+            timerProgressBar: true,
+            onOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
           })
-          .catch(function (err) {
-              //swal.showValidationError('Pedido falhado: ' + err);
-              console.log(err); // estava alert(err); coloquei console log para não estar sempre a aparecer pop-up ao utilizador
+
+          Toast.fire({
+            icon: 'success',
+            title: 'Dados alterados com sucesso'
           })
-          .then(async function (result) {
-              console.log(result);
-              if (result) {
 
 
 
-                  const Toast = Swal.mixin({
-                      toast: true,
-                      position: 'top-end',
-                      showConfirmButton: false,
-                      timer: 1000,
-                      timerProgressBar: true,
-                      onOpen: (toast) => {
-                          toast.addEventListener('mouseenter', Swal.stopTimer)
-                          toast.addEventListener('mouseleave', Swal.resumeTimer)
-                      }
-                  })
-
-                  Toast.fire({
-                      icon: 'success',
-                      title: 'Dados alterados com sucesso'
-                  })
-
-
-
-              }
-              else {
-                  swal("Erro!", "Erro!", "error")
-                  .then(() => {
-                      location.reload();
-                  })
-                  console.log(result);
-                  //swal({ title: `${result.value.userMessage.message.pt}` });
-              }
-          });
+        }
+        else {
+          swal("Erro!", "Erro!", "error")
+            .then(() => {
+              location.reload();
+            })
+          console.log(result);
+          //swal({ title: `${result.value.userMessage.message.pt}` });
+        }
+      });
 
 
   }

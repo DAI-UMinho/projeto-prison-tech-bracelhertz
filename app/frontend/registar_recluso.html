@@ -10,8 +10,8 @@
   <meta name="author" content="">
   <meta name="theme-color" content="#1b2c47" />
 
-  <script src='http://code.jquery.com/jquery-1.7.2.min.js'></script>
-  <script src='http://localhost:3005/socket.io/socket.io.js'></script>
+  <!--<script src='http://code.jquery.com/jquery-1.7.2.min.js'></script>
+  <script src='http://localhost:3005/socket.io/socket.io.js'></script>-->
 
   <title>BracelHertZ - Registar Recluso</title>
   <link rel="icon" type="image/png" href="img/bracelhertzv3.png" />
@@ -386,7 +386,7 @@
                     </div>
                     <div id="whereithappens2" class="card mySlides fade2 mb-5 pb-3" style="display: block;">
 
-                      <div style="display: flex;" class="ml-3 mt-5 mb-2">
+                      <div style="display: flex;" class="margL30 mt-5 mb-2">
                         <span for="local" class="text-secondary" style="padding-top: 8px;">Instituição:</span>
                         <select id="instituicao" class="select-css text-center ml-2 form-control" style="width: 40%;">
                         </select>
@@ -394,7 +394,7 @@
 
                       <br>
 
-                      <div style="display: flex;" class="ml-3">
+                      <div style="display: flex;" class="margL30">
                         <span class="text-secondary pt-2" style="padding-top: 8px;" for="type">Nível de Ameaça:</span>
                         <select id="nivel" class="select-css text-center ml-2 form-control" style="width: 20%;">
                           <option value="1">nível 1</option>
@@ -417,7 +417,7 @@
                       <h5 class="text-secondary text-center mt-4"> Fotografias do Recluso </h5>
                       <div>
                         <form>
-                          <input class="ml-3 mt-4" id="foto" type="file" accept="image/*" onchange="loadFile(event)"
+                          <input class="margL30 mt-4" id="foto" type="file" accept="image/*" onchange="loadFile(event)"
                             multiple>
                           <div class="mt-4" id="preview"></div>
                         </form>
@@ -446,7 +446,7 @@
                       <h4 class="text-secondary text-center mt-4"><strong>Cuidados médicos</strong><br></h4>
                       <div class="card-body mx-auto form-control"
                         style="width: 90%; height: 315px; overflow-y: scroll;">
-                        <div>Listagem dos cuidados necessários</div>
+                        <div>Listagem dos cuidados necessários <span class="text-red">(Este campo não é obrigatória)</span></div>
                         <ul id="listCuidados">
 
                         </ul>

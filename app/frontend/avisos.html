@@ -10,8 +10,8 @@
   <meta name="author" content="">
   <meta name="theme-color" content="#1b2c47" />
 
-  <script src='http://code.jquery.com/jquery-1.7.2.min.js'></script>
-  <script src='http://localhost:3005/socket.io/socket.io.js'></script>
+  <!--<script src='http://code.jquery.com/jquery-1.7.2.min.js'></script>
+  <script src='http://localhost:3005/socket.io/socket.io.js'></script>-->
 
   <title>BracelHertZ - Avisos</title>
   <link rel="icon" type="image/png" href="img/bracelhertzv3.png" />
@@ -176,9 +176,9 @@
             <div class="container-fluid ">
 
               <!-- Page Heading -->
-              <div class="d-sm-flex align-items-center justify-content-between mb-4 border-bottom-secondary">
-                <h1 class="h3 mb-0 text-secondary">Anotações</h1>
-                <div class="justify-content-end">
+              <div class="full_tab align-items-center justify-content-between mb-4 border-bottom-secondary">
+                <h1 class="h3 mb-0 text-secondary" style="display: table-cell; vertical-align: middle;">Anotações</h1>
+                <div class="justify-content-end tab_time" style="float: right; text-align: right;">
                   <select id="filtro" style="width: 137px;" class="dropdown form-control">
                     <span>Filtrar por...</span>
                     <div class="dropdown-content">
@@ -189,7 +189,7 @@
                   </select>
                   <span>
                     <a href="#" data-toggle="modal" data-target="#NotaModal"
-                      class="d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm"><i
+                      class="btn btn-sm btn-secondary shadow-sm"><i
                         class="fas fa-download fa-sm text-white-50"></i> Nova Anotação</a>
                   </span>
                 </div>

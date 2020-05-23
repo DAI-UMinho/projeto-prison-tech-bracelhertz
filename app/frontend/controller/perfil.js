@@ -447,13 +447,13 @@ $('.snum').keyup(function () {
 //----------Só aceita letras e um espaço e pontos, virgulas----------------
 $('.1spaceand').keyup(function () {
   var $th = $(this);
-  $th.val($th.val().replace(/(\s{2,})|[^a-zA-Zà-úÀ-Ú\d.,!?()$€ªº:-@']/g, ' '));
+  $th.val($th.val().replace(/(\s{2,})|[^a-zA-Zà-úÀ-Ú\d.,!?()$€ªº:@_\-']/g, ' '));
   $th.val($th.val().replace(/^\s*/, ''));
 })
 //--------------------------Morada--regex--------------------
 $('.regMorada').keyup(function () {
   var $th = $(this);
-  $th.val($th.val().replace(/(\s{2,})|[^a-zA-Zà-úÀ-Ú\d.,ªº-']/g, ' '));
+  $th.val($th.val().replace(/(\s{2,})|[^a-zA-Zà-úÀ-Ú\d.,ªº\-']/g, ' '));
   $th.val($th.val().replace(/^\s*/, ''));
 })
 
@@ -477,7 +477,6 @@ function Myfunction424() {
   document.getElementById("nacionalidade_perfil").readOnly = false;
   document.getElementById("icon_nacionalidade_perfil").style.display = "block";
   document.getElementById("dataNascimento_perfil").disabled = false;
-  document.getElementById("icon_dataNascimento_perfil").style.display = "block";
   document.getElementById("nome_perfil").readOnly = false;
   document.getElementById("icon_nome_perfil").style.display = "block";
   document.getElementById("localidade_perfil").readOnly = false;
@@ -507,7 +506,6 @@ function Myfunction425() {
   document.getElementById("nacionalidade_perfil").readOnly = true;
   document.getElementById("icon_nacionalidade_perfil").style.display = "none";
   document.getElementById("dataNascimento_perfil").disabled = true;
-  document.getElementById("icon_dataNascimento_perfil").style.display = "none";
   document.getElementById("nome_perfil").readOnly = true;
   document.getElementById("icon_nome_perfil").style.display = "none";
   document.getElementById("localidade_perfil").readOnly = true;

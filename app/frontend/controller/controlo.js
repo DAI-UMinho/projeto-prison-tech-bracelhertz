@@ -282,7 +282,7 @@ function VerificarPulsacao() {
 
             x.innerHTML += constAlert;
 
-            postAlert(reclusos[i].prisonerId);
+            //postAlert(reclusos[i].prisonerId);
 
         } else {
             document.getElementById(reclusos[i].prisonerId + "puls").style.color = "#5a5c69";
@@ -435,10 +435,11 @@ async function postAlert(recId) {
 
 }
 
-
+/*
 var socket = io.connect("http://localhost:3005");
 var idPul;
 socket.on('map', function (data) {
     socket.emit('map', data);
     idPul = data;
 });
+*/

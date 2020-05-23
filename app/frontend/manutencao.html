@@ -29,21 +29,43 @@
 
 </head>
 
-<body style="overflow-y: hidden;">
+<body style="overflow-y: scroll; text-align: center;">
   <div class="w-100 text-center">
-    <img src="img/bracelhertz.png" style="height: 350px;">
+    <img src="img/bracelhertz.png" style="height: 350px;" id="imgLogo">
   </div>
-  <div style="height: 100vh; width: 100%;">
-    <div class="text-center my-auto mx-auto">
+  <div style="height: 100vh;">
+    <div class="text-center my-auto">
       <p class="lead text-gray-800" style="margin: 0;">Sorry, we're down for maintenance</p>
       <p class="text-gray-500 mb-0">We'll be back up shortly</p>
     </div>
-    <div style="text-align: center;">
+    <div>
 
-      <canvas id="myCanvas" width=600 height=480
-        style="background:url('http://s2js.com/img/etc/flappyback.png');  background-size: 100%; height: 95% "></canvas>
+
+
+      <canvas id="myCanvas" width=320 height=480
+        style="background:url('./img/flappyback.png');  background-size: 100%; height: 95% "></canvas>
+
       <script>
 
+
+        onload = function () {
+          htmlCanvas = document.getElementById('myCanvas'),
+
+            context = htmlCanvas.getContext('2d');
+
+          if (window.innerWidth <= 600) {
+            document.getElementById("imgLogo").style.height = "100px";
+            htmlCanvas.width = 320;
+            document.getElementById("myCanvas").style.width = "100%"
+          } else {
+            htmlCanvas.width = 600;
+          }
+        }
+
+
+        function myFunction(x) {
+          x.classList.toggle("fa-thumbs-down");
+        }
         // ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         //
         var ctx = myCanvas.getContext("2d");
@@ -114,6 +136,8 @@
             Got_Player_Input();
           }
         }
+
+
 
 
         function make_bird_slow_and_fall() {
@@ -206,7 +230,7 @@
         }
         var pipe_piece = new Image();
         pipe_piece.onload = add_all_my_pipes;
-        pipe_piece.src = "http://s2js.com/img/etc/flappypipe.png";
+        pipe_piece.src = "./img/flappypipe.png";
         function Do_a_Frame() {
           ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
           bird.Do_Frame_Things();
@@ -233,9 +257,9 @@
           }
         }
         var bottom_bar = new Image();
-        bottom_bar.src = "http://s2js.com/img/etc/flappybottom.png";
+        bottom_bar.src = "./img/flappybottom1.png";
 
-        var bird = new MySprite("./img/peepoJail2.png");
+        var bird = new MySprite("./img/peepoCop.gif");
         bird.x = myCanvas.width / 3;
         bird.y = myCanvas.height / 2;
 

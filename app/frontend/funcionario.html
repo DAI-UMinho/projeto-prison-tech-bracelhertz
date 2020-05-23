@@ -10,8 +10,8 @@
   <meta name="author" content="">
   <meta name="theme-color" content="#1b2c47" />
 
-  <script src='http://code.jquery.com/jquery-1.7.2.min.js'></script>
-  <script src='http://localhost:3005/socket.io/socket.io.js'></script>
+  <!--<script src='http://code.jquery.com/jquery-1.7.2.min.js'></script>
+  <script src='http://localhost:3005/socket.io/socket.io.js'></script>-->
 
   <title>BracelHertZ - Funcionário</title>
   <link rel="icon" type="image/png" href="img/bracelhertzv3.png" />
@@ -268,9 +268,7 @@
                               <strong>Data de
                                 Nascimento</strong></h5>
                             <input type="date" class="h6 ml-2 text-primary font-weight-600" id="dn_funcionario"
-                              style="width: 80%; border: none; background-color: transparent;" readonly="true">
-                            <i id="icon_dn_funcionario" class="fas fa-pen text-primary bg-transparent pr-3"
-                              style="float:right; display: none"></i>
+                              style="width: 98%; border: none; background-color: transparent;" readonly="true">
                           </div>
 
                           <br><br>
@@ -371,9 +369,35 @@
                 </div>
               </div>
 
+              <!-- DataTales Example -->
+              <div class="card shadow mb-4" id="TabLogs" style="display: none;">
+                <div class="card-header bg-secondary">
+                  <div class="m-0 font-weight-bold text-white full_tab">
+                    <div class="tab_nome">Atividades</div>
+                  </div>
+                </div>
+                <div class="card-body" style="max-height: 292px;">
+                  <div class="table-responsive">
+                    <table class="table table-bordered scroll" id="dataTable" width="100%" cellspacing="0">
+                      <thead class="bg-primary text-white">
+                        <tr>
+                          <th>Hora</th>                          
+                          <th>Ação</th>
+                          <th>Por quem</th>
+                        </tr>
+                      </thead>
+
+                      <tbody id="LogsFun">
+
+                      </tbody>
+
+                    </table>
+                  </div>
+                </div>
+              </div>
+
 
               <br>
-
             </div>
           </div>
 
@@ -540,7 +564,6 @@
 
   <!-- Page level custom scripts -->
 
-  <script src="js/demo/datatables-demo.js"></script>
   <script src="controller/funcionario.js"></script>
   <script src="controller/controlo.js"></script>
   <script src="controller/anotFRI.js"></script>

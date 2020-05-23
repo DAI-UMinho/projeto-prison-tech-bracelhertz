@@ -44,9 +44,9 @@ window.onload = async function () {
                         "Autenticado com sucesso!",
                         "success")
                         .then(() => {
-                            if(result.role!=="ROLE_GUARD"){
+                            if (result.role !== "ROLE_GUARD") {
                                 window.location.replace("./dashboard.html");
-                            }else{
+                            } else {
                                 window.location.replace("./avisos.html");
                             }
                         })

@@ -11,22 +11,46 @@
   <meta name="theme-color" content="#1b2c47" />
 
   <title>BracelHertZ - Login</title>
-  <link rel="icon" 
-      type="image/png" 
-      href="img/bracelhertzv3.png" />
+  <link rel="icon" type="image/png" href="img/bracelhertzv3.png" />
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
 
   <!-- Custom styles for this template-->
   <link href="css/sb-admin-2.css" rel="stylesheet">
   <link rel="manifest" href="./manifest.json">
   <link rel="apple-touch-icon" href="/img/icons/icon-152x152.png">
+  <style>
+    video {
+      position: absolute;
+      top: 60px;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin-right: auto;
+      margin-left: auto;
+    }
+
+    canvas {
+      position: absolute;
+      top: 60px;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin-right: auto;
+      margin-left: auto;
+    }
+  </style>
+
+  <script defer src="./face/face-api.min.js"></script>
+  <script defer src="./face/script.js"></script>
 
 </head>
 
-<body class="bg-gradient-primary2">
+<body class="bg-gradient-primary2" style="overflow-y: hidden;">
 
   <div class="container">
 
@@ -36,31 +60,34 @@
       <div class="col-xl-10 col-lg-12 col-md-9">
 
         <div class="card o-hidden border-0 shadow-lg my-5">
-          <div class="card-body p-0">
+          <div class="card-body p-0" id="sizeVideo">
             <!-- Nested Row within Card Body -->
             <div class="row">
               <div class="col-lg-6 d-none d-lg-block bg-login-image2 pr-0"></div>
-              <div class="col-lg-6 px-0" style="margin-right: -10px;"ss>
+              <div class="col-lg-6 px-0" style="margin-right: -10px;" ss>
                 <div class="p-5" style="margin-top: 80px;">
                   <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4">Bem Vindo!</h1>
                   </div>
                   <form class="user">
                     <div class="text-center">
-                      <span data-toggle="modal"id="span" data-target="#logoutModal" onclick="doSomething()" style="width: 48px; height: 48px;">
+                      <span data-toggle="modal" id="span" data-target="#logoutModal" onclick="startVideo()"
+                        style="width: 48px; height: 48px;">
                         <img src="img/reconhecimento.png" style="width: 48px;height:48px;margin-bottom: 5px;">
                       </span>
                     </div>
                     <div class="txtb">
-                      <input type="name" class="form-control form-control-user" id="username" aria-describedby="emailHelp">
+                      <input type="name" class="form-control form-control-user" id="username"
+                        aria-describedby="emailHelp">
                       <span data-placeholder="Username"></span>
                     </div>
                     <div class="txtb">
-                      <input type="password" id="password" name="password"  class="form-control form-control-user">
+                      <input type="password" id="password" name="password" class="form-control form-control-user">
                       <span data-placeholder="Password"></span>
-                      <div class="eye slash" onclick="togglePW()" style="float: right;margin-top: -6%;margin-right: 4%;color:#1b2c47;">
-                      <div></div>
-                      <div></div>
+                      <div class="eye slash" onclick="togglePW()"
+                        style="float: right;margin-top: -6%;margin-right: 4%;color:#1b2c47;">
+                        <div></div>
+                        <div></div>
                       </div>
                     </div>
                     <button id="botaoLogin" class="btn btn-primary btn-user btn-block" style="margin-top: 50px;">
@@ -77,20 +104,9 @@
     </div>
   </div>
 
-    <!-- camara Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content" style="width: 680px;height: 510px;">
-          <div class="modal-header">
-            <div id="vid-controls">
-              <video id="vid-show" autoplay></video>
-              <input id="vid_take" type="button" value="Take Photo"/>
-              <div id="vid-canvas"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+  <video style="display: none; z-index: 3;" id="video" width="720" height="540" autoplay muted></video>
+  <button class="mx-auto" style="display: none;" id="btnVideo" onclick="endVideo()">Cancelar</button>
+
 
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>
@@ -106,78 +122,45 @@
   <script src="./controller/login.js"></script>
 
 
-  <script>
-    function doSomething() {
-      var video = document.getElementById("vid-show"),
-          canvas = document.getElementById("vid-canvas"),
-          take = document.getElementById("vid_take");
-    
-      // [2] ASK FOR USER PERMISSION TO ACCESS CAMERA
-      // WILL FAIL IF NO CAMERA IS ATTACHED TO COMPUTER
-      navigator.mediaDevices.getUserMedia({ video : true })
-      .then(function(stream) {
-        // [3] SHOW VIDEO STREAM ON VIDEO TAG
-        video.srcObject = stream;
-        video.play();
-    
-        // [4] WHEN WE CLICK ON "TAKE PHOTO" BUTTON
-        take.addEventListener("click", function(){
-          // Create snapshot from video
-          var draw = document.createElement("canvas");
-          draw.width = video.videoWidth;
-          draw.height = video.videoHeight;
-          var context2D = draw.getContext("2d");
-          context2D.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
-          // Put into canvas container
-          canvas.innerHTML = "";
-          //canvas.appendChild(draw);
-        });
-      })
-      .catch(function(err) {
-        document.getElementById("vid-controls").innerHTML = "Please enable access and attach a camera";
-      });
-    } 
-      </script>
-
   <script type="text/javascript">
-    $(".txtb input").on("focus",function(){
+    $(".txtb input").on("focus", function () {
       $(this).addClass("focus");
     });
- 
-    $(".txtb input").on("blur",function(){
-      if($(this).val() == "")
-      $(this).removeClass("focus");
+
+    $(".txtb input").on("blur", function () {
+      if ($(this).val() == "")
+        $(this).removeClass("focus");
     });
- 
-    </script>
+
+  </script>
 
 
-<script>
-  function togglePW(){
-    
-    //toggle password visibility
-        document.querySelector('.eye').classList.toggle('slash');
-        
-    //show/hide the password
-        var password = document.querySelector('[name=password]');
-        if(password.getAttribute('type') === 'password'){
-            password.setAttribute('type', 'text');
-        } else {
-            password.setAttribute('type', 'password');
-        }
+  <script>
+    function togglePW() {
+
+      //toggle password visibility
+      document.querySelector('.eye').classList.toggle('slash');
+
+      //show/hide the password
+      var password = document.querySelector('[name=password]');
+      if (password.getAttribute('type') === 'password') {
+        password.setAttribute('type', 'text');
+      } else {
+        password.setAttribute('type', 'password');
+      }
     }
-</script>
+  </script>
 
-<script>
-  if('serviceWorker' in navigator){
+  <script>
+    if ('serviceWorker' in navigator) {
       try {
         navigator.serviceWorker.register('sw.js');
         console.log('SW registered');
-      } catch(error) {
+      } catch (error) {
         console.log('SW register failed');
       }
     }
-</script>
+  </script>
 
 
 </body>
