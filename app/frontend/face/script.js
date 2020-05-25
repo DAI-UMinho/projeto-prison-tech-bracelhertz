@@ -16,7 +16,15 @@ async function faz() {
 
   const canvas = faceapi.createCanvasFromMedia(video)
   document.body.append(canvas)
-  const displaySize = { width: video.width, height: video.height }
+
+  video.style.width = "" + document.getElementById("sizeVideo").offsetWidth + "px";
+  video.style.height = "auto";
+
+  var largura = document.getElementById("video").offsetWidth;
+  var altura = document.getElementById("video").offsetHeight;
+
+  const displaySize = { width: largura, height: altura }
+
   faceapi.matchDimensions(canvas, displaySize)
   canvas.style.zIndex = "3";
   var tentativa = 0;
@@ -33,21 +41,32 @@ async function faz() {
 
     const results = resizedDetections.map(d => faceMatcher.findBestMatch(d.descriptor))
 
-    //console.log(results[0])
     if (typeof results[0] !== 'undefined') {
+      var resultado1 = results[0]._label.split(" ");
+
       if (tentativa == 0) {
-        pessoa = results[0]._label;
-        logar = results[0]._label;
+        pessoa = resultado1;
+        logar = resultado1;
         tentativa++;
       } else {
-        pessoa = results[0]._label;
-        if (logar == pessoa) {
-          if (tentativa == 30) {
+        pessoa = resultado1;
+        if (logar[0] == pessoa[0]) {
+          if (tentativa == 20) {
             if (logar != "unknown") {
-              alert("Logar o " + logar);
+              //alert("Logar o " + resultado1[0]);
+              entrar(resultado1[0], resultado1[1])
+              return;
             } else {
-              alert("Cara não reconhecida");
               tentativa = 0;
+              Swal.fire(
+                'Cara não reconhecida!',
+                '',
+                'warning'
+              ).then(() => {
+                tentativa = 0;
+                endVideo();
+              })
+
             }
           } else {
             tentativa++;
@@ -62,13 +81,12 @@ async function faz() {
     console.log(tentativa)
 
     results.forEach((result, i) => {
-      //console.log(result)
       const bottomRight = {
         x: resizedDetections[0].detection.box.bottomRight.x - 50,
         y: resizedDetections[0].detection.box.bottomRight.y,
       }
-
-      new faceapi.draw.DrawTextField([`${result._label}`], bottomRight).draw(canvas);
+      var resultado = result._label.split(" ");
+      new faceapi.draw.DrawTextField([`${resultado[0]}`], bottomRight).draw(canvas);
 
     })
   }, 100)
@@ -82,7 +100,7 @@ async function loadLabeledImages() {
 
   const labels = [];
 
-  const response = await fetch('https://backend-bracelhertz.herokuapp.com/api/facial-recognition-images', {
+  const response = await fetch('http://127.0.0.1:8080/api/facial-recognition-images', {
     headers: {
       'Content-Type': 'application/json'
     },
@@ -111,7 +129,7 @@ async function loadLabeledImages() {
       if (typeof detections !== 'undefined') {
         descriptions.push(detections.descriptor)
       }
-      return new faceapi.LabeledFaceDescriptors(label.username, descriptions)
+      return new faceapi.LabeledFaceDescriptors(label.user.username + " " + label.secret, descriptions)
     })
 
 
@@ -119,6 +137,8 @@ async function loadLabeledImages() {
   )
 }
 
+
+//-------------------------------------------------------------------START VIDEO------------------------------------------------------
 
 const btn = document.getElementById("btnVideo");
 
@@ -136,8 +156,13 @@ function startVideo() {
     stream => video.srcObject = stream,
     err => console.error(err)
   )
-  faz();
+  setTimeout(faz, 1000)
+  //faz();
 }
+
+
+
+//-------------------------------------------------------------------END VIDEO------------------------------------------------------
 
 function endVideo() {
 
@@ -152,6 +177,66 @@ function endVideo() {
   video.srcObject = null;
 
   video.style.display = "none";
-  canvas.remove();
+  if (typeof canvas !== 'undefined') {
+    canvas.remove();
+  }
   btn.style.display = "none";
 }
+
+
+
+//-------------------------------------------------------------------LOGN FUNCTION------------------------------------------------------
+
+async function entrar(username, secret) {
+  var data = {};
+
+  data.username = username;
+  data.password = secret;
+
+  fetch('http://127.0.0.1:8080/api/auth/signin/facial-recognition', {
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
+    mode: 'cors',
+    method: 'POST',
+    body: JSON.stringify(data),
+    credentials: 'include'
+  })
+    .then(function (response) {
+
+      console.log(response);
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      return response.json();
+    })
+    .catch(function (err) {
+      console.log(err);
+    })
+    .then(async function (result) {
+      if (result) {
+        console.log(result);
+        localStorage.setItem("userLogado", result.userId);
+        localStorage.setItem("RoleLogado", result.role);
+
+
+        if (result.role !== "ROLE_GUARD") {
+          window.location.replace("./dashboard.html");
+        } else {
+          window.location.replace("./avisos.html");
+        }
+
+      } else {
+        Swal.fire(
+          'Os dados que inseriu não estão corretos!',
+          '',
+          'warning'
+        )
+        console.log(result);
+
+      }
+
+    });
+
+};

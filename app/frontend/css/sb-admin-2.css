@@ -12575,5 +12575,13 @@ height: 188px; }
 #seeAlert{
   z-index: 100;
 }
+
+.tab_nome50{
+  display: table-cell !important;
+    width: 50% !important;
+    vertical-align: middle !important;
+}
+
+
 /*----------------------------------------------------------Novo Código---------------------------------------------------------*/
 

@@ -28,10 +28,39 @@
   <link rel="manifest" href="./manifest.json">
   <link rel="apple-touch-icon" href="/img/icons/icon-152x152.png">
 
-
+  <script defer src="./face/face-api.min.js"></script>
+  <script defer src="./face/registarFace.js"></script>
   <style>
     select {
       -webkit-appearance: none;
+    }
+
+    #divVideo {
+      position: absolute;
+      top: 55px;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin-right: auto;
+      margin-left: auto;
+      height: 60%;
+      width: 70%;
+      background-color: #f8f9fc;
+      text-align: center;
+    }
+
+    video{
+      max-width: 720px;
+    }
+
+    canvas {
+      position: absolute;
+      top: 55px;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin-right: auto;
+      margin-left: auto;
     }
   </style>
 
@@ -191,14 +220,19 @@
 
 
                     <div class="card shadow h-100">
-                      <div class="card-header py-3 bg-secondary" style="height: 55px" id="cardheader420">
-                        <div class="font-weight-bold text-white full_tab" style="margin-top:-15px;" id="baixoheader420">
-                          <div class="tab_nome" style="width:70%">Fotografia</div>
-                          <p><input type="file" accept="image/*" name="image" id="file" onchange="loadFile(event)"
-                              style="display: none;"></p>
-                          <p><label for="file" id="foto420" class="mb-0 text-uppercase"
+                      <div class="card-header py-3 bg-secondary full_tab" style="height: 55px" id="cardheader420">
+
+                        <div class="tab_nome50 text-white">Fotografia</div>
+                        <div class="tab_time" style="float: right; height: 20px;">
+                          <button onclick="startVideo()"
+                            style="border: none; background-color: transparent; display: inline;"><img
+                              style="height: 30px; width: 30px;" src="./img/reconhecimentoB.png"></button>
+                          <p style="display: inline;"><input type="file" accept="image/*" name="image" id="file"
+                              onchange="loadFile(event)" style="display: none;"></p>
+                          <p style="display: inline;"><label for="file" id="foto420" class="mb-0 text-uppercase"
                               style="cursor: pointer;"><img class="sizeEditImg" src="img/editIMG1.png"></label></p>
                         </div>
+
                       </div>
                       <!--Card Body -->
                       <div class="card-body p-0 text-center" id="firstone">
@@ -291,8 +325,9 @@
                     <div class="m-0 font-weight-bold text-white full_tab">
                       <div class="tab_nome">Os meus dados</div>
                       <div class="d-flex" type="button tab_time" style="float:right;">
-                        <button class="bg-transparent" id="altPass" style="border: none;" data-toggle="modal" data-target="#PassModal">
-                        <img class="btn_altPass" src="img/altPass.png">
+                        <button class="bg-transparent" id="altPass" style="border: none;" data-toggle="modal"
+                          data-target="#PassModal">
+                          <img class="btn_altPass" src="img/altPass.png">
                         </button>
                         <button class="bg-transparent" id="perfil_save_2" style="border: none; display:none"><i
                             class="fas fa-file-export font-weight-bold text-white"></i></button>
@@ -434,8 +469,9 @@
                           <div class="form-control" style="height: 50px">
                             <h5 class="card-title form-control420" style="width:85px;"><strong>Morada</strong></h5>
                             <div style="display: unset;">
-                              <input type="text" class="regMorada h6 ml-2 text-primary font-weight-600" id="morada_perfil"
-                                style="width: 80%; border: none; background-color: transparent;" readonly="true">
+                              <input type="text" class="regMorada h6 ml-2 text-primary font-weight-600"
+                                id="morada_perfil" style="width: 80%; border: none; background-color: transparent;"
+                                readonly="true">
                               <i id="icon_morada_perfil" class="fas fa-pen text-primary bg-transparent pr-3"
                                 style="float:right; display: none"></i>
                             </div>
@@ -516,6 +552,24 @@
     <i class="fas fa-angle-up"></i>
   </a>
 
+  <!-- Registar reconhecimento facial -->
+  <div id="divVideo" style="display: none;">
+
+    <video style="z-index: 3; width: 720px; height: 540px;" id="video"  autoplay muted></video>
+    <div class="w-100">
+      <button class="btn btn-secondary mx-auto" type="button" id="btnVideo" onclick="endVideo()">Cancelar</button>
+      <button class="btn btn-primary mx-auto" id="btnTakePhoto" data-toggle="modal" data-target="#FaceModal">Take Photo</button>
+    </div>
+
+    <canvas id="canvas" width="134px" height="100px"
+      style="display:none;"></canvas>
+
+  </div>
+
+
+
+
+
   <!-- Logout Modal-->
   <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
@@ -531,6 +585,45 @@
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
           <button class="btn btn-primary" id="botaoLogout">Terminar Sessão</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Registo facial-->
+  <div style="display: none;" class="modal fade" id="FaceModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Registo Facial</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <input type="file" accept="image/*" onchange="TesteFile(event)" id="novaCara">
+
+          <img style="width: 100%; height: auto;" src="" id="FtRecFac">
+          <div class="text-center">Insira a password para confirmar o registo</div>
+
+          <div class="txtb" id="paraPass">
+            <input type="password" id="Pass" name="nPassword" class="form-control form-control-user"
+              pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,24}" required>
+            <span data-placeholder="Password"></span>
+            <div class="eye slash" onclick="togglePW()"
+              style="float: right;margin-top: -6%;margin-right: 4%;color:#1b2c47;">
+              <div></div>
+              <div></div>
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+          <button class="btn btn-primary" id="RegistarReconhecimento">Registar</button>
         </div>
       </div>
     </div>
@@ -557,7 +650,7 @@
 
           <div class="txtb" id="paraPass">
             <input type="password" id="nPassword" name="nPassword" class="form-control form-control-user"
-            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,24}" required>
+              pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,24}" required>
             <span data-placeholder="Nova Password"></span>
             <div class="eye slash" onclick="togglePW()"
               style="float: right;margin-top: -6%;margin-right: 4%;color:#1b2c47;">
@@ -653,40 +746,6 @@
         $(this).removeClass("focus");
     });
 
-  </script>
-
-
-  <script>
-    function doSomething() {
-      var video = document.getElementById("vid-show"),
-        canvas = document.getElementById("vid-canvas"),
-        take = document.getElementById("vid_take");
-
-      // [2] ASK FOR USER PERMISSION TO ACCESS CAMERA
-      // WILL FAIL IF NO CAMERA IS ATTACHED TO COMPUTER
-      navigator.mediaDevices.getUserMedia({ video: true })
-        .then(function (stream) {
-          // [3] SHOW VIDEO STREAM ON VIDEO TAG
-          video.srcObject = stream;
-          video.play();
-
-          // [4] WHEN WE CLICK ON "TAKE PHOTO" BUTTON
-          take.addEventListener("click", function () {
-            // Create snapshot from video
-            var draw = document.createElement("canvas");
-            draw.width = video.videoWidth;
-            draw.height = video.videoHeight;
-            var context2D = draw.getContext("2d");
-            context2D.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
-            // Put into canvas container
-            canvas.innerHTML = "";
-            //canvas.appendChild(draw);
-          });
-        })
-        .catch(function (err) {
-          document.getElementById("vid-controls").innerHTML = "Please enable access and attach a camera";
-        });
-    } 
   </script>
 
 

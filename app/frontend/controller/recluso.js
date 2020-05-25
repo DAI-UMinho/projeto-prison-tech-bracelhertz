@@ -449,7 +449,7 @@ async function editar() {
     }
 
 
-    function verificaGuarda(recluso) {
+    async function verificaGuarda(recluso) {
 
 
         data.prisonerId = recluso.prisonerId;
@@ -474,13 +474,56 @@ async function editar() {
                 'warning'
             )
         } else {
-            if (document.getElementById("id_pulseira").value == "") {
 
-                data.minHB = 40;
-                data.maxHB = 120;
+            const response9 = await fetch('http://127.0.0.1:8080/api/prisoners/by-guards/' + id_user_clicked, {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                mode: 'cors',
+                method: 'GET',
+                credentials: 'include'
+            });
+            const recluso1 = await response9.json();
+
+
+            var verificarB = document.getElementById("id_pulseira").value.trim();
+            const responseB = await fetch('http://127.0.0.1:8080/api/prisoners/bracelet-exists/' + verificarB, {
+
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                mode: 'cors',
+                method: 'GET',
+                credentials: 'include'
+            });
+            const existeB = await responseB.json();
+
+
+            if (existeB && recluso1.braceletId !== verificarB) {
+                Swal.fire(
+                    'Esta pulseira já está em uso!',
+                    '',
+                    'warning'
+                )
+            }else{
+
+
+                if (document.getElementById("id_pulseira").value == "") {
+
+                    data.minHB = 40;
+                    data.maxHB = 120;
+                }
+    
+                editarGuarda(data);
+
+
+
+
             }
 
-            editarGuarda(data);
+
+
+
 
         }
 
