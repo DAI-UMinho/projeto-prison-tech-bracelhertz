@@ -2,6 +2,7 @@ $(window).on("load", function () {
     let userLogado = localStorage.getItem("userLogado");
 
     display_funcionarios();
+    tiraBotoes();
 
 
     async function display_funcionarios() {
@@ -141,9 +142,9 @@ async function VerApagar() {
             if (RoleLogado == "ROLE_MANAGER" && perfil.roles[0].name == "ROLE_MANAGER" || RoleLogado == "ROLE_MANAGER" && perfil.roles[0].name == "ROLE_NETWORKMAN"
                 || RoleLogado == "ROLE_NETWORKMAN" && perfil.roles[0].name == "ROLE_NETWORKMAN") {
 
-                    pode = false;
+                pode = false;
 
-              
+
             } else if (RoleLogado == "ROLE_MANAGER" && perfil.roles[0].name == "ROLE_GUARD") {
 
                 if (perfil.prison.prisonId !== logado.prison.prisonId) {
@@ -258,6 +259,16 @@ function apaga_selecionados() {
     }
     for (var apaga of apagar) {
         apaga.classList.toggle("selecionado");
+    }
+
+}
+
+
+function tiraBotoes() {
+    var windowWidth = window.innerWidth;
+
+    if (windowWidth <= 620) {
+        document.getElementById("esconderBtn").style.display = "none";
     }
 
 }

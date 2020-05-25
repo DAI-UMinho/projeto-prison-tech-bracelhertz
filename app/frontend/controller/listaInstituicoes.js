@@ -1,13 +1,13 @@
 $(window).on("load", function () {
     let RoleLogado = localStorage.getItem("RoleLogado");
     display_instituicoes();
-
+    
 
 
     if (RoleLogado == "ROLE_NETWORKMAN") {
         document.getElementById("esconder").style.display = "inline";
     }
-
+    tiraBotoes();
     async function display_instituicoes() {
 
 
@@ -55,3 +55,12 @@ $(window).on("load", function () {
 
 })
 //----------------------------------------------------------------------------------------------------------------
+
+function tiraBotoes() {
+    var windowWidth = window.innerWidth;
+
+    if (windowWidth <= 620) {
+        document.getElementById("esconder").style.display = "none";
+    }
+
+}

@@ -1,6 +1,7 @@
 $(window).on("load", function () {
     let RoleLogado = localStorage.getItem("RoleLogado");
     display_reclusos();
+   
 
 
 
@@ -34,6 +35,7 @@ $(window).on("load", function () {
             display(func);
 
             document.getElementById("esconder").style.display = "flex";
+            tiraBotoes();
         }
 
         function display(func) {
@@ -259,6 +261,15 @@ function apaga_selecionados() {
     }
     for (var apaga of apagar) {
         apaga.classList.toggle("selecionado");
+    }
+
+}
+
+function tiraBotoes() {
+    var windowWidth = window.innerWidth;
+
+    if (windowWidth <= 620) {
+        document.getElementById("esconder").style.display = "none";
     }
 
 }
