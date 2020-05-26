@@ -13,8 +13,8 @@ Um vez que estamos a desenvolver uma aplicação REST, a pasta app encontra-se d
  - **frontend**
  - **anexos**
 
-Neste momento a pasta **backend** possui uma pasta chamada **server** que constitui a **API main**, esta é feita através de uma linguagem orientada a objetos, o **JAVA** (requisito imposto pelo coordenador da UC).
-Posteriormente pretendemos adicionar mais uma API separada para controlar as pulseiras, a linguagem ainda não está definida mas em principio será em **NodeJs**.
+A pasta **backend** possui a **API main**, esta foi feita através de uma linguagem orientada a objetos, o **JAVA** (requisito imposto pelo coordenador da UC).
+Temos também uma API secundário e separada da main para controlar as pulseiras, a linguagem utilizado foi o **NodeJs**.
 
 A pasta **frontend** possui todo o **html**, **CSS**, **JS** e **fetch** (necessário para a ligação com as rotas das APIs).
 
