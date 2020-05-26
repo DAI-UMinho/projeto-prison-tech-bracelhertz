@@ -131,3 +131,68 @@
 Podemos assim afirmar que a nossa aplicação se encontra totalmente segura para pessoal de fora.
 >
 **Nota:** Update da estrutura do patch notes a partir do patch 1.2
+
+# Patch Notes 1.3
+## Backend
+
+1. **Package controller:**
+- Update da class User;
+- Update da class PrisonController;
+- Update da class PrisonerController;
+- Update da class MedicalPrescriptionController;
+- Update da class CriminalRecordtionController;
+- Update da class AlertLogController;
+- Update da class PrisonerLogController;
+- Update da class UserLogController;
+- Update da class ScheduleController;
+
+2. **Package config:**
+- Implementação da class CORSFilter;
+- Delete da class CorsConfig;
+- Delete da Class WebMvcConfig;
+
+## Frontend
+
+- Update da página lista de uma instituição;
+- Update da página de perfil;
+- Update da página recluso;
+
+- implementação da página registar instituição;
+
+- Updade do código JS da página avisos;
+- Updade do código JS da página dashboard;
+- Updade do código JS da página funcionário;
+- Updade do código JS da página recluso;
+- Updade do código JS da página registar funcionário;
+- Updade do código JS da página perfil;
+
+- Implementação do código JS para a página instituição;
+- Implementação do código JS para a página registar recluso;
+
+- implementação do código JS da agenda;
+- implementação do código JS da barra de registo dos batimentos;
+
+- Finalização página de um funcionário 
+
+
+## Ligações
+
+- Ligações com a API para registar um recluso;
+- Tratamento de erros do registo de um recluso;
+
+- Ligações com a API para editar o perfil;
+- Tratamento de erros do editar perfil;
+
+- Ligações com a API para efetuar login;
+- Tratamento de erros na efetuação do login;
+
+- Ligações com a API para efetuar o logout;
+
+- Ligações com a API para editar o perfil de um recluso;
+- Tratamento de erros do editar perfil de um recluso;
+
+- Ligações com a API para regito de anotações a funcionários;
+- Tratamento de erros do regito de anotações a funcionários;
+
+- Ligações com a API para regito de anotações a reclusos;
+- Tratamento de erros do regito de anotações a reclusos;
