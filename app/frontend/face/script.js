@@ -108,7 +108,7 @@ async function loadLabeledImages() {
     method: 'GET',
   });
   var users = await response.json();
-  console.log(users);
+  //console.log(users);
 
   for (var user of users) {
     labels.push(user)
