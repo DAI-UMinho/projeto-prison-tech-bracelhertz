@@ -87,15 +87,7 @@ public class ImageModelController {
 						return new ResponseEntity<ApiResponse>(new ApiResponse(false, "A manager can only edit guards"),
 								HttpStatus.BAD_REQUEST);
 					}
-				} /*else {
-					if ((!(String.valueOf(roles).equals("[Role [id=0]]")
-							|| String.valueOf(roles).equals("[Role [id=1]]")))
-							&& !(userId.equals(currentUser.getId()))) {
-						return new ResponseEntity<ApiResponse>(
-								new ApiResponse(false, "A network manager can only edit guards and managers"),
-								HttpStatus.BAD_REQUEST);
-					}
-				}*/
+				}
 			}
 			//
 			// File Validations
