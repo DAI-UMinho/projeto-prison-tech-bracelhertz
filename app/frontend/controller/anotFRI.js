@@ -296,25 +296,7 @@ async function editarAnotacao(id) {
             console.log(result);
             if (result) {
 
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 1000,
-                    timerProgressBar: true,
-                    onOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                })
-
-                Toast.fire({
-                    icon: 'success',
-                    title: 'Dados alterados com sucesso'
-                }).then(() => {
-
-                    getAnot();
-                })
+                getAnot();
 
             }
             else {
@@ -485,28 +467,9 @@ document.getElementById("botaoConf").addEventListener("click", async function ()
             console.log(result);
             if (result) {
 
-
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 1000,
-                    timerProgressBar: true,
-                    onOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                })
-
-                Toast.fire({
-                    icon: 'success',
-                    title: 'Alterada com sucesso'
-                }).then(() => {
-                    anotDelete = "";
-                    $('#confModal').modal('hide');
-                    getAnot();
-                })
-
+                anotDelete = "";
+                $('#confModal').modal('hide');
+                getAnot();
 
 
             }

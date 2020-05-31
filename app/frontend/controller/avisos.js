@@ -367,16 +367,10 @@ async function postInst(data) {
     }).then(async function (result) {
         console.log(result);
         if (result) {
-            swal("Sucesso!",
-                "Anotação enviada com sucesso!",
-                "success").then(() => {
-                    document.getElementById("titleN").value = "";
-                    document.getElementById("descriptionN").value = "";
-                    $('#NotaModal').modal('hide');
-                })
-                .then(() => {
-                    avisos();
-                })
+            document.getElementById("titleN").value = "";
+            document.getElementById("descriptionN").value = "";
+            $('#NotaModal').modal('hide');
+            avisos();
 
         }
     }).catch(function (err) {
@@ -407,16 +401,10 @@ async function postRec(data) {
     }).then(async function (result) {
         console.log(result);
         if (result) {
-            swal("Sucesso!",
-                "Anotação enviada com sucesso!",
-                "success").then(() => {
-                    document.getElementById("titleN").value = "";
-                    document.getElementById("descriptionN").value = "";
-                    $('#NotaModal').modal('hide');
-                })
-                .then(() => {
-                    avisos();
-                })
+            document.getElementById("titleN").value = "";
+            document.getElementById("descriptionN").value = "";
+            $('#NotaModal').modal('hide');
+            avisos();
         }
     }).catch(function (err) {
         swal("Erro!", "Erro!", "error");
@@ -518,35 +506,16 @@ document.getElementById("botaoConf").addEventListener("click", async function ()
             console.log(result);
             if (result) {
 
+                anotDelete = "";
+                $('#confModal').modal('hide');
 
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 1000,
-                    timerProgressBar: true,
-                    onOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                })
-
-                Toast.fire({
-                    icon: 'success',
-                    title: 'Alterada com sucesso'
-                }).then(() => {
-                    anotDelete = "";
-                    $('#confModal').modal('hide');
-
-                    if (document.getElementById("filtro").value == 1) {
-                        val = 1;
-                        avisos();
-                    } else {
-                        val = 2;
-                        avisos();
-                    }
-                })
-
+                if (document.getElementById("filtro").value == 1) {
+                    val = 1;
+                    avisos();
+                } else {
+                    val = 2;
+                    avisos();
+                }
 
 
             }
@@ -631,31 +600,13 @@ async function editarAnotacao(id) {
             console.log(result);
             if (result) {
 
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 1000,
-                    timerProgressBar: true,
-                    onOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                })
-
-                Toast.fire({
-                    icon: 'success',
-                    title: 'Dados alterados com sucesso'
-                }).then(() => {
-
-                    if (document.getElementById("filtro").value == 1) {
-                        val = 1;
-                        avisos();
-                    } else {
-                        val = 2;
-                        avisos();
-                    }
-                })
+                if (document.getElementById("filtro").value == 1) {
+                    val = 1;
+                    avisos();
+                } else {
+                    val = 2;
+                    avisos();
+                }
 
             }
             else {
