@@ -135,8 +135,6 @@ public class PrisonerController {
 			boolean alertOff = prisoner.getPrisoner().isAlertOff();
 			User createdBy = userRepository.findByUserId(currentUser.getId());
 			LocalDateTime createdTimestamp = prisoner.getPrisoner().getCreatedTimestamp();
-			Set<CriminalRecord> criminalRecord = prisoner.getPrisoner().getCriminalRecord();
-			Set<MedicalPrescription> medicalPrescription = prisoner.getPrisoner().getMedicalPrescription();
 			List<CriminalRecord> criminalRecordItem = prisoner.getCriminalRecord();
 			List<MedicalPrescription> medicalPrescriptionItem = prisoner.getMedicalPrescription();
 			// End of Attributes
@@ -158,7 +156,7 @@ public class PrisonerController {
 
 			Prisoner newPrisoner = new Prisoner(prisonerId, identifierId, birthDate, nationality, name, null, contact,
 					alternativeContact, cell, threatLevel, prison, bracelhertzId, maxHB, minHB, alertOff, createdBy,
-					createdTimestamp, criminalRecord, medicalPrescription);
+					createdTimestamp);
 
 			// Create User
 			prisonerRepository.save(newPrisoner);
