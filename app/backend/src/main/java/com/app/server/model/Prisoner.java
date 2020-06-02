@@ -140,6 +140,29 @@ public class Prisoner {
 		this.criminalRecord = criminalRecord;
 		this.medicalPrescription = medicalPrescription;
 	}
+	
+	public Prisoner(Long prisonerId, String identifierId, Date birthDate, String nationality, String name, Long photoId,
+			String contact, String alternativeContact, String cell, int threatLevel, Prison prison, String braceletId,
+			int maxHB, int minHB, boolean alertOff, User createdBy, LocalDateTime createdTimestamp) {
+		super();
+		this.prisonerId = prisonerId;
+		this.identifierId = identifierId;
+		this.birthDate = birthDate;
+		this.nationality = nationality;
+		this.name = name;
+		this.photoId = photoId;
+		this.contact = contact;
+		this.alternativeContact = alternativeContact;
+		this.cell = cell;
+		this.threatLevel = threatLevel;
+		this.prison = prison;
+		this.braceletId = braceletId;
+		this.maxHB = maxHB;
+		this.minHB = minHB;
+		this.alertOff = alertOff;
+		this.createdBy = createdBy;
+		this.createdTimestamp = createdTimestamp;
+	}
 
 	public Long getPrisonerId() {
 		return prisonerId;
